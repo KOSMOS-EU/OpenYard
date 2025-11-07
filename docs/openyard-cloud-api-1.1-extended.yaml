@@ -1,0 +1,5275 @@
+openapi: 3.0.0
+info:
+  title: OpenYard Cloud API Extended
+  version: 1.1-extended
+  description: 'OpenYard Cloud API for integration with OpenCloud and Reva platforms.
+    Provides CS3-compatible document management, WebDAV support, and OCS Share API
+    compatibility.
+
+
+    Extended version with comprehensive mapping layer for maximum compatibility.
+
+
+    **Extended API**: Added 39 additional operations with cloud protocol mapping.'
+  contact:
+    name: OpenYard Cloud Support
+    url: https://opencloud.eu
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+- url: https://cloud.brandis.eu
+  description: Production OpenCloud server
+- url: https://localhost:9200
+  description: Local Reva development server
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code
+    ObjectInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique object identifier
+        name:
+          type: string
+          description: Object name
+        path:
+          type: string
+          description: Full object path
+        type:
+          type: string
+          enum:
+          - file
+          - folder
+          description: Object type
+        size:
+          type: integer
+          description: Object size in bytes (for files)
+        modified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+        etag:
+          type: string
+          description: Entity tag for caching
+    ShareInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Share identifier
+        token:
+          type: string
+          description: Share token
+        url:
+          type: string
+          description: Share URL
+        permissions:
+          type: integer
+          description: Permission flags
+  securitySchemes:
+    SessionAuth:
+      type: apiKey
+      in: query
+      name: SessionID
+      description: Session-based authentication
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT token authentication (Reva compatible)
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Basic authentication (WebDAV compatible)
+security:
+- SessionAuth: []
+- BearerAuth: []
+- BasicAuth: []
+tags:
+- name: Documents
+  description: Document management operations
+- name: Folders
+  description: Folder and directory operations
+- name: Search
+  description: Search and discovery operations
+- name: Sharing
+  description: Sharing and collaboration features
+- name: Authentication
+  description: User authentication and sessions
+- name: System
+  description: System and server operations
+paths:
+  /api/advancedCommon/CopyObjects:
+    post:
+      summary: Copy Objects
+      description: Copy files and folders
+      tags:
+      - Operations
+      operationId: CopyObjects
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedCommon/ExistObjectId:
+    get:
+      summary: Check Object Existence
+      description: Check object existence by ID
+      tags:
+      - System
+      operationId: ExistObjectId
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      - name: ObjectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the target object (document or folder)
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedCommon/ExistObjectPath:
+    get:
+      summary: Validate Object Path
+      description: Check object existence by path
+      tags:
+      - System
+      operationId: ExistObjectPath
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      - name: ObjectPath
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Complete hierarchical path to the object within the folder structure
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedCommon/MoveObjects:
+    post:
+      summary: Move Objects
+      description: Move files and folders
+      tags:
+      - Operations
+      operationId: MoveObjects
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedCommon/RecoverObjects:
+    post:
+      summary: Restore Deleted Objects
+      description: Restore deleted objects from trash
+      tags:
+      - Operations
+      operationId: RecoverObjects
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedCommon/Search:
+    post:
+      summary: Advanced Search
+      description: Advanced search across content and metadata
+      tags:
+      - Search
+      operationId: Search
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/BinDocuments:
+    post:
+      summary: Move to Recycle Bin
+      description: Move documents to trash/recycle bin
+      tags:
+      - Documents
+      operationId: BinDocuments
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/GetMetaData:
+    get:
+      summary: Get Document Metadata
+      description: Get comprehensive object metadata
+      tags:
+      - Search
+      operationId: GetMetaData
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/GetDeletedFiles:
+    post:
+      summary: List Deleted Documents
+      description: List deleted files from trash
+      tags:
+      - Documents
+      operationId: GetDeletedFiles
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/GetDocument:
+    post:
+      summary: Get Document Details
+      description: Retrieve document metadata and content information
+      tags:
+      - Documents
+      operationId: GetDocument
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/GetDocumentVersions:
+    get:
+      summary: Get Version History
+      description: Get document version history
+      tags:
+      - Documents
+      operationId: GetDocumentVersions
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/GetFile:
+    post:
+      summary: Download Document
+      description: Download document binary content
+      tags:
+      - Documents
+      operationId: GetFile
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/GetPreviewFile:
+    get:
+      summary: Generate Document Preview
+      description: Generate document preview or thumbnail
+      tags:
+      - Documents
+      operationId: GetPreviewFile
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/IsDocument:
+    get:
+      summary: Verify Document Type
+      description: Check if object is a document
+      tags:
+      - Documents
+      operationId: IsDocument
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      - name: ObjectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the target object (document or folder)
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/SetDocument:
+    post:
+      summary: Create/Update Document
+      description: Create or update documents with content and metadata
+      tags:
+      - Documents
+      operationId: SetDocument
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: File content to upload
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+  /api/advancedDocuments/SetFile:
+    post:
+      summary: Upload Document Content
+      description: Upload document binary content
+      tags:
+      - Documents
+      operationId: SetFile
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: File content to upload
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+  /api/advancedFolders/DeleteFolders:
+    post:
+      summary: Delete Folders
+      description: Delete folders and contents
+      tags:
+      - Folders
+      operationId: DeleteFolders
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedFolders/GetFolder:
+    post:
+      summary: Get Folder Information
+      description: Retrieve folder information and contents
+      tags:
+      - Folders
+      operationId: GetFolder
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedFolders/GetFolderRights:
+    get:
+      summary: Get Folder Permissions
+      description: Get folder access permissions
+      tags:
+      - Sharing
+      operationId: GetFolderRights
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedFolders/GetFolderByFolderpath:
+    post:
+      summary: Find Folder by Path
+      description: Find folder by hierarchical path
+      tags:
+      - Folders
+      operationId: GetFolderByFolderpath
+      parameters:
+      - name: FolderPath
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Complete hierarchical path to the folder location
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedFolders/IsFolder:
+    get:
+      summary: Verify Folder Type
+      description: Check if object is a folder
+      tags:
+      - Folders
+      operationId: IsFolder
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      - name: ObjectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the target object (document or folder)
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedFolders/SetFolder:
+    post:
+      summary: Create/Update Folder
+      description: Create or update folder structure
+      tags:
+      - Folders
+      operationId: SetFolder
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedFolders/SetFolderRights:
+    post:
+      summary: Set Folder Permissions
+      description: Set folder access permissions
+      tags:
+      - Sharing
+      operationId: SetFolderRights
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedGeneral/GetServerSettings:
+    get:
+      summary: Get System Settings
+      description: Get server configuration
+      tags:
+      - System
+      operationId: GetServerSettings
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedGeneral/IsListening:
+    get:
+      summary: Check System Status
+      description: Check API server status
+      tags:
+      - System
+      operationId: IsListening
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedUsers/GetSessionBySessionID:
+    get:
+      summary: Get Session Info
+      description: Retrieve session details
+      tags:
+      - Authentication
+      operationId: GetSessionBySessionID
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedUsers/GetUserInfo:
+    post:
+      summary: Get User Details
+      description: Get user account information
+      tags:
+      - Authentication
+      operationId: GetUserInfo
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedUsers/Authenticate:
+    get:
+      summary: Verify Authentication
+      description: Verify user credentials
+      tags:
+      - Authentication
+      operationId: Authenticate
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedUsers/Login:
+    post:
+      summary: User Login
+      description: User authentication and session creation
+      tags:
+      - Authentication
+      operationId: Login
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedUsers/Logout:
+    get:
+      summary: User Logout
+      description: Session termination
+      tags:
+      - Authentication
+      operationId: Logout
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicCommon/GetFolderSubElementsByMemberId:
+    get:
+      summary: Get Folder Contents by Member
+      description: Get folder contents by member
+      tags:
+      - System
+      operationId: GetFolderSubElementsByMemberId
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      - name: ObjectId
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the target object (document or folder)
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicCommon/GetIndexData:
+    get:
+      summary: Get Index Information
+      description: "Retrieves indexing metadata for objects to support search and\
+        \ classification operations.\n\n**Cloud Mapping**: WebDAV PROPFIND\n\n\u26A0\
+        \uFE0F *Note: This operation requires additional mapping logic and may have\
+        \ limitations in cloud environments.*"
+      tags:
+      - BasicCommon
+      operationId: GetIndexData
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ObjID
+        in: query
+        description: Parameter for ObjID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicCommon/GetMetaData:
+    get:
+      summary: Get Document Metadata
+      description: Get comprehensive object metadata
+      tags:
+      - Search
+      operationId: GetMetaData
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicCommon/SearchForTitle:
+    post:
+      summary: Search by Title
+      description: Search by document/folder titles
+      tags:
+      - Search
+      operationId: SearchForTitle
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicCommon/GetExistingPermalinksByObjId:
+    get:
+      summary: Generate Permalink
+      description: Generate permanent links
+      tags:
+      - Sharing
+      operationId: GetPermaLinkByObjId
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicCommon/DeletePermalink:
+    get:
+      summary: Remove Permalink
+      description: Remove permalinks
+      tags:
+      - Sharing
+      operationId: DeletePermalink
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicCommon/GetPreviewFileByPermalink:
+    get:
+      summary: Preview via Permalink
+      description: Preview via permalink
+      tags:
+      - Sharing
+      operationId: GetPreviewFileByPermalink
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicCommon/GetObjectIdByPermalink:
+    get:
+      summary: Resolve Permalink
+      description: Resolve permalink to object
+      tags:
+      - Sharing
+      operationId: GetObjectIdByPermalink
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/basicConfig/GetOpenyardDMSUserSettings:
+    get:
+      summary: Get User Preferences
+      description: Get user preferences
+      tags:
+      - System
+      operationId: GetOpenyardDMSUserSettings
+      parameters:
+      - name: SessionID
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Unique session identifier for user authentication and request
+          authorization
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Access forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/advancedDocuments/GetFileAsFile:
+    post:
+      summary: Stream Document Content
+      description: 'Streams document content with appropriate headers for direct browser
+        display or download.
+
+
+        **Cloud Mapping**: WebDAV GET operation'
+      tags:
+      - AdvancedDocuments
+      operationId: GetFileAsFile
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/advancedUsers/LoginWithToken:
+    post:
+      summary: Token-Based Login
+      description: 'Authenticates users using security tokens and establishes session
+        context.
+
+
+        **Cloud Mapping**: OAuth2/JWT Bearer token flow'
+      tags:
+      - AdvancedUsers
+      operationId: LoginWithToken
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                UserId: string
+                Lastname: string
+                Firstname: string
+                Fullname: string
+                Login: string
+                SpaceAdmin: true
+                Admin: true
+                Archive: true
+                Index: true
+                Metadata: true
+                DSGVO: true
+                IsSubscriptionAdmin: true
+                IsTemplateAdmin: true
+                SystemUser: true
+                Locked: 0
+                Recyclebin_Days: 0
+                Activity_Status: 0
+                Email: string
+                Department_ID: string
+                Department: string
+                PadSign: string
+                Publish_Address: string
+                User_Folder_ID: string
+                UserGroups: {}
+                TaskLog:
+                  Canceled: true
+                  hasError: true
+                  ErrorType: 0
+                  errDescription: string
+                  errCode: string
+                  TimeStamp: '2025-10-04T08:27:47.702Z'
+                  TaskName: string
+                  SessionUser: {}
+                  UniqueRequestId: string
+                  UniqueStartTime: '2025-10-04T08:27:47.702Z'
+                  UniqueEndTime: '2025-10-04T08:27:47.702Z'
+                  RequestLog:
+                  - UniqueID: string
+                    Time: '2025-10-04T08:27:47.702Z'
+                    TaskName: string
+                    Params: string
+                    isBegin: true
+                    isEnd: true
+                    Success: true
+                  TaskProgress:
+                    MaxValue: 0
+                    CurrentValue: 0
+                    TaskProgressMessage: string
+                    TaskId: string
+                  TaskMustRequestUser: true
+                  HasTblJobsChanged: true
+                  ErrorLogLevel: 0
+                myWait:
+                  MustWait: true
+                  WaitReason: string
+                  WaitTimeDuration: 0
+                  WaitTimeStart: '2025-10-04T08:27:47.702Z'
+                  WaitCount: 0
+                SessionId: string
+                Manager: string
+                Details: {}
+                DetailTypes:
+                - Id: 0
+                  Name: string
+                  DisplayName: string
+                  SourceAttribute: string
+                  IsMandatory: true
+                  Synchronize: true
+                  InternalType: 0
+                UserIdInCharge: string
+                LoginUserId: string
+                InSubstitution: true
+                SubstituteFullName: string
+                Description: string
+                Id: 0
+                IdInCharge: 0
+                AccessToken: string
+                RefreshToken: string
+                ExpiresIn: 0
+                ClientValues:
+                  CurrentObject:
+                    key: string
+                    value: 0
+                  LastUsedFolder: string
+                  LastUsedDocument: string
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/advancedUsers/GenerateSecurityToken:
+    post:
+      summary: Generate Access Token
+      description: 'Creates secure authentication tokens for API access and system
+        integration.
+
+
+        **Cloud Mapping**: OAuth2 token endpoint'
+      tags:
+      - AdvancedUsers
+      operationId: GenerateSecurityToken
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/GetDocIcons:
+    get:
+      summary: Get Doc Icons
+      description: 'Retrieves doc icons information from the system.
+
+
+        **Cloud Mapping**: HTTP GET for icon resources'
+      tags:
+      - BasicDocuments
+      operationId: GetDocIcons
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: UserID
+        in: query
+        description: Parameter for UserID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Extension
+        in: query
+        description: Parameter for Extension - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Status
+        in: query
+        description: Parameter for Status - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: '1234'
+      - name: ImageWidth
+        in: query
+        description: Parameter for ImageWidth - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: ImageHeight
+        in: query
+        description: Parameter for ImageHeight - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/GetDocPraefix:
+    get:
+      summary: Get Doc Praefix
+      description: 'Retrieves doc praefix information from the system.
+
+
+        **Cloud Mapping**: WebDAV PROPFIND'
+      tags:
+      - BasicDocuments
+      operationId: GetDocPraefix
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocOrder
+        in: query
+        description: Parameter for DocOrder - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 01234567891099
+      - name: DateFormat
+        in: query
+        description: 'Date format specification: YearMonthDay (0/1) or DayMonthYear
+          (2/3)'
+        required: false
+        schema:
+          type: string
+        example: '0123'
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/HasPreviewFile:
+    get:
+      summary: Has Preview File
+      description: 'Performs has preview file operation.
+
+
+        **Cloud Mapping**: HTTP HEAD request'
+      tags:
+      - BasicDocuments
+      operationId: HasPreviewFile
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: Doc_Id
+        in: query
+        description: Parameter for Doc_Id - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/ImportDocumentByParentFolderID:
+    post:
+      summary: Import Document By Parent Folder ID
+      description: 'Performs import document by parent folder id operation.
+
+
+        **Cloud Mapping**: WebDAV PUT after ID->Path resolution'
+      tags:
+      - BasicDocuments
+      operationId: ImportDocumentByParentFolderID
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ParentFolderID
+        in: query
+        description: Parameter for ParentFolderID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocName
+        in: query
+        description: Parameter for DocName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocType
+        in: query
+        description: Parameter for DocType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Freeze
+        in: query
+        description: Parameter for Freeze - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: DocumentCollisionBehaviour
+        in: query
+        description: 'Strategy for handling document conflicts: AutomaticRename (0),
+          Overwrite (1), KeepNewer (2), KeepOlder (3), Cancel (4), AsNewVersion (5),
+          ReturnExisting (6), Anyway (90), Ignore (91), KeepExisting (92), NotDefined
+          (-1)'
+        required: false
+        schema:
+          type: string
+        example: 0123456909192-1
+      - name: DocDate
+        in: query
+        description: Parameter for DocDate - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/ImportDocumentByParentFolderPath:
+    post:
+      summary: Import Document By Parent Folder Path
+      description: 'Performs import document by parent folder path operation.
+
+
+        **Cloud Mapping**: WebDAV PUT to resolved path'
+      tags:
+      - BasicDocuments
+      operationId: ImportDocumentByParentFolderPath
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ParentFolderPath
+        in: query
+        description: Parameter for ParentFolderPath - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocName
+        in: query
+        description: Parameter for DocName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocType
+        in: query
+        description: Parameter for DocType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Freeze
+        in: query
+        description: Parameter for Freeze - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: MasterLocation
+        in: query
+        description: Parameter for MasterLocation - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocumentCollisionBehaviour
+        in: query
+        description: 'Strategy for handling document conflicts: AutomaticRename (0),
+          Overwrite (1), KeepNewer (2), KeepOlder (3), Cancel (4), AsNewVersion (5),
+          ReturnExisting (6), Anyway (90), Ignore (91), KeepExisting (92), NotDefined
+          (-1)'
+        required: false
+        schema:
+          type: string
+        example: 0123456909192-1
+      - name: CreateFolderIfNotExist
+        in: query
+        description: Parameter for CreateFolderIfNotExist - see API documentation
+          for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: DocDate
+        in: query
+        description: Parameter for DocDate - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/MoveDocumentDynamic:
+    post:
+      summary: Move Document Dynamic
+      description: 'Performs move document dynamic operation.
+
+
+        **Cloud Mapping**: WebDAV MOVE with dynamic resolution'
+      tags:
+      - BasicDocuments
+      operationId: MoveDocumentDynamic
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ConfigName
+        in: query
+        description: Parameter for ConfigName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/RenameDocument:
+    put:
+      summary: Rename Document
+      description: 'Performs rename document operation.
+
+
+        **Cloud Mapping**: WebDAV MOVE operation'
+      tags:
+      - BasicDocuments
+      operationId: RenameDocument
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocName
+        in: query
+        description: Parameter for DocName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/UpdateDocument:
+    put:
+      summary: Update Document
+      description: 'Performs update document operation.
+
+
+        **Cloud Mapping**: WebDAV PUT (update existing)'
+      tags:
+      - BasicDocuments
+      operationId: UpdateDocument
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: CheckIn
+        in: query
+        description: Parameter for CheckIn - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: Freeze
+        in: query
+        description: Parameter for Freeze - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/UploadFile:
+    post:
+      summary: Upload File
+      description: 'Performs upload file operation.
+
+
+        **Cloud Mapping**: WebDAV PUT operation'
+      tags:
+      - BasicDocuments
+      operationId: UploadFile
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: Extension
+        in: query
+        description: Parameter for Extension - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: CreationDate
+        in: query
+        description: Parameter for CreationDate - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: lastModifiedDate
+        in: query
+        description: Parameter for lastModifiedDate - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FileHash
+        in: query
+        description: SHA-512 hash value for file integrity verification during upload
+        required: false
+        schema:
+          type: string
+      - name: file
+        in: query
+        description: Parameter for file - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/CreateFolderByParentFolderID:
+    post:
+      summary: Create Folder By Parent Folder ID
+      description: 'Performs create folder by parent folder id operation.
+
+
+        **Cloud Mapping**: WebDAV MKCOL after ID->Path resolution'
+      tags:
+      - BasicFolders
+      operationId: CreateFolderByParentFolderID
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ParentFolderID
+        in: query
+        description: Parameter for ParentFolderID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Foldername
+        in: query
+        description: Parameter for Foldername - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Aktz
+        in: query
+        description: Parameter for Aktz - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: TemplateName
+        in: query
+        description: Parameter for TemplateName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FolderType
+        in: query
+        description: Parameter for FolderType - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 01234-1
+      - name: FolderCollisionBehaviour
+        in: query
+        description: 'Strategy for handling folder name conflicts: Assimilate (0),
+          AutomaticRename (1), Cancel (2)'
+        required: false
+        schema:
+          type: string
+        example: '012'
+      - name: IndexType
+        in: query
+        description: Parameter for IndexType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/CreateFolderByParentFolderPath:
+    post:
+      summary: Create Folder By Parent Folder Path
+      description: 'Performs create folder by parent folder path operation.
+
+
+        **Cloud Mapping**: WebDAV MKCOL'
+      tags:
+      - BasicFolders
+      operationId: CreateFolderByParentFolderPath
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ParentFolderPath
+        in: query
+        description: Parameter for ParentFolderPath - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Foldername
+        in: query
+        description: Parameter for Foldername - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: MasterLocation
+        in: query
+        description: Parameter for MasterLocation - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Aktz
+        in: query
+        description: Parameter for Aktz - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: TemplateName
+        in: query
+        description: Parameter for TemplateName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FolderType
+        in: query
+        description: Parameter for FolderType - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 01234-1
+      - name: FolderCollisionBehaviour
+        in: query
+        description: 'Strategy for handling folder name conflicts: Assimilate (0),
+          AutomaticRename (1), Cancel (2)'
+        required: false
+        schema:
+          type: string
+        example: '012'
+      - name: IndexType
+        in: query
+        description: Parameter for IndexType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/CreateFolderByFolderPath:
+    post:
+      summary: Create Folder By Folder Path
+      description: 'Performs create folder by folder path operation.
+
+
+        **Cloud Mapping**: WebDAV MKCOL'
+      tags:
+      - BasicFolders
+      operationId: CreateFolderByFolderPath
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: FolderPath
+        in: query
+        description: Complete hierarchical path to the folder location
+        required: false
+        schema:
+          type: string
+      - name: MasterLocation
+        in: query
+        description: Parameter for MasterLocation - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Aktz
+        in: query
+        description: Parameter for Aktz - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: TemplateName
+        in: query
+        description: Parameter for TemplateName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FolderType
+        in: query
+        description: Parameter for FolderType - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 01234-1
+      - name: FolderCollisionBehaviour
+        in: query
+        description: 'Strategy for handling folder name conflicts: Assimilate (0),
+          AutomaticRename (1), Cancel (2)'
+        required: false
+        schema:
+          type: string
+        example: '012'
+      - name: IndexType
+        in: query
+        description: Parameter for IndexType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/CreateRootFolder:
+    post:
+      summary: Create Root Folder
+      description: 'Performs create root folder operation.
+
+
+        **Cloud Mapping**: WebDAV MKCOL at root'
+      tags:
+      - BasicFolders
+      operationId: CreateRootFolder
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: Foldername
+        in: query
+        description: Parameter for Foldername - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Aktz
+        in: query
+        description: Parameter for Aktz - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FolderType
+        in: query
+        description: Parameter for FolderType - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 01234-1
+      - name: FolderCollisionBehaviour
+        in: query
+        description: 'Strategy for handling folder name conflicts: Assimilate (0),
+          AutomaticRename (1), Cancel (2)'
+        required: false
+        schema:
+          type: string
+        example: '012'
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/GetFolderIcons:
+    get:
+      summary: Get Folder Icons
+      description: 'Retrieves folder icons information from the system.
+
+
+        **Cloud Mapping**: HTTP GET for icon resources'
+      tags:
+      - BasicFolders
+      operationId: GetFolderIcons
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: UserID
+        in: query
+        description: Parameter for UserID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Status
+        in: query
+        description: Parameter for Status - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: '123456789'
+      - name: ImageWidth
+        in: query
+        description: Parameter for ImageWidth - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: ImageHeight
+        in: query
+        description: Parameter for ImageHeight - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: UseOpenIcon
+        in: query
+        description: Parameter for UseOpenIcon - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/GetFolderPraefix:
+    get:
+      summary: Get Folder Praefix
+      description: 'Retrieves folder praefix information from the system.
+
+
+        **Cloud Mapping**: WebDAV PROPFIND'
+      tags:
+      - BasicFolders
+      operationId: GetFolderPraefix
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: FolderID
+        in: query
+        description: Parameter for FolderID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FolderPrefix
+        in: query
+        description: Parameter for FolderPrefix - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 0123499
+      - name: DateFormat
+        in: query
+        description: 'Date format specification: YearMonthDay (0/1) or DayMonthYear
+          (2/3)'
+        required: false
+        schema:
+          type: string
+        example: '0123'
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/RenameFolder:
+    put:
+      summary: Rename Folder
+      description: 'Performs rename folder operation.
+
+
+        **Cloud Mapping**: WebDAV MOVE operation'
+      tags:
+      - BasicFolders
+      operationId: RenameFolder
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: FolderID
+        in: query
+        description: Parameter for FolderID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Foldername
+        in: query
+        description: Parameter for Foldername - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/ApiExplorer/GetApiDescriptions:
+    get:
+      summary: Get Api Descriptions
+      description: 'Retrieves api descriptions information from the system.
+
+
+        **Cloud Mapping**: OpenAPI spec endpoint'
+      tags:
+      - ApiExplorer
+      operationId: GetApiDescriptions
+      parameters:
+      - name: httpMethod
+        in: query
+        description: Parameter for httpMethod - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: route
+        in: query
+        description: Parameter for route - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/advancedDocuments/GetDocumentByDocumentPath:
+    post:
+      summary: Find Document by Path
+      description: "Locates document information using its hierarchical path within\
+        \ the folder structure.\n\n**Cloud Mapping**: WebDAV GET by path\n\n\u26A0\
+        \uFE0F *Note: This operation requires additional mapping logic and may have\
+        \ limitations in cloud environments.*"
+      tags:
+      - AdvancedDocuments
+      operationId: GetDocumentByDocumentPath
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocPath
+        in: query
+        description: Parameter for DocPath - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Extension
+        in: query
+        description: Parameter for Extension - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: LoadDocIndex
+        in: query
+        description: Parameter for LoadDocIndex - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: CheckOut
+        in: query
+        description: Parameter for CheckOut - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                DocInfo:
+                  DocName: string
+                  DocId: string
+                  DocType:
+                    Name: string
+                    DocTypeId: string
+                    FullText: 0
+                    NoAddNew: 0
+                    IsReadOnly: 0
+                    DocTypeType: 0
+                    IsEditable: 0
+                    Auditable_Default_Value: 0
+                    Auditable_Base_DateType: 0
+                    TopicsList:
+                    - index_id: string
+                      index_topic: string
+                      data_type: 0
+                      preview: true
+                      mandatory: true
+                      primary_value: true
+                      SelectableValues:
+                      - string
+                      Cmis_Indexfield: 0
+                      Cmis_MultiValue: true
+                      DisplayName: string
+                      Description: string
+                    Automatic_Version: true
+                    Max_Version: 0
+                    DisplayName: string
+                    Description: string
+                  ParentFolderId: string
+                  FullpathGuid: string
+                  FullpathString: string
+                  Aktz: string
+                  DocIndex:
+                  - topic: string
+                    values:
+                      StringValue: string
+                      DateTimeValue: '2025-10-04T08:27:47.550Z'
+                      DoubleValue: 0
+                      BooleanValue: true
+                      LongValue: 0
+                      UrlValue: string
+                      SortableType: string
+                      DataType: 0
+                  IndexTypeMember:
+                  - Name: string
+                    ObjectId: string
+                    ObjectType: 0
+                    ParentId: string
+                  LinkedObjects:
+                  - Id: string
+                    Type: 0
+                  Status: 0
+                  Description: string
+                  Created: '2025-10-04T08:27:47.550Z'
+                  Creator: string
+                  CreatorFullName: string
+                  LastUpdated: '2025-10-04T08:27:47.550Z'
+                  LastUpdated_User: string
+                  LastUpdated_User_Fullname: string
+                  Date_Rom: string
+                  Checked_Out: true
+                  Checked_Out_User_FullName: string
+                  Checked_Out_User_Id: string
+                  Checked_Out_Date: '2025-10-04T08:27:47.550Z'
+                  FileSize: 0
+                  FileExtension: string
+                  HasNotes: 0
+                  DelStatus: 0
+                  DelUserId: string
+                  DelDateUser: string
+                  DelDateFinal: '2025-10-04T08:27:47.550Z'
+                  DelDateFreeze: '2025-10-04T08:27:47.550Z'
+                  BelongsTo: string
+                  Version: 0
+                  LatestVersion: true
+                  CarePeriodId: string
+                  FileCreated: '2025-10-04T08:27:47.550Z'
+                  Relevance:
+                    Percent: 0
+                    FoundIn:
+                    - string
+                  FileKey: string
+                  ThumbnailFileKey: string
+                  PrefixStr: string
+                  RequestId: string
+                  RequestTime: '2025-10-04T08:27:47.550Z'
+                  WasFreezed: true
+                  PrimaryIndexValue: string
+                  PrimaryIndexSortValue: string
+                  Flags:
+                    Contract: true
+                    PostIn: true
+                    PostOut: true
+                FileKey: string
+                TaskLog:
+                  Canceled: true
+                  hasError: true
+                  ErrorType: 0
+                  errDescription: string
+                  errCode: string
+                  TimeStamp: '2025-10-04T08:27:47.550Z'
+                  TaskName: string
+                  SessionUser:
+                    UserId: string
+                    Lastname: string
+                    Firstname: string
+                    Fullname: string
+                    Login: string
+                    SpaceAdmin: true
+                    Admin: true
+                    Archive: true
+                    Index: true
+                    Metadata: true
+                    DSGVO: true
+                    IsSubscriptionAdmin: true
+                    IsTemplateAdmin: true
+                    SystemUser: true
+                    Locked: 0
+                    Recyclebin_Days: 0
+                    Activity_Status: 0
+                    Email: string
+                    Department_ID: string
+                    Department: string
+                    PadSign: string
+                    Publish_Address: string
+                    User_Folder_ID: string
+                    UserGroups: {}
+                    TaskLog: {}
+                    myWait:
+                      MustWait: true
+                      WaitReason: string
+                      WaitTimeDuration: 0
+                      WaitTimeStart: '2025-10-04T08:27:47.550Z'
+                      WaitCount: 0
+                    SessionId: string
+                    Manager: string
+                    Details: {}
+                    DetailTypes:
+                    - Id: 0
+                      Name: string
+                      DisplayName: string
+                      SourceAttribute: string
+                      IsMandatory: true
+                      Synchronize: true
+                      InternalType: 0
+                    UserIdInCharge: string
+                    LoginUserId: string
+                    InSubstitution: true
+                    SubstituteFullName: string
+                    Description: string
+                    Id: 0
+                    IdInCharge: 0
+                    AccessToken: string
+                    RefreshToken: string
+                    ExpiresIn: 0
+                    ClientValues:
+                      CurrentObject:
+                        key: string
+                        value: 0
+                      LastUsedFolder: string
+                      LastUsedDocument: string
+                  UniqueRequestId: string
+                  UniqueStartTime: '2025-10-04T08:27:47.550Z'
+                  UniqueEndTime: '2025-10-04T08:27:47.550Z'
+                  RequestLog:
+                  - UniqueID: string
+                    Time: '2025-10-04T08:27:47.550Z'
+                    TaskName: string
+                    Params: string
+                    isBegin: true
+                    isEnd: true
+                    Success: true
+                  TaskProgress:
+                    MaxValue: 0
+                    CurrentValue: 0
+                    TaskProgressMessage: string
+                    TaskId: string
+                  TaskMustRequestUser: true
+                  HasTblJobsChanged: true
+                  ErrorLogLevel: 0
+                Rights:
+                  RightsDigit: 0
+                  SpecialRights:
+                    VisibleForAdminOnly: true
+                    HierarchicStructure: true
+                    OrphanedFolder: true
+                  FolderCreate: true
+                  FolderDelete: true
+                  FolderChange: true
+                  DocumentsRead: true
+                  DocumentsCreateAndChange: true
+                  DocumentsRename: true
+                  DocumentsDelete: true
+                  Protocol: true
+                  Archive: true
+                  NoticeRead: true
+                  NoticeWrite: true
+                  FolderSetRights: true
+                ExtendedInformations:
+                - Message: string
+                  ObjectId: string
+                  ObjectType: 0
+                  ObjectSubject: 0
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/advancedDocuments/GetExtendedDocInfo:
+    get:
+      summary: Get Extended Document Info
+      description: "Provides detailed document analysis including processing history\
+        \ and system-generated metadata.\n\n**Cloud Mapping**: WebDAV PROPFIND with\
+        \ custom props\n\n\u26A0\uFE0F *Note: This operation requires additional mapping\
+        \ logic and may have limitations in cloud environments.*"
+      tags:
+      - AdvancedDocuments
+      operationId: GetExtendedDocInfo
+      parameters:
+      - name: SessionId
+        in: query
+        description: Parameter for SessionId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                CheckSumFirst: string
+                CheckSumCurrent: string
+                CheckSumType: 0
+                UnModifiedArchiveContainer: true
+                DocNeverModified: true
+                Archived: true
+                TaskLog:
+                  Canceled: true
+                  hasError: true
+                  ErrorType: 0
+                  errDescription: string
+                  errCode: string
+                  TimeStamp: '2025-10-04T08:27:47.568Z'
+                  TaskName: string
+                  SessionUser:
+                    UserId: string
+                    Lastname: string
+                    Firstname: string
+                    Fullname: string
+                    Login: string
+                    SpaceAdmin: true
+                    Admin: true
+                    Archive: true
+                    Index: true
+                    Metadata: true
+                    DSGVO: true
+                    IsSubscriptionAdmin: true
+                    IsTemplateAdmin: true
+                    SystemUser: true
+                    Locked: 0
+                    Recyclebin_Days: 0
+                    Activity_Status: 0
+                    Email: string
+                    Department_ID: string
+                    Department: string
+                    PadSign: string
+                    Publish_Address: string
+                    User_Folder_ID: string
+                    UserGroups: {}
+                    TaskLog: {}
+                    myWait:
+                      MustWait: true
+                      WaitReason: string
+                      WaitTimeDuration: 0
+                      WaitTimeStart: '2025-10-04T08:27:47.568Z'
+                      WaitCount: 0
+                    SessionId: string
+                    Manager: string
+                    Details: {}
+                    DetailTypes:
+                    - Id: 0
+                      Name: string
+                      DisplayName: string
+                      SourceAttribute: string
+                      IsMandatory: true
+                      Synchronize: true
+                      InternalType: 0
+                    UserIdInCharge: string
+                    LoginUserId: string
+                    InSubstitution: true
+                    SubstituteFullName: string
+                    Description: string
+                    Id: 0
+                    IdInCharge: 0
+                    AccessToken: string
+                    RefreshToken: string
+                    ExpiresIn: 0
+                    ClientValues:
+                      CurrentObject:
+                        key: string
+                        value: 0
+                      LastUsedFolder: string
+                      LastUsedDocument: string
+                  UniqueRequestId: string
+                  UniqueStartTime: '2025-10-04T08:27:47.568Z'
+                  UniqueEndTime: '2025-10-04T08:27:47.568Z'
+                  RequestLog:
+                  - UniqueID: string
+                    Time: '2025-10-04T08:27:47.568Z'
+                    TaskName: string
+                    Params: string
+                    isBegin: true
+                    isEnd: true
+                    Success: true
+                  TaskProgress:
+                    MaxValue: 0
+                    CurrentValue: 0
+                    TaskProgressMessage: string
+                    TaskId: string
+                  TaskMustRequestUser: true
+                  HasTblJobsChanged: true
+                  ErrorLogLevel: 0
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicCommon/SearchForAktz:
+    post:
+      summary: Search by File Number
+      description: "Searches documents and folders using German administrative file\
+        \ numbering (Aktenzeichen) systems.\n\n**Cloud Mapping**: Custom search implementation\n\
+        \n\u26A0\uFE0F *Note: This operation requires additional mapping logic and\
+        \ may have limitations in cloud environments.*\n\n**Cloud Mapping**: Custom\
+        \ search implementation\n\n\u26A0\uFE0F *Note: This operation requires additional\
+        \ mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicCommon
+      operationId: SearchForAktz
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: SearchTerm
+        in: query
+        description: Text string to search for in document content and metadata
+        required: false
+        schema:
+          type: string
+      - name: SearchInFolder
+        in: query
+        description: Parameter for SearchInFolder - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: SearchObjects
+        in: query
+        description: Parameter for SearchObjects - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: '012345'
+      - name: MaxResults
+        in: query
+        description: Maximum number of search results to return (0 = unlimited)
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                FolderInfo:
+                  FolderID: string
+                  ParentFolderID: string
+                  Foldername: string
+                  FullpathGuid: string
+                  FullpathString: string
+                  HasSubElements: true
+                  SubFoldersCount: 0
+                  SubDocsCount: 0
+                  SubElementsLoaded: 0
+                  Type: 0
+                  Created: '2025-10-04T08:27:47.725Z'
+                  Creator: string
+                  CreatorFullName: string
+                  LastUpdated: '2025-10-04T08:27:47.725Z'
+                  LastUpdated_User: string
+                  LastUpdated_User_Fullname: string
+                  Master: string
+                  Aktz: string
+                  AktzCurrentLevel: 0
+                  Status: 0
+                  Checked_Out: 0
+                  Level_0_ParentId: string
+                  HasNotes: 0
+                  HasHeadWords: 0
+                  Description: string
+                  Rights:
+                    RightsDigit: 0
+                    SpecialRights:
+                      VisibleForAdminOnly: true
+                      HierarchicStructure: true
+                      OrphanedFolder: true
+                    FolderCreate: true
+                    FolderDelete: true
+                    FolderChange: true
+                    DocumentsRead: true
+                    DocumentsCreateAndChange: true
+                    DocumentsRename: true
+                    DocumentsDelete: true
+                    Protocol: true
+                    Archive: true
+                    NoticeRead: true
+                    NoticeWrite: true
+                    FolderSetRights: true
+                  AutoFreeze: true
+                  AutoFreezeType: 0
+                  AutoFreezeAfterDays: 0
+                  AutoFreeze_FreezeDays: 0
+                  AutoFreeze_Selection: 0
+                  CarePeriodID: string
+                  Relevance:
+                    Percent: 0
+                    FoundIn:
+                    - string
+                  Tag: string
+                  LinkedObjects:
+                  - Id: string
+                    Type: 0
+                  PrefixStr: string
+                  RequestId: string
+                  RequestTime: '2025-10-04T08:27:47.725Z'
+                  DateRom: '2025-10-04T08:27:47.725Z'
+                  DelDateFinal: '2025-10-04T08:27:47.725Z'
+                  IndexType:
+                    Name: string
+                    DocTypeId: string
+                    FullText: 0
+                    NoAddNew: 0
+                    IsReadOnly: 0
+                    DocTypeType: 0
+                    IsEditable: 0
+                    Auditable_Default_Value: 0
+                    Auditable_Base_DateType: 0
+                    TopicsList:
+                    - index_id: string
+                      index_topic: string
+                      data_type: 0
+                      preview: true
+                      mandatory: true
+                      primary_value: true
+                      SelectableValues:
+                      - string
+                      Cmis_Indexfield: 0
+                      Cmis_MultiValue: true
+                      DisplayName: string
+                      Description: string
+                    Automatic_Version: true
+                    Max_Version: 0
+                    DisplayName: string
+                    Description: string
+                  Index:
+                  - topic: string
+                    values:
+                      StringValue: string
+                      DateTimeValue: '2025-10-04T08:27:47.726Z'
+                      DoubleValue: 0
+                      BooleanValue: true
+                      LongValue: 0
+                      UrlValue: string
+                      SortableType: string
+                      DataType: 0
+                  IndexTypeMember:
+                  - Name: string
+                    ObjectId: string
+                    ObjectType: 0
+                    ParentId: string
+                  PrimaryIndexValue: string
+                  PrimaryIndexSortValue: string
+                  Subfile_Counter: 0
+                SubFolders:
+                - FolderID: string
+                  ParentFolderID: string
+                  Foldername: string
+                  FullpathGuid: string
+                  FullpathString: string
+                  HasSubElements: true
+                  SubFoldersCount: 0
+                  SubDocsCount: 0
+                  SubElementsLoaded: 0
+                  Type: 0
+                  Created: '2025-10-04T08:27:47.726Z'
+                  Creator: string
+                  CreatorFullName: string
+                  LastUpdated: '2025-10-04T08:27:47.726Z'
+                  LastUpdated_User: string
+                  LastUpdated_User_Fullname: string
+                  Master: string
+                  Aktz: string
+                  AktzCurrentLevel: 0
+                  Status: 0
+                  Checked_Out: 0
+                  Level_0_ParentId: string
+                  HasNotes: 0
+                  HasHeadWords: 0
+                  Description: string
+                  Rights:
+                    RightsDigit: 0
+                    SpecialRights:
+                      VisibleForAdminOnly: true
+                      HierarchicStructure: true
+                      OrphanedFolder: true
+                    FolderCreate: true
+                    FolderDelete: true
+                    FolderChange: true
+                    DocumentsRead: true
+                    DocumentsCreateAndChange: true
+                    DocumentsRename: true
+                    DocumentsDelete: true
+                    Protocol: true
+                    Archive: true
+                    NoticeRead: true
+                    NoticeWrite: true
+                    FolderSetRights: true
+                  AutoFreeze: true
+                  AutoFreezeType: 0
+                  AutoFreezeAfterDays: 0
+                  AutoFreeze_FreezeDays: 0
+                  AutoFreeze_Selection: 0
+                  CarePeriodID: string
+                  Relevance:
+                    Percent: 0
+                    FoundIn:
+                    - string
+                  Tag: string
+                  LinkedObjects:
+                  - Id: string
+                    Type: 0
+                  PrefixStr: string
+                  RequestId: string
+                  RequestTime: '2025-10-04T08:27:47.726Z'
+                  DateRom: '2025-10-04T08:27:47.726Z'
+                  DelDateFinal: '2025-10-04T08:27:47.726Z'
+                  IndexType:
+                    Name: string
+                    DocTypeId: string
+                    FullText: 0
+                    NoAddNew: 0
+                    IsReadOnly: 0
+                    DocTypeType: 0
+                    IsEditable: 0
+                    Auditable_Default_Value: 0
+                    Auditable_Base_DateType: 0
+                    TopicsList:
+                    - index_id: string
+                      index_topic: string
+                      data_type: 0
+                      preview: true
+                      mandatory: true
+                      primary_value: true
+                      SelectableValues:
+                      - string
+                      Cmis_Indexfield: 0
+                      Cmis_MultiValue: true
+                      DisplayName: string
+                      Description: string
+                    Automatic_Version: true
+                    Max_Version: 0
+                    DisplayName: string
+                    Description: string
+                  Index:
+                  - topic: string
+                    values:
+                      StringValue: string
+                      DateTimeValue: '2025-10-04T08:27:47.726Z'
+                      DoubleValue: 0
+                      BooleanValue: true
+                      LongValue: 0
+                      UrlValue: string
+                      SortableType: string
+                      DataType: 0
+                  IndexTypeMember:
+                  - Name: string
+                    ObjectId: string
+                    ObjectType: 0
+                    ParentId: string
+                  PrimaryIndexValue: string
+                  PrimaryIndexSortValue: string
+                  Subfile_Counter: 0
+                SubDocs:
+                - DocName: string
+                  DocId: string
+                  DocType:
+                    Name: string
+                    DocTypeId: string
+                    FullText: 0
+                    NoAddNew: 0
+                    IsReadOnly: 0
+                    DocTypeType: 0
+                    IsEditable: 0
+                    Auditable_Default_Value: 0
+                    Auditable_Base_DateType: 0
+                    TopicsList:
+                    - index_id: string
+                      index_topic: string
+                      data_type: 0
+                      preview: true
+                      mandatory: true
+                      primary_value: true
+                      SelectableValues:
+                      - string
+                      Cmis_Indexfield: 0
+                      Cmis_MultiValue: true
+                      DisplayName: string
+                      Description: string
+                    Automatic_Version: true
+                    Max_Version: 0
+                    DisplayName: string
+                    Description: string
+                  ParentFolderId: string
+                  FullpathGuid: string
+                  FullpathString: string
+                  Aktz: string
+                  DocIndex:
+                  - topic: string
+                    values:
+                      StringValue: string
+                      DateTimeValue: '2025-10-04T08:27:47.726Z'
+                      DoubleValue: 0
+                      BooleanValue: true
+                      LongValue: 0
+                      UrlValue: string
+                      SortableType: string
+                      DataType: 0
+                  IndexTypeMember:
+                  - Name: string
+                    ObjectId: string
+                    ObjectType: 0
+                    ParentId: string
+                  LinkedObjects:
+                  - Id: string
+                    Type: 0
+                  Status: 0
+                  Description: string
+                  Created: '2025-10-04T08:27:47.726Z'
+                  Creator: string
+                  CreatorFullName: string
+                  LastUpdated: '2025-10-04T08:27:47.726Z'
+                  LastUpdated_User: string
+                  LastUpdated_User_Fullname: string
+                  Date_Rom: string
+                  Checked_Out: true
+                  Checked_Out_User_FullName: string
+                  Checked_Out_User_Id: string
+                  Checked_Out_Date: '2025-10-04T08:27:47.726Z'
+                  FileSize: 0
+                  FileExtension: string
+                  HasNotes: 0
+                  DelStatus: 0
+                  DelUserId: string
+                  DelDateUser: string
+                  DelDateFinal: '2025-10-04T08:27:47.726Z'
+                  DelDateFreeze: '2025-10-04T08:27:47.726Z'
+                  BelongsTo: string
+                  Version: 0
+                  LatestVersion: true
+                  CarePeriodId: string
+                  FileCreated: '2025-10-04T08:27:47.726Z'
+                  Relevance:
+                    Percent: 0
+                    FoundIn:
+                    - string
+                  FileKey: string
+                  ThumbnailFileKey: string
+                  PrefixStr: string
+                  RequestId: string
+                  RequestTime: '2025-10-04T08:27:47.726Z'
+                  WasFreezed: true
+                  PrimaryIndexValue: string
+                  PrimaryIndexSortValue: string
+                  Flags:
+                    Contract: true
+                    PostIn: true
+                    PostOut: true
+                Notes: string
+                TaskLog:
+                  Canceled: true
+                  hasError: true
+                  ErrorType: 0
+                  errDescription: string
+                  errCode: string
+                  TimeStamp: '2025-10-04T08:27:47.726Z'
+                  TaskName: string
+                  SessionUser:
+                    UserId: string
+                    Lastname: string
+                    Firstname: string
+                    Fullname: string
+                    Login: string
+                    SpaceAdmin: true
+                    Admin: true
+                    Archive: true
+                    Index: true
+                    Metadata: true
+                    DSGVO: true
+                    IsSubscriptionAdmin: true
+                    IsTemplateAdmin: true
+                    SystemUser: true
+                    Locked: 0
+                    Recyclebin_Days: 0
+                    Activity_Status: 0
+                    Email: string
+                    Department_ID: string
+                    Department: string
+                    PadSign: string
+                    Publish_Address: string
+                    User_Folder_ID: string
+                    UserGroups: {}
+                    TaskLog: {}
+                    myWait:
+                      MustWait: true
+                      WaitReason: string
+                      WaitTimeDuration: 0
+                      WaitTimeStart: '2025-10-04T08:27:47.726Z'
+                      WaitCount: 0
+                    SessionId: string
+                    Manager: string
+                    Details: {}
+                    DetailTypes:
+                    - Id: 0
+                      Name: string
+                      DisplayName: string
+                      SourceAttribute: string
+                      IsMandatory: true
+                      Synchronize: true
+                      InternalType: 0
+                    UserIdInCharge: string
+                    LoginUserId: string
+                    InSubstitution: true
+                    SubstituteFullName: string
+                    Description: string
+                    Id: 0
+                    IdInCharge: 0
+                    AccessToken: string
+                    RefreshToken: string
+                    ExpiresIn: 0
+                    ClientValues:
+                      CurrentObject:
+                        key: string
+                        value: 0
+                      LastUsedFolder: string
+                      LastUsedDocument: string
+                  UniqueRequestId: string
+                  UniqueStartTime: '2025-10-04T08:27:47.726Z'
+                  UniqueEndTime: '2025-10-04T08:27:47.726Z'
+                  RequestLog:
+                  - UniqueID: string
+                    Time: '2025-10-04T08:27:47.726Z'
+                    TaskName: string
+                    Params: string
+                    isBegin: true
+                    isEnd: true
+                    Success: true
+                  TaskProgress:
+                    MaxValue: 0
+                    CurrentValue: 0
+                    TaskProgressMessage: string
+                    TaskId: string
+                  TaskMustRequestUser: true
+                  HasTblJobsChanged: true
+                  ErrorLogLevel: 0
+                NextWorkId: string
+                TotalResultsCount: 0
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicCommon/SetIndex:
+    put:
+      summary: Update Index Data
+      description: "Creates or updates indexing information for improved search and\
+        \ categorization performance.\n\n**Cloud Mapping**: WebDAV PROPPATCH\n\n\u26A0\
+        \uFE0F *Note: This operation requires additional mapping logic and may have\
+        \ limitations in cloud environments.*"
+      tags:
+      - BasicCommon
+      operationId: SetIndex
+      parameters:
+      - name: sessionID
+        in: query
+        description: Parameter for sessionID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: objID
+        in: query
+        description: Parameter for objID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: indexType
+        in: query
+        description: Parameter for indexType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicCommon/SearchForIndex:
+    post:
+      summary: Advanced Index Search
+      description: "Executes sophisticated searches using indexed metadata and classification\
+        \ criteria.\n\n**Cloud Mapping**: WebDAV SEARCH method\n\n\u26A0\uFE0F *Note:\
+        \ This operation requires additional mapping logic and may have limitations\
+        \ in cloud environments.*"
+      tags:
+      - BasicCommon
+      operationId: SearchForIndex
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: SearchInFolder
+        in: query
+        description: Parameter for SearchInFolder - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: IndexType
+        in: query
+        description: Parameter for IndexType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Conjunction
+        in: query
+        description: Parameter for Conjunction - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: MaxResults
+        in: query
+        description: Maximum number of search results to return (0 = unlimited)
+        required: false
+        schema:
+          type: string
+      - name: SearchInInheritedIndexes
+        in: query
+        description: Parameter for SearchInInheritedIndexes - see API documentation
+          for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: ResultObjectType
+        in: query
+        description: Parameter for ResultObjectType - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: '012'
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                FolderInfo:
+                  FolderID: string
+                  ParentFolderID: string
+                  Foldername: string
+                  FullpathGuid: string
+                  FullpathString: string
+                  HasSubElements: true
+                  SubFoldersCount: 0
+                  SubDocsCount: 0
+                  SubElementsLoaded: 0
+                  Type: 0
+                  Created: '2025-10-04T08:27:47.751Z'
+                  Creator: string
+                  CreatorFullName: string
+                  LastUpdated: '2025-10-04T08:27:47.751Z'
+                  LastUpdated_User: string
+                  LastUpdated_User_Fullname: string
+                  Master: string
+                  Aktz: string
+                  AktzCurrentLevel: 0
+                  Status: 0
+                  Checked_Out: 0
+                  Level_0_ParentId: string
+                  HasNotes: 0
+                  HasHeadWords: 0
+                  Description: string
+                  Rights:
+                    RightsDigit: 0
+                    SpecialRights:
+                      VisibleForAdminOnly: true
+                      HierarchicStructure: true
+                      OrphanedFolder: true
+                    FolderCreate: true
+                    FolderDelete: true
+                    FolderChange: true
+                    DocumentsRead: true
+                    DocumentsCreateAndChange: true
+                    DocumentsRename: true
+                    DocumentsDelete: true
+                    Protocol: true
+                    Archive: true
+                    NoticeRead: true
+                    NoticeWrite: true
+                    FolderSetRights: true
+                  AutoFreeze: true
+                  AutoFreezeType: 0
+                  AutoFreezeAfterDays: 0
+                  AutoFreeze_FreezeDays: 0
+                  AutoFreeze_Selection: 0
+                  CarePeriodID: string
+                  Relevance:
+                    Percent: 0
+                    FoundIn:
+                    - string
+                  Tag: string
+                  LinkedObjects:
+                  - Id: string
+                    Type: 0
+                  PrefixStr: string
+                  RequestId: string
+                  RequestTime: '2025-10-04T08:27:47.751Z'
+                  DateRom: '2025-10-04T08:27:47.751Z'
+                  DelDateFinal: '2025-10-04T08:27:47.751Z'
+                  IndexType:
+                    Name: string
+                    DocTypeId: string
+                    FullText: 0
+                    NoAddNew: 0
+                    IsReadOnly: 0
+                    DocTypeType: 0
+                    IsEditable: 0
+                    Auditable_Default_Value: 0
+                    Auditable_Base_DateType: 0
+                    TopicsList:
+                    - index_id: string
+                      index_topic: string
+                      data_type: 0
+                      preview: true
+                      mandatory: true
+                      primary_value: true
+                      SelectableValues:
+                      - string
+                      Cmis_Indexfield: 0
+                      Cmis_MultiValue: true
+                      DisplayName: string
+                      Description: string
+                    Automatic_Version: true
+                    Max_Version: 0
+                    DisplayName: string
+                    Description: string
+                  Index:
+                  - topic: string
+                    values:
+                      StringValue: string
+                      DateTimeValue: '2025-10-04T08:27:47.751Z'
+                      DoubleValue: 0
+                      BooleanValue: true
+                      LongValue: 0
+                      UrlValue: string
+                      SortableType: string
+                      DataType: 0
+                  IndexTypeMember:
+                  - Name: string
+                    ObjectId: string
+                    ObjectType: 0
+                    ParentId: string
+                  PrimaryIndexValue: string
+                  PrimaryIndexSortValue: string
+                  Subfile_Counter: 0
+                SubFolders:
+                - FolderID: string
+                  ParentFolderID: string
+                  Foldername: string
+                  FullpathGuid: string
+                  FullpathString: string
+                  HasSubElements: true
+                  SubFoldersCount: 0
+                  SubDocsCount: 0
+                  SubElementsLoaded: 0
+                  Type: 0
+                  Created: '2025-10-04T08:27:47.751Z'
+                  Creator: string
+                  CreatorFullName: string
+                  LastUpdated: '2025-10-04T08:27:47.751Z'
+                  LastUpdated_User: string
+                  LastUpdated_User_Fullname: string
+                  Master: string
+                  Aktz: string
+                  AktzCurrentLevel: 0
+                  Status: 0
+                  Checked_Out: 0
+                  Level_0_ParentId: string
+                  HasNotes: 0
+                  HasHeadWords: 0
+                  Description: string
+                  Rights:
+                    RightsDigit: 0
+                    SpecialRights:
+                      VisibleForAdminOnly: true
+                      HierarchicStructure: true
+                      OrphanedFolder: true
+                    FolderCreate: true
+                    FolderDelete: true
+                    FolderChange: true
+                    DocumentsRead: true
+                    DocumentsCreateAndChange: true
+                    DocumentsRename: true
+                    DocumentsDelete: true
+                    Protocol: true
+                    Archive: true
+                    NoticeRead: true
+                    NoticeWrite: true
+                    FolderSetRights: true
+                  AutoFreeze: true
+                  AutoFreezeType: 0
+                  AutoFreezeAfterDays: 0
+                  AutoFreeze_FreezeDays: 0
+                  AutoFreeze_Selection: 0
+                  CarePeriodID: string
+                  Relevance:
+                    Percent: 0
+                    FoundIn:
+                    - string
+                  Tag: string
+                  LinkedObjects:
+                  - Id: string
+                    Type: 0
+                  PrefixStr: string
+                  RequestId: string
+                  RequestTime: '2025-10-04T08:27:47.751Z'
+                  DateRom: '2025-10-04T08:27:47.751Z'
+                  DelDateFinal: '2025-10-04T08:27:47.751Z'
+                  IndexType:
+                    Name: string
+                    DocTypeId: string
+                    FullText: 0
+                    NoAddNew: 0
+                    IsReadOnly: 0
+                    DocTypeType: 0
+                    IsEditable: 0
+                    Auditable_Default_Value: 0
+                    Auditable_Base_DateType: 0
+                    TopicsList:
+                    - index_id: string
+                      index_topic: string
+                      data_type: 0
+                      preview: true
+                      mandatory: true
+                      primary_value: true
+                      SelectableValues:
+                      - string
+                      Cmis_Indexfield: 0
+                      Cmis_MultiValue: true
+                      DisplayName: string
+                      Description: string
+                    Automatic_Version: true
+                    Max_Version: 0
+                    DisplayName: string
+                    Description: string
+                  Index:
+                  - topic: string
+                    values:
+                      StringValue: string
+                      DateTimeValue: '2025-10-04T08:27:47.751Z'
+                      DoubleValue: 0
+                      BooleanValue: true
+                      LongValue: 0
+                      UrlValue: string
+                      SortableType: string
+                      DataType: 0
+                  IndexTypeMember:
+                  - Name: string
+                    ObjectId: string
+                    ObjectType: 0
+                    ParentId: string
+                  PrimaryIndexValue: string
+                  PrimaryIndexSortValue: string
+                  Subfile_Counter: 0
+                SubDocs:
+                - DocName: string
+                  DocId: string
+                  DocType:
+                    Name: string
+                    DocTypeId: string
+                    FullText: 0
+                    NoAddNew: 0
+                    IsReadOnly: 0
+                    DocTypeType: 0
+                    IsEditable: 0
+                    Auditable_Default_Value: 0
+                    Auditable_Base_DateType: 0
+                    TopicsList:
+                    - index_id: string
+                      index_topic: string
+                      data_type: 0
+                      preview: true
+                      mandatory: true
+                      primary_value: true
+                      SelectableValues:
+                      - string
+                      Cmis_Indexfield: 0
+                      Cmis_MultiValue: true
+                      DisplayName: string
+                      Description: string
+                    Automatic_Version: true
+                    Max_Version: 0
+                    DisplayName: string
+                    Description: string
+                  ParentFolderId: string
+                  FullpathGuid: string
+                  FullpathString: string
+                  Aktz: string
+                  DocIndex:
+                  - topic: string
+                    values:
+                      StringValue: string
+                      DateTimeValue: '2025-10-04T08:27:47.751Z'
+                      DoubleValue: 0
+                      BooleanValue: true
+                      LongValue: 0
+                      UrlValue: string
+                      SortableType: string
+                      DataType: 0
+                  IndexTypeMember:
+                  - Name: string
+                    ObjectId: string
+                    ObjectType: 0
+                    ParentId: string
+                  LinkedObjects:
+                  - Id: string
+                    Type: 0
+                  Status: 0
+                  Description: string
+                  Created: '2025-10-04T08:27:47.751Z'
+                  Creator: string
+                  CreatorFullName: string
+                  LastUpdated: '2025-10-04T08:27:47.751Z'
+                  LastUpdated_User: string
+                  LastUpdated_User_Fullname: string
+                  Date_Rom: string
+                  Checked_Out: true
+                  Checked_Out_User_FullName: string
+                  Checked_Out_User_Id: string
+                  Checked_Out_Date: '2025-10-04T08:27:47.751Z'
+                  FileSize: 0
+                  FileExtension: string
+                  HasNotes: 0
+                  DelStatus: 0
+                  DelUserId: string
+                  DelDateUser: string
+                  DelDateFinal: '2025-10-04T08:27:47.751Z'
+                  DelDateFreeze: '2025-10-04T08:27:47.751Z'
+                  BelongsTo: string
+                  Version: 0
+                  LatestVersion: true
+                  CarePeriodId: string
+                  FileCreated: '2025-10-04T08:27:47.751Z'
+                  Relevance:
+                    Percent: 0
+                    FoundIn:
+                    - string
+                  FileKey: string
+                  ThumbnailFileKey: string
+                  PrefixStr: string
+                  RequestId: string
+                  RequestTime: '2025-10-04T08:27:47.751Z'
+                  WasFreezed: true
+                  PrimaryIndexValue: string
+                  PrimaryIndexSortValue: string
+                  Flags:
+                    Contract: true
+                    PostIn: true
+                    PostOut: true
+                Notes: string
+                TaskLog:
+                  Canceled: true
+                  hasError: true
+                  ErrorType: 0
+                  errDescription: string
+                  errCode: string
+                  TimeStamp: '2025-10-04T08:27:47.751Z'
+                  TaskName: string
+                  SessionUser:
+                    UserId: string
+                    Lastname: string
+                    Firstname: string
+                    Fullname: string
+                    Login: string
+                    SpaceAdmin: true
+                    Admin: true
+                    Archive: true
+                    Index: true
+                    Metadata: true
+                    DSGVO: true
+                    IsSubscriptionAdmin: true
+                    IsTemplateAdmin: true
+                    SystemUser: true
+                    Locked: 0
+                    Recyclebin_Days: 0
+                    Activity_Status: 0
+                    Email: string
+                    Department_ID: string
+                    Department: string
+                    PadSign: string
+                    Publish_Address: string
+                    User_Folder_ID: string
+                    UserGroups: {}
+                    TaskLog: {}
+                    myWait:
+                      MustWait: true
+                      WaitReason: string
+                      WaitTimeDuration: 0
+                      WaitTimeStart: '2025-10-04T08:27:47.751Z'
+                      WaitCount: 0
+                    SessionId: string
+                    Manager: string
+                    Details: {}
+                    DetailTypes:
+                    - Id: 0
+                      Name: string
+                      DisplayName: string
+                      SourceAttribute: string
+                      IsMandatory: true
+                      Synchronize: true
+                      InternalType: 0
+                    UserIdInCharge: string
+                    LoginUserId: string
+                    InSubstitution: true
+                    SubstituteFullName: string
+                    Description: string
+                    Id: 0
+                    IdInCharge: 0
+                    AccessToken: string
+                    RefreshToken: string
+                    ExpiresIn: 0
+                    ClientValues:
+                      CurrentObject:
+                        key: string
+                        value: 0
+                      LastUsedFolder: string
+                      LastUsedDocument: string
+                  UniqueRequestId: string
+                  UniqueStartTime: '2025-10-04T08:27:47.751Z'
+                  UniqueEndTime: '2025-10-04T08:27:47.751Z'
+                  RequestLog:
+                  - UniqueID: string
+                    Time: '2025-10-04T08:27:47.751Z'
+                    TaskName: string
+                    Params: string
+                    isBegin: true
+                    isEnd: true
+                    Success: true
+                  TaskProgress:
+                    MaxValue: 0
+                    CurrentValue: 0
+                    TaskProgressMessage: string
+                    TaskId: string
+                  TaskMustRequestUser: true
+                  HasTblJobsChanged: true
+                  ErrorLogLevel: 0
+                NextWorkId: string
+                TotalResultsCount: 0
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/CheckInAndIgnoreChanges:
+    post:
+      summary: Check In And Ignore Changes
+      description: "Performs check in and ignore changes operation.\n\n**Cloud Mapping**:\
+        \ WebDAV DeltaV CHECKIN\n\n\u26A0\uFE0F *Note: This operation requires additional\
+        \ mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicDocuments
+      operationId: CheckInAndIgnoreChanges
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/CreateNewDocVersion:
+    post:
+      summary: Create New Doc Version
+      description: "Performs create new doc version operation.\n\n**Cloud Mapping**:\
+        \ WebDAV DeltaV VERSION-CONTROL\n\n\u26A0\uFE0F *Note: This operation requires\
+        \ additional mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicDocuments
+      operationId: CreateNewDocVersion
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: CheckIn
+        in: query
+        description: Parameter for CheckIn - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: Freeze
+        in: query
+        description: Parameter for Freeze - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/ImportDocumentDynamic:
+    post:
+      summary: Import Document Dynamic
+      description: "Performs import document dynamic operation.\n\n**Cloud Mapping**:\
+        \ WebDAV PUT with dynamic path resolution\n\n\u26A0\uFE0F *Note: This operation\
+        \ requires additional mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicDocuments
+      operationId: ImportDocumentDynamic
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ConfigName
+        in: query
+        description: Parameter for ConfigName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FileName
+        in: query
+        description: Name of the file including extension (e.g., "document.pdf")
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/SearchForDocContent:
+    post:
+      summary: Search For Doc Content
+      description: "Performs search for doc content operation.\n\n**Cloud Mapping**:\
+        \ WebDAV SEARCH or external search service\n\n\u26A0\uFE0F *Note: This operation\
+        \ requires additional mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicDocuments
+      operationId: SearchForDocContent
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: SearchTerm
+        in: query
+        description: Text string to search for in document content and metadata
+        required: false
+        schema:
+          type: string
+      - name: SearchInFolder
+        in: query
+        description: Parameter for SearchInFolder - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: MaxResults
+        in: query
+        description: Maximum number of search results to return (0 = unlimited)
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+              - DocName: string
+                DocId: string
+                DocType:
+                  Name: string
+                  DocTypeId: string
+                  FullText: 0
+                  NoAddNew: 0
+                  IsReadOnly: 0
+                  DocTypeType: 0
+                  IsEditable: 0
+                  Auditable_Default_Value: 0
+                  Auditable_Base_DateType: 0
+                  TopicsList:
+                  - index_id: string
+                    index_topic: string
+                    data_type: 0
+                    preview: true
+                    mandatory: true
+                    primary_value: true
+                    SelectableValues:
+                    - string
+                    Cmis_Indexfield: 0
+                    Cmis_MultiValue: true
+                    DisplayName: string
+                    Description: string
+                  Automatic_Version: true
+                  Max_Version: 0
+                  DisplayName: string
+                  Description: string
+                ParentFolderId: string
+                FullpathGuid: string
+                FullpathString: string
+                Aktz: string
+                DocIndex:
+                - topic: string
+                  values:
+                    StringValue: string
+                    DateTimeValue: '2025-10-04T08:27:47.804Z'
+                    DoubleValue: 0
+                    BooleanValue: true
+                    LongValue: 0
+                    UrlValue: string
+                    SortableType: string
+                    DataType: 0
+                IndexTypeMember:
+                - Name: string
+                  ObjectId: string
+                  ObjectType: 0
+                  ParentId: string
+                LinkedObjects:
+                - Id: string
+                  Type: 0
+                Status: 0
+                Description: string
+                Created: '2025-10-04T08:27:47.804Z'
+                Creator: string
+                CreatorFullName: string
+                LastUpdated: '2025-10-04T08:27:47.804Z'
+                LastUpdated_User: string
+                LastUpdated_User_Fullname: string
+                Date_Rom: string
+                Checked_Out: true
+                Checked_Out_User_FullName: string
+                Checked_Out_User_Id: string
+                Checked_Out_Date: '2025-10-04T08:27:47.804Z'
+                FileSize: 0
+                FileExtension: string
+                HasNotes: 0
+                DelStatus: 0
+                DelUserId: string
+                DelDateUser: string
+                DelDateFinal: '2025-10-04T08:27:47.804Z'
+                DelDateFreeze: '2025-10-04T08:27:47.804Z'
+                BelongsTo: string
+                Version: 0
+                LatestVersion: true
+                CarePeriodId: string
+                FileCreated: '2025-10-04T08:27:47.804Z'
+                Relevance:
+                  Percent: 0
+                  FoundIn:
+                  - string
+                FileKey: string
+                ThumbnailFileKey: string
+                PrefixStr: string
+                RequestId: string
+                RequestTime: '2025-10-04T08:27:47.804Z'
+                WasFreezed: true
+                PrimaryIndexValue: string
+                PrimaryIndexSortValue: string
+                Flags:
+                  Contract: true
+                  PostIn: true
+                  PostOut: true
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/SearchForDocIndex:
+    post:
+      summary: Search For Doc Index
+      description: "Performs search for doc index operation.\n\n**Cloud Mapping**:\
+        \ WebDAV PROPFIND with custom properties\n\n\u26A0\uFE0F *Note: This operation\
+        \ requires additional mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicDocuments
+      operationId: SearchForDocIndex
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: SearchInFolder
+        in: query
+        description: Parameter for SearchInFolder - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocType
+        in: query
+        description: Parameter for DocType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Conjunction
+        in: query
+        description: Parameter for Conjunction - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: truefalse
+      - name: MaxResults
+        in: query
+        description: Maximum number of search results to return (0 = unlimited)
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+              - DocName: string
+                DocId: string
+                DocType:
+                  Name: string
+                  DocTypeId: string
+                  FullText: 0
+                  NoAddNew: 0
+                  IsReadOnly: 0
+                  DocTypeType: 0
+                  IsEditable: 0
+                  Auditable_Default_Value: 0
+                  Auditable_Base_DateType: 0
+                  TopicsList:
+                  - index_id: string
+                    index_topic: string
+                    data_type: 0
+                    preview: true
+                    mandatory: true
+                    primary_value: true
+                    SelectableValues:
+                    - string
+                    Cmis_Indexfield: 0
+                    Cmis_MultiValue: true
+                    DisplayName: string
+                    Description: string
+                  Automatic_Version: true
+                  Max_Version: 0
+                  DisplayName: string
+                  Description: string
+                ParentFolderId: string
+                FullpathGuid: string
+                FullpathString: string
+                Aktz: string
+                DocIndex:
+                - topic: string
+                  values:
+                    StringValue: string
+                    DateTimeValue: '2025-10-04T08:27:47.807Z'
+                    DoubleValue: 0
+                    BooleanValue: true
+                    LongValue: 0
+                    UrlValue: string
+                    SortableType: string
+                    DataType: 0
+                IndexTypeMember:
+                - Name: string
+                  ObjectId: string
+                  ObjectType: 0
+                  ParentId: string
+                LinkedObjects:
+                - Id: string
+                  Type: 0
+                Status: 0
+                Description: string
+                Created: '2025-10-04T08:27:47.807Z'
+                Creator: string
+                CreatorFullName: string
+                LastUpdated: '2025-10-04T08:27:47.807Z'
+                LastUpdated_User: string
+                LastUpdated_User_Fullname: string
+                Date_Rom: string
+                Checked_Out: true
+                Checked_Out_User_FullName: string
+                Checked_Out_User_Id: string
+                Checked_Out_Date: '2025-10-04T08:27:47.807Z'
+                FileSize: 0
+                FileExtension: string
+                HasNotes: 0
+                DelStatus: 0
+                DelUserId: string
+                DelDateUser: string
+                DelDateFinal: '2025-10-04T08:27:47.807Z'
+                DelDateFreeze: '2025-10-04T08:27:47.807Z'
+                BelongsTo: string
+                Version: 0
+                LatestVersion: true
+                CarePeriodId: string
+                FileCreated: '2025-10-04T08:27:47.807Z'
+                Relevance:
+                  Percent: 0
+                  FoundIn:
+                  - string
+                FileKey: string
+                ThumbnailFileKey: string
+                PrefixStr: string
+                RequestId: string
+                RequestTime: '2025-10-04T08:27:47.807Z'
+                WasFreezed: true
+                PrimaryIndexValue: string
+                PrimaryIndexSortValue: string
+                Flags:
+                  Contract: true
+                  PostIn: true
+                  PostOut: true
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/SetDocIndex:
+    put:
+      summary: Set Doc Index
+      description: "Creates or updates doc index in the system.\n\n**Cloud Mapping**:\
+        \ WebDAV PROPPATCH\n\n\u26A0\uFE0F *Note: This operation requires additional\
+        \ mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicDocuments
+      operationId: SetDocIndex
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: DocType
+        in: query
+        description: Parameter for DocType - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicDocuments/SetDocNotice:
+    put:
+      summary: Set Doc Notice
+      description: "Creates or updates doc notice in the system.\n\n**Cloud Mapping**:\
+        \ WebDAV PROPPATCH custom property\n\n\u26A0\uFE0F *Note: This operation requires\
+        \ additional mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicDocuments
+      operationId: SetDocNotice
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: DocId
+        in: query
+        description: Parameter for DocId - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/GetAllowedSubFolderTypes:
+    get:
+      summary: Get Allowed Sub Folder Types
+      description: "Retrieves allowed sub folder types information from the system.\n\
+        \n**Cloud Mapping**: WebDAV PROPFIND custom properties\n\n\u26A0\uFE0F *Note:\
+        \ This operation requires additional mapping logic and may have limitations\
+        \ in cloud environments.*"
+      tags:
+      - BasicFolders
+      operationId: GetAllowedSubFolderTypes
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: ParentFolderType
+        in: query
+        description: Parameter for ParentFolderType - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 01234-1
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+              - key: 0
+                value: string
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/GetFolderTemplates:
+    get:
+      summary: Get Folder Templates
+      description: "Retrieves folder templates information from the system.\n\n**Cloud\
+        \ Mapping**: WebDAV PROPFIND custom properties\n\n\u26A0\uFE0F *Note: This\
+        \ operation requires additional mapping logic and may have limitations in\
+        \ cloud environments.*"
+      tags:
+      - BasicFolders
+      operationId: GetFolderTemplates
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: TemplateName
+        in: query
+        description: Parameter for TemplateName - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+              - DetailName: string
+                FolderIdStartTemplate: string
+                TemplateDimension: 0
+                IsGlobal: string
+                IsPrivate: true
+                UseTemplateRights: true
+                UserId: string
+                CreatorID: string
+                ConfigId: string
+                CopySubDocuments: true
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/SetFolderNotice:
+    put:
+      summary: Set Folder Notice
+      description: "Creates or updates folder notice in the system.\n\n**Cloud Mapping**:\
+        \ WebDAV PROPPATCH\n\n\u26A0\uFE0F *Note: This operation requires additional\
+        \ mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicFolders
+      operationId: SetFolderNotice
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: FolderID
+        in: query
+        description: Parameter for FolderID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicFolders/SetFolderExtendedProperties:
+    put:
+      summary: Set Folder Extended Properties
+      description: "Creates or updates folder extended properties in the system.\n\
+        \n**Cloud Mapping**: WebDAV PROPPATCH\n\n\u26A0\uFE0F *Note: This operation\
+        \ requires additional mapping logic and may have limitations in cloud environments.*"
+      tags:
+      - BasicFolders
+      operationId: SetFolderExtendedProperties
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: FolderID
+        in: query
+        description: Parameter for FolderID - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: Aktz
+        in: query
+        description: Parameter for Aktz - see API documentation for details
+        required: false
+        schema:
+          type: string
+      - name: FolderType
+        in: query
+        description: Parameter for FolderType - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: 01234-1
+      responses:
+        '200':
+          description: Operation completed successfully
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
+  /api/basicGeneral/GetEnumerationAsDictionary:
+    get:
+      summary: Get Enumeration As Dictionary
+      description: "Retrieves enumeration as dictionary information from the system.\n\
+        \n**Cloud Mapping**: System metadata via WebDAV PROPFIND\n\n\u26A0\uFE0F *Note:\
+        \ This operation requires additional mapping logic and may have limitations\
+        \ in cloud environments.*"
+      tags:
+      - BasicGeneral
+      operationId: GetEnumerationAsDictionary
+      parameters:
+      - name: SessionID
+        in: query
+        description: Unique session identifier for user authentication and request
+          authorization
+        required: false
+        schema:
+          type: string
+      - name: Enumtype
+        in: query
+        description: Parameter for Enumtype - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: '012345'
+      - name: Datatype
+        in: query
+        description: Parameter for Datatype - see API documentation for details
+        required: false
+        schema:
+          type: string
+        example: '01'
+      responses:
+        '200':
+          description: Operation completed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+              example: {}
+        '400':
+          description: Invalid request parameters
+        '401':
+          description: Authentication required
+        '500':
+          description: Internal server error
