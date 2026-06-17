@@ -1,8 +1,18 @@
 #!/bin/bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+# Load DIST
+if [[ -f "$PROJECT_ROOT/DIST" ]]; then
+    set -a
+    . "$PROJECT_ROOT/DIST"
+    set +a
+fi
+
 APP=folderviews
-HOST=cloud.brandis.eu
+HOST="${HOST:?HOST not set — create DIST file}"
 DEPLOY_DIR=deploy/folderviews
 REMOTE_BASE=/data/opencloud_podman
 VIEWS_PATH=/var/lib/opencloud/web/assets/views

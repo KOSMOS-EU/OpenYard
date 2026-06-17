@@ -1,17 +1,15 @@
 # OpenYard DMS Microservice
-# Deployment für cloud.brandis.eu
 #
 # Läuft auf eigenem Port 9201, NICHT über Traefik.
 # Damit keine Konflikte mit OpenCloud-API und
 # Source-IP-Filterung möglich.
 #
 # Setup:
-#   1. Diese Datei nach /data/opencloud_podman/openyard.yml kopieren
-#   2. In /data/opencloud_podman/.env OPENYARD=:openyard.yml setzen
+#   1. Diese Datei nach <DATAPATH>/openyard.yml kopieren
+#   2. In <DATAPATH>/.env OPENYARD=:openyard.yml setzen
 #   3. podman compose up -d openyard
 #
-# Zugriff: https://cloud.brandis.eu:9201/api/advancedGeneral/IsListening
-# Oder direkt: http://<server-ip>:9201/api/...
+# Zugriff: https://<HOST>:9201/api/advancedGeneral/IsListening
 #
 ---
 services:
