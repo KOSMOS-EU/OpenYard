@@ -12,6 +12,7 @@ import (
 	"github.com/kosmos-eu/openyard/pkg/auth"
 	"github.com/kosmos-eu/openyard/pkg/config"
 	"github.com/kosmos-eu/openyard/pkg/cs3client"
+	"github.com/kosmos-eu/openyard/pkg/http/cmis"
 	"github.com/kosmos-eu/openyard/pkg/http/handlers"
 	"github.com/kosmos-eu/openyard/pkg/upload"
 )
@@ -182,6 +183,11 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 	// Swagger UI stub
 	m.Get("/swagger/", h.IDPSwagger)
 	m.Get("/swagger/docs/v1", h.IDPSwagger)
+
+	// --- CMIS 1.1 Browser JSON Binding ---
+	cmisHandler := cmis.New(gw, sessions, cfg)
+	m.Mount("/cmis", cmisHandler.Router())
+	log.Info().Msg("CMIS 1.1 browser binding enabled at /cmis")
 
 	return &Service{mux: m}
 }
