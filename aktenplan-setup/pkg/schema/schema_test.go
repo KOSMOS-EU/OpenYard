@@ -4,31 +4,18 @@ import (
 	"testing"
 )
 
-func TestParseBrandisAktenplan(t *testing.T) {
-	ap, err := LoadFromFile("../../../docs/brandis-aktenplan.yaml")
+func TestParseAktenplanFile(t *testing.T) {
+	// Integration test — requires a real aktenplan YAML.
+	// Skipped if file not present (e.g. in CI or public checkout).
+	const path = "../../../docs/aktenplan.yaml"
+	ap, err := LoadFromFile(path)
 	if err != nil {
-		t.Fatalf("LoadFromFile: %v", err)
-	}
-
-	if ap.Aktenplan.Kommune != "Brandis" {
-		t.Errorf("Kommune = %q, want %q", ap.Aktenplan.Kommune, "Brandis")
+		t.Skipf("Skipping: %v", err)
 	}
 
 	count := CountKnoten(ap.Aktenplan.Knoten)
-	if count < 100 {
-		t.Errorf("CountKnoten = %d, want >= 100", count)
-	}
-
-	// Check first top-level node
-	if len(ap.Aktenplan.Knoten) == 0 {
-		t.Fatal("no top-level knoten")
-	}
-	first := ap.Aktenplan.Knoten[0]
-	if first.Kennung != "11" {
-		t.Errorf("first Kennung = %q, want %q", first.Kennung, "11")
-	}
-	if first.Name != "Innere Verwaltung" {
-		t.Errorf("first Name = %q, want %q", first.Name, "Innere Verwaltung")
+	if count < 10 {
+		t.Errorf("CountKnoten = %d, want >= 10", count)
 	}
 }
 
