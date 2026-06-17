@@ -9,14 +9,14 @@ import (
 
 // GET /api/advancedGeneral/IsListening
 func (h *Handlers) IsListening(w http.ResponseWriter, r *http.Request) {
-	// WinYard returns plain "true" (not JSON object)
+	// legacy DMS returns plain "true" (not JSON object)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
 	w.Write([]byte("true"))
 }
 
 // GET /api/advancedGeneral/GetServerSettings
-// WinYard-compatible response with Settings object and TaskLog.
+// legacy DMS-compatible response with Settings object and TaskLog.
 func (h *Handlers) GetServerSettings(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, 200, map[string]interface{}{
 		"Settings": map[string]interface{}{
@@ -124,7 +124,7 @@ func (h *Handlers) PersistMigration(w http.ResponseWriter, r *http.Request) {
 }
 
 // POST /api/management/migration/map
-// Maps an old WinYard ID to a new OpenYard ID in memory.
+// Maps an old legacy DMS ID to a new OpenYard ID in memory.
 // Body: {"OldId": "...", "NewId": "...", "Type": "folder|document", "Name": "..."}
 func (h *Handlers) MapMigrationID(w http.ResponseWriter, r *http.Request) {
 	var body struct {
@@ -157,7 +157,7 @@ func writeJSONRaw(w http.ResponseWriter, status int, data []byte) {
 	w.Write(data)
 }
 
-// taskLogWrap wraps a response with a TaskLog envelope (common WinYard pattern).
+// taskLogWrap wraps a response with a TaskLog envelope (common legacy DMS pattern).
 func taskLogWrap(data interface{}) map[string]interface{} {
 	b, _ := json.Marshal(data)
 	var result map[string]interface{}

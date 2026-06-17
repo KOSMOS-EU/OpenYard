@@ -33,7 +33,7 @@ func TestIsListening(t *testing.T) {
 		t.Fatalf("status = %d, want 200", w.Code)
 	}
 
-	// WinYard returns plain "true"
+	// legacy DMS returns plain "true"
 	if w.Body.String() != "true" {
 		t.Errorf("body = %q, want \"true\"", w.Body.String())
 	}

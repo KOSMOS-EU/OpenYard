@@ -38,7 +38,7 @@ func runServer(cfg *config.Config) error {
 
 	log.Info().Str("addr", cfg.HTTP.Addr).Str("gateway", cfg.Reva.GatewayAddr).Msg("starting openyard")
 
-	// Migration DB (ID mapping WinYard → OpenYard)
+	// Migration DB (ID mapping legacy DMS → OpenYard)
 	migration.Init()
 
 	// CS3 Gateway Client

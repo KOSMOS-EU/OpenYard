@@ -1,4 +1,4 @@
-// Package extract implements Aktenplan extraction from a WinYard API.
+// Package extract implements Aktenplan extraction from a legacy DMS API.
 package extract
 
 import (
@@ -15,7 +15,7 @@ import (
 
 // APIOptions configures API-mode extraction.
 type APIOptions struct {
-	BaseURL   string // e.g. "http://winyard:8080"
+	BaseURL   string // e.g. "http://dms-host:8080"
 	Username  string
 	Password  string
 	StartPath string // e.g. "/Aktenplan"
@@ -23,7 +23,7 @@ type APIOptions struct {
 	Output    io.Writer
 }
 
-// APIExtractor crawls a WinYard/OpenYard API to build an Aktenplan YAML.
+// APIExtractor crawls a legacy DMS/OpenYard API to build an Aktenplan YAML.
 type APIExtractor struct {
 	opts      APIOptions
 	client    *http.Client

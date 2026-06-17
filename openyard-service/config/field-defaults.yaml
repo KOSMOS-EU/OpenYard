@@ -1,5 +1,5 @@
 # OpenYard Field-Default-Engine Konfiguration
-# Definiert Quellen und Defaults für WinYard-API-Felder
+# Definiert Quellen und Defaults für legacy DMS-API-Felder
 
 user_fields:
   LoginName:

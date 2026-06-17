@@ -11,9 +11,9 @@ import (
 
 func main() {
 	mode := flag.String("mode", "api", "Extraction mode: api or sql")
-	apiURL := flag.String("url", envOr("WINYARD_URL", "http://localhost:8080"), "WinYard API base URL")
-	user := flag.String("user", envOr("WINYARD_USER", ""), "WinYard username")
-	pass := flag.String("pass", envOr("WINYARD_PASS", ""), "WinYard password")
+	apiURL := flag.String("url", envOr("LEGACY_DMS_URL", "http://localhost:8080"), "Legacy DMS API base URL")
+	user := flag.String("user", envOr("LEGACY_DMS_USER", ""), "DMS username")
+	pass := flag.String("pass", envOr("LEGACY_DMS_PASS", ""), "DMS password")
 	startPath := flag.String("start-path", "/", "Start path for recursive crawl")
 	output := flag.String("output", "aktenplan.yaml", "Output YAML file")
 	kommune := flag.String("kommune", "", "Kommune name for metadata")

@@ -55,7 +55,7 @@ func (s *SessionCache) Delete(sessionID string) {
 	s.cache.Delete(sessionID)
 }
 
-// generateGUID creates a UUID v4 string matching WinYard SessionID format.
+// generateGUID creates a UUID v4 string matching legacy DMS SessionID format.
 func generateGUID() string {
 	b := make([]byte, 16)
 	rand.Read(b)

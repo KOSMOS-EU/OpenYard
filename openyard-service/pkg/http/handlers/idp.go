@@ -9,11 +9,11 @@ import (
 )
 
 // --- IDP / Identity Server Endpoints ---
-// Mapped from Winyard.Identity.WebApi (svb-dms01:52329)
+// Mapped from legacy DMS.Identity.WebApi (svb-dms01:52329)
 // These run on the same port as the DMS API.
 
 // GET /connect/authorize — OIDC Authorization
-// WinYard client calls this to initiate OIDC flow.
+// legacy DMS client calls this to initiate OIDC flow.
 // In OpenYard we redirect to OpenCloud's OIDC.
 func (h *Handlers) ConnectAuthorize(w http.ResponseWriter, r *http.Request) {
 	// Phase 1: stub — return 302 to simulate OIDC redirect

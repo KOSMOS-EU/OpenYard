@@ -9,7 +9,7 @@ Dateisystemzugriff (NFS, SMB, lokaler Mount).
 
 ## Referenz
 
-- xx1.png: WINYARD DMS Baumansicht + Register-Dialog (Typ-Auswahl, Aktenzeichen)
+- xx1.png: legacy DMS DMS Baumansicht + Register-Dialog (Typ-Auswahl, Aktenzeichen)
 - xx2.png: Kontextmenü "Neu" mit typspezifischen Kind-Elementen (AK4-Typen)
 
 ## Architektur

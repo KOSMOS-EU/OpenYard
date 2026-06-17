@@ -12,7 +12,7 @@ import (
 	"github.com/kosmos-eu/openyard/pkg/migration"
 )
 
-// encodeObjectID creates the WinYard-compatible ObjectId from a CS3 ResourceId.
+// encodeObjectID creates the legacy DMS-compatible ObjectId from a CS3 ResourceId.
 // Format: base64(storage_id$space_id!opaque_id) — matches CS3 triple format.
 func encodeObjectID(rid *provider.ResourceId) string {
 	if rid == nil {
@@ -24,9 +24,9 @@ func encodeObjectID(rid *provider.ResourceId) string {
 
 // decodeObjectID parses an ObjectId to CS3 ResourceId.
 // Tries: 1) base64 encoded (OpenYard native)
-//        2) Migration DB lookup (WinYard GUID → OpenYard ID)
+//        2) Migration DB lookup (legacy DMS GUID → OpenYard ID)
 func decodeObjectID(objectID string) (*provider.ResourceId, error) {
-	// Try migration lookup first for WinYard GUIDs (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
+	// Try migration lookup first for legacy DMS GUIDs (xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx)
 	if len(objectID) == 36 && objectID[8] == '-' && objectID[13] == '-' {
 		oyID := migration.LookupOpenYardID(objectID)
 		if oyID != "" {
@@ -70,7 +70,7 @@ func decodeObjectID(objectID string) (*provider.ResourceId, error) {
 	return rid, nil
 }
 
-// mapResourceInfo converts CS3 ResourceInfo to WinYard-compatible JSON map.
+// mapResourceInfo converts CS3 ResourceInfo to legacy DMS-compatible JSON map.
 func mapResourceInfo(info *provider.ResourceInfo) map[string]interface{} {
 	// Unescape folder names (U+2215 → "/") for display
 	displayName := strings.ReplaceAll(path.Base(info.Path), "\u2215", "/")
@@ -113,7 +113,7 @@ func formatTimestamp(ts *typesv1.Timestamp) string {
 	return time.Unix(int64(ts.Seconds), int64(ts.Nanos)).UTC().Format("2006-01-02T15:04:05Z")
 }
 
-// refFromObjectID creates a CS3 Reference from a WinYard ObjectId.
+// refFromObjectID creates a CS3 Reference from a legacy DMS ObjectId.
 func refFromObjectID(objectID string) (*provider.Reference, error) {
 	rid, err := decodeObjectID(objectID)
 	if err != nil {
@@ -127,7 +127,7 @@ func refFromPath(p string) *provider.Reference {
 	return &provider.Reference{Path: p}
 }
 
-// mapFolderInfo converts CS3 ResourceInfo to WinYard FolderInfo.
+// mapFolderInfo converts CS3 ResourceInfo to legacy DMS FolderInfo.
 func mapFolderInfo(info *provider.ResourceInfo) map[string]interface{} {
 	return map[string]interface{}{
 		"FolderID":       encodeObjectID(info.Id),
@@ -151,8 +151,8 @@ func mapFolderInfo(info *provider.ResourceInfo) map[string]interface{} {
 	}
 }
 
-// taskLogOK returns a standard WinYard TaskLog with no errors.
-// metaKeyMap maps known WinYard field names to English oy.* metadata keys.
+// taskLogOK returns a standard legacy DMS TaskLog with no errors.
+// metaKeyMap maps known legacy DMS field names to English oy.* metadata keys.
 // Unknown keys are passed through as oy.<OriginalKey>.
 var metaKeyMap = map[string]string{
 	// Document metadata
@@ -214,7 +214,7 @@ var metaKeyMap = map[string]string{
 	"PrimaryIndexValue":    "oy.primaryIndex",
 }
 
-// infoKeyMap maps known WinYard DocIndex topic names to English info.* keys.
+// infoKeyMap maps known legacy DMS DocIndex topic names to English info.* keys.
 // User-defined index fields live in the info.* namespace, separate from oy.* system fields.
 // Unknown topics pass through as info.<sanitized-topic>.
 var infoKeyMap = map[string]string{
@@ -249,7 +249,7 @@ var infoKeyMap = map[string]string{
 	"KZ_DKS":                       "info.dksCode",
 }
 
-// mapMetaKey converts a WinYard metadata key to an oy.* or info.* key.
+// mapMetaKey converts a legacy DMS metadata key to an oy.* or info.* key.
 // Keys with "info:" prefix are mapped via infoKeyMap to the info.* namespace.
 // Known keys get English names, unknown keys pass through as oy.<key>.
 func mapMetaKey(wyKey string) string {
@@ -263,7 +263,7 @@ func mapMetaKey(wyKey string) string {
 	return "oy." + wyKey
 }
 
-// mapInfoKey converts a WinYard DocIndex topic to an info.* key.
+// mapInfoKey converts a legacy DMS DocIndex topic to an info.* key.
 // Known topics get English names, unknown topics are sanitized.
 func mapInfoKey(topic string) string {
 	if mapped, ok := infoKeyMap[topic]; ok {

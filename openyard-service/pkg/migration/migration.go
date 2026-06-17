@@ -1,11 +1,11 @@
-// Package migration provides ID mapping between WinYard and OpenYard ObjectIDs.
+// Package migration provides ID mapping between legacy DMS and OpenYard ObjectIDs.
 //
-// Used for document migration: when importing documents from WinYard,
-// the old WinYard ID is mapped to the new OpenYard ID so that subsequent
+// Used for document migration: when importing documents from legacy DMS,
+// the old legacy DMS ID is mapped to the new OpenYard ID so that subsequent
 // lookups with the old ID still work.
 //
 // Uses a simple JSON file as backend (no CGO/SQLite dependency).
-// Format: {"winyard-guid": {"oy": "openyard-id", "t": "folder", "n": "name"}, ...}
+// Format: {"legacy-guid": {"oy": "openyard-id", "t": "folder", "n": "name"}, ...}
 package migration
 
 import (
@@ -60,18 +60,18 @@ func Init() {
 	})
 }
 
-// LookupOpenYardID translates a WinYard ID to an OpenYard ID.
-func LookupOpenYardID(winyardID string) string {
+// LookupOpenYardID translates a legacy DMS ID to an OpenYard ID.
+func LookupOpenYardID(legacyID string) string {
 	mu.RLock()
 	defer mu.RUnlock()
-	if e, ok := idMap[winyardID]; ok {
+	if e, ok := idMap[legacyID]; ok {
 		return e.OpenYardID
 	}
 	return ""
 }
 
-// LookupWinYardID reverse-translates an OpenYard ID to WinYard ID.
-func LookupWinYardID(openyardID string) string {
+// LookupLegacyID reverse-translates an OpenYard ID to legacy DMS ID.
+func LookupLegacyID(openyardID string) string {
 	mu.RLock()
 	defer mu.RUnlock()
 	for wyID, e := range idMap {
@@ -82,13 +82,13 @@ func LookupWinYardID(openyardID string) string {
 	return ""
 }
 
-// MapID creates or updates a WinYard→OpenYard mapping in memory.
+// MapID creates or updates a legacy DMS→OpenYard mapping in memory.
 // Call Persist() to write to disk.
-func MapID(winyardID, openyardID, objType, name string) {
+func MapID(legacyID, openyardID, objType, name string) {
 	mu.Lock()
 	defer mu.Unlock()
 
-	idMap[winyardID] = entry{
+	idMap[legacyID] = entry{
 		OpenYardID: openyardID,
 		Type:       objType,
 		Name:       name,

@@ -36,7 +36,7 @@ type DocIndexEntry struct {
 // Body: application/xml with ImportDocDataDynamic (WCF DataContract)
 // Response: "guid-of-new-document" (JSON string)
 //
-// OldId: optional WinYard document ID. If provided, the migration DB is
+// OldId: optional legacy DMS document ID. If provided, the migration DB is
 //
 //	updated to map OldId → new OpenYard ID, enabling future lookups.
 //
@@ -155,7 +155,7 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 
 	log.Info().Str("file", fileName).Int("size", len(fileData)).Str("id", newID).Str("method", h.uploader.Name()).Msg("document imported")
 
-	// Response: GUID as JSON string (WinYard format)
+	// Response: GUID as JSON string (legacy DMS format)
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
 	w.Write([]byte(`"` + newID + `"`))

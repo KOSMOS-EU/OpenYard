@@ -18,7 +18,7 @@ import (
 
 // POST /api/advancedUsers/Login
 //
-// WinYard clients send:
+// legacy DMS clients send:
 //   - Authorization: Basic Og== (dummy, empty user:pass)
 //   - Body: JSON search query (NOT username/password)
 //   - Auth happens via OIDC beforehand (connect.authorize on IDP)
@@ -33,7 +33,7 @@ func (h *Handlers) Login(w http.ResponseWriter, r *http.Request) {
 	var cs3User *gateway.AuthenticateResponse
 	var loginName string
 
-	// Try direct login — WinYard sends {"username":"...","Password":"..."}
+	// Try direct login — legacy DMS sends {"username":"...","Password":"..."}
 	// Accept both lowercase and uppercase variants
 	var directLogin map[string]interface{}
 	if len(bodyBytes) > 0 {
@@ -118,12 +118,12 @@ func (h *Handlers) Login(w http.ResponseWriter, r *http.Request) {
 
 	sessionID := h.sessions.Create(sc)
 
-	// WinYard-compatible login response
+	// legacy DMS-compatible login response
 	writeJSON(w, 200, buildLoginResponse(sessionID, sc))
 	log.Info().Str("user", sc.Login).Str("session", sessionID[:8]+"...").Msg("login")
 }
 
-// buildLoginResponse creates a WinYard-compatible login response
+// buildLoginResponse creates a legacy DMS-compatible login response
 // matching the structure observed in captures.
 func buildLoginResponse(sessionID string, sc *auth.SessionContext) map[string]interface{} {
 	return map[string]interface{}{
@@ -191,7 +191,7 @@ func (h *Handlers) Logout(w http.ResponseWriter, r *http.Request) {
 		h.sessions.Delete(sessionID)
 		log.Info().Str("session", sessionID[:8]+"...").Msg("logout")
 	}
-	// WinYard returns TaskLog on logout
+	// legacy DMS returns TaskLog on logout
 	writeJSON(w, 200, map[string]interface{}{
 		"TaskLog": map[string]interface{}{
 			"Canceled":  false,

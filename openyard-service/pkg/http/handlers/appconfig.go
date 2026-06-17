@@ -119,7 +119,7 @@ func (h *Handlers) GetAppConfigDetailsAsJson(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	// The stored file contains the meta + content from WinYard
+	// The stored file contains the meta + content from legacy DMS
 	var stored map[string]interface{}
 	if err := json.Unmarshal(data, &stored); err != nil {
 		writeJSON(w, 200, []interface{}{})

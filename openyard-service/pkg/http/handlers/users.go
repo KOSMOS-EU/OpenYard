@@ -31,7 +31,7 @@ func (h *Handlers) GetUserInfo(w http.ResponseWriter, r *http.Request) {
 		"displayName": u.DisplayName,
 		"email":       u.Mail,
 		"status":      "active",
-		// Field-Default-Engine: WinYard-spezifische Felder mit Defaults
+		// Field-Default-Engine: legacy DMS-spezifische Felder mit Defaults
 		"Funktion":             "",
 		"Telefon":              "",
 		"SachbearbeiterKennung": "",

@@ -22,11 +22,11 @@ func withCS3Token(r *http.Request) *http.Request {
 }
 
 // POST /api/advancedDocuments/GetDocument
-// DocID is a query parameter (WinYard format), not in body.
+// DocID is a query parameter (legacy DMS format), not in body.
 func (h *Handlers) GetDocument(w http.ResponseWriter, r *http.Request) {
 	r = withCS3Token(r)
 
-	// DocID from query (WinYard) or ObjectId from body (legacy)
+	// DocID from query (legacy DMS) or ObjectId from body (legacy)
 	docID := r.URL.Query().Get("DocID")
 	if docID == "" {
 		docID = r.URL.Query().Get("ObjectId")

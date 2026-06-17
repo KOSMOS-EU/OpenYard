@@ -14,7 +14,7 @@ import (
 )
 
 // POST /api/advancedFolders/GetFolder
-// WinYard uses FolderID as query parameter, body is empty {}.
+// legacy DMS uses FolderID as query parameter, body is empty {}.
 // FolderID=00000000-0000-0000-0000-000000000000 means root (list all spaces/volumes).
 func (h *Handlers) GetFolder(w http.ResponseWriter, r *http.Request) {
 	r = withCS3Token(r)
@@ -61,7 +61,7 @@ func (h *Handlers) GetFolder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Build WinYard-compatible response
+	// Build legacy DMS-compatible response
 	subFolders := make([]map[string]interface{}, 0)
 	subDocs := make([]map[string]interface{}, 0)
 	for _, info := range listRes.Infos {
@@ -88,7 +88,7 @@ func (h *Handlers) GetFolder(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-// getFolderRoot lists all spaces as WinYard root volumes.
+// getFolderRoot lists all spaces as legacy DMS root volumes.
 func (h *Handlers) getFolderRoot(w http.ResponseWriter, r *http.Request) {
 	if h.gw == nil || h.gw.Gateway == nil {
 		// No gateway — return empty root
@@ -538,7 +538,7 @@ func (h *Handlers) GetFolderTemplates(w http.ResponseWriter, r *http.Request) {
 
 // POST /api/basicFolders/CreateRootFolder
 // Creates a new root volume/space.
-// WinYard: ?SessionID=...&Foldername=...&Aktz=...&FolderType=...
+// legacy DMS: ?SessionID=...&Foldername=...&Aktz=...&FolderType=...
 func (h *Handlers) CreateRootFolder(w http.ResponseWriter, r *http.Request) {
 	r = withCS3Token(r)
 

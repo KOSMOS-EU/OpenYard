@@ -6,7 +6,7 @@ FolderViewPlus erweitert OpenCloud Web um **typisierte Ordneransichten**. Ordner
 einen Typ der bestimmt: welche Kinder erlaubt sind, welche Spalten angezeigt werden,
 welche Aktionen verfügbar sind und welche Metadaten gepflegt werden.
 
-Designed für **DMS/Aktenplan-Szenarien** (z.B. WINYARD/Archikart), aber generisch nutzbar
+Designed für **DMS/Aktenplan-Szenarien** (z.B. legacy DMS/Archikart), aber generisch nutzbar
 für jede hierarchische Strukturierung.
 
 **Wichtig: FolderViewPlus ist ein reiner UI-Ansatz.** Auf WebDAV- oder Reva-Ebene wird
