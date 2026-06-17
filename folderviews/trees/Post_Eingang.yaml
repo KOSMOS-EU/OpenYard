@@ -1,0 +1,16 @@
+volume: Post Eingang
+id: 78f21541-4cb8-40ef-badf-2f53147ff7f2
+aktz: null
+total_folders: 4
+total_docs: 2
+aktz_count: 0
+tree:
+  name: Post Eingang
+  folders:
+  - name: 2 Verteilung
+    folders:
+    - name: Bau und Ordnung
+      folders:
+      - name: Löwe, Anja
+  - name: 5 Mail
+    docs: 2

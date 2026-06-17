@@ -1,0 +1,246 @@
+volume: ___Klammer
+id: 24557af7-c8a7-411f-8c4f-8d3f1e4841e2
+aktz: null
+total_folders: 111
+total_docs: 1657
+aktz_count: 0
+tree:
+  name: ___Klammer
+  docs: 26
+  folders:
+  - name: Archiv
+    folders:
+    - name: '2002'
+      folders:
+      - name: '01.02'
+        docs: 14
+      - name: 02. 02
+        docs: 2
+      - name: '08.02'
+        docs: 2
+      - name: '09.02'
+        docs: 9
+      - name: '10.02'
+        docs: 7
+      - name: '11.02'
+        docs: 23
+      - name: '12.02'
+        docs: 13
+        folders:
+        - name: Nachtrag
+          docs: 2
+    - name: '2003'
+      docs: 2
+      folders:
+      - name: '01.03'
+        docs: 17
+      - name: '02.03'
+        docs: 19
+      - name: '03.03'
+        docs: 13
+      - name: '04.03'
+        docs: 18
+      - name: '05.03'
+        docs: 17
+      - name: '06.03'
+        docs: 28
+        folders:
+        - name: Mittelschule
+          docs: 6
+      - name: '07.03'
+        docs: 18
+      - name: '08.03'
+        docs: 23
+      - name: '09.03'
+        docs: 14
+      - name: '10.03'
+        docs: 14
+      - name: '11.03'
+        docs: 18
+      - name: '12.03'
+        docs: 15
+    - name: '2004'
+      docs: 1
+      folders:
+      - name: April 04
+        docs: 23
+      - name: August 04
+        docs: 29
+      - name: Bilder Bau
+        docs: 9
+      - name: Dez. 04
+        docs: 16
+      - name: Februar 04
+        docs: 19
+      - name: Januar 04
+        docs: 26
+      - name: Juli 04
+        docs: 7
+      - name: Juni 04
+        docs: 16
+      - name: Mai 04
+        docs: 17
+      - name: März 04
+        docs: 17
+      - name: November 04
+        docs: 16
+      - name: Oktober 04
+        docs: 25
+        folders:
+        - name: Fotos Feuerwehr Artikel
+          docs: 4
+        - name: MZH Richtfest
+          docs: 26
+      - name: September 04
+        docs: 28
+      - name: Sonderausgabe Juni
+        docs: 3
+    - name: '2005'
+      docs: 1
+      folders:
+      - name: April 05
+        docs: 19
+      - name: August 05
+        docs: 27
+      - name: Broschüre
+        docs: 15
+      - name: Dezember 2005
+        docs: 1
+        folders:
+        - name: 30.11.05
+          docs: 17
+      - name: Febr.05
+        docs: 18
+      - name: Jan.05
+        docs: 21
+        folders:
+        - name: Foto Hort
+          docs: 4
+      - name: Juli 05
+        docs: 29
+      - name: Juni 05
+        docs: 31
+      - name: Mai 05
+        docs: 28
+      - name: Marz 05
+        docs: 26
+      - name: November 05
+        docs: 17
+      - name: Oktober 05
+        docs: 28
+      - name: September 05
+        docs: 18
+    - name: '2006'
+      folders:
+      - name: April 06
+        docs: 37
+        folders:
+        - name: KIGA
+          docs: 5
+      - name: August
+        docs: 63
+      - name: Dezember
+        docs: 52
+      - name: Februar
+        docs: 29
+      - name: Januar
+        docs: 44
+      - name: Juli
+        docs: 11
+  - name: Bilder
+    docs: 17
+    folders:
+    - name: Stadtarchiv
+      folders:
+      - name: Neubau Oberschule 01-1999
+        docs: 57
+      - name: alter Friedhof 04-1999
+        docs: 10
+      - name: durchgang Gymnasium Oberschule 5-1998
+        docs: 39
+  - name: Bilder für HP Chronik
+    docs: 13
+  - name: Brandiser Stadtjournal
+    folders:
+    - name: '2016'
+      docs: 12
+  - name: Denkmalschutz
+    docs: 5
+  - name: Ediketten
+    docs: 2
+  - name: Friedhof
+    docs: 7
+  - name: Förderung Umschulung KJC
+    docs: 6
+  - name: Geschichtswerkstatt HP
+    docs: 4
+  - name: HP
+  - name: Kampangne
+    docs: 4
+  - name: Mit-Mach-Stadt
+    docs: 4
+  - name: Presseschau Artikel
+    folders:
+    - name: '2016'
+      docs: 53
+    - name: '2017'
+      docs: 4
+  - name: Uhrheberrecht-Genemigung
+    docs: 4
+  - name: Vorlagen
+    docs: 2
+  - name: für HP bereits gesendet
+    docs: 3
+    folders:
+    - name: Bilder
+      folders:
+      - name: Frank Mieszkalski
+        docs: 1
+      - name: Kayenberg
+        docs: 36
+      - name: katrin Schreiber
+        docs: 9
+    - name: G.Große
+      docs: 3
+    - name: Schulgeschichte für HP
+      docs: 29
+    - name: für HP
+      docs: 28
+  - name: historisches
+    docs: 4
+    folders:
+    - name: Protokollbücher Rat der Gemeinde Polenz
+      docs: 1
+    - name: Rundblick
+      docs: 10
+    - name: Zeitfenster
+      docs: 4
+    - name: chronik einzelner Gebäude
+      docs: 3
+    - name: internetseiten
+      docs: 1
+  - name: jahrschronik
+    folders:
+    - name: '2014'
+      docs: 1
+      folders:
+      - name: Sitzung Stadtrat
+        docs: 6
+      - name: zeitungsartikel
+        docs: 9
+    - name: '2015'
+      docs: 31
+      folders:
+      - name: Jahresalmanach für HP
+        docs: 11
+    - name: '2016'
+      docs: 3
+  - name: schule
+    docs: 19
+    folders:
+    - name: Bilder
+      docs: 23
+    - name: Schulgeschichte für HP
+      docs: 29
+  - name: vereine brandis
+    docs: 7

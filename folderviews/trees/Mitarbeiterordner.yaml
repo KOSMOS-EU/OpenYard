@@ -1,0 +1,5770 @@
+volume: Mitarbeiterordner
+id: fb3dd9e0-b106-1064-064f-64f82aa1c079
+aktz: null
+total_folders: 2676
+total_docs: 18705
+aktz_count: 1
+tree:
+  name: Mitarbeiterordner
+  folders:
+  - name: Hoetger
+    folders:
+    - name: Archikart
+      folders:
+      - name: Locarno
+        docs: 20
+      - name: Schlüsselmanagement
+        docs: 1
+    - name: Archiv
+      folders:
+      - name: Archiv
+        docs: 3
+        folders:
+        - name: MTL_Musikschule
+          docs: 19
+          folders:
+          - name: Unterrichtszeiten  Klassenräume 1. Schulhalbjahr 20152016-Dateien
+            docs: 3
+        - name: VoSo_Wurzen_OG_Polenz
+          docs: 7
+        - name: Zumba_Torres
+          docs: 8
+      - name: Archiv_2005-2014
+        folders:
+        - name: Allgemeinder Schriftverkehr
+          docs: 24
+        - name: Bürgerhaus Polenz
+          docs: 1
+        - name: Entgelt-TH-Ordnung
+          docs: 3
+        - name: Hallenbelegung
+          docs: 16
+        - name: MZHGym
+          docs: 37
+        - name: Monatsübersicht MZH 2013
+          docs: 18
+        - name: Monatsübersicht MZH 2014
+          docs: 10
+        - name: Monatsübersicht MZH ab 2010 2011
+          docs: 20
+          folders:
+          - name: Monatsübersicht MZH ab 2011
+            docs: 17
+        - name: Monatsübersichten 2012
+          docs: 20
+        - name: Nutzungsverträge 05-06
+          docs: 48
+        - name: Nutzungsverträge 06-07
+          docs: 34
+        - name: Nutzungsverträge 07-08
+          docs: 36
+        - name: Nutzungsverträge 08-09
+          docs: 23
+        - name: Nutzungsverträge 09 - 10
+          docs: 20
+        - name: Nutzungsverträge 10-11
+          docs: 41
+        - name: Nutzungsverträge 11 - 12
+          docs: 28
+        - name: Nutzungsverträge 2012 - 2013
+          docs: 31
+        - name: Nutzungsverträge ab 1. 1. 2013
+          docs: 17
+          folders:
+          - name: BTTC 1946 e. V
+            docs: 8
+          - name: ESV Lok Beucha e. V
+            docs: 6
+          - name: FSV 1921 Brandis e. V
+            docs: 7
+          - name: Reha
+            docs: 6
+          - name: SV Stahl Brandis e. V
+            docs: 7
+          - name: Sächsische Jugendweihe
+            docs: 5
+          - name: TC Beucha e. V
+            docs: 3
+          - name: Tanzschule Jörgens
+            docs: 2
+          - name: VHS
+            docs: 10
+          - name: Zumba
+            docs: 3
+        - name: Nutzungsverträge ab 1.1.2014
+          folders:
+          - name: Arbeitsgruppe für Umwelttoxikologie e. V
+            docs: 1
+          - name: BTTC 1946 e. V
+            docs: 4
+          - name: Blutspende
+            docs: 1
+          - name: Die Beuchaer flotten Sportomis
+            docs: 2
+          - name: ESV Lok Beucha e. V
+            docs: 4
+          - name: FSV Brandis 1921
+            docs: 10
+          - name: Heimatverein Beucha e. V
+            docs: 7
+          - name: Kleingarten Frohsinn Brandis e. V
+            docs: 4
+          - name: Kommunaler Eigenbetrieb Kultur u. Weiterbildung
+            docs: 9
+          - name: Musikschule Notenspaß
+            docs: 3
+          - name: Reha
+            docs: 5
+          - name: SV Stahl Brandis e. V
+            docs: 6
+          - name: SV Tresenwald e. V
+            docs: 3
+          - name: Sächsischer Verband für Jugendarbeit und Jugendweihe e. V
+            docs: 7
+          - name: TC Beucha e. V
+            docs: 7
+          - name: Tanzschule Jörgens
+            docs: 1
+          - name: Zumba
+            docs: 3
+        - name: Schriftverkehr 2014
+          docs: 4
+        - name: Schriftverkehr Vereine 2009
+          docs: 95
+        - name: Schriftverkehr mit Schulen Musikschulen
+          docs: 34
+        - name: Schriftverkehr mit Vereinen 2010
+          docs: 20
+        - name: Schriftverkehr mit Vereinen 2011
+          docs: 42
+        - name: Schriftverkehr mit Vereinen 2012
+          docs: 40
+        - name: SoftMaker
+          folders:
+          - name: Schriftverkehr Vereine 2013
+            docs: 38
+          - name: Settings
+            docs: 1
+        - name: Sportplätze
+          docs: 7
+      - name: Zinke
+        docs: 1
+        folders:
+        - name: Anschreiben
+          docs: 18
+        - name: Beschlussvorlagen
+          docs: 8
+        - name: Feuerwehr
+          docs: 15
+          folders:
+          - name: FFW_Bescheide
+            docs: 68
+        - name: GLIM
+          docs: 7
+          folders:
+          - name: Grundriss_Skizzen_Anlagenbuchhaltung
+            docs: 11
+          - name: Kita_VoSo_Beucha
+            docs: 5
+          - name: Liegenschaften
+            docs: 11
+          - name: S43
+            docs: 8
+            folders:
+            - name: Bilder
+              docs: 4
+          - name: Schadensregulierung
+            docs: 10
+        - name: Vermietung
+          docs: 5
+          folders:
+          - name: AfU
+            docs: 8
+          - name: Allgemeines
+            docs: 36
+            folders:
+            - name: Aushänge_Schließzeiten
+              docs: 4
+            - name: Finanzen
+              docs: 2
+            - name: Info an HM
+              docs: 43
+            - name: Satzung_Ordnungen
+              docs: 10
+            - name: Zufahrt_Schild_MZH_OS-Dateien
+              docs: 3
+          - name: BTTC
+            docs: 37
+          - name: Concept
+            docs: 4
+          - name: DRK_Blutspende
+            docs: 17
+          - name: ESV_Lok_Beucha
+            docs: 18
+            folders:
+            - name: Abt. Tischtennis
+              docs: 10
+            - name: Abt._Wintersport_Triathlon
+              docs: 19
+          - name: FSV_1921_Brandis
+            docs: 62
+          - name: Feuerwehr
+            docs: 18
+            folders:
+            - name: FFW_Räume_privat
+              docs: 10
+          - name: Frauenchor_Polenz
+            docs: 19
+          - name: GS_Brandis
+            docs: 1
+          - name: Heimatverein_Beucha
+            docs: 9
+          - name: Heimatverein_Polenz
+            docs: 11
+          - name: Hort_Brandis
+            docs: 7
+          - name: Jugendweihe
+            docs: 26
+          - name: KiTa_Beucha
+            docs: 6
+          - name: Kinderheim_Machern_gGmbH
+            docs: 6
+          - name: MTL_Musikschule
+            docs: 17
+          - name: Männerchor_Polenz
+            docs: 15
+          - name: Notenspaß_Baecke
+            docs: 11
+          - name: Pfarramt_Beucha
+            docs: 3
+          - name: Rehasport_Börner_Klose
+            docs: 26
+          - name: SC_Polenz
+            docs: 41
+          - name: SV_Althen
+            docs: 22
+          - name: SV_Stahl
+            docs: 26
+            folders:
+            - name: Kampfsport
+              docs: 1
+            - name: Rugby
+              docs: 27
+            - name: Turnen
+              docs: 21
+            - name: Volleyball
+              docs: 40
+              folders:
+              - name: Änderung der Trainingszeiten 201516-Dateien
+                docs: 3
+          - name: Schulsport
+            docs: 5
+          - name: Sonstiges
+            docs: 13
+          - name: Sportomis
+            docs: 13
+          - name: TC_Beucha
+            docs: 26
+          - name: Tanzschule_Jörgens
+            docs: 12
+          - name: VHS
+            docs: 5
+            folders:
+            - name: MTL_VHS_Kurse
+              docs: 19
+            - name: MTL_VHS_Sportgruppe
+              docs: 18
+          - name: VoSo_Wurzen_OG_Polenz
+            docs: 7
+          - name: Zumba_Torres
+            docs: 8
+          - name: einmalige_Veranstaltungen
+            folders:
+            - name: 03.11.2014_Kreiselterntrat
+              docs: 2
+            - name: 03.12.2014_14.01.2015_Elternabend_Gym
+              docs: 1
+            - name: 04.12.2014_VerkehrskonzeptBrandis
+              docs: 2
+            - name: 07.10.2014_14.10.2014_AZV
+              docs: 3
+            - name: 11.04.2015_Frohsinn
+              docs: 1
+            - name: 12.12.2014_GS_Musikverein
+              docs: 6
+            - name: 18.12.2014_Pechmann
+              docs: 5
+            - name: 20.12.2014_Musikverein
+              docs: 6
+            - name: 21.03.2015_Siedlerverein
+              docs: 3
+            - name: 27.10.2014_01.11.2014_CVJM
+              docs: 12
+            - name: 28_30.11.2014_moskito
+              docs: 26
+            - name: 29.11.2014_adventgemeinde
+              docs: 10
+        - name: Widersprüche
+          docs: 6
+          folders:
+          - name: Abhilfe_WSBescheide
+            docs: 20
+          - name: Anhörungen
+            docs: 34
+          - name: Einstellungen
+            docs: 35
+          - name: Widersprüche_Finanzen
+            docs: 46
+    - name: Beiträge
+      docs: 3
+      folders:
+      - name: Bahnhofstraße
+        docs: 4
+      - name: Bescheinigung-Erschließungsbeitrag
+        docs: 6
+      - name: Beuchaer-Strasse-K8367
+        docs: 9
+        folders:
+        - name: Bescheide
+          docs: 41
+      - name: Erschließung
+        folders:
+        - name: Lysimeterweg
+          docs: 7
+          folders:
+          - name: Beiträge
+            docs: 23
+      - name: Finsterer_Weg
+        docs: 78
+      - name: Heinrich-Heine-Kurze-Straße
+        docs: 6
+        folders:
+        - name: Bescheide
+          docs: 20
+      - name: Poststrasse
+        docs: 9
+        folders:
+        - name: Bescheide
+          docs: 43
+    - name: Bilder
+      docs: 3
+    - name: Fibu
+      docs: 13
+      folders:
+      - name: Gymnasium Brandis
+        docs: 2
+      - name: Steuerberater
+        docs: 4
+      - name: TH_Beucha
+        docs: 4
+      - name: TH_Gymnasium
+        docs: 2
+    - name: FÖMi
+      docs: 2
+      folders:
+      - name: Fö_Mi_WALDPO02
+        docs: 38
+        folders:
+        - name: Bauabnahme (GRW-Infra) L31-4322.90222-Dateien
+          docs: 6
+        - name: Schlussrechnung (GRW-Infra) L31-4322.90222-Dateien
+          docs: 5
+        - name: WG Stand Rechnungslegung verkehrliche Erschließung GG Brandis-Dateien
+          docs: 5
+      - name: Fö_Mi_WALDPO05
+        docs: 6
+    - name: Gemarkungstausch
+      docs: 10
+    - name: Gemarkungstausch_aktuell
+      docs: 10
+    - name: Litfaßsäule
+      docs: 1
+    - name: Mietmanagement
+      docs: 2
+      folders:
+      - name: Anke
+        docs: 9
+        folders:
+        - name: Vorlagen
+          docs: 60
+          folders:
+          - name: Schließung der Kommunalen Einrichtungen der Stadt Brandis weiterhin
+            docs: 2
+        - name: 'WG: Message from KM_458e'
+          docs: 2
+      - name: Belegungsplan
+        folders:
+        - name: '2016'
+          folders:
+          - name: Dezember16
+            docs: 14
+        - name: '2017'
+          folders:
+          - name: April_17
+            docs: 16
+          - name: August_17
+            docs: 8
+          - name: Dezember_17
+            docs: 13
+          - name: Februar_17
+            docs: 20
+          - name: Januar_17
+            docs: 19
+          - name: Juli_17
+            docs: 9
+          - name: Juni_17
+            docs: 16
+          - name: Mai_17
+            docs: 19
+          - name: März2017
+            docs: 21
+          - name: November_17
+            docs: 18
+          - name: Oktober_17
+            docs: 22
+          - name: September_17
+            docs: 19
+        - name: '2018'
+          folders:
+          - name: April_18
+            docs: 16
+          - name: August_18
+            docs: 16
+            folders:
+            - name: August_18
+              docs: 20
+          - name: Dezember_18
+            docs: 11
+          - name: Februar_18
+            docs: 16
+          - name: Januar_18
+            docs: 21
+          - name: Juli_18
+            docs: 11
+          - name: Juni_18
+            docs: 18
+          - name: Mai_18
+            docs: 16
+          - name: März-18
+            docs: 12
+          - name: November_18
+            docs: 15
+          - name: Oktober_18
+            docs: 16
+          - name: September_18
+            docs: 16
+        - name: '2019'
+          folders:
+          - name: April_19
+            docs: 15
+          - name: August_19
+            docs: 12
+          - name: Dezember_19
+            docs: 11
+          - name: Februar_19
+            docs: 11
+          - name: Januar_19
+            docs: 12
+          - name: Juli_19
+            docs: 14
+          - name: Juni_19
+            docs: 16
+          - name: Mai_19
+            docs: 16
+          - name: März_2019
+            docs: 14
+          - name: November_19
+            docs: 15
+          - name: Oktober_19
+            docs: 15
+          - name: September_19
+            docs: 15
+        - name: '2020'
+          folders:
+          - name: April_20
+            docs: 12
+          - name: August_20
+            docs: 6
+          - name: Dezember20
+            docs: 4
+          - name: Februar_20
+            docs: 11
+          - name: Januar_20
+            docs: 12
+          - name: Juli_20
+            docs: 8
+          - name: Juni_20
+            docs: 8
+          - name: Mai_20
+            docs: 12
+          - name: März_20
+            docs: 12
+          - name: November20
+            docs: 6
+          - name: Oktober_20
+            docs: 10
+          - name: September-20
+            docs: 10
+        - name: '2021'
+          folders:
+          - name: Januar_21
+      - name: Belegungspläne_Halbjahresübersicht
+        folders:
+        - name: 2015-2016
+          docs: 2
+        - name: 2016-2017
+          docs: 6
+        - name: 2017-2018
+          docs: 10
+        - name: 2018-2019
+          docs: 5
+        - name: 2019-2020
+          docs: 3
+        - name: 2020-2021
+          docs: 2
+      - name: Belegungspläne_Sonderveranstaltungen
+        docs: 9
+        folders:
+        - name: 'WG: Sprechzeiten und Veranstaltungen Speiseraum Gymnasium'
+          docs: 3
+      - name: Bilder
+        folders:
+        - name: Bilder _Polenz
+          docs: 8
+        - name: Jahnhöhe
+          docs: 8
+      - name: Kalkulation_Abrechnungen
+        docs: 10
+        folders:
+        - name: Finanzen
+          docs: 2
+          folders:
+          - name: BKA MZH
+            docs: 2
+          - name: Fibu
+            docs: 1
+        - name: Jahresstunden MZH
+          docs: 8
+      - name: Satzung_Ordnungen
+        docs: 11
+      - name: Vertragsentwürfe
+        docs: 4
+        folders:
+        - name: Regionalverein
+          docs: 9
+      - name: Vorlagen
+        docs: 53
+        folders:
+        - name: Aushänge_Schließzeiten
+          docs: 38
+        - name: Bestuhlungspläne
+          folders:
+          - name: Forum_OS
+            docs: 3
+          - name: MZH
+            docs: 2
+        - name: Info an HM
+          folders:
+          - name: Bilder_MZH_Geräte
+            docs: 16
+      - name: °Vermietung_einmalige_Veranstaltungen
+        docs: 2
+        folders:
+        - name: 18.12.2014_Pechmann
+          docs: 5
+        - name: 20.12.2014_Musikverein
+          docs: 6
+        - name: 2014_10_14-07_AZV
+          docs: 3
+        - name: 2014_11_03_Kreiselterntrat
+          docs: 2
+        - name: 2014_12-12_GS_Musikverein
+          docs: 6
+        - name: 2014_12_04_VerkehrskonzeptBrandis
+          docs: 2
+        - name: 20150918_Kita_regenbogen
+          docs: 5
+          folders:
+          - name: Aw AW Kindersportfest Kindergarten Regenbogen-Dateien
+            docs: 3
+          - name: Kindersportfest Kindergarten Regenbogen-Dateien
+            docs: 3
+          - name: Speiseraum  Turnhalle am 18.09.2015 (16.00 - 21.00 Uhr)-Dateien
+            docs: 3
+          - name: Trainingsabsage für den 18.09.2015-Dateien
+            docs: 3
+        - name: 20151005_Circus Fernandini_GS_Brandis
+          docs: 10
+          folders:
+          - name: AW Circus Fernandini-Dateien
+            docs: 3
+          - name: Circus Fernandini  Zirkusprojekt mit GS Brandis Zeitraum 03.10.2015
+              - 10.10.2015-Dateien
+            docs: 3
+        - name: 20151014_Leichtathletik_Taucha
+          docs: 9
+          folders:
+          - name: Re offene Rechnung - Trainingslager am 14.10.2015-Dateien
+            docs: 6
+          - name: offene Rechnung - Trainingslager am 14.10.2015-Dateien
+            docs: 5
+        - name: 20151219_Musikverein_Brandis
+          docs: 9
+          folders:
+          - name: AW Reservierungsbestätigung Forum Oberschule  neuer Termin-Dateien
+            docs: 5
+          - name: AW Veranstaltung 19.12.2015  Forum Oberschule-Dateien
+            docs: 5
+          - name: Reservierungsbestätigung Forum Oberschule 19.12.2015-Dateien
+            docs: 5
+          - name: Terminänderung Weihnachtskonzert - Musikverein Brandis-Dateien
+            docs: 5
+          - name: WG Reservierung Forum Oberschule - Bühne-Dateien
+            docs: 5
+        - name: 2015_01_14_2014_12_01_Elternabend_Gym
+          docs: 1
+        - name: 2015_02_Haus Grillensee
+          docs: 3
+        - name: 2015_04_11_Frohsinn
+          docs: 4
+        - name: 2015_04_CVJM
+          docs: 2
+        - name: 2015_10_09_Heimatverein_Beucha
+        - name: 2016-05-21_BH_Polenz_Wagner
+          docs: 8
+          folders:
+          - name: AW Daten für Nutzungsvertrag Bürgerhaus Polenz-Dateien
+            docs: 5
+          - name: Besteck Bürgerhaus Polenz vorhanden-Dateien
+            docs: 5
+          - name: Daten für Nutzungsvertrag Bürgerhaus Polenz-Dateien
+            docs: 3
+          - name: WG Reinigung Bürgerhaus Polenz - Veranstaltungen am 21.05.2016-Dateien
+            docs: 5
+        - name: 2016-08-06_BH_Polenz_Knöfel
+          docs: 10
+          folders:
+          - name: Knöfel_Ireen_BH_Polenz
+            docs: 2
+          - name: Zusatzreinigung Gemeindehaus Polenz-Dateien
+            docs: 3
+        - name: 20160106_Begegnungscafe
+          docs: 3
+          folders:
+          - name: WG Raumnutzung Grundschule Beucha-Dateien
+            docs: 3
+        - name: 20160114_Regionalfinale
+          docs: 8
+          folders:
+          - name: Antwort_an_Hr._Schor_Regionalfinale - Leichtathletik-Vielseitigkeits-Wettkampf
+              - 14.01.2015-Dateien
+            docs: 5
+          - name: MZW - Nutzung-Dateien
+            docs: 5
+          - name: Nutzungsvertrag   Regionalfinale - Leichtathletik-Vielseitigkeits-Wettkampf
+              - 14.01.2015-Dateien
+            docs: 5
+          - name: Re Telefonnummer  Regionalfinale - Leichtathletik-Vielseitigkeits-Wettkampf
+              - 14.01.2015-Dateien
+            docs: 5
+          - name: Regionalfinale - Leichtathletik-Vielseitigkeits-Wettkampf - 14.01.2015-Dateien
+            docs: 5
+        - name: 20160128_Kreiselternrat
+          docs: 4
+          folders:
+          - name: Neue Veranstaltungen Januar 2015 - Kreiselternratssitzung am 28.01.2016-Dateien
+            docs: 5
+          - name: Oberschule_Reservierung-Dateien
+            docs: 5
+          - name: Reservierung Forum Oberschule - Kreiselternratsitzung 28.01.2016-Dateien
+            docs: 6
+          - name: WG Kreiselternratsitzung 20.01.2015-Dateien
+            docs: 4
+        - name: 20160319_Siedlerverein_Beucha
+          docs: 3
+        - name: 2016_04_16_Kleingartenverein_Frohsinn
+          docs: 6
+          folders:
+          - name: AW Nutzung Speiseraum 16.04.2016  Kleingartenverein Frohsinn-Dateien
+            docs: 5
+          - name: Nutzung Speiseraum 16.04.2016  Kleingartenverein Frohsinn-Dateien
+            docs: 5
+          - name: Veranstaltung 16.04.2016 und 03.05.2016-Dateien
+            docs: 5
+        - name: 2016_05_Kreiselternrat
+          docs: 3
+          folders:
+          - name: Info HM-Dateien
+            docs: 5
+          - name: Kreiselternratssitzung am 03.05.2016 - Zeit aktualisert-Dateien
+            docs: 5
+        - name: 20170119_Regionalfinale
+          docs: 6
+        - name: 20170803_AWO-Mulde
+          docs: 11
+          folders:
+          - name: 'AW: Termin Fußballturnier'
+            docs: 5
+        - name: 2017_04_01_KGV_Frohsinn
+          docs: 4
+        - name: 2017_06_17_Abschlussfest_10.Klassen
+          docs: 9
+        - name: 2017_10_20_AWO_Buchlesung
+          docs: 10
+        - name: 2017_10_30_Sportveranstaltung_Tim-Fuhse
+          docs: 1
+        - name: 2017_11_03_Schützengesellschaft_Brandis
+          docs: 10
+          folders:
+          - name: 'AW: Fw: AW: Wettkampf Schützen'
+            docs: 2
+          - name: 'AW: Wettkampf Schützen'
+            docs: 2
+          - name: 'Aw: AW: Fw: AW: Wettkampf Schützen (archiviert im Winyard DMS)'
+            docs: 4
+          - name: 'Aw: AW: Wettkampf Schützen'
+            docs: 2
+        - name: 2017_Talentecampus
+          docs: 10
+          folders:
+          - name: Talente Campus 03.07-07.07.2017
+            docs: 2
+        - name: 2018-04-05_FEG_Musical
+          docs: 10
+        - name: 2018-04-21-Glasfaser
+          docs: 6
+        - name: 2018-10-05-DLRG
+          docs: 9
+        - name: 2018-10-24-Deutsche-Glasfaser
+          docs: 12
+        - name: 2018-11-02_Herbstpokal-Schützengesellschaft
+          docs: 9
+        - name: 2018_01_18_Vielseitigkeitswettbewerb
+          docs: 7
+        - name: 2018_01_19_Neujahrstreffen_Landrat
+          docs: 13
+          folders:
+          - name: Musikanlage Oberschule für MZH
+            docs: 2
+          - name: Neujahrstreffen 19.01.2017
+            docs: 4
+          - name: 'WG: Neujahrstreffen 19.01.2017 (archiviert im Winyard DMS)'
+            docs: 4
+        - name: 2018_04_14_KGV-Frohsinn
+          docs: 3
+        - name: 2018_08_18_Buchlesung-AWO
+          docs: 3
+        - name: 2018_Adventisten_Herbstjugendtreffen
+          docs: 2
+          folders:
+          - name: 'AW: AJ BMV '
+            folders:
+            - name: ' Herbstjugendtreffen in Brandis '
+              folders:
+              - name: ' 12.-14.10.2018 '
+                folders:
+                - name: ' Anfrage Vorreservierung'
+                  docs: 3
+        - name: 2018_Deutsche-Glasfaser
+          docs: 5
+        - name: 2018_Siedlerverein_Beucha
+          docs: 3
+        - name: 2018_Talentecampus
+          docs: 4
+        - name: 2019-03-22-Landesmeisterschaft-Schützengesellschaft
+          docs: 5
+        - name: 2019-03-23-Siedlerverein-Beucha
+          docs: 3
+        - name: 2019-03-30-KGV-Frohsinn
+          docs: 2
+        - name: 2019-04-25-FEG-Musical
+          docs: 16
+        - name: 2019-06-01-InMotion-Messirek
+          docs: 9
+        - name: 2019-11-01_03-Herbstpokal-Schützengesellschaft
+          docs: 10
+        - name: 2019-Talentecampus
+          docs: 3
+        - name: 2019_01_17-Vielseitigkeitswettkampf
+          docs: 7
+        - name: 2019_09_28-Diakonie-Leipziger-Land
+          docs: 19
+        - name: 2020-03-20_22-Landesmeisterschaft-Schützengesellschaft
+          docs: 4
+        - name: 2020-03-21-Siedlerverein-Beucha-Kirchbruch
+          docs: 3
+        - name: 2020-03-28_KGV-Frohsinn
+          docs: 4
+        - name: 2020-04-16-CVJM-Musical
+          docs: 4
+        - name: 2020-05-25-RVMTL
+          docs: 5
+        - name: 2020-05-Circus-Fernandini
+          docs: 18
+        - name: 2020-07-25_Corsten-Nadine
+          docs: 6
+        - name: 2020-10-03-BH-Bartsch-Dirk
+          docs: 2
+        - name: 2020-10_23.25-Adventisten
+          docs: 8
+        - name: 2020-11-06-Landkreis-Helfertag
+          docs: 12
+        - name: 2021-03-19_21-Landesmeisterschaft-Luftdruckwaffen-Schützengesellschaft
+          docs: 2
+        - name: 2021-11-05_07-Herbstpokal-Schütengesellschaft
+          docs: 1
+        - name: 21.03.2015_Siedlerverein
+          docs: 3
+        - name: 27.10.2014_01.11.2014_CVJM
+          docs: 12
+        - name: 28_30.11.2014_moskito
+          docs: 27
+        - name: 29.11.2014_adventgemeinde
+          docs: 10
+        - name: Adventjugend_6.-8.10.2017
+          docs: 28
+          folders:
+          - name: AW Anfrage  Herbstjugendtreffen in Brandis  6.-8.10.2017-Dateien
+            docs: 5
+          - name: AW Herbstjugendtreffen in Brandis  6.-8.10.2017-Dateien
+            docs: 5
+          - name: Herbstjugendtreffen in Brandis  6.-8.10.2017-Dateien
+            docs: 5
+          - name: WG Anfrage  Herbstjugendtreffen in Brandis  6.-8.10.2017-Dateien
+            docs: 5
+        - name: Akrobatik_Club_Taucha
+          docs: 9
+          folders:
+          - name: AW AW Miete Turnhalle-Dateien
+            docs: 5
+          - name: Miete Turnhalle-Dateien
+            docs: 3
+        - name: DRK_Waldsteinberg
+          docs: 10
+        - name: Freizeit_Grillensee
+          docs: 37
+          folders:
+          - name: AW Anhänge - neue Termine - Handball Frau Mühlner-Dateien
+            docs: 5
+          - name: AW Haus Grillensee Nachweis Haftpflichtversicherung Hallenbelegungen
+              Sommer 2016  Turnhalle am Gymnasium Brandis -Dateien
+            docs: 5
+          - name: AW Reservierung Juli 2016 - SD DHfK-Dateien
+            docs: 5
+          - name: AW Terminverschiebung-Dateien
+            docs: 5
+          - name: AW Turnhalle SC DHfK -Dateien
+            docs: 5
+          - name: AW Turnhallenzeiten Floorball Herr Saß-Dateien
+            docs: 5
+          - name: AW neue Termine - Handball Frau Mühlner-Dateien
+            docs: 4
+          - name: Hallenbelegungen-Dateien
+            docs: 3
+          - name: Terminverschiebung-Dateien
+            docs: 3
+          - name: Turnhalle SC DHfK -Dateien
+            docs: 3
+          - name: Turnhallenzeiten Floorball Herr Saß-Dateien
+            docs: 3
+        - name: Kinderheim_Machern_gGmbH
+          docs: 6
+        - name: Siedlerverein-Beucha
+          docs: 3
+        - name: Talentecampus
+          docs: 8
+          folders:
+          - name: AW Reinigungskosten  Talentcampus 10.-14.08.2015-Dateien
+            docs: 4
+          - name: Re Graffitifläche für Talentcampus-Dateien
+            docs: 3
+          - name: WG Reinigungskosten  Talentcampus 10.-14.08.2015-Dateien
+            docs: 3
+        - name: etwas vergessen-Dateien
+          docs: 3
+        - name: stubaier_bauerntheater_25_26.11.2016
+          docs: 1
+          folders:
+          - name: Stubaier Bauerntheater 25.26.11.2015 - Forum Oberschule -Dateien
+            docs: 5
+      - name: °°Vermietung_Vereine
+        docs: 5
+        folders:
+        - name: AWO
+          docs: 2
+        - name: AfU
+          folders:
+          - name: Abrechnungen
+            docs: 9
+          - name: Nutzungsvertrag
+            docs: 2
+          - name: Schriftwechsel
+            docs: 17
+            folders:
+            - name: 2016-AW AfU e.V. - Bodenuntersuchung 2016 - Raumanmietung-Dateien
+              docs: 5
+            - name: 2016-AfU e.V. - Bodenuntersuchung 2016 - Raumanmietung -Dateien
+              docs: 5
+            - name: 2016-Bestätigung Termine 2016 für Bodenuntersuchung im Gymnasium
+                Brandis-Dateien
+              docs: 5
+            - name: 2016-WG Raumanmietung_2016 -Dateien
+              docs: 3
+        - name: BTTC
+          folders:
+          - name: Abrechnung
+            docs: 1
+            folders:
+            - name: '2014'
+              docs: 10
+            - name: '2015'
+              docs: 13
+            - name: '2016'
+              docs: 15
+            - name: '2017'
+              docs: 12
+            - name: '2018'
+              docs: 13
+            - name: '2019'
+              docs: 12
+            - name: '2020'
+              docs: 9
+          - name: Allgemeines
+            docs: 214
+            folders:
+            - name: 13.08.2016 BTTC - Mehrzweckhalle-Dateien
+              docs: 5
+            - name: AW AW Anfrage Teilnehmerzahl  Durchführung verschiedener Veranstaltungen-Dateien
+              docs: 3
+            - name: AW AW Reservierung 18.12.2015_Hallenzeiten BTTC 1946-Dateien
+              docs: 5
+            - name: AW AW Tischtennis-Dateien
+              docs: 5
+            - name: AW Abmeldung MZH - 20.05.2016-Dateien
+              docs: 5
+            - name: AW Abrechnung Landeseinzelmeisterschaft am 13.12.2015-Dateien
+              docs: 5
+            - name: AW Anfrage Teilnehmerzahl  Durchführung verschiedener Veranstaltungen-Dateien
+              docs: 3
+            - name: AW Hallennutzung des BTTC 1946-Dateien
+              docs: 3
+            - name: AW Nachwuchstraining in den Ferien-Dateien
+              docs: 5
+            - name: AW Reservierung Hallenzeiten BTTC 1946-Dateien
+              docs: 5
+            - name: AW Reservierung MZH-Dateien
+              docs: 5
+            - name: AW Reservierung der MZH am 16.01.2016 BTTC-Dateien
+              docs: 5
+            - name: AW Resrvierung MZH im November 2016-Dateien
+              docs: 5
+            - name: AW Tischtennis-Dateien
+              docs: 5
+            - name: AW Verlängerung der reservierten Hallenzeit-Dateien
+              docs: 5
+            - name: AW WG Rückgabe unterzeichnete Abrechnung-Dateien
+              docs: 5
+            - name: 'AW: WG: Planung Sportstätten 2. Halbjahr 2017 // kleine Erinnerung'
+              docs: 3
+            - name: Abmeldung MZH-Dateien
+              docs: 3
+            - name: Absage Trainingszeiten im 2. Halbjahr 2017
+              docs: 2
+            - name: Aw AW Nutzung der Sportstätten während der Sommerferien 2015  Trainingszeiten
+                2. HJ 2015-Dateien
+              docs: 3
+            - name: Aw AW Reservierung MZH-Dateien
+              docs: 5
+            - name: Aw Nutzung der Sportstätten während der Sommerferien 2015  Trainingszeiten
+                2. HJ 2015-Dateien
+              docs: 3
+            - name: Aw Trainingszeiten Sommerferien und  2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Aw Veranstaltung 15.08.2015-Dateien
+              docs: 3
+            - name: BTTC - Training montags bis zum Ende der Sommerferien abgesagt-Dateien
+              docs: 5
+            - name: BTTC diesen Samstag in der MZH-Dateien
+              docs: 5
+            - name: BTTC-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Hallennutzung des BTTC 1946-Dateien
+              docs: 3
+            - name: Hinweise zur Mehrzweckhalle - Geräte  Ordnung-Dateien
+              docs: 5
+            - name: Nachwuchstraining in den Ferien-Dateien
+              docs: 3
+            - name: Nutzung der MZH durch den BTTC am 09. und 10.04.2016-Dateien
+              docs: 5
+            - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+              docs: 3
+            - name: Punktspiel 12.10. und  24.10.2015-Dateien
+              docs: 5
+            - name: Punktspiel 23.01.2016 - Parkmöglichkeiten-Dateien
+              docs: 5
+            - name: Re AW Tischtennis-Dateien
+              docs: 3
+            - name: Reservierung 05.09.  24.10.2015 BTTC 1946-Dateien
+              docs: 5
+            - name: Reservierung 19.09.2015 MZH-Dateien
+              docs: 5
+            - name: Reservierung Hallenzeiten BTTC 1946-Dateien
+              docs: 3
+            - name: Reservierung der MZH am 16.01.2016 BTTC-Dateien
+              docs: 3
+            - name: Resrvierung MZH-Dateien
+              docs: 3
+            - name: Resrvierung MZH_10.04.2016-Dateien
+              docs: 3
+            - name: Tische für 10. Brandiser TT-Cup-Dateien
+              docs: 5
+            - name: Tischtennis-Dateien
+              docs: 3
+            - name: Training am 18.12.2015-Dateien
+              docs: 5
+            - name: Training vom BTTC Nachwuch in den Winterferien-Dateien
+              docs: 5
+            - name: Trainingsabsage - Freitag 06.05.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage - Freitag27.05.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage 06.10.2015-Dateien
+              docs: 5
+            - name: Trainingsabsage für Freitag 05.08.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage für Freitag 17.06.2016-Dateien
+              docs: 5
+            - name: Trainingsbeginn für den 26.06.2015-Dateien
+              docs: 3
+            - name: Trainingszeit - Dienstag 24.05.2016- erst ab 19.00 Uhr möglich-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Trainingszeiten Sommerferien und  2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Verlängerung der reservierten Hallenzeit-Dateien
+              docs: 3
+            - name: WG Punktspiel 24.10.2015-Dateien
+              docs: 5
+            - name: WG Rückgabe unterzeichnete Abrechnung-Dateien
+              docs: 5
+            - name: komplette Absage der Trainingseinheiten am 26.06.2015-Dateien
+              docs: 3
+            - name: verlängerte Punktspiel  Trainingszeit des BTTC-Dateien
+              docs: 5
+            - name: verlängerte Trainings-  Punktspielzeiten-Dateien
+              docs: 5
+            - name: Überziehung Trainingszeit BTTC-Dateien
+              docs: 3
+        - name: Betriebskostenabrechnung
+          docs: 11
+        - name: Concept
+          docs: 4
+        - name: DRK_Blutspende
+          folders:
+          - name: Abrechnungen
+            docs: 20
+          - name: Nutzungsverträge
+            docs: 2
+          - name: Schriftwechsel
+            docs: 42
+            folders:
+            - name: AW Blutspendetermin 2016-Dateien
+              docs: 6
+            - name: AW Blutspendetermin in Brandis am Freitag 17.06.2016-Dateien
+              docs: 6
+            - name: AW Planung Blutspendetermine 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: 'AW: Blutspendetermine in Brandis am Freitag, 18.08.2017 und 10.11.2017'
+              docs: 2
+            - name: Blutspende - 17.06.2016-Dateien
+              docs: 5
+            - name: Blutspendetermin in Brandis am Freitag 17.06.2016-Dateien
+              docs: 4
+            - name: Blutspendetermine 2016 - Oberschule Brandis-Dateien
+              docs: 5
+            - name: Blutspendetermine in Brandis am Freitag, 18.08.2017 und 10.11.2017
+              docs: 2
+            - name: Erinnerung Reinigung - 17.06.2016-Dateien
+              docs: 5
+            - name: Planung Blutspendetermine 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Re Planung Blutspendetermine 2. Halbjahr 2016-Dateien
+              docs: 3
+            - name: WG Erinnerung Reinigung - 17.06.2016-Dateien
+              docs: 5
+        - name: ESV_Lok_Beucha
+          docs: 1
+          folders:
+          - name: Abrechnungen
+            docs: 3
+            folders:
+            - name: '2014'
+              docs: 8
+            - name: '2015'
+              docs: 9
+            - name: '2016'
+              docs: 16
+            - name: '2017'
+              docs: 12
+            - name: '2018'
+              docs: 12
+            - name: '2019'
+              docs: 12
+            - name: '2020'
+              docs: 9
+          - name: Abt. Tischtennis
+            docs: 46
+            folders:
+            - name: Punktspiele ESV Lok Beucha-Tischtennis-Dateien
+              docs: 4
+            - name: Tischtennistrainging am Karfreitag (25.03.) - Turnhalle der GS
+                Beucha-Dateien
+              docs: 5
+            - name: WG Punktspiel 2. Mannschaft ESV Lok Beucha Tischtennis-Dateien
+              docs: 6
+          - name: Abt._Gymnastik
+            docs: 28
+          - name: Abt._Wintersport_Triathlon
+            docs: 33
+            folders:
+            - name: NEUE Trainingszeiten ESV Lok Beucha Abt. WintersportTriathlon-Dateien
+              docs: 5
+          - name: Allgemeines
+            docs: 77
+            folders:
+            - name: ' Turnhalle Beucha gesperrt wegen Vorbereitungen Sommerfest GS
+                Beucha // 13.06. - 17.06.2017'
+              docs: 2
+            - name: AW Absage Trainingszeit in den Herbstferien-Dateien
+              docs: 5
+            - name: AW Trainingspause GYM-Dateien
+              docs: 5
+            - name: AW Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016; esv
+                Lok Beucha-Dateien
+              docs: 3
+            - name: AW Turnhallenzeit_Leichtathletik_freitags-Dateien
+              docs: 5
+            - name: AW Übersicht Trainingszeiten 2. Halbjahr  Sommerferien-Dateien
+              docs: 5
+            - name: 'AW: Turnhalle Beucha gesperrt wegen Vorbereitungen Sommerfest
+                GS Beucha // 13.06. - 17.06.2017'
+              docs: 3
+            - name: Absage Trainingszeit in den Herbstferien-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+              docs: 3
+            - name: Re Trainingszeiten Sommerferien 2015-Dateien
+              docs: 3
+            - name: Re TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Rückgabe unterzeichnete Abrechnung-Dateien
+              docs: 5
+            - name: Tag d. offenen Tür - GS Beucha - 15.04.2016 - Training abgesagt-Dateien
+              docs: 5
+            - name: Training ESV Lok Beucha während der Sommerferien  Abt. Wintersport
+                Nutzung der Toiletten-Dateien
+              docs: 5
+            - name: Training2.HJ-Dateien
+              docs: 3
+            - name: Trainingsabsage ESV Lok Beucha Abt. Fußball-Dateien
+              docs: 5
+            - name: Trainingsabsage f. 04.08. u. 05.08.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage für 16.17.06.2016 und 05.08.2016 Turnhalle Beucha-Dateien
+              docs: 5
+            - name: Trainingsabsage für 22.06.2017
+              docs: 3
+            - name: Trainingsabsage für 3.11.2015 - Alte Turnhalle - E-Jugend-Dateien
+              docs: 5
+            - name: Trainingsabsage für Freitag 04.09.2015-Dateien
+              docs: 5
+            - name: Trainingsabsage für diesen Freitag (03.07.2015)-Dateien
+              docs: 3
+            - name: Trainingsabsage für diesen Freitag (15.04.2016) Turnhalle Beucha-Dateien
+              docs: 5
+            - name: Trainingsabsage v. 14.06. - 17.06.2016 in der Turnhalle Beucha-Dateien
+              docs: 5
+            - name: Trainingspause GYM-Dateien
+              docs: 3
+            - name: Trainingsplanung 2. Halbjahr 2017 und während Sommerferien
+              docs: 2
+            - name: Trainingszeit Fussball - montags 18.30 - 19.30-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Trainingszeiten Sommerferien 2015-Dateien
+              docs: 3
+            - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Turnhalle GS Beucha - Aerobic ab 23.03.2016-Dateien
+              docs: 5
+            - name: 'WG: Turnhalle Beucha gesperrt wegen Vorbereitungen Schulanfang
+                GS Beucha   '
+              docs: 2
+            - name: abgesagte Trainingszeiten - Abt. Fußball-Dateien
+              docs: 5
+            - name: kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+            - name: Änderungen beim ESV in der Tunhalle Beucha-Dateien
+              docs: 5
+            - name: Übersicht Trainingszeit für das 2. Halbjahr 2016 (08.08.2016 -
+                31.12.2016)-Dateien
+              docs: 5
+          - name: Nutzungsverträge
+            docs: 7
+        - name: FSV_1921_Brandis
+          folders:
+          - name: Abrechnung
+            docs: 4
+            folders:
+            - name: '2014'
+              docs: 13
+            - name: '2015'
+              docs: 8
+            - name: '2016'
+              docs: 13
+            - name: '2017'
+              docs: 14
+            - name: '2018'
+              docs: 13
+            - name: '2019'
+              docs: 12
+            - name: '2020'
+              docs: 5
+            - name: Hallencup
+              docs: 26
+            - name: Projekte
+              docs: 4
+          - name: Allgemeines
+            docs: 85
+            folders:
+            - name: ' aktualisierte Termine 13. Hallencupserie und Trainingsabsage
+                für 01./08.062017'
+              docs: 2
+            - name: 01_Schriftverkehr_Schützenplatz
+              docs: 54
+              folders:
+              - name: AW Trainingszeiten E-Jugend Schützenplatz  B-Jugend Mehrzweckhalle-Dateien
+                docs: 5
+              - name: AW kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                  2016-Dateien
+                docs: 5
+              - name: Aw Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+                docs: 3
+              - name: Benutzung Schützenplatz während der Wintermonate-Dateien
+                docs: 10
+                folders:
+                - name: Trainingszeiten 1. Herren Mannschaft - Schützenplatz  Mehrzweckhalle-Dateien
+                  docs: 4
+              - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+                docs: 3
+              - name: Re Hinweise Aschebahn auf dem Sportplatz Schützenplatz-Dateien
+                docs: 5
+              - name: Re Trainingsplan FSV Brandis-Dateien
+                docs: 5
+              - name: Re Trainingszeiten E-Jugend Schützenplatz  B-Jugend Mehrzweckhalle-Dateien
+                docs: 5
+              - name: 'Re: Trainingsplan Jahnhöhe FSV Brandis'
+                docs: 2
+              - name: Schlüssel Sportplatz Schützenplatz_1-Dateien
+                docs: 5
+              - name: Trainingsabsage - 09.05./18.05.2017
+                docs: 2
+              - name: Trainingszeiten E-Jugend  Schützenplatz-Dateien
+                docs: 5
+              - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+                docs: 5
+              - name: Trainingzeiten der E-Jugend auf dem Schützenplatz-Dateien
+                docs: 3
+              - name: Zirkuszelt auf dem Schützenplatz (03.10-10.10.2015)-Dateien
+                docs: 5
+              - name: kleine Erinnerung -  Trainingszeiten Sommerferien und 2. Halbjahr
+                  2016-Dateien
+                docs: 5
+            - name: 02_Schriftverkehr_Halle
+              docs: 82
+              folders:
+              - name: 12. Hallencup 2017- Vorschlag f. 3. Termin-Dateien
+                docs: 5
+              - name: AW Endgültige Hallenzeiten FSV Brandis-Dateien
+                docs: 3
+              - name: AW Hallennutzung  - 06.03.2016-Dateien
+                docs: 6
+              - name: AW Infos FSV Brandis-Dateien
+                docs: 5
+              - name: AW Reservierung Mehrzweckhalle-Dateien
+                docs: 5
+              - name: AW Trainingsplan FSV Halle - Termine Hr. Hebold-Dateien
+                docs: 5
+              - name: AW WG Hallenzeiten - Fußballprojekt-Dateien
+                docs: 5
+              - name: Ausstattung 11. Hallencupserie-Dateien
+                docs: 5
+              - name: Bestätigung  Veranstaltung mit Flüchtlingskindern-Dateien
+                docs: 5
+              - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+                docs: 5
+              - name: Hallengewerbecup 12.03.2016  neue Veranstaltungszeit-Dateien
+                docs: 5
+              - name: Hallennutzung -Dateien
+                docs: 3
+              - name: Infos FSV Brandis-Dateien
+                docs: 3
+              - name: MZH - 11.02.2015  FSV 1921-Dateien
+                docs: 5
+              - name: Mehrzweckhalle  - 06.03.2016 -10.30 - 12.30  FSV Brandis-Dateien
+                docs: 5
+              - name: Mehrzweckhalle-Dateien
+                docs: 3
+              - name: Nutzung MZH_20.10.2015-Dateien
+                docs: 3
+              - name: Parkmöglichkeiten 11. Hallencupserie am 30.01.2016-Dateien
+                docs: 5
+              - name: Re 12. Hallencup 2017- Vorschlag f. 3. Termin-Dateien
+                docs: 5
+              - name: Re Hallenzeiten für die B-Jugend- eventuell noch dieses Jahr-Dateien
+                docs: 5
+              - name: Re Parkmöglichkeiten 11. Hallencupserie am 30.01.2016-Dateien
+                docs: 5
+              - name: Re Termine für 11. Hallencupserie-Dateien
+                docs: 3
+              - name: Re Trainingsabsage für 3.11.2015 - Alte Turnhalle - E-Jugend-Dateien
+                docs: 5
+              - name: Re WG Hallenzeiten - Fußballprojekt-Dateien
+                docs: 3
+              - name: Re offene Fragen - Training 1. Halbjahr 2016-Dateien
+                docs: 5
+              - name: Reservierung Mehrzweckhalle - Training C-Jugend und Gewerbepokal-Dateien
+                docs: 5
+              - name: Schlüssel Mehrzweckhalle für FSV-Dateien
+                docs: 5
+              - name: Schlüssel für Mehrzweckhalle-Dateien
+                docs: 5
+              - name: Termine für 11. Hallencupserie-Dateien
+                docs: 3
+              - name: Terminverschiebung - Hallengewerbecup  eventuell neue Termine
+                  für Training mit Flüchtlingskindern-Dateien
+                docs: 5
+              - name: Training Fußball - FSV Brandis zusätzlich-Dateien
+                docs: 5
+              - name: Trainingsabsage für 3.11.2015 - Alte Turnhalle - E-Jugend-Dateien
+                docs: 5
+              - name: Trainingsplan FSV Halle-Dateien
+                docs: 3
+              - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+                docs: 5
+              - name: TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+                docs: 3
+              - name: WG Hallenzeiten - Fußballprojekt-Dateien
+                docs: 6
+              - name: Zeitverschiebung beim Hallengewerbecup in der MZH am 12.03.2016-Dateien
+                docs: 5
+              - name: Übersicht Trainingszeiten  Bitte um Rückmeldung-Dateien
+                docs: 5
+            - name: Re Anschrift Rechnungslegung - Trainingseinheiten-Dateien
+              docs: 5
+          - name: Nutzungsvertrag
+            docs: 5
+        - name: FeG_Brandis
+          docs: 12
+          folders:
+          - name: Nutzung der Turnhalle am Gymnasium durch die Freie evangelische
+              Gemeinde-Dateien
+            docs: 5
+          - name: Trainingszeiten Sommerferien und Planung 2. Halbjahr 2016-Dateien
+            docs: 5
+        - name: Feuerwehr
+          docs: 71
+          folders:
+          - name: AW Antrag Nutzung Sportstätte.-Dateien
+            docs: 6
+          - name: AW Reservierung Mehrzweckhalle für 150 Jahr Feier-Dateien
+            docs: 5
+          - name: AW Trainingszeiten - Übersicht f. 2. Halbjahr-Dateien
+            docs: 5
+          - name: AW Trainingszeiten Feuerwehr 2. Halbjahr 2015  Sommerferien  Schließzeiten-Dateien
+            docs: 3
+          - name: Benutzung Schützenplatz während der Wintermonate-Dateien
+            docs: 5
+          - name: FFW Beucha
+            docs: 30
+            folders:
+            - name: AW Antrag Nutzung Sportstätte.-Dateien
+              docs: 6
+            - name: AW Nutzung Turnhalle Beucha durch Feuerwehr Beucha in Schuljahr
+                20152016-Dateien
+              docs: 3
+            - name: Antwortschreiben zum JF-Wettkampf in Beucha am 28.05.2016-Dateien
+              docs: 5
+            - name: Gelesen AW Antrag Nutzung Sportstätte.-Dateien
+              docs: 3
+            - name: Gelesen Trainingsabsage v. 14.06. - 17.06.2016 in der Turnhalle
+                Beucha-Dateien
+              docs: 3
+            - name: Gelesen Trainingszeiten Sommerferien und Planung 2. Halbjahr 2016-Dateien
+              docs: 3
+            - name: Grundschule Beucha-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Nutzung Turnhalle Beucha durch Feuerwehr Beucha in Schuljahr 20152016-Dateien
+              docs: 3
+            - name: RE AW Trainingszeiten - Übersicht f. 2. Halbjahr -Dateien
+              docs: 5
+            - name: Trainingsabsage v. 14.06. - 17.06.2016 in der Turnhalle Beucha-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016  Hallenschließzeiten
+                Weihnachtsferien-Dateien
+              docs: 5
+            - name: Trainingszeiten Sommerferien und Planung 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: 'Turnhalle Beucha gesperrt wegen Vorbereitungen Sommerfest GS
+                Beucha  '
+              docs: 2
+            - name: WG Nutzung Turnhalle Beucha durch Feuerwehr Beucha in Schuljahr
+                20152016-Dateien
+              docs: 3
+          - name: FFW_Räume_privat
+            docs: 105
+            folders:
+            - name: 'AW: Vertrag_Mehnert'
+              docs: 2
+            - name: FFW Haus Brandis - Private Feier am 21.05.2016-Dateien
+              docs: 5
+            - name: FFW Polenz - private Feier v. Hr. Wittig am 05.02.2016-Dateien
+              docs: 5
+            - name: Miete Schulungsraum OF Brandis-Dateien
+              docs: 5
+            - name: Mietverträge-Dateien
+              docs: 3
+            - name: RE Mietverträge-Dateien
+              docs: 3
+          - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+            docs: 5
+          - name: Jugendfeuerwehr-Wettkampf am 28.05.2016 Sportplatz und Speiseraum
+              GS Beucha-Dateien
+            docs: 5
+          - name: RE AW Trainingszeiten - Übersicht f. 2. Halbjahr -Dateien
+            docs: 5
+          - name: RE Trainingszeiten  Hallennutzung 1. Halbjahr 2016  Hallenschließzeiten
+              Weihnachtsferien-Dateien
+            docs: 5
+          - name: Reservierung Forum Oberschule Brandis am 14.06.2017-Dateien
+            docs: 5
+          - name: Reservierung Forum für 14.06.2017-Dateien
+            docs: 5
+          - name: Reservierung Mehrzweckhalle für 150 Jahr Feier-Dateien
+            docs: 5
+          - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016  Hallenschließzeiten
+              Weihnachtsferien-Dateien
+            docs: 5
+          - name: Trainingszeiten Feuerwehr 2. Halbjahr 2015  Sommerferien  Schließzeiten-Dateien
+            docs: 3
+          - name: Trainingszeiten Sommerferien und Planung 2. Halbjahr 2016-Dateien
+            docs: 5
+          - name: 'Veranstaltung: 150 Jahr FFW Brandis 10.06.2017 // Sport- und Mehrzweckhalle
+              Brandis'
+            docs: 2
+          - name: Volleyballturnier 18.11.2015-Dateien
+            docs: 5
+          - name: Zirkuszelt auf dem Schützenplatz (03.10-10.10.2015)-Dateien
+            docs: 5
+          - name: Übersicht Trainingszeiten ab 24.08.2015  Hinweise während der Sommerferien-Dateien
+            docs: 3
+        - name: Frauenchor_Polenz
+          folders:
+          - name: Abrechnungen
+            docs: 1
+            folders:
+            - name: '2014'
+              docs: 3
+            - name: '2015'
+              docs: 5
+            - name: '2016'
+              docs: 7
+            - name: '2017'
+              docs: 11
+              folders:
+              - name: 'AW: Rechnung Mai 2017'
+                docs: 2
+            - name: '2018'
+              docs: 11
+            - name: '2019'
+              docs: 13
+            - name: '2020'
+              docs: 3
+          - name: Allgemeines
+            docs: 24
+            folders:
+            - name: AW AW Plan 2. HJ 2015-Dateien
+              docs: 3
+            - name: AW Chorproben 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW Chorproben 2. Halbjahr 2016-Dateien
+            - name: AW Gemeindeamt-Dateien
+              docs: 5
+            - name: AW Plan - 21.05.2016-Dateien
+              docs: 5
+            - name: AW Plan 2. HJ 2015-Dateien
+              docs: 3
+            - name: AW Plan für 1. HJ 2016-Dateien
+              docs: 5
+            - name: AW Terminplan Frauenchor-Dateien
+              docs: 3
+            - name: Chorproben 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Chorproben 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Gemeindeamt-Dateien
+              docs: 3
+            - name: Nachberechnung 1. Halbjahr 2015-Dateien
+              docs: 5
+            - name: Nutzung Bürgerhaus Polenz-Dateien
+              docs: 3
+            - name: Plan für 1. HJ 2016-Dateien
+              docs: 3
+            - name: Re Nutzung Bürgerhaus Polenz-Dateien
+              docs: 3
+            - name: 'Re: Chorproben 2. Halbjahr 2017'
+              docs: 3
+            - name: Terminplan Frauenchor-Dateien
+              docs: 3
+          - name: Nutzungsverträge
+            docs: 3
+        - name: GS_Beucha
+          docs: 29
+          folders:
+          - name: AW Ihre Anfrage-Dateien
+            docs: 5
+          - name: AW Termine-Dateien
+            docs: 5
+          - name: Christenlehre-Dateien
+            docs: 3
+          - name: Ihre Anfrage-Dateien
+            docs: 3
+          - name: Sportunterrichtsplanung neues Schuljahr // Kita Knirpsentreff (archiviert
+              im Winyard DMS)
+            docs: 3
+          - name: Termine
+            docs: 2
+          - name: Trainingsabsage für 16.17.06.2016 und 05.08.2016 Turnhalle Beucha-Dateien
+            docs: 5
+        - name: GS_Brandis
+          docs: 51
+          folders:
+          - name: AW Anmeldung einer Schulveranstaltung-Dateien
+            docs: 5
+          - name: AW Circus Fernandini-Dateien
+            docs: 3
+          - name: AW Schulanfangsfeier 05.06.08.2015 - Bühenenaufbau-Dateien
+            docs: 5
+          - name: AW Schulanfangsfeier 21.22.08.2015 - Bühenenaufbau-Dateien
+            docs: 3
+          - name: AW Termine  Frühlingsfest - Schulanfang-Dateien
+            docs: 5
+          - name: Anmeldung einer Schulveranstaltung-Dateien
+            docs: 3
+          - name: Circus Fernandini  Zirkusprojekt mit GS Brandis Zeitraum 03.10.2015
+              - 10.10.2015-Dateien
+            docs: 3
+          - name: Frühlingsfest 21.04.2016 - MZH - GS -Dateien
+            docs: 5
+          - name: GTA und Trainingsbeginn für den 26.06.2015_Stahl_Brandis-Dateien
+            docs: 3
+          - name: Nutzung Mehrzweckhalle am 26.06.2015-Dateien
+            docs: 3
+          - name: Nutzung Mehrzweckhalle am 26.06.2015_OS-Dateien
+            docs: 3
+          - name: Schulanfangsfeier 05.06.08.2015 - Bühenenaufbau-Dateien
+            docs: 3
+          - name: Schulanfangsfeier 21.22.08.2015 - Bühenenaufbau-Dateien
+            docs: 3
+          - name: Schulanfangsfeier GS Brandis  Sperrung Mehrzweckhalle 21.08 - 24.08.2015-Dateien
+            docs: 3
+          - name: Schulsportzeiten 20162017-Dateien
+            docs: 5
+          - name: Schulsportzeiten Schuljahr 20152016-Dateien
+            docs: 3
+          - name: Termine-Dateien
+            docs: 3
+          - name: Trainingsbeginn für den 26.06.2015.BTTC-htm-Dateien
+            docs: 3
+          - name: Veranstaltung Schulanfangsfeier  Sport- und Mehrzweckhalle Brandis
+              - 06.08.2016-Dateien
+            docs: 5
+          - name: WG Frühlingsfest 21.04.2016 - MZH - GS -Dateien
+            docs: 5
+        - name: Gymnasium_Brandis
+          docs: 79
+          folders:
+          - name: AW Reservierung Speiseraum + Toiletten aTH am 23.06.2016 Gymnasium
+              Brandis-Dateien
+            docs: 3
+          - name: AW Speiseraumplanung 6.07.2015-Dateien
+            docs: 3
+          - name: AW Sportunterrricht am 17.20.06.2016 in der Mehrzweckhalle - Abschlussfeier
+              Oberschule-Dateien
+            docs: 5
+          - name: AW TELC im Gymnasium Brandis-Dateien
+            docs: 5
+          - name: 'AW: Sprechzeiten Jugendweihe - 1. Mail'
+            docs: 2
+          - name: Abbestellung aTH 30.01.2016-Dateien
+            docs: 3
+          - name: Anmeldung Mehrzweckhalle für Abitur-Prüfungen-Dateien
+            docs: 3
+          - name: Feuerwehrfest Mehrzweckhalle // 08.06. - 09.06.2017
+            docs: 2
+          - name: Parkmöglichkeiten zum Tag der offenen Tür - 30.01.16-Dateien
+            docs: 5
+          - name: Rerservierung Speiseraum Turnhalle Gymnasium  02.02.2016-Dateien
+            docs: 5
+          - name: Reservierung Forum Oberschule-Dateien
+            docs: 3
+          - name: Reservierung Speiseraum + Toiletten aTH am 23.06.2016 Gymnasium
+              Brandis-Dateien
+            docs: 3
+          - name: Schulsport am 26.08.2016 auf dem Schützenplatz-Dateien
+            docs: 5
+          - name: Schulsportzeiten 20162017-Dateien
+            docs: 5
+          - name: Speiseraum 04.11.2015-Dateien
+            docs: 5
+          - name: Speiseraum 06.07.2015  aktualisierter Veranstaltungsplan_Juli-Dateien
+            docs: 3
+          - name: Speiseraum Veranstaltung 24.11.2015 entfällt-Dateien
+            docs: 5
+          - name: TELC im Gymnasium Brandis-Dateien
+            docs: 3
+          - name: Trainingsabsage Freitag 28.08.2015-Dateien
+            docs: 3
+          - name: WG Reservierung Forum Oberschule-Dateien
+            docs: 3
+        - name: Heerling
+          folders:
+          - name: Abrechnungen
+            docs: 1
+            folders:
+            - name: '2016'
+              docs: 6
+            - name: '2017'
+              docs: 11
+            - name: '2018'
+              docs: 12
+            - name: '2019'
+              docs: 8
+            - name: '2020'
+              docs: 5
+          - name: Nutzungsverträge
+            docs: 1
+          - name: Schriftwechsel
+            docs: 33
+            folders:
+            - name: AW Planung Yoga-Stunden im 2. Halbjahr 2016 im Bürgerhaus Polenz-Dateien
+              docs: 5
+            - name: Gemeindehaus Polenz - Yogastunden-Dateien
+              docs: 5
+            - name: Planung Yoga-Stunden im 2. Halbjahr 2016 im Bürgerhaus Polenz-Dateien
+              docs: 5
+            - name: Re Planung Yoga-Stunden im 2. Halbjahr 2016 im Bürgerhaus Polenz-Dateien
+              docs: 5
+        - name: Heimatverein_Beucha
+          folders:
+          - name: 2018-02-15-Heimatverein-Beucha-Alte-Bäume
+            docs: 1
+          - name: Abrechnungen
+            docs: 29
+          - name: Allgemeines
+            docs: 46
+            folders:
+            - name: Heimatverein Beucha e.V. Miete des Speiseraums der Grundschule
+                Beucha-Dateien
+              docs: 3
+            - name: Termin-Dateien
+              docs: 3
+            - name: Veranstaltung am 26.02.2016 im Speiseraum der GS Beucha-Dateien
+              docs: 5
+          - name: Nutzungsverträge
+            docs: 21
+        - name: Heimatverein_Polenz
+          docs: 1
+          folders:
+          - name: Abrechnung
+            docs: 30
+          - name: Allgemeines
+            docs: 36
+          - name: Nutzungsverträge
+            docs: 2
+        - name: Herzberg-Nachfolger-v.Focus-Motivation
+          folders:
+          - name: Abrechnungen
+            docs: 2
+            folders:
+            - name: '2018'
+              docs: 2
+            - name: '2019'
+              docs: 11
+            - name: '2020'
+              docs: 4
+          - name: Nutzungsvertrag
+            docs: 5
+          - name: Schriftwechsel
+            docs: 32
+        - name: Hort_Beucha
+          docs: 7
+          folders:
+          - name: AW Hallennutzungszeiten ab 24.08.2015-Dateien
+            docs: 5
+          - name: Hallennutzungszeiten ab 08.08.2016-Dateien
+            docs: 5
+          - name: Hallennutzungszeiten ab 24.08.2015-Dateien
+            docs: 3
+          - name: Turnhalle Beucha gesperrt wegen Vorbereitungen Sommerfest GS Beucha
+            docs: 2
+          - name: WG Hallennutzungszeiten ab 24.08.2015-Dateien
+            docs: 3
+        - name: Hort_Brandis
+          docs: 54
+          folders:
+          - name: AW Hallennutzungszeiten ab 24.08.2015-Dateien
+            docs: 3
+          - name: AW Hortübernachtung vom 30.06. zum 01.07.2016-Dateien
+            docs: 5
+          - name: AW MZH -Nutzung am 09.02.16-Dateien
+            docs: 5
+          - name: AW Nutzung MZH in den Sommerferien-Dateien
+            docs: 4
+          - name: AW Nutzung Winterferien MZH-Dateien
+            docs: 5
+          - name: AW Schlechtwettervariante -Dateien
+            docs: 5
+          - name: AW Schützenplatz-Dateien
+            docs: 5
+          - name: 'AW: 14.06.2017'
+            docs: 2
+          - name: Hallennutzungszeiten ab 24.08.2015-Dateien
+            docs: 3
+          - name: Hort Brandis - Nutzung Schützenplatz und Hof im Gymnasium-Dateien
+            docs: 5
+          - name: Hortnacht - Hort Brandis - 30.06. - 01.07.2016-Dateien
+            docs: 5
+          - name: Hortübernachtung vom 30.06. zum 01.07.2016-Dateien
+            docs: 3
+          - name: MZH -Nutzung am 09.02.16-Dateien
+            docs: 3
+          - name: Nutzung MZH vom Hort Brandis in den Ferien-Dateien
+            docs: 5
+          - name: Schlechtwettervariante -Dateien
+            docs: 3
+          - name: Schützenplatz-Dateien
+            docs: 3
+          - name: aktualisierter Veranstaltungsplan für Februar - Ferienzeit-Dateien
+            docs: 5
+        - name: Jugendweihe
+          docs: 2
+          folders:
+          - name: 1-Abrechnungen
+            docs: 55
+          - name: 2-Nutzungsverträge
+            docs: 11
+          - name: 3-Schriftverkehr-Jugendweihe
+            folders:
+            - name: '2015'
+              docs: 1
+            - name: '2016'
+              docs: 7
+            - name: '2017'
+              docs: 3
+            - name: '2018'
+              docs: 7
+            - name: '2019'
+              docs: 2
+            - name: '2020'
+              docs: 8
+            - name: '2021'
+              docs: 1
+          - name: 4-Schriftverkehr-Sprechtage
+            docs: 1
+            folders:
+            - name: '2015'
+              docs: 10
+            - name: '2016'
+              docs: 3
+            - name: '2017'
+              docs: 2
+            - name: '2018'
+              docs: 2
+            - name: '2019'
+              docs: 1
+            - name: '2020'
+              docs: 2
+          - name: 5-Bauhofaufträge
+            docs: 12
+        - name: KiTa_Beucha_Knirpsentreff
+          folders:
+          - name: Allgemeines
+            docs: 17
+            folders:
+            - name: 'AW: Turnhalle Beucha gesperrt wegen Vorbereitungen Schulanfang
+                GS Beucha   '
+              docs: 2
+            - name: Sportunterrichtsplanung neues Schuljahr // Kita Knirpsentreff
+              docs: 2
+          - name: Nutzungsverträge
+            docs: 6
+          - name: 'Turnhalle Beucha gesperrt wegen Vorbereitungen Schulanfang GS Beucha  '
+            docs: 2
+          - name: 'WG: Turnhalle Beucha gesperrt wegen Vorbereitungen Sommerfest GS
+              Beucha '
+            docs: 2
+        - name: Kita_Regenbogen
+          docs: 7
+          folders:
+          - name: AW Sporthallennutzung-Dateien
+            docs: 5
+          - name: Bauhofauftrag - Beuchaer Straße  Ecke Pappelallee-Dateien
+            docs: 5
+          - name: WG Anfrage Elternrat Kita Regenbogen-Dateien
+            docs: 7
+            folders:
+            - name: Anfrage Elternrat Kita Regenbogen-Dateien
+              docs: 3
+            - name: WG Anfrage Elternrat Kita Regenbogen-Dateien
+              docs: 5
+        - name: Musikverein
+          folders:
+          - name: Abrechnung
+            docs: 9
+          - name: Allgemeines
+            docs: 18
+            folders:
+            - name: AW Forum Oberschule für Grundschule Brandis - Bestätigung Termine-Dateien
+              docs: 5
+          - name: Nutzungsverträge
+            docs: 5
+        - name: Männerchor_Polenz
+          folders:
+          - name: Abrechnungen
+            docs: 8
+            folders:
+            - name: '2014'
+            - name: '2015'
+            - name: '2016'
+              docs: 5
+            - name: '2017'
+              docs: 10
+            - name: '2018'
+              docs: 11
+            - name: '2019'
+              docs: 11
+            - name: '2020'
+              docs: 3
+          - name: Allgemeines
+            docs: 34
+            folders:
+            - name: AW Terminplan Chorproben 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Chorproben 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Haftung für digitales Piano-Dateien
+              docs: 5
+            - name: Schrank für digitales Piano-Dateien
+              docs: 5
+            - name: Terminplan 2. Halbjahr 2015  Nutzungszeit Bürgerhaus Polenz-Dateien
+              docs: 3
+            - name: Terminplan Chorproben 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: neuer Vorsitzender Männerchor-Dateien
+              docs: 3
+            - name: Überschneidung Probe mit Heimatverein-Dateien
+              docs: 3
+          - name: Nutzungsverträge
+            docs: 3
+        - name: Notenspaß_Baecke
+          folders:
+          - name: Abrechnungen
+            docs: 19
+          - name: Allgemeines
+            docs: 26
+            folders:
+            - name: AW Planung Unterrichtszeiten  Klassenräume 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW Unterrichtszeiten  Klassenräume 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW Unterrichtszeiten  Klassenräume 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: AW WG Unterrichtszeiten  Klassenräume 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Planung Unterrichtszeiten  Klassenräume 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Reservierung Klassenraum-Dateien
+              docs: 3
+            - name: Unterrichtszeiten  Klassenräume 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Unterrichtszeiten  Klassenräume 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: WG Unterrichtszeiten  Klassenräume 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+          - name: Nutzungsverträge
+            docs: 1
+        - name: OS_Brandis
+          docs: 52
+        - name: Ortschaftsrat-Polenz
+          docs: 2
+        - name: Pfarramt_Beucha
+          folders:
+          - name: Abrechnungen
+            docs: 1
+            folders:
+            - name: '2015'
+              docs: 2
+            - name: '2016'
+              docs: 8
+            - name: '2017'
+              docs: 10
+            - name: '2018'
+              docs: 11
+            - name: '2019'
+              docs: 12
+            - name: '2020'
+              docs: 6
+          - name: Allgemeines
+            docs: 25
+            folders:
+            - name: AW Miete Schulraum Beucha-Dateien
+              docs: 5
+            - name: AW Miete Schulraum Beucha_1.HJ2016-Dateien
+              docs: 5
+            - name: 'AW: Christenlehrestunden im 2. Halbjahr 2017'
+              docs: 4
+            - name: Christenlehrestunden ab 08.08.2017
+              docs: 3
+            - name: Christenlehrestunden ab 08.09.2015-Dateien
+              docs: 5
+            - name: Christenlehrestunden in der GS Beucha-Dateien
+              docs: 5
+            - name: Miete Schulraum Beucha-Dateien
+              docs: 3
+          - name: Nutzungsverträge
+            docs: 1
+        - name: Rehasport_Börner_Klose
+          folders:
+          - name: Abrechnungen
+            docs: 4
+            folders:
+            - name: '2014'
+              docs: 2
+            - name: '2015'
+              docs: 1
+            - name: '2016'
+              docs: 8
+            - name: '2017'
+              docs: 12
+            - name: '2018'
+              docs: 12
+            - name: '2019'
+              docs: 11
+            - name: '2020'
+              docs: 10
+          - name: Nutzungsverträge
+            docs: 7
+          - name: Schriftwechsel
+            docs: 146
+            folders:
+            - name: AW Re Trainingszeiten - freitags 2. Halbjahr-Dateien
+              docs: 5
+            - name: AW Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: 'AW: Planung Sportstätten 2. Halbjahr 2017'
+              docs: 3
+            - name: Absage Training am 17.12.2015-Dateien
+              docs: 5
+            - name: Fwd Re Trainingszeiten - freitags 2. Halbjahr-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Nutzung Turnhalle neues Schuljahr  Kindersport-Dateien
+              docs: 3
+            - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+              docs: 3
+            - name: Re WG Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Trainingsabsage 12.08.2016 Prim. e.V.  alte Turnhalle-Dateien
+              docs: 5
+            - name: Trainingsabsage für 3.11.2015-Dateien
+              docs: 5
+            - name: Trainingsabsage für den 18.09.2015-Dateien
+              docs: 3
+            - name: Trainingsausfall am 02.02.2016-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Trainingszeiten - freitags 2. Halbjahr-Dateien
+              docs: 5
+            - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Veranstaltung am 23.06.2016 im Speiseraum an der Turnhalle Gymnasium-Dateien
+              docs: 5
+            - name: Verschiebung Training am 26.06.2015-Dateien
+              docs: 3
+            - name: Verschiebung Trainingszeit PRIM e.V.  26.06.2015-Dateien
+              docs: 3
+        - name: SC-Partheland_ehem-SC_Polenz
+          folders:
+          - name: Abrechnungen
+            docs: 2
+            folders:
+            - name: '2014'
+              docs: 1
+            - name: '2015'
+              docs: 5
+            - name: '2016'
+              docs: 5
+            - name: '2017'
+              docs: 5
+            - name: '2018'
+              docs: 4
+            - name: '2019'
+              docs: 7
+            - name: '2020'
+              docs: 3
+          - name: Nutzungsverträge
+            docs: 7
+          - name: Schriftwechsel
+            docs: 107
+            folders:
+            - name: AW SC Polenz Trainingszeiten-Dateien
+              docs: 5
+            - name: AW SC Polenz e.V.-Dateien
+              docs: 5
+            - name: AW Training am 19.02.2016-Dateien
+              docs: 5
+            - name: AW Trainingstermine Feiertag  Wochenende Oktober 2016-Dateien
+              docs: 5
+            - name: AW Trainingszeiten SC Polenz (Winterhalbjahr)-Dateien
+              docs: 3
+            - name: AW TrainingszeitenSportstätten 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: AW Trainingszeitverlängerung-Dateien
+              docs: 5
+            - name: AW kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+            - name: 'AW: Planung Sportstätten 2. Halbjahr 2017'
+              docs: 2
+            - name: 'AW: Planung Sportstätten 2. Halbjahr 2017 (archiviert im Winyard
+                DMS)'
+              docs: 2
+            - name: 'AW: Trainingszeiten Sportplatz Schützenplatz'
+              docs: 3
+            - name: Aw Ansprechpartner  Übungsleiter Trainingszeiten SC Polenz (Winterhalbjahr)-Dateien
+              docs: 4
+            - name: Benutzung Schützenplatz während der Wintermonate-Dateien
+              docs: 5
+            - name: Bestätigung Trainingszeiten Oktober 2015 Schützenplatz-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+              docs: 3
+            - name: Re WG Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 3
+            - name: SC Polenz - Schützenplatz-Dateien
+              docs: 5
+            - name: SC Polenz - alternative Termine 2. Halbjahr-Dateien
+              docs: 5
+            - name: SC Polenz Trainingszeiten-Dateien
+              docs: 3
+            - name: SC Polenz e.V.-Dateien
+              docs: 3
+            - name: Schlüssel Schützenplatz  Mehrzweckhalle-Dateien
+              docs: 5
+            - name: Training am 19.02.2016-Dateien
+              docs: 3
+            - name: Trainingsverlängerung SC Polenz bis 27.04.2016-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Trainingszeiten SC Polenz (Winterhalbjahr)  Kosten-Dateien
+              docs: 5
+            - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenSportstätten 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+        - name: SV_Althen
+          folders:
+          - name: Abrechnungen
+            docs: 1
+            folders:
+            - name: '2016'
+              docs: 3
+            - name: '2017'
+              docs: 5
+            - name: '2018'
+              docs: 5
+            - name: '2019'
+              docs: 4
+            - name: '2020'
+              docs: 2
+          - name: Nutzungsverträge
+            docs: 9
+          - name: Schriftwechsel
+            docs: 54
+            folders:
+            - name: AW Abrechnung Hallenmiete 2. Hj 2015-Dateien
+              docs: 3
+            - name: AW Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW TrainingszeitenSportstätten 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Anlage zur Abrechnung - 2. Halbjahr 2015-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+              docs: 3
+            - name: Schlüssel für Mehrzweckhalle - Training - SV Althen-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Trainingszeiten 2. Halbjahr 2015-Dateien
+              docs: 5
+            - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenSportstätten 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+        - name: SV_Stahl
+          folders:
+          - name: Abrechnung
+            docs: 4
+            folders:
+            - name: '2014'
+              docs: 3
+            - name: '2015'
+              docs: 18
+            - name: '2016'
+              docs: 30
+            - name: '2017'
+              docs: 31
+            - name: '2018'
+              docs: 26
+            - name: '2019'
+              docs: 23
+            - name: '2020'
+              docs: 11
+          - name: Allgemeines
+            docs: 53
+            folders:
+            - name: AW Telefonliste  Abrechnung 2. Halbjahr-Dateien
+              docs: 5
+            - name: Abrechnung der Sportstätten im September 2015-Dateien
+              docs: 5
+            - name: Abrechnung für Oktober - Guthaben-Dateien
+              docs: 5
+            - name: Bestätigung Reservierung Speiseraum - 04.11.2015-Dateien
+              docs: 5
+            - name: Gitterwagen - Alte Turnhalle am Gymnasium-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Hinweise zur Mehrzweckhalle - Geräte  Ordnung-Dateien
+              docs: 5
+            - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+              docs: 3
+            - name: Schlüsselübergabe Mitgliederversammlung 04.11.2015-Dateien
+              docs: 5
+            - name: Trainingsabsage - 14.06.2017
+              docs: 2
+            - name: Trainingsabsage - Donnerstag 21.04.2016-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 4
+            - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+          - name: Gymnastik
+            docs: 80
+            folders:
+            - name: AW Gymnastikgruppe SV Stahl Brandis e.V.-Dateien
+              docs: 5
+            - name: AW Gymnastikgruppe des SV Stahl Brandis-Dateien
+              docs: 5
+            - name: AW Trainingszeiten Abteilung Gymnastik Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+            - name: AW Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW WG TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Absage Training am 17.12.2015 - Gymnastik TH Gymnasium-Dateien
+              docs: 5
+            - name: Gymnastikgruppe SV Stahl Brandis e.V.-Dateien
+              docs: 3
+            - name: Gymnastikgruppe des SV Stahl Brandis-Dateien
+              docs: 3
+            - name: Neue Ansprechpartnerin - SV Stahl Abt. Gymnastik TH Gymnasium-Dateien
+              docs: 5
+            - name: Re WG Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Re kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+            - name: Trainingsabsage - 17.03.2016 - Abt. Gymnastik-Dateien
+              docs: 5
+            - name: Trainingsabsage - 20.01. 19.30 - 20.30 auf Feld 3-Dateien
+              docs: 5
+            - name: Trainingsabsage - 20.01.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage - Gymnastikgruppe des SV Stahl Brandis - 16.06.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage - SV Stahl Brandis - 17.03.16 - alte Turnhalle-Dateien
+              docs: 5
+            - name: Trainingsabsage 04.11.2015-Dateien
+              docs: 5
+            - name: Trainingsabsage SV Stahl Abt. Gymnastik-Dateien
+              docs: 5
+            - name: Trainingsabsage-Dateien
+              docs: 5
+            - name: Trainingszeiten Abteilung Gymnastik Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+            - name: Veranstaltung am 23.06.2016 im Speiseraum an der Turnhalle Gymnasium-Dateien
+              docs: 5
+            - name: kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+          - name: Kampfsport
+            docs: 44
+            folders:
+            - name: AW Erinnerung - Trainingszeiten 2. Halbjahr-Dateien
+              docs: 5
+            - name: AW Trainingszeit - Dienstag 24.05.2016- erst ab 19.00 Uhr möglich-Dateien
+              docs: 5
+            - name: Bestätigung Trainingszeiten-Dateien
+              docs: 5
+            - name: Re Erinnerung - Trainingszeiten 2. Halbjahr-Dateien
+              docs: 3
+            - name: Re Trainingszeit - Dienstag 24.05.2016- erst ab 19.00 Uhr möglich-Dateien
+              docs: 3
+            - name: Training SV Stahl - Abteilung Judo-Dateien
+              docs: 5
+            - name: Training SV Stahl Judo am 24.05. komplett abgesagt-Dateien
+              docs: 5
+            - name: Trainingsabsage  -verkürzung-Dateien
+              docs: 5
+            - name: Trainingsabsage - 02.06.2016 und Trainingszeiten Sommerferien-Dateien
+              docs: 5
+            - name: Trainingsabsage 06.10.2015-Dateien
+              docs: 5
+            - name: Trainingsabsage u. -änderung vom SV Stahl Abt. Judo-Dateien
+              docs: 5
+            - name: Trainingszeit - Dienstag 24.05.2016- erst ab 19.00 Uhr möglich-Dateien
+              docs: 5
+            - name: Trainingszeiten 2. Halbjahr-Dateien
+              docs: 5
+            - name: 'WG: Planung Sportstätten 2. Halbjahr 2017 // kleine Erinnerung'
+              docs: 2
+            - name: kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+          - name: Nutzungsverträge
+            docs: 4
+          - name: Rugby
+            docs: 80
+          - name: Turnen
+            docs: 77
+          - name: Volleyball
+            docs: 250
+            folders:
+            - name: ' Terminänderung Punktspiele September 2017'
+              docs: 2
+            - name: AW Anfrage Verfügbarkeit eines Feldes in der MZH für den 26.11.2016-Dateien
+              docs: 5
+            - name: AW Bestätigung Hallenbuchung - SV Stahl Brandis Abt. Volleyball
+                - Saison 2015-16-Dateien
+              docs: 5
+            - name: AW Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: AW Hallenabsage 04.11.2015  Trainingszeit 1800 bis 2000 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 5
+            - name: AW Hallenabsage 08.06.2016  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 5
+            - name: AW Hallenabsage 10.06.2015  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: AW Hallenabsage 13.05.2015  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: AW Hallenabsage 20.04.2016  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 5
+            - name: AW Hallenabsage 22.06.2016  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: AW Hallenabsage 24.06.2015  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: AW Hallenabsage 30.03.2016  Trainingszeit 1800 bis 2000 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 5
+            - name: AW Hallenabsage 30.09.2015  Trainingszeit 1800 bis 2000 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 5
+            - name: AW Hallenbelegung 18.12.-Dateien
+              docs: 5
+            - name: AW Hallenreservierung-Dateien
+              docs: 7
+            - name: AW Hallenvorreservierung 2017-Dateien
+              docs: 5
+            - name: AW Heimspiele-Dateien
+              docs: 5
+            - name: AW Trainingsabsage - Freitag 06.05.2016 - Alte Turnhalle verfügbar-Dateien
+              docs: 5
+            - name: AW Trainingsabsage - Freitag 06.05.2016-Dateien
+              docs: 5
+            - name: AW Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: AW Trainingszeiten-Dateien
+              docs: 5
+            - name: AW Übersicht Termine - gemeinsamer Nutzung der MZH mit Brandiser
+                Tischtennisclub-Dateien
+              docs: 5
+            - name: 'AW: Hallenanfrage'
+              docs: 3
+            - name: Absage Punktspiel 05.05.2018
+              docs: 3
+            - name: Absage Training am 21.05.2015-Dateien
+              docs: 3
+            - name: Anfrage Verfügbarkeit eines Feldes in der MZH für den 26.11.2016-Dateien
+              docs: 3
+            - name: Belegung Mehrzweckhalle gleichzeitig mit BTTC - Samstag 10.10.2015-Dateien
+              docs: 5
+            - name: Bestätigung Trainingszeiten  Nachfrage GTA-Dateien
+              docs: 5
+            - name: GTA und Trainingsbeginn für den 26.06.2015-Dateien
+              docs: 3
+            - name: Geänderte Nutzungszeit - SV Stahl - am 26.03.2016-Dateien
+              docs: 5
+            - name: Hallenabsage 04.03.2016  Trainingszeit 1930 bis 2200 Uhr auf dem
+                rechten äußeren Feld-Dateien
+              docs: 3
+            - name: Hallenabsage 04.11.2015  Trainingszeit 1800 bis 2000 Uhr auf dem
+                linken äußeren Feld-Dateien
+              docs: 3
+            - name: Hallenabsage 10.06.2015  Trainingszeit 1800 bis 2030 Uhr auf dem
+                linken äußeren Feld-Dateien
+              docs: 3
+            - name: Hallenabsage 13.05.2015  Trainingszeit 1800 bis 2030 Uhr auf dem
+                linken äußeren Feld-Dateien
+              docs: 3
+            - name: Hallenabsage 20.04.2016  Trainingszeit 1800 bis 2030 Uhr auf dem
+                linken äußeren Feld-Dateien
+              docs: 3
+            - name: Hallenabsage 30.03.2016  Trainingszeit 1800 bis 2000 Uhr auf dem
+                linken äußeren Feld-Dateien
+              docs: 3
+            - name: Hallenabsage 30.09.2015  Trainingszeit 1800 bis 2000 Uhr auf dem
+                linken äußeren Feld-Dateien
+              docs: 3
+            - name: Hallenbuchung - SV Stahl Brandis Abt. Volleyball - Saison 2015-16-Dateien
+              docs: 3
+            - name: Hallenvorreservierung 2017-Dateien
+              docs: 3
+            - name: Heimspiele-Dateien
+              docs: 3
+            - name: Heimspieltermine SV Stahl Abt. Volleyball-Dateien
+              docs: 5
+            - name: MZH Bestellung Feld 2  24.3.16  1730-1930 Uhr-Dateien
+              docs: 3
+            - name: Nutzungszeit Mehrzweckhalle am 26.03.2016-Dateien
+              docs: 5
+            - name: Re Absage Training am 21.05.2015-Dateien
+              docs: 3
+            - name: Re Belegung Mehrzweckhalle gleichzeitig mit BTTC - Samstag 10.10.2015-Dateien
+              docs: 5
+            - name: Re Bestätigung Trainingszeiten  Nachfrage GTA-Dateien
+              docs: 5
+            - name: Re Hallenabsage 08.06.2016  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: Re Hallenabsage 17.07.2015  Trainingszeit 1930 bis 2200 Uhr auf
+                dem rechten äußeren Feld-Dateien
+              docs: 3
+            - name: Re Hallenabsage 22.06.2015  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: Re Hallenabsage 22.06.2016  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: Re Trainingsabsage - Freitag27.05.2016-Dateien
+              docs: 5
+            - name: Re Trainingsabsage für 11.12.05.2016-Dateien
+              docs: 5
+            - name: Re Trainingsabsage für Freitag 17.06.2016-Dateien
+              docs: 5
+            - name: Re Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Re gemeinsamer Nutzung der MZH mit Brandiser Tischtennisclub -
+                am 05.09.2015-Dateien
+              docs: 5
+            - name: Re Übersicht Termine - gemeinsamer Nutzung der MZH mit Brandiser
+                Tischtennisclub-Dateien
+              docs: 5
+            - name: 'Re: AW: Hallenanfrage'
+              docs: 2
+            - name: 'Re: Planung Sportstätten 2. Halbjahr 2017'
+              docs: 2
+            - name: Reservierung MZH am 21.05.2016-Dateien
+              docs: 5
+            - name: Tausch Trainingshalle beim SV Stahl Brandis - Volleyball-Event
+                am 28.04.2016-Dateien
+              docs: 5
+            - name: Training SV Stahl Abt. Volleyball am 06.05.2016-Dateien
+              docs: 5
+            - name: Training Volleyball (SV Stahl) am 27.05.2016 - Alte Turnhalle
+                Gymnasium-Dateien
+              docs: 5
+            - name: Training am 18.12.2015-Dateien
+              docs: 5
+            - name: Training am 27.05.2016 - Turnhalle am Gymnasium-Dateien
+              docs: 5
+            - name: Trainingsabsage - 24.06.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage - Freitag 06.05.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage - Freitag27.05.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage 12.05.2017
+              docs: 2
+            - name: Trainingsabsage Freitag 24.06.2016 SV Stahl Volleyball-Dateien
+              docs: 5
+            - name: Trainingsabsage SV Stahl Jugendvolleyball  30.09.2015-Dateien
+              docs: 5
+            - name: Trainingsabsage für 03.11.2017
+              docs: 2
+            - name: Trainingsabsage für Freitag 05.08.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage für Freitag 17.06.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage für Montag 04.07.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage für den 03.07.2015-Dateien
+              docs: 3
+            - name: Trainingsabsage vom SV Stahl Brandis Abt. Volleyball donnerstags-Dateien
+              docs: 3
+            - name: Trainingszeiten-Dateien
+              docs: 3
+            - name: Volleyball MZH-Dateien
+              docs: 3
+            - name: WG Hallenabsage 04.03.2016  Trainingszeit 1930 bis 2200 Uhr auf
+                dem rechten äußeren Feld-Dateien
+              docs: 5
+            - name: WG Hallenabsage 24.06.2015  Trainingszeit 1800 bis 2030 Uhr auf
+                dem linken äußeren Feld-Dateien
+              docs: 3
+            - name: gemeinsamer Nutzung der MZH mit Brandiser Tischtennisclub - am
+                05.09.2015-Dateien
+              docs: 5
+            - name: komplette Absage der Trainingseinheiten am 26.06.2015-Dateien
+              docs: 3
+            - name: zusätzliches Training SV Stahl Abt. Volleyball  Donnerstag 24.03.2016-Dateien
+              docs: 5
+            - name: Änderung der Trainingszeiten 201516-Dateien
+              docs: 3
+            - name: Übersicht Termine - gemeinsamer Nutzung der MZH mit Brandiser
+                Tischtennisclub -Dateien
+              docs: 5
+            - name: Übersicht Trainingszeiten 2. Halbjahr // Abt. Volleyball
+              docs: 2
+        - name: SV_Tresenwald
+          docs: 9
+          folders:
+          - name: 07.03.2015_SV Tresenwald e. V. Machern
+            docs: 3
+          - name: 08.04.2016_SV_Tresenwald
+            docs: 7
+            folders:
+            - name: AW Anfrage Sporthalle Gymnasium Brandis 08.04.2016-Dateien
+              docs: 5
+            - name: Anfrage Sporthalle Gymnasium Brandis 08.04.2016-Dateien
+              docs: 3
+            - name: Stornierung Abrechnung Volleyballtraining 08.04.2016-Dateien
+              docs: 6
+          - name: 14.10.2016_SV_Tresenwald
+            docs: 6
+          - name: 18.03.2016_SV_Tresenwald
+            docs: 11
+            folders:
+            - name: AW Anfrage Sporthalle Gymnasium Brandis am 18.03.2016-Dateien
+              docs: 5
+            - name: AW Rückgabe unterzeichnete Abrechnung-Dateien
+              docs: 5
+            - name: Anfrage Sporthalle Gymnasium Brandis  18.03.2016-Dateien
+              docs: 3
+            - name: Anfrage Sporthalle Gymnasium Brandis am 18.03.2016-Dateien
+              docs: 5
+            - name: Fwd WG Rückgabe unterzeichnete Abrechnung-Dateien
+              docs: 5
+            - name: SV Tresenwald - 18.03.2016 TH Gymnasium-Dateien
+              docs: 5
+          - name: 20150925_SV_Tresenwald
+            docs: 7
+            folders:
+            - name: AW Buchung Sporthalle Gymnasium Brandis-Dateien
+              docs: 5
+            - name: WG Buchung Sporthalle Gymnasium Brandis-Dateien
+              docs: 5
+          - name: 20160108_SV_Tresenwald
+            docs: 5
+            folders:
+            - name: AW Anfrage Sporthalle Gymnasium Brandis-Dateien
+              docs: 5
+            - name: Abrechnung Sporthalle Gymnasium Brandis-Dateien
+              docs: 5
+            - name: WG Anfrage Sporthalle Gymnasium Brandis-Dateien
+              docs: 6
+          - name: 20160122_SV_Tresenwald
+            docs: 4
+            folders:
+            - name: AW Anfrage Sporthalle Gymnasium Brandis  22.01.2016-Dateien
+              docs: 5
+          - name: 2018_01_13_TH_Gymnasium
+            docs: 1
+          - name: Abrechnungen
+            docs: 8
+        - name: Schulsport
+          docs: 12
+        - name: Sportomis
+          folders:
+          - name: Abrechnungen
+            docs: 1
+            folders:
+            - name: '2014'
+              docs: 2
+            - name: '2015'
+              docs: 1
+            - name: '2016'
+              docs: 6
+            - name: '2017'
+              docs: 11
+            - name: '2018'
+              docs: 11
+            - name: '2019'
+              docs: 11
+          - name: Nutzungsverträge
+            docs: 1
+          - name: Schriftwechsel
+            docs: 43
+            folders:
+            - name: AW -Dateien
+              docs: 5
+            - name: AW Trainingszeit montags Überschneidung mit Hort Beucha-Dateien
+              docs: 3
+            - name: 'AW: Planung Sportstätten 2. Halbjahr 2017'
+              docs: 3
+            - name: Aw AW Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Aw Information bei kurzfristig abgesagten Trainingszeiten-Dateien
+              docs: 3
+            - name: Aw Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Aw Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: Reinigung Turnhalle Beucha-Dateien
+              docs: 5
+            - name: Trainingstermine 2. Halbjahr 2015-Dateien
+              docs: 3
+            - name: Trainingszeiten 2. HJ 2015-Dateien
+              docs: 5
+            - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: Unbenannt-Dateien
+              docs: 3
+        - name: TC_Beucha
+          folders:
+          - name: Abrechnungen
+            docs: 12
+          - name: Allgemeines
+            docs: 78
+            folders:
+            - name: AW  Trainingszeiten 2. Halbjahr 2015  bitte um Rückinfo-Dateien
+              docs: 3
+            - name: AW Trainingszeiten 20152016-Dateien
+              docs: 5
+            - name: AW Trainingszeiten Tennis Beucha-Dateien
+              docs: 5
+            - name: 'AW: Nutzung der Turnhalle TC Beucha - 2. Halbjahr 2017'
+              docs: 2
+            - name: Aw AW WG  Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Aw WG  Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Hallen - Schließzeiten Sommerferien 2016-Dateien
+              docs: 5
+            - name: 'Hallennutzung durch den TC Beucha '
+              docs: 2
+            - name: Nutzung der Sportstätten während der Sommerferien 2015-Dateien
+              docs: 3
+            - name: Trainingsabsage für 01.03.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage für 10.03.2016-Dateien
+              docs: 5
+            - name: Trainingsabsage für 17.03.2016-Dateien
+              docs: 5
+            - name: Trainingszeiten  Hallennutzung 1. Halbjahr 2016-Dateien
+              docs: 5
+            - name: Trainingszeiten 20152016-Dateien
+              docs: 3
+            - name: Trainingszeiten Sommerferien und 2. Halbjahr 2016-Dateien
+              docs: 5
+            - name: TrainingszeitenHallennutzung 1. Schulhalbjahr 20152016-Dateien
+              docs: 3
+            - name: kleine Erinnerung - Trainingszeiten Sommerferien und 2. Halbjahr
+                2016-Dateien
+              docs: 5
+          - name: Nutzungsverträge
+            docs: 1
+        - name: TSC-Grün-Gold-Leipzig
+          folders:
+          - name: Abrechnungen
+            docs: 3
+            folders:
+            - name: '2017'
+              docs: 3
+            - name: '2018'
+              docs: 13
+            - name: '2019'
+              docs: 12
+            - name: '2020'
+              docs: 10
+          - name: Nutzungsvertrag
+            docs: 5
+          - name: Schriftwechsel
+            docs: 29
+        - name: Tanzschule_Jörgens
+          folders:
+          - name: Abrechnungen
+            docs: 1
+            folders:
+            - name: '2014'
+              docs: 1
+            - name: '2015'
+              docs: 6
+            - name: '2016'
+              docs: 6
+            - name: '2017'
+              docs: 7
+            - name: '2018'
+              docs: 11
+            - name: '2019'
+              docs: 11
+            - name: '2020'
+              docs: 3
+          - name: Nutzungsverträge
+            docs: 2
+          - name: Schriftwechsel
+            docs: 30
+        - name: VHS
+          docs: 105
+          folders:
+          - name: Abrechnungen
+            docs: 56
+          - name: MTL_VHS_Kurse
+            docs: 70
+          - name: MTL_VHS_Sportgruppe
+            docs: 39
+        - name: focus-motivation
+          folders:
+          - name: Abrechnung
+            docs: 2
+            folders:
+            - name: '2017'
+              docs: 6
+            - name: '2018'
+              docs: 11
+          - name: Nutzungsvertrag
+            docs: 2
+          - name: Schriftwechsel
+            docs: 17
+            folders:
+            - name: 'AW: Focus Motivation - Mehrzweckhalle'
+              docs: 7
+            - name: 'AW: WG: Focus Motivation - Gruppen Athletik Training'
+              docs: 4
+            - name: 'Re: Focus Motivation - Mehrzweckhalle'
+              docs: 5
+        - name: Änderung_Nutzungsverträge
+          docs: 37
+    - name: Mit-Mach-Stadt
+      folders:
+      - name: Organisation
+        docs: 21
+      - name: Projekte
+        folders:
+        - name: Beiträge_Community
+          docs: 5
+        - name: Brandiser-Geschichten
+          docs: 1
+        - name: Geschichtspfad
+          docs: 1
+        - name: Hausflohmarkt
+          docs: 8
+          folders:
+          - name: Hausflohmarkt  // Bitte um Rückruf
+            docs: 3
+        - name: Ideen
+          docs: 12
+        - name: Litfasssäule
+          docs: 12
+        - name: Telefonzelle_Bücherschrank
+          docs: 3
+        - name: Wanderkino
+          docs: 5
+    - name: Schadensregulierung
+      docs: 6
+      folders:
+      - name: Fuchs_Beucha
+        docs: 5
+      - name: Höhne
+        docs: 2
+      - name: Kinzel_OS_Brandis
+        docs: 2
+      - name: Schadensregulierung_Zinke
+        docs: 11
+      - name: Versicherung_Schadenersatz
+        docs: 17
+      - name: Zakrajda
+        docs: 4
+        folders:
+        - name: Schaden Tür - David Zakrajda-Dateien
+          docs: 5
+    - name: Schlüsselverwaltung
+      docs: 126
+      folders:
+      - name: FSV
+        docs: 11
+      - name: Focus_Motivation
+        docs: 1
+      - name: Hausmeister
+        docs: 3
+      - name: Prim
+        docs: 1
+      - name: SC_Polenz
+        docs: 4
+      - name: SV_Althen
+        docs: 3
+      - name: Tanzschule_Jörgens
+        docs: 1
+    - name: Vertragsregister
+      docs: 2
+      folders:
+      - name: Verträge
+    - name: Vorlagen
+      docs: 43
+    - name: Widersprüche
+      docs: 6
+      folders:
+      - name: Aufhebungsbescheide
+        docs: 1
+      - name: Ausgleichsbeiträge
+        docs: 9
+      - name: Bau
+        docs: 1
+        folders:
+        - name: Arnold-Steffi-Straßenbaubeitrag-BeuchaerStraße
+          docs: 6
+        - name: Bauer_Johann-Gabriele_Hausnummernvergabe
+          docs: 22
+        - name: Baumgarten_Michael
+          docs: 8
+        - name: Bernert_Heiko
+          docs: 3
+        - name: Bierling_Straßenbau_Heinrich-Heine-Kurze-Straße
+          docs: 5
+        - name: Brandiser_Wohnstätten_Straßenbaubeitrag_Poststraße
+          docs: 7
+        - name: Brauchle-Straßenbaubeitrag-BeuchaerStraße
+          docs: 3
+        - name: Czarnowsky-Straßenbaubeitrag-BeuchaerStrasse
+          docs: 4
+        - name: Dorn-Monika-Martin-Straßenbaubeitrag-BeuchaerStraße
+          docs: 3
+        - name: Eichelbaum
+          docs: 3
+        - name: Engelmann
+          docs: 3
+        - name: Flämig_Lars_Hausnummernvergabe
+          docs: 3
+        - name: Flämig_Lars_Strassenbau
+          docs: 2
+        - name: Kaminski-Straßenbau-Poststraße
+          docs: 2
+        - name: Kiese-Liane-Straßenbaubeitrag-BeuchaerStraße
+          docs: 3
+        - name: Klem_Strassenbau_Langestrasse
+          docs: 5
+        - name: Knöfel_Jens
+          docs: 13
+          folders:
+          - name: Widerspruch-Dateien
+            docs: 3
+        - name: Kunath-Katrin-BeuchaerStraße
+          docs: 4
+        - name: Kutzner-Hausnummer
+          docs: 8
+        - name: LAsuV
+          docs: 3
+        - name: MuB-Dämmtechnik-Straßenbaubeitrag-BeuchaerStraße
+          docs: 3
+        - name: Möller_Edeltraut_Strassenbau_Beuchaerstr
+          docs: 4
+        - name: Müller-Straßenbaubeitrag-BeuchaerStraße
+          docs: 3
+        - name: RAin_woernicker_Gisela_Woenicker
+          docs: 10
+        - name: Richter_Hausnummernvergabe
+          docs: 2
+        - name: Richter_Silke_Strassenbau
+          docs: 6
+          folders:
+          - name: Widerspruch Richter Fotos-Dateien
+            docs: 5
+          - name: Widerspruchsverfahren-Dateien
+            docs: 3
+        - name: Schmidt-Jürgen-Doris_Straßenbaubeitrag-BeuchaerStraße
+          docs: 3
+        - name: Schuhmann-Straßenbaubeitrag-BeuchaerStraße
+          docs: 4
+        - name: Schulz-Petra-Straßenbaubeitrag
+          docs: 4
+        - name: Schulze-Hager-Straßenbaubeitrag-BeuchaerStraße
+          docs: 4
+        - name: Schwarz-Straßenbaubeitrag-Poststraße
+          docs: 1
+        - name: Schönberg
+          docs: 4
+          folders:
+          - name: Schönber-2.Bescheid
+            docs: 3
+        - name: Seiffert_Joachim_Straßenbau_
+          docs: 11
+        - name: Siegl_Frank_Hausnummernvergabe
+          docs: 2
+        - name: Siegl_Frank_Strassenbau_Töpfergasse
+          docs: 4
+        - name: Specht_Strassenbau_Töpfergasse
+          docs: 3
+        - name: Stauden-Thomas-Beuchaerstrasse-strassenbaubeitrag
+          docs: 4
+        - name: Strauss_Annelies_Strassenbau
+          docs: 5
+        - name: Strauss_Rico_Strassenbau
+          docs: 9
+        - name: Thyrolf_Seifert
+          docs: 20
+          folders:
+          - name: Entwurf Widerspruchsbescheid Seifert ./. Stadt Brandis
+            docs: 3
+          - name: 'Per E-Mail senden: Version3_Widerspruchsbescheid_Seifert_Thyrolf.docx'
+            docs: 2
+        - name: Wagner-Straßenbaubeitrag-Beuchaerstraße
+          docs: 1
+        - name: Wagner_Straßenbau_Heinrich-Heine-KurzeStraße
+          docs: 5
+        - name: Zentrales Flächenmanagement-Lysimeterstation
+          docs: 3
+      - name: Feuerwehr
+        folders:
+        - name: Condor_Versicherung
+          docs: 2
+        - name: Wierczoch_Ute
+          docs: 1
+      - name: Finanzen
+        folders:
+        - name: Beier-Jochen-Grundsteuerbescheid
+          docs: 1
+        - name: Bock_Jürgen
+          docs: 2
+        - name: Damm-Gerald-Gewerbesteuer
+          docs: 3
+        - name: Deim_Peter
+          docs: 34
+          folders:
+          - name: 2. Klage_6K399_16
+            docs: 15
+            folders:
+            - name: AW Stadt Brandis .. Deim II-Dateien
+              docs: 5
+            - name: Peter Deim .. Stadt Brandis - 2. Klage  6 K 39916-Dateien
+              docs: 5
+            - name: Peter Deim .. Stadt Brandis - Bestätigung Rechtsschutzversicherung
+                - 6 k 39916 - 2. Klage-Dateien
+              docs: 5
+            - name: Schreiben an VG Leipzig Peter Deim .. Stadt Brandis - 2. Klage  6
+                K 39916-Dateien
+              docs: 5
+            - name: Vollmacht Stadt Brandis .. Deim II - 6 K 39916-Dateien
+              docs: 5
+          - name: Deim .. Stadt Brandis - Rücksprache Finanzamt Grimma-Dateien
+            docs: 5
+          - name: Peter Deim .. Stadt Brandis - Bestätigung Rechtsschutzversicherung-Dateien
+            docs: 5
+          - name: Peter Deim .. Stadt Brandis - Schreiben an VG-Dateien
+            docs: 5
+          - name: Peter Deim .. Stadt Brandis - Schriftsatz v. 23.03.2016 Hr. Deim
+              6 K 26916-Dateien
+            docs: 5
+          - name: WG Vollmacht Peter Deim-Dateien
+            docs: 5
+          - name: Übernahme Vertretung- Deim .. Stadt Brandis-Dateien
+            docs: 5
+        - name: Fichtner_Interieur
+          docs: 6
+        - name: Flämig_Hannelore
+          docs: 3
+        - name: HSSLock_Säumniszuschlag
+          docs: 9
+        - name: Kleinsteuber-Mahngebühren
+          docs: 2
+        - name: Knoll
+          docs: 1
+        - name: Kuntze_Christine
+          docs: 7
+          folders:
+          - name: Fwd AW Anhörung an Frau Christine Kuntze - Bitte um kurze Stellungnahme-Dateien
+            docs: 3
+          - name: WG Anhörung an Frau Christine Kuntze - Bitte um kurze Stellungnahme-Dateien
+            docs: 3
+        - name: Muster
+          docs: 2
+        - name: Niehoff
+          docs: 2
+        - name: Pika-Deschner
+          docs: 5
+        - name: Sauter_Angelika
+          docs: 4
+        - name: Schreyer
+          docs: 1
+        - name: Specht_Manuela_Steffen
+          docs: 3
+        - name: Teichmann-Grundsteuer
+          docs: 4
+        - name: Wündisch
+          docs: 6
+      - name: Friedhof
+        folders:
+        - name: Herrmann_Sonja
+          docs: 3
+        - name: Knörnschild-Karlheinz
+          docs: 3
+        - name: Meier_Dieter
+          docs: 3
+      - name: GLIM
+        folders:
+        - name: Trapp_Speeck
+          docs: 8
+      - name: Vorlagen
+        docs: 9
+        folders:
+        - name: Formulierung bei Anhörungen-Dateien
+          docs: 5
+    - name: Zuarbeiten
+      docs: 30
+      folders:
+      - name: Gemarkungstausch_Brandis_Naunhof
+        docs: 1
+        folders:
+        - name: Aktuell
+          docs: 13
+        - name: Vorbereitungsstatus
+          docs: 9
+          folders:
+          - name: Flurstücke_mit_Luftbild
+            docs: 10
+          - name: Flurstücke_ohne_Luftbild
+            docs: 7
+          - name: Flurstücke_ohne_Luftbild_markiert
+            docs: 1
+      - name: Löwe
+        docs: 12
+        folders:
+        - name: Einnahme_Ausgaberechnung
+          docs: 3
+        - name: Kaufantragsabsagen
+          docs: 5
+        - name: Pachtverträge Anja
+          docs: 2
+          folders:
+          - name: Blumenhaus_Staudt
+            docs: 2
+          - name: Uhlig_Baerbel
+            docs: 2
+      - name: Ratskeller
+        docs: 12
+      - name: Sportanalyse
+        docs: 9
+      - name: Sportstättenstatistik
+        docs: 6
+      - name: Veranstaltungsorte
+        docs: 3
+  - name: Koeltzsch
+    folders:
+    - name: Allgemeines, Vorlagen
+      aktz: Desktop
+      docs: 12
+    - name: Ina
+      docs: 2
+      folders:
+      - name: '2021'
+        docs: 9
+    - name: Liegenschaften Hötger
+      folders:
+      - name: Abrechnungen
+        docs: 1
+        folders:
+        - name: 'ADTV-Tanzschule Jörgens GmbH '
+          docs: 1
+        - name: VHS Muldental Fitmacher
+          folders:
+          - name: '2020'
+            docs: 1
+          - name: Verwendungsnachweis
+            docs: 1
+        - name: Volkssolidarität Betriebskosten
+          docs: 1
+      - name: Anmeldungen Polizei/Feuerwehr
+      - name: Ansprechpartner
+        docs: 1
+      - name: Ausschreibungen/Vergabe
+        docs: 6
+      - name: Belegungsplan
+        docs: 1
+        folders:
+        - name: 2020-2021
+          docs: 2
+        - name: '2021'
+          docs: 1
+          folders:
+          - name: April 2021
+            docs: 11
+          - name: Februar 2021
+            docs: 19
+          - name: Januar 2021
+            docs: 11
+          - name: Mai 2021
+            docs: 10
+          - name: März 2021
+            docs: 8
+      - name: Belegungspläne Sonderveranstaltungen
+        docs: 2
+      - name: Nutzungen Vereine
+        folders:
+        - name: 'FF und Helfertag '
+          folders:
+          - name: 1-Abrechnungen
+            docs: 1
+          - name: 2-Nutzungsverträge
+            docs: 2
+          - name: 3-Schriftverkehr
+            docs: 4
+          - name: Bauhofaufträge
+            docs: 4
+        - name: Jugendweihe
+          docs: 2
+          folders:
+          - name: 1-Abrechnungen
+            docs: 54
+          - name: 2-Nutzungsverträge
+            docs: 12
+          - name: 3-Schriftverkehr-Jugendweihe
+            folders:
+            - name: '2015'
+              docs: 1
+            - name: '2016'
+              docs: 7
+            - name: '2017'
+              docs: 3
+            - name: '2018'
+              docs: 7
+            - name: '2019'
+              docs: 2
+            - name: '2020'
+              docs: 8
+            - name: '2021'
+              docs: 7
+          - name: 4-Schriftverkehr-Sprechtage
+            docs: 1
+            folders:
+            - name: '2015'
+              docs: 10
+            - name: '2016'
+              docs: 3
+            - name: '2017'
+              docs: 2
+            - name: '2018'
+              docs: 2
+            - name: '2019'
+              docs: 1
+            - name: '2020'
+              docs: 2
+          - name: 5-Bauhofaufträge
+            docs: 12
+        - name: Schützenverein
+          docs: 10
+          folders:
+          - name: 1-Abrechnungen
+          - name: 2-Nutzungsverträge
+            docs: 6
+          - name: 3-Schriftverkehr
+            docs: 7
+          - name: Bauhofanträge
+      - name: Nutzungsverträge
+        folders:
+        - name: FFW Brandis
+          folders:
+          - name: 2021 Angeli am 26.06.21
+            docs: 4
+        - name: Gemeindeamt Polenz
+          folders:
+          - name: 2021 Gosko am 04.09.21
+            docs: 3
+    - name: Liegenschaften Löwe
+      docs: 1
+      folders:
+      - name: 2007 Solaranlagen Am alten Flugplatz 1
+        docs: 1
+        folders:
+        - name: Schriftverkehr
+          docs: 1
+        - name: Verträge
+          docs: 1
+      - name: 2012 Erbbaurechtsvertrag Juwi Biogasanlage Fl.st. 261/18
+        docs: 12
+        folders:
+        - name: 'AW: EILT SEHR: Suche nach Unterlagen Grunddienstbarkeiten Herrschvermerke
+            im Grundbuch von Polenz, GB-Blatt 358, Bestandsverzeichnis lfd. Nr. der
+            Grundstücke 147 bis 150 '
+          docs: 4
+        - name: BayWa r. e. Bioenergy GmbH
+          docs: 9
+        - name: Notariat
+          docs: 4
+      - name: 2013 Ur.-Nr. 1301/21 KV Jende/Kirste Seidel
+        docs: 9
+      - name: 2015 Verkauf Flst. 113/30, 113/31, 113/44 Cämmerei, Otto Walter Winter
+        docs: 1
+      - name: '2015 Verkauf Flst. 113/38, 113/39, 113/40 Cämmerei, Gustav Richard
+          Koch '
+        docs: 1
+      - name: 2016 und 2022 Tausch und Verkauf Naunhofer sowie Kläranlage
+        folders:
+        - name: Notar
+          docs: 13
+        - name: Rechnungen
+          docs: 1
+        - name: Schriftverkehr Teilfläche von Flst. 224/65 ab 01.03.22
+          docs: 3
+        - name: Vermessung
+          docs: 5
+      - name: 2017 Verkauf Flurstück T. v. 66/9 Krah
+        docs: 2
+        folders:
+        - name: Notar
+          docs: 5
+      - name: 2018 Wohnungsgenossenschaft Wurzen Normakaufhalle
+        folders:
+        - name: Notarvertrag 0485/2018  vom 19.03.18 Wohnungsgenossenschaft Wurzen
+            Rathausgasse 7 Ecke Matthildenstraße
+          docs: 2
+        - name: Vermessung
+          docs: 1
+      - name: 2020 BWS Grundstücke Baulasten
+        docs: 21
+      - name: 2020 Flst. 326/7, 594/8, 594/9, 594/10 Brandis Krumme
+        folders:
+        - name: Notar
+          docs: 1
+        - name: Rechnungen
+          docs: 1
+        - name: Schriftverkehr
+      - name: 2020 Restitutionsverfahren Preißer
+        docs: 3
+      - name: 2020 Verkauf Flurstück 232/8 und 230/3, Brandis- Rossmann
+        folders:
+        - name: Notar
+          docs: 7
+        - name: Schriftverkehr
+          docs: 3
+      - name: 2020 Verkauf Flurstück T. v. 139/1, Brandis, Corina Berkner
+        docs: 3
+        folders:
+        - name: Rechnungen
+          docs: 1
+      - name: 2021 AZV Ableitung Rathaus
+        docs: 2
+        folders:
+        - name: 'AW: Ergebnisse Nebelaktion Rathaus+Parkplatz Brandis'
+          docs: 5
+        - name: Ergebnisse Nebelaktion Rathaus+Parkplatz Brandis
+          docs: 4
+        - name: versiegelte Flächen Objekt Leipziger Straße 2 in Brandis
+          docs: 5
+      - name: 2021 Agrarförderung
+        docs: 5
+      - name: 2021 Ankauf DB Fl. 1/13 und 1/15 Kleinsteinberg
+        folders:
+        - name: Flst. 1/13
+          docs: 7
+        - name: Flst. 1/15
+          docs: 13
+      - name: 2021 Ankauf Flst. 394/131, 394/283, 394/286 VK Volkmar Hirsch
+        docs: 2
+        folders:
+        - name: Notar
+          docs: 2
+        - name: Rechnungen
+          docs: 4
+      - name: 2021 Ankauf Flurstücke 624/6 und 624/8, Polenz GESA
+        docs: 3
+        folders:
+        - name: Schriftverkehr
+          docs: 1
+      - name: 2021 Ankauf Gebäude auf Flst. 369/3, Beucha, Volkmar Hirsch
+        folders:
+        - name: Notar
+          docs: 4
+        - name: Schriftverkehr
+          docs: 3
+      - name: 2021 Ankauf Grundstücke Bahnhofsgelände
+        docs: 6
+      - name: 2021 Ankauf v. D. Holzmann & Partner GmbH Flst. 12/1
+        folders:
+        - name: Notar
+          docs: 1
+        - name: Rechnungen
+          docs: 1
+      - name: 2021 Bauprofis Flst. 630/4, 630/5, 630/6, 630/7, 630/8, 630/9, 630/13,
+          630/14
+        docs: 3
+      - name: 2021 Bauprofis Überlassungsvertrag Flst. 594/33, 494/39
+        docs: 5
+      - name: 2021 DG Asset I GmbH T.v. Flst. 301/1
+        docs: 1
+      - name: 2021 Erbpacht Flst. 33 Brandis
+        folders:
+        - name: Grundbuch
+          docs: 3
+        - name: Liegenschaftskarte
+          docs: 2
+        - name: Schriftverkehr
+          docs: 2
+      - name: 2021 Fuhrig Ankauf T. v. 261/20 Polenz
+        docs: 5
+        folders:
+        - name: Notar
+          docs: 7
+        - name: Schriftverkehr
+          docs: 5
+        - name: Vermessung
+          docs: 9
+      - name: 2021 Nachlass Kelch Flst. 304/11 Cämmerei
+        docs: 2
+      - name: 2021 Stopfkuchen Flurstück 158, UR-Nr. 1010/1994
+        docs: 7
+      - name: 2021 Straßenbaumaßnahme Dahlienweg Beucha
+        docs: 2
+      - name: 2021 Verkauf Flurstück 164/2 Kleinsteinberg-Meincke
+        docs: 4
+      - name: 2021 Verkauf Flurstück 261/23, Polenz -  mkpreis
+        docs: 2
+        folders:
+        - name: Dienstbarkeit
+          docs: 5
+        - name: Notar
+          docs: 12
+        - name: Vermessung
+          docs: 2
+      - name: 2021 Verkauf Flurstück 273/2 Beucha - IBIS GmbH
+        folders:
+        - name: Beschlussvorlage
+          docs: 2
+        - name: Mieter MSC Beucha
+          docs: 1
+        - name: Notar
+          docs: 8
+        - name: Protokolle
+          docs: 1
+        - name: Schriftverkehr
+          docs: 2
+        - name: Vermessung
+          docs: 14
+      - name: 2021 Verkauf Flurstück 394/373 und Flst. 394/374, Beucha - Miersch
+        docs: 5
+      - name: 2021 Verkauf T. v. Flurstück 214/8 und 418/5 Birkner
+        docs: 7
+        folders:
+        - name: Vermessung
+          docs: 1
+      - name: 2021 Verkauf T. v. Flurstück 434/3 Schenk Grundbesitz (Wreesmann)
+        docs: 2
+        folders:
+        - name: Notar
+          docs: 8
+        - name: Schriftverkehr
+          docs: 3
+        - name: Vermessung
+          docs: 1
+      - name: Amt für Landwirtschaft, Umwelt, Geologie
+        docs: 5
+      - name: Anfragen Grundstücke
+        docs: 1
+        folders:
+        - name: 2021 Anfrage Kauf Flst. 273/2, Beucha, Rico Schiemann - Ablehnung
+          docs: 1
+        - name: 2021 Anfrage Kauf Flst. 359/7, Cämmerei, Heinz Brück - Ablehnung
+          docs: 1
+        - name: 2021 Anfrage Kauf T. v. 128/i, Cämmerei Eheleute Pots - Ablehnung
+          docs: 2
+        - name: 2021 Anfrage Kauf T. v. Flst. 44, Kleinsteinberg, Niels Oesterreich,
+            Ablehnung
+          docs: 2
+        - name: 2021 Verkauf Flurstück 233/1, Brandis - Handke - Antrag wurde zurück
+            genommen
+          folders:
+          - name: Beschlussvorlagen
+            docs: 3
+          - name: Schriftverkehr
+            docs: 3
+        - name: 2021 Verkauf Flurstück T v. 35, Beucha - Remitschka - Ablehnung
+          docs: 5
+          folders:
+          - name: Schriftverkehr
+            docs: 5
+        - name: 2021 Verkauf Flurstücke 213/2 und T. v. 213/1, Beucha - Thomas Schneider
+            - Ablehung
+          folders:
+          - name: Beschlussvorlage
+            docs: 2
+          - name: Schriftverkehr
+            docs: 3
+        - name: 2021 Verkauf T. v. Flurstück 287/20, Beucha - Lempa -verstorben
+          folders:
+          - name: Schriftverkehr
+            docs: 3
+        - name: 2021 Vorkaufsrecht T. v. 963/1 Greifenberg rückständiger Grunderwerb
+            erledigt
+          docs: 7
+        - name: 2022 Anfrage Kauf Flst. 814/2, Cämmerei, Eheleute Schwartz
+          folders:
+          - name: Schriftverkehr
+            docs: 3
+        - name: 2022 Anfrage Kauf Flst. T. v. 44, Kleinsteinberg, Manuela Höse
+          docs: 3
+        - name: Anfrage Verkauf Flst. 794/1 und 794/2 Cämmerei, Eheleute Silke und
+            Steffen Feix, Ablehnung
+          docs: 2
+      - name: 'Auflösung Grdst02 '
+        folders:
+        - name: '2017'
+          docs: 7
+      - name: Baulasten
+        folders:
+        - name: Flst. 757 Brandis - Dietze, Heike
+          docs: 6
+      - name: Beschlussvorlagen
+        folders:
+        - name: '2021'
+          docs: 8
+          folders:
+          - name: Flurstück 117, Hauptstraße 28
+            docs: 3
+          - name: Flurstücke 118/3 und 118/4, Hauptstraße 26
+            docs: 9
+      - name: Formulare, Gesetze
+        docs: 2
+      - name: Fortführungsnachweise, Katastervermessung
+        folders:
+        - name: Gemarkung Beucha
+          docs: 6
+        - name: Gemarkung Brandis
+          docs: 3
+        - name: Gemarkung Cämmerei
+          docs: 5
+        - name: Gemarkung Kleinsteinberg
+          docs: 1
+        - name: Gemarkung Polenz
+          docs: 2
+      - name: Geopark
+        docs: 7
+      - name: Grundbuchauszüge, Eintragungsbekanntmachungen
+        docs: 1
+        folders:
+        - name: 8604-GB-Blatt 1684 Beucha
+          docs: 8
+        - name: 8604-GB-Blatt 1927 Beucha
+          docs: 1
+        - name: 8604-GB-Blatt 1986 Beucha, Hennig Meincke
+          docs: 1
+        - name: 8604-GB-Blatt 604 Beucha, André Winkler (Frau Nikel)
+          docs: 2
+        - name: 8604-GB-Blatt 764 Beucha, Hennig Meincke
+          docs: 1
+        - name: 8605-GB-Blatt 827 Beucha, Hennig Meincke
+          docs: 1
+        - name: 8609 GB-Blatt 4028, Brandis (Frau Quandt)
+          docs: 1
+        - name: 8609-GB-Batt 2284, Brandis, Krumme
+          docs: 1
+        - name: 8609-GB-Blatt 166 Brandis, Alexander Liebold
+          docs: 3
+        - name: 8609-GB-Blatt 206 Brandis
+          docs: 1
+        - name: '8609-GB-Blatt 2287 Brandis, Naunhofer Straße '
+          docs: 2
+        - name: 8609-GB-Blatt 3609 Brandis - Naunhofer Straße
+          docs: 6
+        - name: 8609-GB-Blatt 3826, Brandis, Ralf Bieler
+          docs: 2
+        - name: 8609-GB-Blatt 3869 Brandis, Rathausgasse 1
+          docs: 1
+        - name: 8609-GB-Blatt 3938 Brandis
+          docs: 1
+        - name: 8609-GB-Blatt 4059 Brandis Rossmann
+          docs: 1
+        - name: 8609-GB-Blatt 4060 Brandis, Corina Berkner
+          docs: 1
+        - name: 8609-GB-Blätter Sanierungsvermerke
+          docs: 1
+        - name: 8610-GB-Blatt 1842 Brandis, Hypothek (Frau Nikel)
+          docs: 2
+        - name: 8611-GB-Blatt 358 Polenz
+          docs: 2
+        - name: 8611-GB-Blatt 358 Polenz, EE Biogasanlage
+          docs: 3
+        - name: 8611-GB-Blatt 496 Polenz, EE Biogasanlage
+          docs: 2
+        - name: 8611-GB-Blatt 513 Polenz, EE Biogasanlage
+          docs: 1
+        - name: 8611-GB-Blatt 514 Polenz, EE Biogasanlage
+          docs: 2
+        - name: Schriftverkehr, Rechnungen
+          docs: 1
+      - name: Grundbucheinsichten
+        folders:
+        - name: '2021'
+          docs: 9
+        - name: '2022'
+          docs: 4
+      - name: Grunddienstbarkeiten
+        docs: 2
+      - name: Grundsteuerbescheide
+        folders:
+        - name: Sachsen Solarfonds I bis III (Juwi)
+          docs: 17
+      - name: Nutzungsvereinbarungen
+        folders:
+        - name: Busschleife Fachklinikum Brandis
+          docs: 12
+      - name: Pacht & Miete
+        docs: 3
+        folders:
+        - name: BioChem-Bienenzucht
+          docs: 10
+        - name: Garagen
+          folders:
+          - name: Uhlig
+            docs: 1
+        - name: Kleingartenverein
+          docs: 2
+        - name: Machern Landwirtschaft
+          docs: 3
+        - name: Neuvermietung
+          folders:
+          - name: Flst. 697/1 Cämmerei, Feuerweg I
+            docs: 1
+        - name: Pachtverträge 2-seitiger Pachtvertrag
+          docs: 6
+          folders:
+          - name: Flst. 344/14 Brandis
+            folders:
+            - name: Schmerder
+              docs: 6
+          - name: Flst. 452, Beucha
+            folders:
+            - name: Schönfelder
+              docs: 1
+          - name: Flst. 785/1 Cämmerei
+            folders:
+            - name: Kohlmeier
+              docs: 6
+          - name: Flst. T v. 44 , Kleinsteinberg, Kündigung Uhlig
+            docs: 4
+          - name: Flst. T. v. 1348 Cämmerei Zwarg-Schneider
+          - name: Flst. T. v. 278/5, Cämmerei
+            folders:
+            - name: Rudolph und Voigt
+              docs: 4
+          - name: Flurstück 1118/6 Gartenland zur Ergänzung Wohngrundstück
+            folders:
+            - name: Geldner
+              docs: 8
+          - name: Flurstück 205 i und 205/11 Schlosspark
+            folders:
+            - name: Walther ab 01.07.21
+              docs: 13
+          - name: Flurstück 205 n Schlosspark
+            folders:
+            - name: Tiegel ab 01.07.21
+              docs: 13
+          - name: Flurstück 697/1- Feuerweg III Garten
+            docs: 2
+            folders:
+            - name: Backsmann bis 31.01.21
+              docs: 25
+          - name: Flurstück 831/2 Cämmerei
+            docs: 1
+          - name: Flurstück 836/2 - Feuerweg I Garten
+            folders:
+            - name: Große, Sven ab 01.03.21
+              docs: 9
+          - name: 'Flurstück 95/1 Wolfshain '
+            docs: 2
+            folders:
+            - name: Sievert ab 01.01.2021 Teilfläche von 900 m²
+              docs: 23
+          - name: 'Flurstück T. v. 1348 Brandis Gartenland zur Ergänzung Härtel '
+            docs: 4
+          - name: Flurstücke 271/3, 272/3, 317/10 Forstweg Gartenland zur Ergänzung
+              Wohngrundstück
+            folders:
+            - name: Klebus
+              docs: 4
+          - name: Flurstücke 317/4, 317/5, T. v. 317/6, T. v. 317/7 Amselweg Gartenland
+              zur Ergänzung Wohngrundstück
+            folders:
+            - name: Hartmann
+              docs: 1
+          - name: Flurstücke 317/6, 317/7 Gartenland zur Ergänzung Wohngrundstück
+            folders:
+            - name: Klebus
+              docs: 3
+          - name: Flurstücke T . 214/8 und 418/5, Cämmerei
+            folders:
+            - name: Birkner
+              docs: 8
+        - name: Pachtverträge 3-seitiger Pachtvertrag
+          folders:
+          - name: Flst. 1348 und 1384 Sygo/Schneider Zwarg
+            docs: 3
+          - name: Flst. 205/11, Brandis Schneider-Baden
+            folders:
+            - name: Baden
+              docs: 17
+            - name: Schneider
+              docs: 4
+          - name: Flst. 322, Beucha Frister-Cionaka
+            docs: 9
+          - name: Flst. 452, Beucha Schönfelder
+            docs: 4
+          - name: Flst. 664/1, Cämmerei, Teichmann
+            docs: 11
+          - name: Flst. 664/2, Cämmerei, Birnbaum
+            docs: 7
+          - name: Flst. 687, Cämmerei - Pfeifer
+            docs: 12
+          - name: Flst. 785/1, Cämmerei - Kohlmeier
+            folders:
+            - name: Kohlmeier
+              docs: 2
+          - name: Flst. 787/2 Baum - Ziegler
+            docs: 12
+          - name: Flst. 790/1 Cämmerei - Dietrich
+            folders:
+            - name: Manuela Dietrich
+              docs: 3
+          - name: Flst. 790/2 Cämmerei - Dietrich
+            folders:
+            - name: Manuela Dietrich
+              docs: 3
+          - name: Flst. 823/2 Cämmerei, Krohm
+            docs: 20
+          - name: Flst. T. v. 300 Garage Frister-Cionaka
+            docs: 1
+        - name: Pachtverträge nach außen
+          docs: 1
+        - name: 'Solarfonds '
+          folders:
+          - name: S + S Solarfond Herr Königstein
+            docs: 2
+          - name: Sachsenfonds I bis III Herr Brambach und Herr Prestele
+            docs: 2
+        - name: Taucherparadies Sachsen
+          docs: 5
+        - name: Vermietung/Verpachtung
+          docs: 2
+          folders:
+          - name: Flst. 394/286, Beucha, KELL
+            docs: 6
+          - name: HV-Vertrag August-Bebel-Straße 12 und Hausmeisterwohnung
+            docs: 4
+          - name: HV-Vertrag Flst. 287/7, 276/5, 276/6, 273/8 Garagen Beucha
+            docs: 4
+          - name: HV-Vertrag Haus am See, 7 Bungalows
+            docs: 4
+          - name: HV-Vertrag Kulturhaus August-Bebel-Straße 60
+            docs: 4
+          - name: Lange Stücken 5, Beucha
+            docs: 10
+            folders:
+            - name: Bowlingtreff
+              docs: 5
+            - name: Buchhaltung
+              docs: 2
+            - name: Max Weishaupt GmbH
+              docs: 2
+            - name: Motion Fitness (Messirek)
+              docs: 22
+            - name: Securitas
+              docs: 2
+            - name: Wartung Heizung und Lüftung
+              docs: 2
+            - name: envia
+              docs: 1
+        - name: Werbeaufsteller
+          folders:
+          - name: Blumenhaus_Staudt
+            docs: 10
+          - name: Uhlig_Baerbel
+            docs: 4
+        - name: bebaue Grdst. Pachtverträge
+          docs: 6
+        - name: epeg Energieplanung - Lebensraum Insekten
+          docs: 4
+          folders:
+          - name: Flst. 437/4 Brandis epeg Energieplanung
+            docs: 3
+      - name: Polizei
+        docs: 3
+      - name: Städtebauliche Verträge
+        folders:
+        - name: Fl.st. 120/1 und 118/1 Quarterbeck Projekt 4 GmbH
+          docs: 2
+        - name: Städtebaulicher Vertrag Urkunde 1452/2021, DIE BAUPROFIS
+          docs: 3
+      - name: Unterlagen Frau Quandt
+        docs: 10
+      - name: Verkauf Karosseriebau ???
+        docs: 4
+      - name: Versorgungsverträge
+        docs: 2
+      - name: Vollmachten
+        docs: 3
+      - name: Vorkaufsrechte
+        docs: 5
+        folders:
+        - name: 2021 Flst. 117 Vorkaufsrechtsanfrage
+          docs: 5
+        - name: 2021 Flst. 1281, Brandis ET Jende
+          docs: 3
+        - name: 2021 Vorkaufsrecht Flurstück 118/3, Brandis, Tippner - Eroglu
+          docs: 10
+        - name: 2022 Vorkaufsrecht Flst. 394/153 Beucha, Immokautz
+          docs: 4
+        - name: 2022 Vorkaufsrecht Flst. 405/3 Beucha, Graupner
+          docs: 3
+        - name: Debitorenlisten
+          docs: 14
+        - name: Schriftverkehr
+          folders:
+          - name: '2021'
+            docs: 56
+          - name: '2022'
+            docs: 18
+    - name: Vertragsregister
+      folders:
+      - name: E-Mails an Mitarbeiter
+        folders:
+        - name: '2021'
+          docs: 5
+        - name: '2022'
+          docs: 11
+    - name: rückständiger Grunderwerb
+      docs: 3
+  - name: Löwe
+    folders:
+    - name: Auskunftsersuchen EMA
+      docs: 6
+    - name: BRW/ Grundstücksmarktberichte
+      folders:
+      - name: BRW 21.05.2014
+        docs: 1
+      - name: BRW 31.12.2008
+        folders:
+        - name: Bodenrichtwertkarten
+          docs: 2
+        - name: Erläuterungen zu den Bodenrichtwerten
+          docs: 1
+    - name: INSEK
+      docs: 3
+      folders:
+      - name: Verwendungsnachweise KSK
+        docs: 11
+        folders:
+        - name: Rechnungen_einzeln
+          docs: 8
+    - name: Liegenschaften
+      docs: 32
+      folders:
+      - name: AZV
+        docs: 7
+      - name: Abführungspflicht an den Entschädigungsfond nach EntschG
+        folders:
+        - name: 070821 www  8604-329
+          docs: 2
+      - name: Ablagerungen
+        docs: 2
+      - name: Allg. Schriftverkehr Liegenschaften
+        docs: 42
+        folders:
+        - name: Bungalow 11.3 Autobahnsee
+          docs: 2
+        - name: Parkstraße
+          docs: 1
+        - name: Umwelt 2000
+          docs: 3
+      - name: Ammelshainer Weg Waldsteinberg zw. Brück und Richter
+        docs: 7
+        folders:
+        - name: Fotos Brück 08-2022
+          docs: 12
+        - name: Rückbau Brück
+          docs: 5
+          folders:
+          - name: Fotos Januar
+            docs: 7
+          - name: Fotos September
+            docs: 4
+      - name: Amt für Landwirtschaft, Umwelt, Geologie
+        docs: 7
+      - name: Ausschreibungen
+        folders:
+        - name: Beucha 273 2, 273 8 Jugendclub
+          docs: 3
+        - name: Beucha 274 5 Gemeindehaus
+          docs: 1
+        - name: Beucha 36 4 Dorfstraße 14
+          docs: 5
+        - name: Brandis 34 Ratskeller
+          docs: 2
+        - name: Cämmerei 70 37 Wiesengrund
+          docs: 2
+        - name: Kleinsteinberg 76 3, 76 5, 76 11
+          docs: 11
+        - name: Normakaufhalle
+          docs: 1
+        - name: Polenz 7 2 Str. der Einigkeit
+          docs: 2
+        - name: Sportplatz Polenz
+          docs: 1
+        - name: Waldsteinberg 226 36 Rotkehlchenweg
+          docs: 2
+          folders:
+          - name: Baugrundstück Rotkehlchenweg
+            docs: 9
+        - name: Wolfshain 18 1
+          docs: 2
+      - name: BVVG
+        docs: 24
+        folders:
+        - name: 300 Beucha
+          docs: 2
+        - name: 344_17 & 594_2 Brandis
+          docs: 1
+      - name: Baulasten
+        docs: 5
+        folders:
+        - name: Flst. 757 Brandis - Dietze, Heike
+          docs: 1
+      - name: Beschlussvorlagen
+        docs: 6
+        folders:
+        - name: Stadtrat
+          docs: 16
+          folders:
+          - name: FSV 1921 Brandis
+            docs: 3
+          - name: LAV
+            docs: 4
+          - name: Landschreiber
+            docs: 3
+          - name: Marie-von-Pentz-Weg
+            folders:
+            - name: Flst. 234/13 Gem. Brandis
+              docs: 8
+            - name: Flst. 234/29 Gem. Brandis
+              folders:
+              - name: Puschmann
+                docs: 6
+              - name: Weber
+                docs: 3
+          - name: Meincke
+            docs: 5
+          - name: Porsch
+            folders:
+            - name: Schriftverkehr
+              docs: 5
+            - name: Vorlage VA Költzsch
+              docs: 5
+            - name: Vorlage VA Löwe
+              docs: 3
+          - name: Walter - Baulast Flst. 22/2
+            docs: 3
+          - name: mk preis
+            docs: 5
+        - name: VA
+          docs: 120
+          folders:
+          - name: Beuchaer Bau- u. Wohnungsgesellschaft mbH - Flst. 45_9 Beucha
+            docs: 3
+          - name: Brandiser Wohnstätten GmbH - Flst. 201/2 Brandis
+            docs: 3
+          - name: GESA Flst. 624/6 und 624/8 Polenz
+            docs: 5
+          - name: Hänsel, Thomas
+            folders:
+            - name: Beschlussvorlagen
+              folders:
+              - name: VA Vorlage Költzsch
+                docs: 3
+            - name: Schriftverkehr
+              docs: 2
+          - name: Poltersdorf Flst. 429 Albrechtshain
+            docs: 2
+          - name: Schimpke Flst. 91/39 u. 464/3 Polenz
+            docs: 3
+      - name: Bestandsaufnahme + Liegenschaftsnachweise
+        docs: 2
+        folders:
+        - name: Bestallung
+          docs: 4
+      - name: Betriebskosten
+        folders:
+        - name: Böhle Garten Feuerweg
+          docs: 1
+        - name: Fuchs
+          docs: 7
+        - name: 'Gerecke '
+          docs: 1
+        - name: KELL Kommunalentsorgung Flst. 394/286 Beucha
+          docs: 9
+        - name: Quetting
+          docs: 7
+        - name: SC Polenz
+          docs: 9
+        - name: Siedlerverband Autobahnsee Beucha e. V.
+          docs: 2
+      - name: Bundesamt f zentrale Dienste u offene Vermögensfragen
+        docs: 74
+        folders:
+        - name: 646 i u. 650 Cämmerei
+          docs: 2
+        - name: Bodenordnungsverfahren
+          docs: 3
+        - name: Polenz - Flst. 29 8-11
+          docs: 2
+        - name: 'Zuordnungsverfahren Ostbruch '
+          docs: 10
+      - name: Bundesanstalt für Immobilienaufgaben
+        docs: 10
+      - name: Dienstbarkeiten
+        docs: 4
+        folders:
+        - name: 'Dienstbarkeit 1247/2 Brandis - envia '
+          docs: 3
+        - name: Dienstbarkeit 125/9 & 125/u Kleinst. - Conrad_NSW
+          docs: 5
+        - name: Dienstbarkeit 150/1 u. 452 Beucha - Hoier
+          docs: 6
+        - name: Dienstbarkeit 180/1 Brandis - Germer
+          docs: 7
+        - name: Dienstbarkeit 274/5 Beucha - Deutsche Telekom Technik
+          docs: 1
+        - name: Dienstbarkeit 329/21 Beucha - DB Netz AG
+          docs: 1
+        - name: Dienstbarkeit 394/357 Beucha - Kautz
+          docs: 6
+        - name: Dienstbarkeit 432/e Brandis - Horst, Christopher
+          docs: 5
+        - name: Dienstbarkeit 76/9 Cämmerei - epeg Trafostation
+          docs: 1
+        - name: Dienstbarkeit Stadt 271_1 Brandis
+          docs: 1
+        - name: Dienstbarkeiten 431/7 Bra u. 418/5+6 Cäm - Bahnhofsplatte Brandis
+          docs: 4
+        - name: Grunddienstbarkeit 418_29 Beucha - Schindler
+          docs: 3
+        - name: Grunddienstbarkeit 631 4 Polenz - Franke
+          docs: 7
+        - name: Wegerecht 1417 Brandis - Kühn
+          docs: 4
+        - name: Wegerecht Flst. 287 9 - Kirchbruch
+          docs: 6
+      - name: Doppik
+        docs: 10
+      - name: Erbbaurecht Kinderheim Waldsteinberg
+        docs: 5
+      - name: Erbschein
+        docs: 1
+      - name: Finanzamt
+        docs: 28
+      - name: Flugplatz Waldpolenz
+        docs: 78
+        folders:
+        - name: Biogasanlage
+          docs: 18
+        - name: Waldpolenz
+          docs: 18
+          folders:
+          - name: Verträge
+            docs: 1
+            folders:
+            - name: S+S Solarfonds Brandis GmbH & Co KG
+              docs: 4
+            - name: SachsenFonds Solar I GmbH & Co. KG
+              docs: 3
+            - name: SachsenFonds Solar II GmbH & Co. KG
+              docs: 2
+            - name: SachsenFonds Solar III GmbH & Co. KG
+              docs: 2
+        - name: ____AAJuwi
+          docs: 136
+      - name: Gebäudekostenauskehrung
+        docs: 2
+      - name: Gestattungsverträge
+        docs: 1
+        folders:
+        - name: Deutsche Bahn
+          docs: 1
+        - name: Epeg
+          docs: 7
+      - name: Grundbuchamt
+        docs: 9
+        folders:
+        - name: Grundbuchauszüge
+          docs: 88
+        - name: Grundbuchberichtigungsanträge
+          docs: 77
+          folders:
+          - name: Flurstück 329_19 Beucha
+            docs: 3
+          - name: Vereinigung/ Verschmelzung Flst. 109/14, 18, 43, 45, 47 Cäm.
+            docs: 2
+          - name: 'Vereinigung/ Verschmelzung Flst. 111/7, 112/6, 113/22+24+26+28+30+32+34+36+38,
+              408/25 Cäm.  '
+            docs: 2
+          - name: Vereinigung/ Verschmelzung Flst. 132/6, 128/46 Cäm.
+            docs: 2
+          - name: Vereinigung/ Verschmelzung Flst. 16/5 & 407/3 Cäm.
+            docs: 5
+          - name: Vereinigung/ Verschmelzung Flst. 181, 182/2, 183, 183/c, 183/1
+            docs: 1
+          - name: Vereinigung/ Verschmelzung Flst. 407/4, 408/7+23, 129/2 u. a. Cäm.
+            docs: 2
+        - name: Sanierung
+          docs: 12
+      - name: Guthabenerstattungen
+        docs: 8
+      - name: Gärten
+        docs: 40
+      - name: Haushalt
+        docs: 1
+      - name: Insolvenzen
+        docs: 8
+      - name: Kauf- & Pachtgesuche
+        docs: 51
+        folders:
+        - name: Kauf Flst. 38 Brandis
+          docs: 7
+        - name: Koch
+          docs: 2
+        - name: Lempa
+          docs: 3
+        - name: MITOKO
+          docs: 1
+      - name: Kelch
+        docs: 11
+        folders:
+        - name: Bilder Eilfeld
+          docs: 7
+      - name: Kostenbescheide
+        docs: 13
+      - name: Kündigungen
+        docs: 12
+        folders:
+        - name: Heyn
+          docs: 2
+        - name: Kaubitzsch
+          docs: 2
+        - name: Kirchhof
+          docs: 3
+        - name: Koch - Erbin Wuytack
+          docs: 1
+        - name: Richter, Christiane
+          docs: 2
+        - name: Schrotthandel Krause
+          docs: 1
+      - name: Landesamt zur Regelung offener Vermögensfragen
+        docs: 1
+      - name: Löschungsbewilligungen
+        docs: 14
+      - name: Nachlass/ Erwerb Flst. 25 Polenz
+        docs: 13
+        folders:
+        - name: Flurstück 25 Polenz
+          docs: 10
+      - name: Pacht  & Miete
+        docs: 1
+        folders:
+        - name: Garagen
+          docs: 18
+          folders:
+          - name: Garagenstandort Beucha
+            docs: 14
+            folders:
+            - name: Garagenstandort 273 8
+              docs: 13
+              folders:
+              - name: Bilder Garage 1
+                docs: 3
+              - name: Bilder Garage 2 - Herold
+                docs: 9
+            - name: Garagenstandort 276 5+6
+              docs: 24
+            - name: Garagenstandort 287 7
+              docs: 54
+              folders:
+              - name: Karl, Christian - ehem. Liensdorf
+                docs: 7
+              - name: Mitbauer
+                docs: 6
+            - name: Garagenstandort 76 11
+              docs: 4
+          - name: Garagenstandort FFW Brandis
+            docs: 2
+          - name: Garagenstandort Siedlungsring-Klingaer Straße
+            docs: 2
+          - name: Garagenstandort Waldbadweg
+            docs: 5
+          - name: Parkberechtigungen Flst 276 6 Beucha - August-Bebel-Str. 60
+            docs: 3
+            folders:
+            - name: Geis
+              docs: 4
+            - name: Höhne
+              docs: 2
+        - name: Mehrzweckschuppen
+          folders:
+          - name: Fuchs
+            docs: 4
+          - name: Lässig - Mehrzweckschuppen
+            docs: 7
+            folders:
+            - name: Bilder Schaden 06.09.2016
+              docs: 4
+            - name: Fotos Garagenübernahme 18.02.21
+              docs: 3
+        - name: Pachtverträge
+          docs: 6
+          folders:
+          - name: 2-seitiger Pachtvertrag
+            docs: 8
+            folders:
+            - name: Am Bahnhof
+              folders:
+              - name: Kürschner
+                docs: 5
+                folders:
+                - name: Bilder Garten Krumbiegel
+                  docs: 8
+            - name: Am Teichdamm
+              docs: 5
+              folders:
+              - name: Fotos Pinkwart
+                docs: 9
+            - name: Ammelshainer Weg
+              docs: 1
+              folders:
+              - name: Dr. Guth, Steffi
+                docs: 7
+              - name: Richter, Christiane
+                docs: 4
+              - name: Schlichter, Hans-Joachim
+                docs: 3
+            - name: Amselweg
+              folders:
+              - name: Hartmann
+                docs: 7
+              - name: Klebus
+                docs: 7
+                folders:
+                - name: Klebus Fotos 17.12.20
+                  docs: 9
+              - name: Limmer
+                docs: 4
+            - name: An der Halde
+              folders:
+              - name: Böhm
+                docs: 6
+              - name: Drescher
+                docs: 2
+              - name: Krause
+                docs: 13
+              - name: Rimbeck
+                docs: 5
+            - name: August-Bebel-Straße
+              docs: 6
+            - name: 'Bergstraße '
+              docs: 5
+            - name: Birkenweg
+              folders:
+              - name: Lienert
+                docs: 4
+            - name: Borsdorfer Straße, Wolfshain
+              folders:
+              - name: Merseburger_Hanke
+                docs: 3
+            - name: Brandiser Str. - Steilufer
+              folders:
+              - name: Bennek
+                docs: 8
+              - name: Friedrich
+                docs: 9
+              - name: Herrmann, Dieter u. Susanne
+                docs: 9
+              - name: Herrmann, Wilhelm u. Hanna
+                docs: 9
+              - name: Laicht, Heike
+                docs: 4
+              - name: Laicht, Heiko
+                docs: 6
+            - name: Brandiser Straße
+              docs: 5
+            - name: Cämmereistraße
+              folders:
+              - name: Rose
+                docs: 6
+            - name: Dorfring Wolfshain
+              folders:
+              - name: Baar & Seidel
+                docs: 4
+              - name: Hansmann
+                docs: 1
+              - name: Kautz
+                docs: 6
+                folders:
+                - name: Grundstück Wolshain - Kautz
+                  docs: 7
+            - name: Erlenring
+              docs: 1
+              folders:
+              - name: Dr. Kühn
+                docs: 1
+              - name: Drasdo
+                docs: 5
+              - name: Lehnert
+                docs: 5
+                folders:
+                - name: Zimmermann
+                  docs: 1
+              - name: Lesti
+                docs: 1
+              - name: Münzner
+                docs: 1
+              - name: Prietzel
+                docs: 1
+              - name: Ratzak
+                docs: 1
+              - name: Schilde
+                docs: 1
+              - name: Schneider
+                docs: 1
+              - name: Steinert
+                docs: 1
+              - name: Süptitz
+                docs: 1
+              - name: Wielsch
+                docs: 1
+            - name: Feldstraße
+              folders:
+              - name: Brauns
+                docs: 3
+            - name: Feuerweg
+              docs: 1
+              folders:
+              - name: Beyer, Rostalski
+                docs: 3
+              - name: 'Christiansen '
+                docs: 5
+              - name: Denecke
+                docs: 1
+              - name: Harrendorf
+                docs: 5
+                folders:
+                - name: Polzin
+                  docs: 4
+                - name: Weidner
+                  docs: 4
+              - name: Heer
+                docs: 5
+              - name: Hempel
+                docs: 8
+              - name: Kettner
+                folders:
+                - name: Feuerweg
+                  docs: 5
+                - name: 'Wurzener Straße '
+                  docs: 5
+              - name: Kirsten
+                docs: 6
+              - name: Kohl
+                docs: 23
+                folders:
+                - name: Bilder
+                  docs: 9
+                - name: Bilder 02.11.2016
+                  docs: 7
+                - name: Bilder Flst. 777 - 25.11.15
+                  docs: 9
+              - name: Obieglo
+                docs: 3
+              - name: Piede, Carmen
+                docs: 7
+              - name: Schmidt
+                docs: 11
+              - name: Schmähl
+                docs: 6
+              - name: Schubert
+                docs: 3
+              - name: Schwarz
+                docs: 7
+              - name: Schüler
+                docs: 6
+              - name: Seidel
+                docs: 8
+              - name: Sintke
+                docs: 8
+              - name: Steudel
+                docs: 5
+                folders:
+                - name: Schöne, Andreas
+                  docs: 3
+              - name: 'Uhlenbrock '
+                docs: 5
+              - name: Wendler
+                docs: 5
+              - name: Wulff
+                docs: 4
+            - name: 'Finsterer Weg '
+              folders:
+              - name: Baumgarten
+                docs: 5
+            - name: Gartenanlage am Todgraben
+              docs: 3
+            - name: Gartengasse
+              folders:
+              - name: Große
+                docs: 8
+            - name: Grenzweg
+              folders:
+              - name: Miegel
+                docs: 5
+            - name: Hainbuchenallee
+              docs: 7
+              folders:
+              - name: Blei
+                docs: 5
+              - name: Boden
+                docs: 2
+              - name: Brachmann
+                docs: 6
+                folders:
+                - name: Härtel
+                  docs: 8
+                  folders:
+                  - name: Schönemann
+                    docs: 4
+              - name: Brosius
+                docs: 7
+              - name: Gey
+                docs: 4
+                folders:
+                - name: Rudolph
+                  docs: 2
+              - name: Jäger
+                docs: 5
+              - name: Müller
+                docs: 2
+              - name: Richter
+                docs: 4
+              - name: Riedel
+                docs: 5
+              - name: Scheel
+                docs: 3
+              - name: Straub
+                docs: 6
+              - name: Wilbert
+                docs: 2
+              - name: Wild
+                docs: 5
+              - name: Zimmermann
+                docs: 5
+              - name: Zwarg und Schneider
+                docs: 9
+                folders:
+                - name: Sygo
+                  docs: 2
+            - name: Heu- & Futtermahd
+              folders:
+              - name: Berndt
+                docs: 3
+              - name: Mitzscherling
+                docs: 6
+              - name: Tar
+                docs: 6
+                folders:
+                - name: Brandstiftung Heuballen
+                  docs: 8
+            - name: Kirchberg
+              folders:
+              - name: Landmetzgerei Reiche OHG
+                docs: 4
+                folders:
+                - name: Umsatzsteuer
+                  docs: 3
+              - name: Reiche, Thomas
+                docs: 4
+              - name: Schütze
+                docs: 5
+            - name: Kleinsteinberger Straße
+              folders:
+              - name: Altermann
+                docs: 5
+              - name: Dragheim
+                docs: 4
+              - name: Fischer
+                docs: 4
+              - name: Heinze+Schuhmann
+                docs: 7
+              - name: Höse
+                docs: 9
+              - name: Nitzsche
+                docs: 3
+              - name: Obringer
+                docs: 3
+              - name: Solluntsch
+                docs: 5
+              - name: Wandel
+                docs: 7
+            - name: Kohlenberg
+              folders:
+              - name: Naumann
+                docs: 5
+                folders:
+                - name: freier Garten 479_13
+                  docs: 1
+              - name: Scherling
+                docs: 3
+              - name: Schmeil & Engelmann
+                docs: 6
+              - name: Urban
+                docs: 2
+              - name: Winter & Möbius
+                docs: 5
+            - name: Leipziger Straße
+              folders:
+              - name: Fuß - Wolfshain
+                docs: 5
+              - name: Hartmann
+                docs: 1
+              - name: Landschreiber
+                docs: 4
+            - name: Lerchenweg
+              folders:
+              - name: Afferden, Dr
+                docs: 4
+              - name: Gentzsch
+              - name: Knossalla/ Schüpbach
+                docs: 6
+              - name: Liebelt
+                docs: 6
+              - name: Schwenke
+                docs: 3
+            - name: Lysimeterweg
+              folders:
+              - name: Chudeska
+                docs: 2
+              - name: Geier, Florian
+                docs: 5
+              - name: Geier, Jan u. Katrin
+                docs: 3
+                folders:
+                - name: Geier, Jan & Carmen
+                  docs: 6
+              - name: Golsch
+                docs: 7
+              - name: Köhler & Krohe
+                docs: 6
+              - name: Pots & Töpfer
+                docs: 5
+              - name: Stein
+                docs: 5
+              - name: Wagner
+                docs: 6
+            - name: Macherner Straße
+              folders:
+              - name: Giesa
+                docs: 4
+            - name: Mathildenstraße
+              folders:
+              - name: Beutel, Sylvia
+                docs: 1
+            - name: Mittelweg
+              folders:
+              - name: Trutz
+                docs: 5
+            - name: Moritz-Nebe-Weg
+              folders:
+              - name: Meincke
+                docs: 5
+            - name: Naunhofer Straße
+              folders:
+              - name: Birk
+                docs: 4
+              - name: Heiland
+                docs: 3
+            - name: Parkstraße
+              docs: 6
+            - name: Rathausgasse
+              folders:
+              - name: Schnabel
+                docs: 5
+            - name: Rehwinkel
+              folders:
+              - name: Baum
+                docs: 1
+                folders:
+                - name: Bilder
+                  docs: 5
+              - name: Rudolph & Voigt
+                docs: 7
+                folders:
+                - name: Bilder Oktober 2016
+                  docs: 3
+              - name: Schuster
+                docs: 5
+                folders:
+                - name: Bilder
+                  docs: 3
+            - name: Rosenweg Brandis
+              folders:
+              - name: Dietze
+                docs: 5
+              - name: Landschreiber/ Tandel
+                docs: 5
+            - name: Rotkehlchenweg
+              docs: 5
+              folders:
+              - name: Enghardt
+                docs: 20
+              - name: Schaufuß
+                docs: 6
+              - name: Schubert
+                docs: 5
+            - name: Siedlung West
+              docs: 1
+              folders:
+              - name: Baumann
+                docs: 6
+              - name: Hoffmann
+                docs: 4
+              - name: Tilke + Kirscht
+                docs: 4
+              - name: Windgassen
+                docs: 8
+              - name: Zimmer
+                docs: 5
+            - name: Siedlungsring
+              folders:
+              - name: Forbrig
+                docs: 5
+            - name: Sonnenhöhe
+              folders:
+              - name: Kröber/ Quandt
+                docs: 5
+              - name: Trautsch
+                docs: 5
+            - name: Sportplatz Polenz
+              folders:
+              - name: Forbrig
+                docs: 3
+            - name: Waldstraße
+              folders:
+              - name: Schmerder
+                docs: 4
+            - name: Weststraße
+              folders:
+              - name: Börner
+                docs: 4
+            - name: Wiesengrund
+              folders:
+              - name: Fuchs
+                docs: 7
+            - name: Wolfshain
+              folders:
+              - name: Büttner
+                docs: 10
+              - name: Kahl
+                docs: 4
+              - name: Petzold
+                docs: 3
+            - name: Wurzener Straße
+              folders:
+              - name: Chowaniak
+                docs: 4
+              - name: Hahn
+                docs: 5
+              - name: Holz
+                docs: 6
+              - name: Naumann
+                docs: 6
+            - name: Wäscheplatz Polenz Flst 7 2
+              docs: 5
+            - name: Zeititzer Weg
+              docs: 4
+            - name: Zur Rodelbahn
+              folders:
+              - name: Wilde
+                docs: 7
+          - name: 3-seitiger Pachtvertrag
+            docs: 6
+            folders:
+            - name: Abresch - Sintke u. Weiser
+              docs: 7
+            - name: Ackermann - Dr. Schmidt
+              docs: 6
+            - name: Baum - Baum
+              docs: 5
+            - name: Baum - Hemmersbach
+              docs: 4
+            - name: Berger - Pilot
+              docs: 5
+              folders:
+              - name: Albrecht - Berger & Pilot
+                docs: 6
+            - name: Berndt - Tiegel & Holz
+              docs: 7
+            - name: Bitterlich, Kunath - Wündisch
+              docs: 8
+              folders:
+              - name: Bitterlich - Beier, Rostalski
+                docs: 3
+            - name: Blechschmidt - Berger
+              docs: 7
+            - name: Brautzsch - Leschnik, Vetter
+              docs: 8
+              folders:
+              - name: Bilder 17.10.2011
+                docs: 4
+            - name: Breitling - Mosch bzw. Martin
+              docs: 2
+            - name: Burkhardt - Krohm
+              docs: 7
+              folders:
+              - name: Vielhauer - Burkhardt
+                docs: 6
+            - name: Bäger - Auerswald
+              docs: 5
+            - name: Cerny, Pfahl - Günther
+              docs: 7
+            - name: Dufke-Uhlmann/Schmidt Flst.656 Cäm.
+              docs: 11
+              folders:
+              - name: Drogoin - Dufke
+                docs: 3
+            - name: Egi - Blechschmidt
+              docs: 5
+            - name: Ertel - Röding
+              docs: 1
+            - name: Feix - Denecke
+              docs: 4
+            - name: Friedrich - Friedrich (Steinmetzbetrieb)
+              docs: 6
+              folders:
+              - name: Friedrich_Roland
+                docs: 2
+            - name: Gaumnitz-Schilling
+              docs: 6
+            - name: Goller - Mehnert
+              docs: 5
+            - name: Gungl - Peters
+              docs: 6
+            - name: Götte - Hempel Flst. 677 Cäm.
+              docs: 6
+              folders:
+              - name: Koepke - Götte
+                docs: 6
+            - name: Haepe - Wrobel
+              docs: 3
+            - name: Hebrack - Hebrack
+              docs: 4
+            - name: Hofmann - Geske bzw. Schweitz
+              docs: 6
+            - name: Hättig - Golanowski
+              docs: 7
+            - name: Hörig - Fuhrholz
+              docs: 8
+            - name: Jahn - Meier
+              docs: 10
+            - name: Kaps - Kaps
+              docs: 4
+            - name: Kisslinger - Ballarin
+              docs: 11
+              folders:
+              - name: Ballarin 09.08.22
+                docs: 14
+              - name: Ballarin Gartenübergabe 01.07.25
+                docs: 12
+              - name: Frank Ballarin
+                docs: 13
+                folders:
+                - name: Fotos Ballarin 19.04.24
+                  docs: 10
+            - name: Kretzschmar - Zschommler/ Osterried
+              docs: 6
+            - name: Kämpfe - Hahn
+              docs: 5
+            - name: Kühn - Keil
+              docs: 5
+            - name: Lorenz - Engel
+              docs: 5
+              folders:
+              - name: Kutscher - Lorenz
+                docs: 7
+            - name: Morgenstern - Pfütze
+              docs: 6
+              folders:
+              - name: Morgenstern - Morgenstern
+                docs: 4
+            - name: Mytkowski - Strecker & Brückner
+              docs: 5
+              folders:
+              - name: Bilder Frühjahr_Sommer 2015
+                docs: 6
+              - name: Menschner - Mytkowski
+                docs: 5
+            - name: Müller - Böhle Flst. 683 Cäm.
+              docs: 8
+              folders:
+              - name: Bilder 08.11.23
+                folders:
+                - name: privater Garten
+                  docs: 9
+                - name: städtischer Garten
+                  docs: 14
+            - name: 'Müller - Kohlmeier '
+              docs: 6
+            - name: Müller - Müller
+              docs: 4
+            - name: Naumann - Sedlaczek Flst. 205/h Bra.
+              docs: 6
+              folders:
+              - name: Pietz - Naumann
+                docs: 7
+                folders:
+                - name: Zimmermann - Pietz
+                  docs: 1
+            - name: Oesterreich - Müller
+              docs: 6
+            - name: Oswald-Rößler
+              docs: 5
+              folders:
+              - name: Schäffer - Oswald
+                docs: 6
+                folders:
+                - name: Gaitzsch - Schäffer
+                  docs: 5
+            - name: Pampel - Pampel
+              docs: 4
+            - name: Peters - Engelmann/ Börner
+              docs: 7
+            - name: Reuter - Tietz
+              docs: 5
+            - name: Rodig - Dietrich
+              docs: 16
+            - name: Rollbis - David
+              docs: 10
+              folders:
+              - name: Gartenbilder 05.10.2009
+                docs: 27
+            - name: Schneider - Heine - Ziesche
+              docs: 4
+              folders:
+              - name: Keil - Schneider+Heine
+                docs: 10
+            - name: Schubert-Schöne
+              docs: 4
+            - name: Schuster - Trebeljahr
+              docs: 5
+            - name: Schöps - Lerch bwz. Kolditz
+              docs: 2
+            - name: Seifert - Seifert+Nitzschke
+              docs: 5
+            - name: Tausch - Piprek
+              docs: 5
+              folders:
+              - name: Krüger - Mayer u. Tausch
+                docs: 9
+                folders:
+                - name: Martschinski - Krüger
+                  docs: 2
+                  folders:
+                  - name: Matousek - Martschinski
+                    docs: 8
+            - name: Thiemann - Arany
+              docs: 7
+            - name: Thomalsky - Rieck Flst. 44 Kleinsteinberg
+              docs: 4
+              folders:
+              - name: Voigt - Thomalsky Flst. 44 Kleinsteinberg
+                docs: 8
+                folders:
+                - name: 'Quetting - Voigt '
+                  docs: 5
+                  folders:
+                  - name: Quetting - Quetting
+                    docs: 4
+            - name: Tiegel/ Holz - Müller
+              docs: 6
+            - name: Voigtländer
+              docs: 1
+            - name: Wessel - Weiser
+              docs: 4
+            - name: Wiora - Wiora
+              docs: 3
+            - name: Witt - Saal
+              docs: 4
+            - name: Zagner - Ertel
+              docs: 10
+              folders:
+              - name: Fotos Garten Zagner
+                docs: 18
+            - name: Ziegert - Herner
+              docs: 3
+          - name: AWO Kreisverband Mulde-Collm e.V.
+            docs: 3
+          - name: Anfragen Gärten
+            docs: 14
+          - name: Anglerverband Leipzig e. V
+            docs: 14
+          - name: Bilder Garten Ballarin
+            docs: 6
+          - name: BioChem agrar GmbH - Bienenvölker
+            docs: 5
+          - name: DAV e. V
+            docs: 9
+          - name: ESV Lokomotive Beucha e. V
+            folders:
+            - name: ESV_LOK_Beucha_Beachvolleyballplatz
+              docs: 3
+            - name: ESV_LOK_Beucha_Beachvolleyballplatz+Fussballplatz
+              docs: 4
+          - name: Elektro Lange
+            docs: 10
+          - name: FSV 1921 Brandis e. V
+            docs: 23
+          - name: Gebäudeeinmessung in das Liegenschaftskataster
+            docs: 5
+          - name: HundeSportTeam Parthenaue e. V
+            docs: 7
+          - name: Jagdpachtvertrag
+            docs: 3
+          - name: KGV Frohsinn Brandis e. V.
+            docs: 3
+          - name: Kleingartenverein Apfelblüte
+            docs: 24
+          - name: Kündigungen nach SchuldRAnpG
+            docs: 5
+            folders:
+            - name: Baule
+              docs: 15
+            - name: Brautzsch
+              docs: 11
+            - name: Egi
+              docs: 2
+            - name: Keller
+              docs: 11
+              folders:
+              - name: Bilder 08.09.2015
+                docs: 6
+              - name: Bilder 17.10.2011
+                docs: 9
+            - name: Kretschmer
+              docs: 2
+              folders:
+              - name: Bilder Kretschmer
+                docs: 12
+            - name: Mytkowski
+              docs: 1
+            - name: Rantzsch
+              docs: 2
+              folders:
+              - name: Besichtigung 15.10.2012
+                docs: 9
+              - name: Übergabe 08.01.2013
+                docs: 8
+            - name: Stammer
+              docs: 7
+              folders:
+              - name: Bilder
+                docs: 8
+              - name: Bilder Abgabe
+                docs: 7
+            - name: Vielhauer
+              folders:
+              - name: Fotos
+                docs: 10
+            - name: Voß
+              docs: 3
+            - name: Weingand + Siebert
+              docs: 3
+            - name: Wündisch
+              docs: 18
+              folders:
+              - name: Bilder 02.10.2013
+                docs: 5
+              - name: Bilder 17.12.2014 nach Beräumung
+                docs: 5
+              - name: Bilder 20.08.2014
+                docs: 4
+              - name: Bilder Zähler Garten
+                docs: 3
+            - name: Zagner
+              docs: 10
+          - name: Landpachtverträge
+            docs: 1
+            folders:
+            - name: Gut Engelsdorf
+              docs: 4
+            - name: Kunzmann, Michael
+              docs: 5
+            - name: Machern Landwirtschaft
+              docs: 2
+              folders:
+              - name: Landpachtvertrag 759
+                docs: 3
+              - name: Landpachtvertrag Nr. 732
+                docs: 1
+              - name: Landpachtvertrag Nr. 755
+                docs: 5
+              - name: Landpachtvertrag Nr. 765
+                docs: 3
+              - name: Landpachtvertrag Nr. 766
+                docs: 2
+          - name: Makerspace Räumlichkeit
+            docs: 7
+          - name: Nachlasssache Lommatzsch
+            docs: 1
+            folders:
+            - name: Bilder nach Beräumung
+              docs: 7
+          - name: SC Polenz
+            docs: 10
+          - name: SC_Partheland
+            docs: 3
+            folders:
+            - name: Lange Stücken
+              docs: 3
+            - name: Polenz
+              docs: 9
+          - name: SKU GmbH & Co. KG
+            docs: 2
+          - name: Schützengesellschaft Brandis e. V.
+            docs: 4
+          - name: Siedlerverband Autobahnsee Beucha e. V.
+            docs: 8
+          - name: Siedlerverein Kirchbruch e.V
+            docs: 11
+          - name: Stadtpark Gartenanlage
+            docs: 5
+            folders:
+            - name: Eigentümer Flst. 204 1 - Schück & Youniq
+              docs: 2
+              folders:
+              - name: Bilder Bäume
+                docs: 6
+            - name: Gödicke
+              docs: 5
+              folders:
+              - name: Gödicke
+                docs: 6
+            - name: Menzer u. Naumann
+              docs: 5
+            - name: Mocker
+              docs: 13
+            - name: Pernat T. v. 205/11 Bra
+              docs: 4
+            - name: Reuter
+              docs: 9
+            - name: Schalkowski Flst. 205 8 Bra
+              docs: 27
+            - name: Scheibe
+              docs: 4
+            - name: Schneider
+              docs: 1
+              folders:
+              - name: Bilder Schaden Baumfällung
+                docs: 8
+              - name: Schneider
+                docs: 4
+          - name: Taucherparadies Sachsen
+            docs: 2
+          - name: Tennisclub Beucha e. V.
+            docs: 5
+          - name: Urban bzw. Radelli
+            docs: 6
+            folders:
+            - name: Bilder 19.04.2017
+              docs: 8
+          - name: Werbeaufsteller
+            docs: 3
+            folders:
+            - name: Blumenhaus_Staudt
+              docs: 3
+            - name: Teich, Robert
+              docs: 4
+            - name: Uhlig_Baerbel
+              docs: 3
+          - name: _bebaute Grdst. Pachtverträge
+            docs: 6
+            folders:
+            - name: Backsmann
+              docs: 9
+              folders:
+              - name: Bilder Zaun 19.12.2016
+                docs: 3
+            - name: Brautzsch
+              docs: 4
+              folders:
+              - name: Fotos 2024
+                docs: 7
+            - name: Brenner
+              docs: 6
+            - name: Dettler
+              docs: 4
+            - name: Däbritz
+              docs: 5
+            - name: Fischer
+              docs: 6
+            - name: Gerecke
+              docs: 1
+            - name: Grosch
+              docs: 7
+              folders:
+              - name: Ballarin Gartenübergabe 01.07.25
+                docs: 11
+            - name: Haferkorn
+              docs: 7
+            - name: Kozik
+              docs: 8
+            - name: Kretzschmar
+              docs: 8
+              folders:
+              - name: Bilder Garten Flst. 670 Cämmerei
+                docs: 8
+            - name: Kögler
+              docs: 8
+            - name: Leschnik
+              docs: 1
+            - name: Lützelberger
+              docs: 8
+              folders:
+              - name: Fotos Bungalow
+                docs: 8
+              - name: Fotos Flst. 827 Cämmerei
+                docs: 8
+            - name: Michalsky/ Trautmann
+              docs: 7
+              folders:
+              - name: Pachtgarten Flst. 687
+                docs: 10
+            - name: Mocker
+              docs: 5
+              folders:
+              - name: Bilder
+                docs: 5
+            - name: Rauch + Reuter
+              docs: 6
+              folders:
+              - name: Bilder 14.09.2011
+                docs: 9
+            - name: Rohde
+              docs: 5
+              folders:
+              - name: Fotos
+                docs: 3
+            - name: Scherling
+              docs: 4
+            - name: Schrotthandel Krause
+              docs: 3
+            - name: Schumann
+              docs: 7
+            - name: Teich, Robert
+              docs: 8
+            - name: Thiele
+              docs: 7
+            - name: Töpfer
+              docs: 12
+          - name: epeg Energieplanung - Lebensraum Insekten
+            docs: 3
+        - name: Wasserturm
+          folders:
+          - name: DFMG Deutsche Funkturm GmbH
+            docs: 7
+          - name: Deutscher Funkturm
+            docs: 2
+            folders:
+            - name: Bilder
+              docs: 10
+      - name: Pachtzinsauskehrung - falsches Flst
+        docs: 1
+        folders:
+        - name: 090313 Hoerning 8604 - 417 33
+          docs: 3
+        - name: 100629 Friedrich 8604 - 287 7
+          docs: 3
+      - name: Pachtzinsauskehrung nach VZOG
+        docs: 2
+        folders:
+        - name: 070723 Hellmann 8611-614 4
+          docs: 5
+        - name: 070809 Handtke 8610-770 2
+          docs: 2
+        - name: 080117 Thomas, Klaus bzw. Oehlschläger 8611-614 5
+          docs: 4
+        - name: 081127 Wolfrum 8611-695
+          docs: 4
+        - name: 100312 Most 8609-136 a
+          docs: 1
+        - name: 140502 Schuster Trebeljahr
+          docs: 2
+        - name: 160225 Franke Flst. 29_8 Pol
+          docs: 4
+        - name: 160225 Heidel Flst. 29_11 Pol
+          docs: 9
+        - name: 170105 Gut Engelsdorf
+          docs: 7
+        - name: 170126 Flst. 8609-470
+          docs: 1
+        - name: 191016 Weiser 661_2
+          docs: 4
+        - name: 191025 Ertel, Martha
+          docs: 4
+        - name: 191029 Kürschner 432_25 & 432_26
+          docs: 3
+        - name: 191105 Kunath, Karin 432_24 Bra
+          docs: 3
+        - name: 191202 Flst. 326 Beucha
+          docs: 6
+          folders:
+          - name: Piprek, Milva
+            docs: 2
+        - name: 'Auskehr Gärten Mittelweg '
+          folders:
+          - name: Kolditz & Lerch Flst. 710_p Bra
+            docs: 2
+          - name: Kraft, Peter u. Gerda 712_y Bra
+            docs: 2
+          - name: Kretzschmar, Sven u. Peukert, Nadine Flst. 712_h Bra
+            docs: 2
+          - name: Theile, Volker 712_l & 712_m Bra
+            docs: 2
+          - name: Trutz Flst. 712_q Bra
+            docs: 6
+          - name: Winkler, Sören u. Barbara 712_x Bra
+            docs: 2
+        - name: Auskehr Gärten Ostbruch - Kohlenberg
+          docs: 1
+          folders:
+          - name: Berger, Anne-Kathrin 479/2 Bra
+            docs: 2
+          - name: Kaps, Marcus 439/9 u. 479/16 Bra
+            docs: 2
+          - name: Pilot, Aphrodit 479/5 Bra
+            docs: 2
+          - name: Scherling, Jürgen + Naumann, Maik 479/13 Bra
+            docs: 2
+          - name: Wilkes, Rainer 479/11 Bra
+            docs: 2
+          - name: Winter & Möbius 439/8 u. 479/12 Bra
+            docs: 2
+        - name: 'Auskehr Gärten Wurzener Straße '
+          folders:
+          - name: Fuhrholz, Nicole 905/1 Bra
+            docs: 3
+          - name: Hahn, Alla 906 Bra
+            docs: 3
+          - name: Holz, Dietmar u. Petra 905/2 Bra
+            docs: 3
+          - name: Kösser, Anni 887/2 Bra
+            docs: 3
+          - name: Rauch, Juliane 888/2 Bra
+            docs: 3
+          - name: Saal, Andreas 892/1 Bra
+            docs: 3
+          - name: Saal, Andreas 892/2 Bra
+            docs: 3
+          - name: Tietz, Sven u. Carina 900 Bra
+            docs: 4
+        - name: Machern Landwirtschaft
+          docs: 2
+      - name: Pachtzinsauskehrung nach VermG
+        docs: 2
+      - name: Pizzaautomat
+        docs: 4
+      - name: Ratskeller
+        docs: 28
+        folders:
+        - name: 111213 Bilder Befestigung Spiralwuchs
+          docs: 7
+        - name: Holzschutzgutachten - Bilder
+          docs: 20
+        - name: Rossmann
+          docs: 3
+      - name: Restitutionsverfahren
+        folders:
+        - name: Preißer
+          docs: 27
+          folders:
+          - name: 191017 Schreiben an RA  Wichmann
+            docs: 23
+          - name: Preißer
+            docs: 23
+            folders:
+            - name: Preisser
+              docs: 42
+          - name: Preißer Zinsrechnung
+            docs: 42
+      - name: SachenRBerG
+        folders:
+        - name: Meincke
+          docs: 21
+          folders:
+          - name: Beschlussvorlage Stadtrat
+            docs: 4
+          - name: Bilder
+            docs: 4
+      - name: Sicherungskopien
+        docs: 1
+      - name: Spielplatzerneuerung Wolfshain
+        docs: 5
+      - name: Steinbrüche
+        docs: 6
+      - name: VerkFlBer
+        docs: 8
+        folders:
+        - name: Augsten
+          docs: 2
+        - name: EDEKA Flst. 225 2 Brandis
+          docs: 2
+        - name: Fuß Flst. 101 Wolfshain
+          docs: 1
+        - name: Günther u. Müller Flst. 244 Pol
+          docs: 3
+        - name: Harkansson-Hall & Celikkesen
+          docs: 5
+        - name: Hering Flst. 29 b Pol
+          docs: 3
+        - name: Jüptner & Voigt
+          docs: 1
+        - name: Kahl Flst. 30 Wolfshain
+          docs: 3
+        - name: Klöhn Flst. 23 a Pol
+          docs: 3
+        - name: Meißner Flst. 231 p Beucha
+          docs: 3
+        - name: Neumann Flst. 57 Polenz
+          docs: 1
+        - name: Preißer Erbengem. 228_a Beucha
+          docs: 1
+        - name: Scheibe Flst. 87 Wolfshain
+          docs: 5
+        - name: Schneider 29 a Polenz
+          docs: 6
+        - name: Schneider, Heidi Flst. 41 Pol
+          docs: 2
+        - name: Sonntag Flst. 150 6 Brandis
+          docs: 3
+        - name: Strobel Flst. 53 a Kleinsteinberg
+          docs: 3
+        - name: Trautmann VerkFlBerG
+          docs: 8
+        - name: Zehnder, Otto, Silabetzschky, Täubert, Göpel, Peter, Thoß - Flst.
+            156 c Bra
+          docs: 22
+      - name: Verkauf- & Pachtangebote
+        docs: 2
+        folders:
+        - name: Kaufangebote Brückenersatzbau Wiesenweg, Waldsteinberg
+          docs: 2
+      - name: Verkehrswertgutachten
+        docs: 2
+      - name: Vermessung
+        docs: 17
+        folders:
+        - name: Kleine
+          docs: 7
+      - name: Verträge und Vereinbarungen
+        docs: 3
+        folders:
+        - name: Baustelleneinrichtung
+          docs: 9
+        - name: Kaufverträge & Tauschverträge
+          docs: 3
+          folders:
+          - name: 2008 Bartsch KV
+            docs: 7
+          - name: 2008 Klostermann KV
+            docs: 4
+          - name: 2008 Kolar + Arendt KV
+            docs: 6
+          - name: 2008 Most KV
+            docs: 12
+          - name: 2008 Schuster KV
+            docs: 5
+          - name: 2008 VEW TV 214 u. 225 6 Beucha
+            docs: 1
+          - name: 2009 Fuchs KV
+            docs: 6
+          - name: 2009 Musikarche Brandis e.V KV
+            docs: 9
+          - name: 2009 Schuchardt TV
+            docs: 11
+          - name: 2009 Straße der Einigkeit 9 - Polenz
+            docs: 4
+            folders:
+            - name: Dienstbarkeit Straße der Einigkeit
+              docs: 1
+            - name: Versteigerung Polenz Flst 80 7
+              docs: 2
+          - name: 2009 VEW Flst. 218 1 Beucha
+            docs: 5
+          - name: 2010 Büttner KV
+            docs: 2
+          - name: 2010 Hörmann KV
+            docs: 8
+          - name: 2010 Juwi Immobilien GbR
+            docs: 9
+          - name: 2011 Brandiser Photovoltaikpark
+            docs: 2
+          - name: 2011 Große TV
+            docs: 2
+          - name: 2011 Kroll+Müller KV
+            docs: 8
+          - name: 2011 Kuhn KV
+            docs: 4
+          - name: 2011 Langer KV
+            docs: 1
+          - name: 2011 Spitzbarth KV
+            docs: 6
+          - name: 2012 BKE KV
+            docs: 1
+          - name: 2012 Breitenborn
+            docs: 2
+          - name: 2012 Gerecke KV
+            docs: 17
+            folders:
+            - name: Bilder Vermessung
+              docs: 4
+          - name: 2012 Hörmann KV 96 18, 609 1, 610 1
+            docs: 4
+          - name: 2013 Angel-Fischer-Verein Mölkau KV
+            docs: 6
+          - name: 2013 Arndt
+            docs: 2
+          - name: 2013 Birk KV
+            docs: 7
+            folders:
+            - name: Fotos
+              docs: 7
+          - name: 2013 Burkart KV
+            docs: 5
+          - name: 2013 DIE BAUPROFIS KV
+            docs: 6
+            folders:
+            - name: Fotos
+              docs: 3
+            - name: Fotos 11.07.2013
+              docs: 27
+          - name: 2013 Keßner KV
+            docs: 1
+          - name: 2013 Neumann KV
+            docs: 8
+            folders:
+            - name: Kündigungen Pachtverträge
+              docs: 8
+              folders:
+              - name: Fotos
+                docs: 7
+                folders:
+                - name: Fotos 01.07.2013
+                  docs: 2
+          - name: 2013 Ziesche KV
+            docs: 5
+          - name: 2014 Autobahnamt KV
+            docs: 2
+          - name: 2014 Bartsch Kirchbruch KV
+            docs: 3
+          - name: 2014 Bärsch KV
+            docs: 5
+          - name: 2014 ErbbauR Waldbadweg
+            docs: 10
+          - name: 2014 Kapelle Kirchbruch KV
+            docs: 3
+          - name: 2014 LASuV - 466_15+16 Pol
+            docs: 2
+          - name: 2014 Schmidt Kirchbruch KV
+            docs: 4
+          - name: 2014 Schor KV
+            docs: 7
+          - name: 2014 Spitzbarth, Udo KV
+            docs: 13
+            folders:
+            - name: Schiemann
+              docs: 3
+          - name: 2014 Wandel KV
+            docs: 3
+          - name: 2015 Beuchaer Bau- u. Wohnungs GmbH Flst. 369/3 Beu - Lange Stücken
+            docs: 2
+          - name: 2015 Erbbaurecht Gerstmann
+            docs: 6
+          - name: 2015 Giesa KV
+            docs: 2
+          - name: 2015 Hofmann KV
+            docs: 2
+          - name: 2015 LASuV - 214_5 Kleinsteinberg
+            docs: 2
+          - name: 2016 AZV Parthe KV
+            docs: 2
+            folders:
+            - name: Beucha 394_103
+              docs: 3
+            - name: Beucha 394_260 u. 394_263
+              docs: 4
+            - name: Beucha 394_346
+              docs: 1
+            - name: Brandis 1350
+              docs: 3
+            - name: Cämmerei 358_d
+              docs: 8
+            - name: Cämmerei 788_2
+              docs: 3
+            - name: Cämmerei 933
+              docs: 3
+          - name: 2016 Hoier, Katja
+            docs: 3
+          - name: 2016 LASuV - 124_7, 207_3, 208_ Cäm
+            docs: 4
+          - name: 2017 Beuchaer Bau- u. Wohnungs GmbH Flst. 215 Cäm. - Kitabau
+            docs: 5
+          - name: 2017 Freistaat Sachsen
+            docs: 2
+          - name: 2017 Friedemann KV
+            docs: 4
+          - name: 2017 Heller
+            docs: 3
+          - name: 2017 Henze KV
+            docs: 4
+          - name: '2017 Jones, Dr. KV '
+            docs: 3
+          - name: 2017 Kautz KV
+            docs: 3
+          - name: 2017 Schotter- und Kies-Union GmbH & Co. KG
+            docs: 3
+          - name: 2017 Teich KV
+            docs: 3
+          - name: 2017 herrenloses Grundstück 424/b Beucha
+            docs: 1
+          - name: 2018 Bartsch KV Pol 22d
+            docs: 6
+          - name: 2018 Colditz
+            docs: 4
+          - name: 2018 Haase_Nent KV
+            docs: 4
+          - name: 2018 Islinger
+            docs: 5
+          - name: 2018 LASuV - 639_3 Pol
+            docs: 6
+          - name: 2018 Scherling KV
+            docs: 4
+          - name: 2018 Wohnungsgenossenschaft Wurzen eG
+            docs: 6
+            folders:
+            - name: Fotos Normakaufhalle
+              docs: 18
+          - name: '2019 Deutsche Glasfaser Asset I GmbH KV - Flst. T. v. 788/1 Cäm.
+              + T. v. 287/20 Beucha '
+            docs: 3
+          - name: 2019 Kirchschullehn Brandis/ Liebold KV
+            docs: 3
+          - name: 2019 Miersch KV
+            docs: 4
+          - name: 2019 Rossmann KV
+            folders:
+            - name: Markt 9
+              docs: 2
+            - name: 'Pappelallee '
+              docs: 5
+          - name: 2020 AZV Parthe KV Beu 394/367
+            docs: 2
+          - name: 2020 Berkner KV Flst. T. v. 139/1 Brandis
+            docs: 4
+          - name: 2020 Busch KV - Flst. 599/18 Brandis
+            docs: 4
+          - name: 2020 DB Netz AG KV T.v. 418/2 Cäm. u. 431/3 Bra
+            docs: 7
+            folders:
+            - name: Ordner Költzsch - Deutsche Bahn Flst. 418/2 und 431/3
+              folders:
+              - name: 'Kunath '
+                docs: 4
+              - name: Lagepläne
+                docs: 2
+              - name: Schriftverkehr
+                docs: 3
+              - name: Verträge
+                docs: 2
+          - name: 2020 Deutsche Glasfaser KV - Flst. T. v. 301/1 Cäm.
+            docs: 4
+          - name: 2020 Hoffmann KV T. v. 130/34 Cäm
+            docs: 8
+          - name: 2020 Krah - Bäckerei KV Flst. 66/21 Beu
+            docs: 5
+          - name: 2020 Krumme KV/ Überlassung
+            docs: 3
+          - name: 2020 König & Kutschenreiter - Fall Meincke 164/2 Kleinsteinberg
+            docs: 5
+          - name: '2020 Naunhofer Straße '
+            docs: 17
+            folders:
+            - name: Kleinkläranlage
+              docs: 10
+          - name: 2020 Windgassen KV 130/52, 130/53 & T. v. 130/34 Cäm
+            docs: 8
+          - name: 2020 mkpreis
+            docs: 7
+          - name: 2021 DB AG / Burkart, Caroline KV Flst. 278/21 Beucha
+            docs: 7
+          - name: 2021 DB AG / Schneider, Roland KV 1/15 Beucha
+            docs: 1
+          - name: 2021 DIE BAUPROFIS - KV Sportplatz Polenz
+            docs: 4
+          - name: '2021 DIE BAUPROFIS - Übertragung Erschließungsanlagen Jahnhöhe '
+            docs: 4
+          - name: 2021 IBIS GmbH KV
+            docs: 19
+          - name: 2022 Hänsel KV - Flst. 234/16 Bra
+            docs: 8
+          - name: 2022 Landschreiber KV - Flst. 847 Brandis
+            docs: 5
+          - name: 2022 Miersch KV - Flst. 394/379 Beucha
+            docs: 3
+          - name: 2022 Moschner KV Flst. 332/17 Beucha
+            folders:
+            - name: Beschlussvorlage
+              docs: 2
+            - name: Notar
+              docs: 5
+          - name: 2022 Porsch KV - Flst. 414/2 Beucha
+            docs: 5
+          - name: 2023 AR Verwaltungs- u. Unternehmergesellschaft & Co. KG - Übertragung
+              Erschließungsanlagen Meisengrund
+            docs: 9
+          - name: 2023 BWS mbH - Flst. 201/2 Bra
+            docs: 3
+          - name: 2023 Bauer KV Flst. 314/3 Bra
+            docs: 10
+          - name: 2023 Beuchaer Bau- u. Wohnungsgesellschaft mbH - Flst. 45/9 Beucha
+            docs: 6
+          - name: 2023 Croitor KV Flst. 314/1 Bra
+            docs: 5
+            folders:
+            - name: Ordner Költzsch - Verkauf Flurstück TF 314 Brandis - Eheleute
+                Kunze
+              docs: 6
+          - name: 2023 Dr. Sachse KV Flst. 25/1 Bra
+            docs: 3
+          - name: 2023 Grundstücke Pappelallee (Flst. 234/13 & 234/29)
+            docs: 2
+            folders:
+            - name: 2022 Merseburger KV - Flst. 234/13 Brandis
+              docs: 1
+          - name: 2023 Puschmann KV Flst. 234/29 Bra
+            docs: 4
+          - name: 2023 Schimpke Flst. 91/39 u. 464/3 Polenz
+            docs: 5
+            folders:
+            - name: Beschlussunterlagen
+              docs: 4
+          - name: 2023 Wierczoch KV Flst. 33 Brandis
+            docs: 9
+          - name: 2024 BWS KV Flst. 145/11 Brandis
+            docs: 5
+          - name: 2024 Beier T. v. 206 Kleinsteinberg
+            docs: 6
+          - name: 2024 Graichen
+            docs: 3
+          - name: 2024 Karosseriebau Dietze KV - Flst. 261/45 Polenz
+            docs: 5
+          - name: 2024 Machern Landwirtschaft GmbH & Co. KG - T.v. 93/1 Kleinst.
+            docs: 4
+          - name: 2024 Müller KV Flst. 22/9 Beucha
+            docs: 4
+          - name: 2025 BWS KV Dahlienweg Flst. 251/i, 257/a, 257/b, 257/c, 862 u.
+              861 Bra
+            docs: 3
+          - name: 2025 BWS KV Flst. 473/2 Pol
+            docs: 1
+          - name: 2025 Bartsch KV
+            docs: 1
+          - name: 2025 Remler KV 270/3 Cäm
+            docs: 2
+          - name: 2025 Vetter KV 261/42 Pol
+            docs: 4
+          - name: 2026 Poltersdorf KV Flst. 429 Albrechtshain
+            docs: 1
+          - name: 2026 Reich KV Flst. 261/44 Pol
+            docs: 1
+          - name: Gesetzliche Vertretungen
+            folders:
+            - name: Hesse KV
+              docs: 2
+            - name: Koch, Gustav Richard
+              docs: 1
+            - name: Winter, Otto Walter
+              docs: 1
+          - name: VerkFlBer
+            docs: 1
+            folders:
+            - name: 'August-Bebel-Straße '
+              folders:
+              - name: Meinig
+                docs: 3
+            - name: Beuchaer Straße
+              docs: 5
+              folders:
+              - name: AF Schlossresidenz GmbH
+                docs: 18
+              - name: Boguth
+                docs: 8
+              - name: Dorn
+                docs: 9
+              - name: Edeka
+                docs: 7
+              - name: Friedemann
+                docs: 4
+              - name: Große
+                docs: 1
+              - name: Hitzner + Klein
+                docs: 9
+              - name: Hochmuth + Einmüller
+                docs: 8
+              - name: Kaiser Erbengem.
+                docs: 25
+              - name: Költzsch
+                docs: 12
+              - name: Köpping
+                docs: 6
+              - name: Möller
+                docs: 6
+              - name: Schmidt
+                docs: 2
+              - name: Schulze, Hager
+                docs: 6
+              - name: Strauß
+                docs: 7
+                folders:
+                - name: Langefeld
+                  docs: 6
+              - name: Winkler, Irmgard - Erben
+                docs: 11
+            - name: Kreisverkehr Polenz
+              docs: 3
+            - name: Mittelweg
+              docs: 8
+            - name: Neubauernsiedlung
+              folders:
+              - name: Voigt/ Jüptner
+                docs: 2
+            - name: Schützenstraße
+              docs: 1
+            - name: Töpfergasse KV
+              folders:
+              - name: Köhler, Mathias
+                docs: 5
+              - name: Schneider, Gundula
+                docs: 6
+        - name: Nutzungsvereinbarung Grasnutzung
+          folders:
+          - name: Hemmersbach, Jan
+            docs: 4
+          - name: Schuster, Heiko
+            docs: 1
+          - name: Will, Doreen
+            docs: 5
+            folders:
+            - name: Fotos
+              docs: 8
+        - name: Nutzungsvereinbarungen
+          docs: 4
+          folders:
+          - name: Circus Brunselli
+            docs: 1
+          - name: Circus Hermann Renz
+            docs: 1
+          - name: Circus Sabrina Renz
+            docs: 2
+          - name: Dorffest Polenz - Heller
+            docs: 5
+          - name: Kindercircus Barlay
+            docs: 3
+          - name: Kinderheim Machern
+            folders:
+            - name: '2018'
+              docs: 5
+            - name: '2023'
+              docs: 3
+            - name: '2025'
+              docs: 3
+          - name: Makerspace Partheland e. V.
+            docs: 3
+          - name: Nutzung Autobahnsee Osterfeuer
+            docs: 2
+          - name: 'Nutzung Drehgenehmigung Luftrüstungsindustrie '
+            docs: 2
+          - name: Nutzung FFW
+            docs: 2
+          - name: Nutzung Filmabend Kulturhaus Beucha e.V.
+            docs: 1
+          - name: Nutzung In`Motion Fitness
+            docs: 2
+          - name: Nutzung Lange Stücken Feuerwerk
+            docs: 1
+          - name: Nutzung Patrouillenritt
+            docs: 3
+          - name: Nutzung Polizeidirektion Leipzig
+            docs: 5
+          - name: Nutzung Polizeirevier Grimma
+            docs: 2
+          - name: Nutzung Rettungshundestaffel BRH
+            docs: 2
+          - name: Nutzung Rettungshundestaffel Deutsche Lebens-Rettungs-Gesellschaft
+            docs: 2
+          - name: Nutzung Rettungshundestaffel Johanniter
+            docs: 4
+          - name: 'Nutzung Schmidt, Fabian '
+            docs: 1
+          - name: Nutzung Schützengesellschaft
+            docs: 2
+          - name: Nutzung THW
+            folders:
+            - name: Nutzung 2013
+              docs: 2
+            - name: Nutzung 2018
+              docs: 3
+            - name: Nutzung 2025
+              docs: 2
+          - name: Nutzung Teamgeist Ost GmbH
+            docs: 2
+          - name: Nutzung The Rock Beucha e.V.
+            docs: 1
+          - name: Nutzung UFA FICTION GmbH - Flugplatz
+            docs: 2
+          - name: Nutzung Unfallrekonstruktion
+            docs: 1
+          - name: Nutzung Wasserturm - Tag des offenen Denkmals
+            docs: 1
+          - name: Picknick im Park - Bürgerverein Brandis e. V.
+            docs: 5
+          - name: Puppentheater
+            docs: 3
+          - name: SIB/ PD Leipzig
+            docs: 3
+          - name: SV Stahl Brandis
+            docs: 2
+          - name: Stadtteilfest Waldsteinberg - Wießner
+            docs: 2
+          - name: Triathlon-Day
+            docs: 7
+          - name: UFA FICTION GmbH - Drehgenehmigung Ostbruch
+            docs: 2
+          - name: Veranstaltung Ostbruch - Bereitschaftspolizei
+            docs: 2
+        - name: Schenkung
+          folders:
+          - name: Kutscher
+            docs: 2
+        - name: Taucheinsatz
+          docs: 3
+        - name: Verkehrswertgutachten
+          docs: 3
+      - name: Vollmachten
+        docs: 23
+      - name: Vorkaufsrechtsausübung
+        folders:
+        - name: Flst. 216/8 Beu - Laese
+          docs: 1
+        - name: 'Flst. 297/1 u. 297/b Cäm. - Brachmann '
+          docs: 15
+        - name: Flst. 31/1 Cäm. Scheibe-Kunzmann
+          docs: 1
+        - name: Flst. 456/5 u. 456/b Cäm. - FS Sachsen
+          docs: 5
+        - name: Flst. 81 + 82 Brandis
+          docs: 4
+      - name: Waldbad - ländl. Neuordnungsverfahren
+        docs: 2
+        folders:
+        - name: Bootshaus
+          docs: 3
+      - name: schlüssiges Handeln
+        docs: 1
+      - name: Öffentliche Zustellung
+        docs: 1
+    - name: Sonstiges
+      docs: 2

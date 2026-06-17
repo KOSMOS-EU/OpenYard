@@ -1,0 +1,44 @@
+# OpenYard Field-Default-Engine Konfiguration
+# Definiert Quellen und Defaults für WinYard-API-Felder
+
+user_fields:
+  LoginName:
+    source: cs3.user.username
+  Klarname:
+    source: cs3.user.displayName
+  Email:
+    source: cs3.user.email
+  Funktion:
+    default: ""
+  Telefon:
+    default: ""
+  SachbearbeiterKennung:
+    source: adapter_db
+    default: ""
+  Adresse:
+    default: "N/A"
+  Geburtsdatum:
+    default: null
+  SuperNutzer:
+    source: cs3.user.role.admin
+  Gesperrt:
+    source: cs3.user.enabled
+    invert: true
+
+document_fields:
+  ObjectId:
+    source: cs3.resource_id
+    encoding: base64
+  Name:
+    source: cs3.path.basename
+  Path:
+    source: cs3.path
+  Size:
+    source: cs3.size
+  MimeType:
+    source: cs3.mime_type
+  Modified:
+    source: cs3.mtime
+    format: "2006-01-02T15:04:05Z"
+  ETag:
+    source: cs3.etag

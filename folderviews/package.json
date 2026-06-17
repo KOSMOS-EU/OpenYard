@@ -1,0 +1,29 @@
+{
+  "name": "opencloud-folderviews",
+  "version": "1.0.0",
+  "description": "Typed folder views for OpenCloud (Aktenplan, DMS)",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --mode opencloud",
+    "build": "vite build --mode opencloud",
+    "lint": "eslint . --ext .vue,.js,.ts --fix",
+    "type-check": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@opencloud-eu/extension-sdk": "^7.0.1",
+    "@opencloud-eu/web-client": "^4.0.0",
+    "@opencloud-eu/web-pkg": "^4.0.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "typescript": "~5.6.0",
+    "vite": "^8.0.0",
+    "vue-tsc": "^2.0.0",
+    "vue3-gettext": "^2.4.0"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

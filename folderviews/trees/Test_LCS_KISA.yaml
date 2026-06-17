@@ -1,0 +1,863 @@
+volume: Test LCS/KISA
+id: efc3a4dd-7ef9-47aa-a691-10a017573188
+aktz: null
+total_folders: 425
+total_docs: 186
+aktz_count: 0
+tree:
+  name: Test LCS/KISA
+  folders:
+  - name: Löschablage
+    folders:
+    - name: Rechnungsausgang
+      folders:
+      - name: Bescheide
+        folders:
+        - name: '0100000003'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0100001985
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0100003052'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0100003057'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: '0100003365'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0100004106'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0100004183
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0103 Grundsteuer A
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: '0100004457'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0100004617'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0100004697
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0100005018
+          folders:
+          - name: '2023'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0100005099
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: '0100005105'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 3
+        - name: '0100005122'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: '0100005123'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+                - name: J
+                  docs: 1
+        - name: '0100005125'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0100200184
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+                - name: J
+                  docs: 2
+        - name: '0100201215'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0100201529
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0100201815
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0100201910
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0100202202'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: '0100202253'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: '0100202330'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0100202533'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0100202814
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0100202880
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0100202882
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 3
+                - name: J
+                  docs: 1
+        - name: 0100202883
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0100202884
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0100 Grundsteuer B
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: '0101050036'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 3
+        - name: 0101050049
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 3
+        - name: 0101050093
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101051009
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 3
+        - name: '0101051132'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101051964
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101052085
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101052817
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: 0101052847
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101052933
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101052953
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101052960
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: 0101052982
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 4
+        - name: 0101052986
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0101054973
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0101255007'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: '0101255072'
+          folders:
+          - name: '2024'
+            folders:
+            - name: '0101 '
+              docs: 1
+            - name: 0101 Gewerbesteuer
+              docs: 9
+        - name: '0101255105'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: '0101255227'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: 0101255293
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: 0101255296
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: '0101255323'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 3
+        - name: '0101255404'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 8
+        - name: '0101255447'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 3
+        - name: '0101255503'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: '0101255506'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255508
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 4
+        - name: 0101255509
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0101255512'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: '0101255513'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: '0101255514'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: '0101255515'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: '0101255516'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: '0101255517'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255518
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255519
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: '0101255534'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: '0101255544'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: '0101255550'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0101255551'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: '0101255552'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255597
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255668
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 3
+        - name: '0101255730'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 4
+        - name: '0101255765'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255843
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255889
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: 0101255932
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 4
+        - name: 0101255933
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 3
+        - name: 0101255935
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255951
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: 0101255954
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 6
+        - name: 0101255964
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+        - name: 0101255974
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: 0101255975
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: 0101255983
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+        - name: 0101255988
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 1
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: 0101255991
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: 0101255992
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0101 Gewerbesteuer
+              docs: 2
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0102000249
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0102 Hundesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 2
+        - name: 0102000909
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0102 Hundesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0102200497
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0102 Hundesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 1
+        - name: 0102200658
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0102 Hundesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: 0102200659
+          folders:
+          - name: '2024'
+            folders:
+            - name: 0102 Hundesteuer
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 1
+        - name: '0213400445'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 1033 Pacht aus Eigent. bis 3.10.90
+              folders:
+              - name: '1'
+                folders:
+                - name: A
+                  docs: 4
+        - name: '0213400622'
+          folders:
+          - name: '2024'
+            folders:
+            - name: 1034 Pacht aus Eigentum ab 3.10.90
+              folders:
+              - name: '1'
+                folders:
+                - name: J
+                  docs: 5

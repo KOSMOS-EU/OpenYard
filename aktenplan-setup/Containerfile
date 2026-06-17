@@ -1,0 +1,18 @@
+FROM docker.io/library/golang:1.24-alpine AS builder
+
+RUN apk add --no-cache git ca-certificates
+
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /aktenplan-extract ./cmd/aktenplan-extract/
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /aktenplan-apply ./cmd/aktenplan-apply/
+
+FROM docker.io/library/alpine:3.21
+RUN apk add --no-cache ca-certificates
+COPY --from=builder /aktenplan-extract /usr/local/bin/
+COPY --from=builder /aktenplan-apply /usr/local/bin/
+
+ENTRYPOINT ["aktenplan-apply"]

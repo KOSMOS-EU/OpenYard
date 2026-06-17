@@ -1,0 +1,32 @@
+# OpenYard Service - Compose Overlay
+# Wird zusammen mit der bestehenden OpenCloud-Compose gestartet:
+#
+#   docker compose -f docker-compose.yml -f opencloud.yml \
+#     -f proxy-setup/docker-compose.openyard.yml up -d
+
+services:
+  openyard:
+    build:
+      context: ../openyard-service
+    image: ${OPENYARD_IMAGE:-local/openyard:0.1.0}
+    environment:
+      OPENYARD_HTTP_ADDR: "0.0.0.0:9201"
+      OPENYARD_LOG_LEVEL: ${OPENYARD_LOG_LEVEL:-info}
+      OPENYARD_REVA_GATEWAY: ${OPENYARD_REVA_GATEWAY:-opencloud:9142}
+      OPENYARD_SESSION_TTL: ${OPENYARD_SESSION_TTL:-8h}
+      OPENYARD_DB_DSN: ${OPENYARD_DB_DSN:-}
+      MICRO_REGISTRY: ${MICRO_REGISTRY:-nats-js-kv}
+      MICRO_REGISTRY_ADDRESS: ${MICRO_REGISTRY_ADDRESS:-opencloud:9233}
+    networks:
+      - opencloud-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:9201/api/advancedGeneral/IsListening"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  opencloud-net:
+    external: true
+    name: opencloud_full_opencloud-net

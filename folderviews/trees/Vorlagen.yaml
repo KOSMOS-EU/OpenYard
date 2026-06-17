@@ -1,0 +1,75 @@
+volume: Vorlagen
+id: 2e48846b-8518-4e0b-a28f-f2016d757768
+aktz: null
+total_folders: 54
+total_docs: 1
+aktz_count: 0
+tree:
+  name: Vorlagen
+  folders:
+  - name: ARCHIKART4
+    folders:
+    - name: Begehung
+    - name: Bescheid
+      folders:
+      - name: 1.Schriftverkehr
+      - name: 2.Bescheide
+      - name: 3.Anlagen
+    - name: Bäume
+      folders:
+      - name: 1.Schriftverkehr
+      - name: 2.Erfassung
+      - name: 3.Kontrolle,Aufgaben
+      - name: 4.Anlagen
+    - name: FM-Basis
+      folders:
+      - name: 1.Schriftverkehr
+      - name: 2.Verträge
+      - name: 3.Rechnungen
+      - name: 4.Anlagen
+    - name: Grünflächen
+      folders:
+      - name: 1.Schriftverkehr
+      - name: 2.Erfassung
+      - name: 3.Maßnahmen
+      - name: 4.Anlagen
+    - name: Straßen
+      folders:
+      - name: 1.Schriftverkehr
+      - name: 2.Widmung
+      - name: 3.Zusatzbestand
+      - name: 4.Anlagen
+    - name: Verträge
+      folders:
+      - name: 1.Verträge
+      - name: 2.Schriftverkehr
+      - name: 3.Anlagen
+    - name: allgemein
+      folders:
+      - name: 1.Schriftverkehr
+      - name: 2.Anlagen
+  - name: Aktenvorlage
+    folders:
+    - name: Allgemeines
+    - name: Arbeitshilfen, Vorlagen, Formulare
+    - name: Dienstberatungen
+    - name: Dokumentationen für Hard- und Software
+    - name: Grundsätzliches
+    - name: Lehrgangsunterlagen aus Schulungen
+    - name: Präsentationen, Dokumentationen, Wissensdokumente
+    - name: Rechtsgrundlagen
+  - name: Briefvorlagen
+    docs: 1
+  - name: SVKA
+    folders:
+    - name: §29
+    - name: §45
+    - name: §46
+  - name: Sondernutzung
+    folders:
+    - name: Baustelle
+    - name: Container
+    - name: Geruest
+    - name: Infostand
+    - name: Plakatierung
+    - name: Versorgungstraeger

@@ -1,0 +1,51 @@
+volume: Anordnungen
+id: 91546c3c-d47b-47c8-8420-791c35860244
+aktz: null
+total_folders: 21
+total_docs: 14121
+aktz_count: 0
+tree:
+  name: Anordnungen
+  folders:
+  - name: '2013'
+    folders:
+    - name: K
+      docs: 1
+  - name: '2014'
+    folders:
+    - name: K
+      docs: 1
+  - name: '2015'
+    folders:
+    - name: K
+      docs: 4
+  - name: '2019'
+    folders:
+    - name: D
+      docs: 93
+    - name: K
+      docs: 25
+    - name: Listen
+      docs: 2
+    - name: S
+      docs: 109
+  - name: '2025'
+    folders:
+    - name: D
+      docs: 2716
+    - name: K
+      docs: 6659
+    - name: Listen
+      docs: 593
+    - name: S
+      docs: 77
+  - name: '2026'
+    folders:
+    - name: D
+      docs: 1186
+    - name: K
+      docs: 2281
+    - name: Listen
+      docs: 329
+    - name: S
+      docs: 45

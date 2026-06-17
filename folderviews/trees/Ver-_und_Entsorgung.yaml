@@ -1,0 +1,54 @@
+volume: Ver- und Entsorgung
+id: eb0fc385-7ee3-437f-a014-61c4c2a1fa23
+aktz: '53'
+total_folders: 20
+total_docs: 81
+aktz_count: 0
+tree:
+  name: Ver- und Entsorgung
+  aktz: '53'
+  folders:
+  - name: 53.10 Gebäudemanagement
+    folders:
+    - name: 53.10.01 Betriebskostenabrechnung
+      docs: 4
+      folders:
+      - name: Betriebskosten 2023 - Rechnungen
+        docs: 15
+      - name: Betriebskosten 2024 - Rechnungen
+      - name: Betriebskosten 2025 - Rechnungen
+        docs: 5
+        folders:
+        - name: Schornsteinfeger
+          docs: 4
+      - name: Betriebskosten 2026 - Rechnungen
+        folders:
+        - name: Brunata  Metrona
+          docs: 5
+        - name: Schornsteinfeger
+          docs: 4
+      - name: Betriebskostenabrechnung 2024
+        docs: 8
+        folders:
+        - name: Betriebskosten 2024
+          docs: 7
+        - name: Rechnungen
+          docs: 12
+          folders:
+          - name: 2025121812260_0018gaxer
+            docs: 4
+      - name: Brunata
+        docs: 6
+      - name: Mietverträge
+        docs: 3
+    - name: 53.10.02 Dachbegrünung
+      docs: 1
+      folders:
+      - name: Mehrzweckhalle
+        docs: 1
+      - name: Oberschule
+        docs: 1
+    - name: 53.10.03 Digitales Prüfbuch
+      folders:
+      - name: Grundschule Brandis
+        docs: 1

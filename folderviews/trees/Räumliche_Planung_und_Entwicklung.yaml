@@ -1,0 +1,25 @@
+volume: Räumliche Planung und Entwicklung
+id: 4a61d282-ae8b-476a-9376-383ac3f34930
+aktz: '51'
+total_folders: 6
+total_docs: 0
+aktz_count: 6
+tree:
+  name: Räumliche Planung und Entwicklung
+  aktz: '51'
+  folders:
+  - name: Flächen- und grundstücksbezogene Daten und Grundlagen
+    aktz: '51.20'
+    folders:
+    - name: Flächen- und grundstücksbezogene Daten und Grundlagen
+      aktz: 51.20.05
+  - name: Räumliche Planungs- und Entwicklungsmaßnahmen und Flurneuordnung
+    aktz: '51.11'
+    folders:
+    - name: Räumliche Planungs- und Entwicklungsmaßnahmen
+      aktz: 51.11.01
+      folders:
+      - name: Allgemeine Verwaltungsleistungen Ortsplanungskonzept
+        aktz: 51.11.01.00
+      - name: Konzepte Ortsplanung u. Mitwirkung überörtliche Planung
+        aktz: 51.11.01.01

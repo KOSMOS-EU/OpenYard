@@ -1,0 +1,72 @@
+volume: Verkehrsflächen und -anlagen, Öffentlicher Personennahverkehr
+id: f9b0c2e7-23ad-43dd-874c-c108f0f83353
+aktz: '54'
+total_folders: 24
+total_docs: 0
+aktz_count: 24
+tree:
+  name: Verkehrsflächen und -anlagen, Öffentlicher Personennahverkehr
+  aktz: '54'
+  folders:
+  - name: Gemeindestraßen
+    aktz: '54.10'
+    folders:
+    - name: Gemeindestraßen
+      aktz: 54.10.01
+      folders:
+      - name: Bereitstellung und Unterhaltung der Gemeindestraßen, Wege, Brücken und
+          Anlagen
+        aktz: 54.10.01.01
+      - name: Bereitstellung und Unterhaltung von öffentlicher Beleuchtung an Gemeindestraßen
+        aktz: 54.10.01.02
+      - name: Kalkulation und Abrechnung von Erschließungs- und Straßenbaubeiträgen
+          für Gemeindestraßen und Anlage
+        aktz: 54.10.01.03
+  - name: Kreisstraßen
+    aktz: '54.20'
+    folders:
+    - name: Kreisstraßen
+      aktz: 54.20.01
+  - name: Parkeinrichtungen
+    aktz: '54.60'
+    folders:
+    - name: Parkeinrichtungen
+      aktz: 54.60.01
+  - name: Sonstige Leistungen der Straßenbaulastträger
+    aktz: '54.90'
+    folders:
+    - name: Sonstige Leistungen der Straßenbaulastträger
+      aktz: 54.90.01
+      folders:
+      - name: Straßenrechtliche Sondernutzung und Sperrung
+        aktz: 54.90.01.01
+  - name: Sonstiger Personen- und Güterverkehr
+    aktz: '54.80'
+    folders:
+    - name: Sonstiger Personen- und Güterverkehr
+      aktz: 54.80.01
+  - name: Staatsstraßen
+    aktz: '54.30'
+    folders:
+    - name: Staatsstraßen
+      aktz: 54.30.01
+    - name: Verkehrsflächen und Anlagen, ÖPNV
+      aktz: 54.30.02
+  - name: Straßenreinigung und Winterdienst
+    aktz: '54.51'
+    folders:
+    - name: Straßenreinigung
+      aktz: 54.51.01
+  - name: Winterdienst an Gemeindestraßen, Wegen und Plätzen
+    aktz: '54.52'
+    folders:
+    - name: Winterdienst an Gemeindestraßen, Wegen und Plätzen
+      aktz: 54.52.01
+      folders:
+      - name: Winterdienst an Gemeindestraßen, Wegen und Plätzen
+        aktz: 54.52.01.01
+  - name: Öffentlicher Personennahverkehr
+    aktz: '54.70'
+    folders:
+    - name: Öffentlicher Personennahverkehr
+      aktz: 54.70.01

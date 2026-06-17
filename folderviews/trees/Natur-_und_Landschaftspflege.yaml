@@ -1,0 +1,100 @@
+volume: Natur- und Landschaftspflege
+id: 9eed6c6a-11f7-408f-9e13-c9ed76aebc09
+aktz: '55'
+total_folders: 35
+total_docs: 2
+aktz_count: 35
+tree:
+  name: Natur- und Landschaftspflege
+  aktz: '55'
+  folders:
+  - name: Friedhofs- und Bestattungswesen
+    aktz: '55.30'
+    folders:
+    - name: Friedhofs- und Bestattungswesen
+      aktz: 55.30.01
+      docs: 1
+      folders:
+      - name: Bestattungsleistungen, Unterhaltung und Bereitstellung von Grabstellen
+          und Friedhofsanlagen
+        aktz: 55.30.01.01
+        docs: 1
+        folders:
+        - name: Satzungen
+          aktz: 55.30.01.01-13
+  - name: Land- und Forstwirtschaft
+    aktz: '55.51'
+    folders:
+    - name: Land- und Forstwirtschaft
+      aktz: 55.51.01
+      folders:
+      - name: AVL Land- und Forstwirtschaft
+        aktz: 55.51.01.01
+      - name: Bewirtschaftung und Verpachtung eigener landwirtschaftlicher Flächen
+        aktz: 55.51.01.02
+      - name: Vollzug von Förderprogrammen der ländlichen Entwicklung
+        aktz: 55.51.01.03
+      - name: Waldbewirtschaftung einschließlich jagdliche Nutzung
+        aktz: 55.51.01.04
+        folders:
+        - name: Berufsgenossenschaft
+          aktz: 55.51.01.04-04
+          folders:
+          - name: Umlage
+            aktz: 55.51.01.04-04/1
+        - name: Flugplatz
+          aktz: 55.51.01.04-01
+        - name: Fördermittel
+          aktz: 55.51.01.04-02
+        - name: Jagdpacht
+          aktz: 55.51.01.04-03
+        - name: Rechnungen Selbstwerber
+          aktz: 55.51.01.04-05
+        - name: Selbstwerberverträge
+          aktz: 55.51.01.04-06
+        - name: Sonstiges
+          aktz: 55.51.01.04-07
+        - name: Wirtschaftsplan Wald
+          aktz: 55.51.01.04-08
+  - name: Natur- und Landschaftspflege
+    aktz: '55.40'
+    folders:
+    - name: 55.40.06
+      aktz: 55.40.06
+      folders:
+      - name: Steinbrüche
+        aktz: 55.40.06.01
+        folders:
+        - name: Bergbauflächen (Bergbaurestflächen, Erweiterung von Bergbauflächen)
+          aktz: 55.40.06.01-01
+    - name: Natur- und Landschaftspflege
+      aktz: 55.40.01
+      folders:
+      - name: AVL Naturschutz und Landschaftspflege
+        aktz: 55.40.01.01
+      - name: Ausgleichsflächen (Ökokonto)
+        aktz: 55.40.01.03
+      - name: Durchführung und Förderung von landschaftspflegerischen und gestalterischen
+          Maßnahmen (LEADER)
+        aktz: 55.40.01.02
+      - name: Ersatzpflanzungen gemäß Baumschutzsatzung
+        aktz: 55.40.01.04
+        folders:
+        - name: Stellungnahme zu Bauanträgen
+          aktz: 55.40.01.04-01
+  - name: Öffentliche Gewässer und Wasserbauliche Anlagen
+    aktz: '55.20'
+    folders:
+    - name: Öffentliche Gewässer und Wasserbauliche Anlagen
+      aktz: 55.20.01
+      folders:
+      - name: Ausbau und Unterhaltung Öffentlicher Gewässer II. Ordnung
+        aktz: 55.20.01.02
+  - name: Öffentliches Grün, Landschaftsbau
+    aktz: '55.10'
+    folders:
+    - name: Öffentliches Grün, Landschaftsbau
+      aktz: 55.10.01
+      folders:
+      - name: Kleingartenanlagen und Kleingartenwesen - Bereitstellung und Unterhaltung
+        aktz: 55.10.01.03

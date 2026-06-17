@@ -1,0 +1,4 @@
+{
+  "entrypoint": "remoteEntry.mjs",
+  "config": {}
+}

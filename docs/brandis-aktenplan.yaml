@@ -1,0 +1,595 @@
+# Brandis-Aktenplan (generiert aus WinYard-Strukturexport)
+# Basis: Sächsischer Standard-Aktenplan
+# Generiert: 2026-05-25
+#
+# Struktur:
+#   knoten:
+#     - kennung: "XX"             # Hauptgruppe
+#       name: "Bezeichnung"
+#       kinder:
+#         - kennung: "XX.YY"      # Gruppe
+#           ...
+
+aktenplan:
+  version: "1.0"
+  kommune: "Brandis"
+  quelle: "WinYard-Export"
+  knoten:
+    - kennung: "11"
+      name: "Innere Verwaltung"
+      kinder:
+        - kennung: "11.11"
+          kinder:
+            - kennung: "11.11.01"
+              kinder:
+                - kennung: "11.11.01.04"
+                  name: "Repräsentationen, Ehrungen, partnerschaftliche Beziehungen 1"
+                - kennung: "11.11.01.05"
+                  name: "Beauftragte (Gleichstellung, Senioren)"
+        - kennung: "11.12"
+          kinder:
+            - kennung: "11.12.02"
+              kinder:
+                - kennung: "11.12.02.00"
+                  name: "AVL Auszubildende"
+        - kennung: "11.13"
+          kinder:
+            - kennung: "11.13.05"
+              kinder:
+                - kennung: "11.13.05.02"
+                  name: "Rathaus Markt 1-3"
+                - kennung: "11.13.05.03"
+                  name: "Rathausgasse 7-11, Mathildenstr. 7 Brandis"
+                - kennung: "11.13.05.04"
+                  name: "Gemeindehaus Beucha August-Bebel-Str. 12"
+                - kennung: "11.13.05.05"
+                  name: "Gemeindehaus Polenz Zur Rodelbahn 6"
+                - kennung: "11.13.05.06"
+                  name: "Baubetriebshof Am Bahnhof 5 mit Nebengebäude Beucha u. Polenz"
+                - kennung: "11.13.05.07"
+                  name: "Dorfgemeinschaftshaus Polenz"
+                - kennung: "11.13.05.08"
+                  name: "Feuerwehrgerätehaus Brandis Markt 4"
+                - kennung: "11.13.05.09"
+                  name: "Feuerwehrgerätehaus Polenz Klingaer Str. 20"
+                - kennung: "11.13.05.10"
+                  name: "Feuerwehrgerätehaus Beucha August-Bebel-Str. 10 a"
+                - kennung: "11.13.05.11"
+                  name: "Grundschule Brandis Poststr. 8"
+                - kennung: "11.13.05.12"
+                  name: "Grundschule Brandis, Hort Poststr. 8"
+                - kennung: "11.13.05.13"
+                  name: "Grundschule Beucha Kleinsteinberger Str. 20"
+                - kennung: "11.13.05.14"
+                  name: "Grundschule Beucha, Hort Kleinsteinberger Str. 20"
+                - kennung: "11.13.05.15"
+                  name: "Oberschule Brandis Poststr. 20"
+                - kennung: "11.13.05.16"
+                  name: "Gymnasium Brandis Bahnhofstr. 18 a, Schulstr. 3"
+                - kennung: "11.13.05.17"
+                  name: "Bibliothek Brandis Bahnhofstr. 20 a"
+                - kennung: "11.13.05.18"
+                  name: "Jugendclub Polenz Zur Rodelbahn 6"
+                - kennung: "11.13.05.19"
+                  name: "Turnhalle Schulkomplex Brandis Schulstr. 3 a"
+                - kennung: "11.13.05.20"
+                  name: "Wohngebäude Rathausgasse 6"
+                - kennung: "11.13.05.21"
+                  name: "Speiseraum Schulkomplex Brandis Schulstr. 3 a"
+                - kennung: "11.13.05.22"
+                  name: "Sport- und Mehrzweckhalle Brandis Poststr. 22"
+                - kennung: "11.13.05.23"
+                  name: "Kinderkombination Regenbogen Brandis Pappelallee 6"
+                - kennung: "11.13.05.24"
+                  name: "Kinderkrippe Brandis Waldstr. 6 e d. Aussenst. d. Kinderkomb. Regenbogen"
+                - kennung: "11.13.05.25"
+                  name: "Kindertagesstätte Knirpsentreff Beucha Kleinsteinberger Str. 28"
+                - kennung: "11.13.05.26"
+                  name: "Jugendclub Beucha August-Bebel-Str. 4"
+                - kennung: "11.13.05.27"
+                  name: "DRK-Kinderheim Schwalbennest Waldsteinberg"
+                - kennung: "11.13.05.28"
+                  name: "Kegelbahn Polenz Siedlungsring 16 a"
+                - kennung: "11.13.05.29"
+                  name: "Sportplatz Freundschaft mit Sportlerheim Brandis Dahlienweg"
+                - kennung: "11.13.05.30"
+                  name: "Sportplatz Lange Stücken Beucha"
+                - kennung: "11.13.05.31"
+                  name: "Sportlerheim Beucha August-Bebel-Str. 10"
+                - kennung: "11.13.05.32"
+                  name: "Kegelbahn Brandis Bahnhofstr. 22"
+                - kennung: "11.13.05.33"
+                  name: "Sportplatz mit Sporthalle Schützenplatz Brandis Waldstr. 6 f"
+                - kennung: "11.13.05.34"
+                  name: "Friedhof Brandis Waldstraße 16"
+                - kennung: "11.13.05.35"
+                  name: "Ratskeller Brandis Markt 9"
+                - kennung: "11.13.05.36"
+                  name: "Waldbad MZ-Gebäude Brandis"
+                - kennung: "11.13.05.37"
+                  name: "Kulturhaus Beucha August-Bebel-Str. 60"
+                - kennung: "11.13.05.38"
+                  name: "Wohnhaus Beucha, Moritz-Nebe-Weg 4"
+                - kennung: "11.13.05.39"
+                  name: "Sportplatz Polenz, Klingaer Str."
+                - kennung: "11.13.05.40"
+                  name: "Bungalows Siedlerverband Beucha"
+                - kennung: "11.13.05.41"
+                  name: "Sport- und Freizeitpark Lange Stücken Beucha"
+                - kennung: "11.13.05.42"
+                  name: "Beucha Dorfstr. 14"
+                - kennung: "11.13.05.43"
+                  name: "Haus am See Beucha (Rock e.V.)"
+                - kennung: "11.13.05.44"
+                  name: "Garagenhöfe Beucha"
+                - kennung: "11.13.05.45"
+                  name: "Kleinsteinberger Str. 58"
+                - kennung: "11.13.05.46"
+                  name: "Kleinsteinberger Str. 68/70 u. 70a"
+                - kennung: "11.13.05.47"
+                  name: "Hausmeisterwohnung GS Beucha"
+                - kennung: "11.13.05.48"
+                  name: "Wohngebäude Mathildenstr. 6"
+                - kennung: "11.13.05.49"
+                  name: "Wasserturm Beucha"
+                - kennung: "11.13.05.50"
+                  name: "Turnhalle Grundschule Beucha, Kleinsteinberger Straße 20"
+                - kennung: "11.13.05.51"
+                  name: "Bungalows Beucha Kleinsteinberger Str. 46-48"
+                - kennung: "11.13.05.52"
+                  name: "Südl. und Nordl. Toilettengebäude Autobahnsee"
+        - kennung: "11.16"
+          kinder:
+            - kennung: "11.16.08"
+              kinder:
+                - kennung: "11.16.08.01"
+                  name: "Stadtarchiv"
+            - kennung: "11.16.09"
+              kinder:
+                - kennung: "11.16.09.00"
+                  name: "Archiv"
+            - kennung: "11.16.14"
+              kinder:
+                - kennung: "11.16.14.01"
+                  name: "Baubetriebshof Haltung von Fahrzeugen"
+                - kennung: "11.16.14.02"
+                  name: "Baubetriebshof Geräte, Ausrüstungsgegenstände, Einsatztechnik"
+                - kennung: "11.16.14.10"
+                  name: "Baubetriebshof Hausmeister-Sammelstelle"
+    - kennung: "12"
+      name: "Sicherheit und Ordnung"
+      kinder:
+        - kennung: "12.11"
+          kinder:
+            - kennung: "12.11.01"
+              kinder:
+                - kennung: "12.11.01.00"
+                  name: "AVL Statistik/Wahlen"
+        - kennung: "12.21"
+          kinder:
+            - kennung: "12.21.01"
+              kinder:
+                - kennung: "12.21.01.00"
+                  name: "AVL Ordnungsaufgaben"
+                - kennung: "12.21.01.03"
+                  name: "Erteilung der Genehmigung und Überwachung erlaubnispflichtiger Gewerbebetriebe"
+        - kennung: "12.22"
+          kinder:
+            - kennung: "12.22.01"
+              kinder:
+                - kennung: "12.22.01.00"
+                  name: "AVL Melde- und Personenstandswesen"
+        - kennung: "12.60"
+          kinder:
+            - kennung: "12.60.01"
+              kinder:
+                - kennung: "12.60.01.00"
+                  name: "AVL Brandschutz"
+                - kennung: "12.60.01.02"
+                  name: "Feuerwehrgerätehäuser"
+                - kennung: "12.60.01.03"
+                  name: "FFW Haltung von Fahrzeugen"
+        - kennung: "12.80"
+          kinder:
+            - kennung: "12.80.01"
+              kinder:
+                - kennung: "12.80.01.01"
+                  name: "LF 16 TS - L-UK 8010"
+                - kennung: "12.80.01.02"
+                  name: "RW 1 - L-UK 8011"
+    - kennung: "21"
+      name: "Schule und Bildung"
+      kinder:
+        - kennung: "21.11"
+          kinder:
+            - kennung: "21.11.01"
+              kinder:
+                - kennung: "21.11.01.00"
+                  name: "AVL Grundschulen"
+                - kennung: "21.11.01.01"
+                  name: "Grundschule Brandis"
+                - kennung: "21.11.01.02"
+                  name: "Grundschule Beucha"
+            - kennung: "21.11.02"
+              kinder:
+                - kennung: "21.11.02.01"
+                  name: "GS Brandis Inklusion"
+                - kennung: "21.11.02.02"
+                  name: "GS Beucha Inklusion"
+        - kennung: "21.51"
+          kinder:
+            - kennung: "21.51.02"
+              kinder:
+                - kennung: "21.51.02.01"
+                  name: "Oberschule Inklusion"
+    - kennung: "28"
+      name: "Kultur"
+      kinder:
+        - kennung: "28.10"
+          kinder:
+            - kennung: "28.10.01"
+              kinder:
+                - kennung: "28.10.01.01"
+                  name: "Eigene Veranstaltungen Stadt Brandis"
+                - kennung: "28.10.01.02"
+                  name: "Stadtfest Brandis"
+                - kennung: "28.10.01.03"
+                  name: "Vereinstreffen"
+                - kennung: "28.10.01.07"
+                  name: "Kulturelle Veranstaltungen im OT Brandis"
+                - kennung: "28.10.01.08"
+                  name: "Kulturelle Veranstaltungen im OT Polenz"
+                - kennung: "28.10.01.09"
+                  name: "Kulturelle Veranstaltungen im OT Beucha"
+                - kennung: "28.10.01.10"
+                  name: "sonstige Kulturaufgaben"
+                - kennung: "28.10.01.11"
+                  name: "GEMA"
+    - kennung: "31"
+      name: "Soziale Leistungen"
+      kinder:
+        - kennung: "31.11"
+          kinder:
+            - kennung: "31.11.01"
+              kinder:
+                - kennung: "31.11.01.01"
+                  name: "Soziale Hilfen für Bedürftige nach SGB IX und XII"
+        - kennung: "31.22"
+          kinder:
+            - kennung: "31.22.01"
+              kinder:
+                - kennung: "31.22.01.01"
+                  name: "Eingliederungsleistungen - Beschäftigte der Verwaltung"
+                - kennung: "31.22.01.02"
+                  name: "Eingliederungsleistungen - Beschäftigte des Baubetriebshofs"
+    - kennung: "36"
+      name: "Kinder- und Jugendarbeit"
+      kinder:
+        - kennung: "36.21"
+          kinder:
+            - kennung: "36.21.01"
+              kinder:
+                - kennung: "36.21.01.02"
+                  name: "Initiative Jugend bewegt Kommune"
+        - kennung: "36.51"
+          kinder:
+            - kennung: "36.51.01"
+              kinder:
+                - kennung: "36.51.01.04"
+                  name: "Kinderkombination (am Bahnhof)"
+        - kennung: "36.61"
+          kinder:
+            - kennung: "36.61.01"
+              kinder:
+                - kennung: "36.61.01.00"
+                  name: "Jugendarbeit - Eigene Einrichtungen"
+                - kennung: "36.61.01.01"
+                  name: "Kinder- und Jugendclub Beucha der Stadt Brandis"
+                - kennung: "36.61.01.02"
+                  name: "Jugendclub Polenz der Stadt Brandis"
+        - kennung: "36.62"
+          kinder:
+            - kennung: "36.62.01"
+              kinder:
+                - kennung: "36.62.01.00"
+                  name: "Jugendarbeit - Freie Träger"
+                - kennung: "36.62.01.01"
+                  name: "Kinder- und Jugendhaus des CVJM Brandis e.V."
+                - kennung: "36.62.01.02"
+                  name: "Freier Träger Jugendarbeit - AWO"
+    - kennung: "42"
+      name: "Sportförderung"
+      kinder:
+        - kennung: "42.10"
+          kinder:
+            - kennung: "42.10.01"
+              kinder:
+                - kennung: "42.10.01.02"
+                  name: "Förderung im Rahmen der Sportförderrichtlinie der Stadt Brandis"
+            - kennung: "42.10.02"
+              kinder:
+                - kennung: "42.10.02.01"
+                  name: "Sportveranstaltungen"
+                - kennung: "42.10.02.02"
+                  name: "Beuchaer Triathlon Day"
+                - kennung: "42.10.02.03"
+                  name: "Sachsenpokal im Feuerwehrsport"
+        - kennung: "42.41"
+          kinder:
+            - kennung: "42.41.01"
+              kinder:
+                - kennung: "42.41.01.00"
+                  name: "Sportstätten"
+                - kennung: "42.41.01.01"
+                  name: "Sportplatz Schützenplatz"
+                - kennung: "42.41.01.02"
+                  name: "Sport- und Freizeitpark Lange Stücken"
+                - kennung: "42.41.01.03"
+                  name: "Sportplatz Freundschaft"
+                - kennung: "42.41.01.04"
+                  name: "Kegelbahn Brandis"
+                - kennung: "42.41.01.05"
+                  name: "Kegelbahn Polenz"
+            - kennung: "42.41.02"
+              kinder:
+                - kennung: "42.41.02.00"
+                  name: "Turn- und Sporthallen"
+                - kennung: "42.41.02.01"
+                  name: "Sporthalle des Gymnasium Brandis"
+                - kennung: "42.41.02.02"
+                  name: "Sport- und Mehrzweckhalle Brandis"
+                - kennung: "42.41.02.03"
+                  name: "Stadtmeisterschaften Fußball"
+    - kennung: "51"
+      name: "Bauleitplanung, Stadtentwicklung"
+      kinder:
+        - kennung: "51.11"
+          kinder:
+            - kennung: "51.11.01"
+              kinder:
+                - kennung: "51.11.01.02"
+                  name: "Städtebauliche Sanierung und Entwicklung"
+                - kennung: "51.11.01.03"
+                  name: "Dorferneuerung"
+        - kennung: "51.20"
+          kinder:
+            - kennung: "51.20.05"
+              kinder:
+                - kennung: "51.20.05.01"
+                  name: "Geoinformationsdienste, Kartografische Serviceprodukte"
+    - kennung: "52"
+      name: "Bauordnung, Wohnungswesen"
+      kinder:
+        - kennung: "52.20"
+          kinder:
+            - kennung: "52.20.01"
+              kinder:
+                - kennung: "52.20.01.01"
+                  name: "Wohnungsbauförderung"
+        - kennung: "52.30"
+          kinder:
+            - kennung: "52.30.01"
+              kinder:
+                - kennung: "52.30.01.01"
+                  name: "Kriegsgräber / Ehrenmale"
+                - kennung: "52.30.01.02"
+                  name: "Bergkirche Beucha"
+    - kennung: "53"
+      name: "Ver- und Entsorgung"
+      kinder:
+        - kennung: "53.10"
+          kinder:
+            - kennung: "53.10.01"
+              kinder:
+                - kennung: "53.10.01.01"
+                  name: "Sicherstellg. Elektrizitätsvers. incl. Förderung u. Konzessionsabgabe"
+        - kennung: "53.20"
+          kinder:
+            - kennung: "53.20.01"
+              kinder:
+                - kennung: "53.20.01.01"
+                  name: "Sicherstellg. Gasversorgung einschl. Förderung u. Konzessionsabgabe"
+        - kennung: "53.30"
+          kinder:
+            - kennung: "53.30.01"
+              kinder:
+                - kennung: "53.30.01.01"
+                  name: "Kommunale Wasserversorgung bei Zweckverbänden weitere Untergliederung"
+        - kennung: "53.80"
+          kinder:
+            - kennung: "53.80.01"
+              kinder:
+                - kennung: "53.80.01.01"
+                  name: "Abwasserbeseitigung"
+    - kennung: "54"
+      name: "Verkehrswesen"
+      kinder:
+        - kennung: "54.10"
+          kinder:
+            - kennung: "54.10.01"
+              kinder:
+                - kennung: "54.10.01.00"
+                  name: "AVL Gemeindestraßen"
+        - kennung: "54.20"
+          kinder:
+            - kennung: "54.20.01"
+              kinder:
+                - kennung: "54.20.01.00"
+                  name: "AVL Kreisstraßen"
+                - kennung: "54.20.01.01"
+                  name: "Bereitstellung und Unterhaltung der Rad- und Gehwege an Kreisstraßen"
+                - kennung: "54.20.01.02"
+                  name: "Bereitstellung und Unterhaltung von öffentlicher Beleuchtung an Kreisstraßen"
+                - kennung: "54.20.01.03"
+                  name: "Kalkulation und Abrechnung von Erschließungs- und Straßenbaubeiträgen für Kreisstraßen und Anlagen"
+        - kennung: "54.30"
+          kinder:
+            - kennung: "54.30.01"
+              kinder:
+                - kennung: "54.30.01.00"
+                  name: "AVL Staatsstraßen"
+                - kennung: "54.30.01.01"
+                  name: "Bereitstellung und Unterhaltung der Rad- und Gehwege an Staatsstraßen"
+                - kennung: "54.30.01.02"
+                  name: "Bereitstellung und Unterhaltung von öffentlicher Beleuchtung an Staatsstraßen"
+                - kennung: "54.30.01.03"
+                  name: "Kalkulation und Abrechnung von Erschließungs- und Straßenbaubeiträgen für Staatsstraßen und Anlagen"
+            - kennung: "54.30.02"
+              kinder:
+                - kennung: "54.30.02.01"
+                  name: "Verkehrsflächen und Anlagen, ÖPNV"
+        - kennung: "54.51"
+          kinder:
+            - kennung: "54.51.01"
+              kinder:
+                - kennung: "54.51.01.01"
+                  name: "Straßenreinigung"
+        - kennung: "54.60"
+          kinder:
+            - kennung: "54.60.01"
+              kinder:
+                - kennung: "54.60.01.01"
+                  name: "Bereitstellung und Betrieb und Wartung von Parkeinrichtungen, Parkscheinautomaten und Parkuhren"
+        - kennung: "54.70"
+          kinder:
+            - kennung: "54.70.01"
+              kinder:
+                - kennung: "54.70.01.00"
+                  name: "ÖPNV Muldental in Fahrt"
+        - kennung: "54.80"
+          kinder:
+            - kennung: "54.80.01"
+              kinder:
+                - kennung: "54.80.01.01"
+                  name: "Bereitstellung und Betrieb von sonstigen Anlagen des Personen- und Güterverkehrs"
+    - kennung: "55"
+      name: "Öffentliches Grün, Umwelt"
+      kinder:
+        - kennung: "55.10"
+          kinder:
+            - kennung: "55.10.01"
+              kinder:
+                - kennung: "55.10.01.01"
+                  name: "AVL Öffentliches Grün und Landschaftsbau"
+                - kennung: "55.10.01.02"
+                  name: "Grün- und Parkanlagen - Bereitstellung und Unterhaltung"
+                - kennung: "55.10.01.03"
+                  name: "Kleingartenanlagen und Kleingartenwesen - Bereitstellung und Unterhaltung"
+                - kennung: "55.10.01.04"
+                  name: "Spielplätze - Bereitstellung und Unterhaltung"
+                - kennung: "55.10.01.05"
+                  name: "Sonstige Maßnahmen und Einrichtungen die der Erholung und Freizeitgestaltung dienen"
+        - kennung: "55.20"
+          kinder:
+            - kennung: "55.20.01"
+              kinder:
+                - kennung: "55.20.01.01"
+                  name: "Autobahnsee Öffentliche Gewässer II. Ordnung - Unterhaltung"
+                - kennung: "55.20.01.03"
+                  name: "Bereitstellung, Unterhaltung, Instandsetzung und Betrieb wasserbaulicher Anlagen"
+                - kennung: "55.20.01.04"
+                  name: "Vorbeugender Grundwasser- und Hochwasserschutz"
+        - kennung: "55.30"
+          kinder:
+            - kennung: "55.30.01"
+              kinder:
+                - kennung: "55.30.01.02"
+                  name: "Personalisierte UGA Friedhof Brandis Waldstraße"
+        - kennung: "55.40"
+          kinder:
+            - kennung: "55.40.01"
+              kinder:
+                - kennung: "55.40.01.01"
+                  name: "AVL Naturschutz und Landschaftspflege"
+                - kennung: "55.40.01.02"
+                  name: "Durchführung und Förderung von landschaftspflegerischen und gestalterischen Maßnahmen (LEADER)"
+                - kennung: "55.40.01.03"
+                  name: "Ausgleichsflächen (Ökokonto)"
+        - kennung: "55.51"
+          kinder:
+            - kennung: "55.51.01"
+              kinder:
+                - kennung: "55.51.01.01"
+                  name: "AVL Land- und Forstwirtschaft"
+                - kennung: "55.51.01.02"
+                  name: "Bewirtschaftung und Verpachtung eigener landwirtschaftlicher Flächen"
+                - kennung: "55.51.01.03"
+                  name: "Vollzug von Förderprogrammen der ländlichen Entwicklung"
+    - kennung: "57"
+      name: "Wirtschaftsförderung"
+      kinder:
+        - kennung: "57.10"
+          kinder:
+            - kennung: "57.10.01"
+              kinder:
+                - kennung: "57.10.01.00"
+                  name: "AVL Wirtschaftsförderung"
+                - kennung: "57.10.01.01"
+                  name: "Gewerbegebiet Brandis-West"
+                - kennung: "57.10.01.02"
+                  name: "Gewerbepark Beucha"
+                - kennung: "57.10.01.03"
+                  name: "Gewerbepark Waldpolenz und ehem. Flugplatz"
+        - kennung: "57.30"
+          kinder:
+            - kennung: "57.30.01"
+              kinder:
+                - kennung: "57.30.01.01"
+                  name: "AVL Allg. Einrichtungen und Unternehmen"
+                - kennung: "57.30.01.02"
+                  name: "Sport- und Mehrzweckhalle Brandis"
+                - kennung: "57.30.01.03"
+                  name: "Gemeindehaus Polenz"
+                - kennung: "57.30.01.04"
+                  name: "Öffentliche Toiletten"
+                - kennung: "57.30.01.05"
+                  name: "Verpachtete Garagen und Garagenhöfe"
+                - kennung: "57.30.01.06"
+                  name: "Verpachtete Werbeflächen"
+                - kennung: "57.30.01.07"
+                  name: "Wochenmarkt, sonstige Markteinrichtungen"
+                - kennung: "57.30.01.08"
+                  name: "Festzelt, Bühne, sonst. Einrichtungen und Anlagen (st.pfl.)"
+            - kennung: "57.30.02"
+              kinder:
+                - kennung: "57.30.02.07"
+                  name: "Weihnachtsmärkte, andere Markteinrichtungen"
+        - kennung: "57.50"
+          kinder:
+            - kennung: "57.50.01"
+              kinder:
+                - kennung: "57.50.01.01"
+                  name: "Tourismusförderung/Spendenbänke"
+    - kennung: "61"
+      name: "Finanzwirtschaft, Steuern"
+      kinder:
+        - kennung: "61.10"
+          kinder:
+            - kennung: "61.10.01"
+              kinder:
+                - kennung: "61.10.01.01"
+                  name: "Steuern, allgemeine Zuweisungen, allgemeine Umlagen"
+        - kennung: "61.30"
+          kinder:
+            - kennung: "61.30.01"
+              kinder:
+                - kennung: "61.30.01.01"
+                  name: "Abwicklung der Vorjahre"
+    - kennung: "71"
+      name: "Brand- und Katastrophenschutz"
+      kinder:
+        - kennung: "71.20"
+          kinder:
+            - kennung: "71.20.01"
+              kinder:
+                - kennung: "71.20.01.00"
+                  name: "Katastrophenschutz, Hochwasser"
+    - kennung: "81"
+      name: "Personalwirtschaft"
+      kinder:
+        - kennung: "81.01"
+          kinder:
+            - kennung: "81.01.00"
+              kinder:
+                - kennung: "81.01.00.00"
+                  name: "Lohnverrechnung"

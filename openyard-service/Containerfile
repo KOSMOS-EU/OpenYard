@@ -1,0 +1,21 @@
+FROM docker.io/library/golang:1.23-alpine AS builder
+
+RUN apk add --no-cache git ca-certificates
+
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /openyard ./cmd/openyard/
+
+FROM docker.io/library/alpine:3.21
+RUN apk add --no-cache ca-certificates wget
+COPY --from=builder /openyard /usr/local/bin/openyard
+COPY config/ /etc/openyard/
+
+EXPOSE 9201
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD wget -q --spider http://localhost:9201/api/advancedGeneral/IsListening || exit 1
+
+ENTRYPOINT ["openyard", "server"]

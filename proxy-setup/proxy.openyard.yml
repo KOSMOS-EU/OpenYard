@@ -1,0 +1,68 @@
+# OpenYard Proxy-Konfiguration
+# Wird in die bestehende OpenCloud proxy.yaml integriert.
+#
+# Integration:
+#   1. Inhalt in die bestehende proxy.yaml unter policies einfügen
+#   2. OpenCloud neu starten: docker compose restart opencloud
+#
+# Der OpenYard-Service läuft auf Port 9201 im Container-Netz.
+# Alle /api/* Pfade werden mit unprotected: true geroutet,
+# weil OpenYard eine eigene SessionID-basierte Auth-Bridge hat.
+
+additional_policies:
+  - name: openyard
+    routes:
+      # Authentication (eigene Auth-Bridge)
+      - endpoint: /api/advancedUsers/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Documents
+      - endpoint: /api/advancedDocuments/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Folders
+      - endpoint: /api/advancedFolders/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Common Operations
+      - endpoint: /api/advancedCommon/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # System / Health
+      - endpoint: /api/advancedGeneral/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Basic Common (Search, Permalinks, Metadata)
+      - endpoint: /api/basicCommon/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Basic Config
+      - endpoint: /api/basicConfig/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Basic Documents (Extended API)
+      - endpoint: /api/basicDocuments/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Basic Folders (Extended API)
+      - endpoint: /api/basicFolders/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # Basic General (Enumerations)
+      - endpoint: /api/basicGeneral/
+        backend: http://openyard:9201
+        unprotected: true
+
+      # API Explorer
+      - endpoint: /api/ApiExplorer/
+        backend: http://openyard:9201
+        unprotected: true

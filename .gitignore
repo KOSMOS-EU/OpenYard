@@ -1,0 +1,30 @@
+# Binaries
+openyard-service/openyard
+aktenplan-setup/aktenplan-extract
+aktenplan-setup/aktenplan-apply
+
+# Build
+BUILD_VERSION
+*.exe
+*.test
+*.out
+
+# Deployment-specific (contains customer hosts/IPs)
+DIST
+
+# Environment & secrets
+.env.*
+*.pem
+*.key
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc

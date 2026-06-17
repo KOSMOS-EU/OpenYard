@@ -1,0 +1,115 @@
+volume: Sicherheit und Ordnung
+id: 476195e0-cc6f-4622-ac39-1bcd8dede652
+aktz: '12'
+total_folders: 37
+total_docs: 26
+aktz_count: 37
+tree:
+  name: Sicherheit und Ordnung
+  aktz: '12'
+  folders:
+  - name: Brandschutz
+    aktz: '12.60'
+    folders:
+    - name: Brandbekämpfung und Gefahrenabwehr
+      aktz: 12.60.01
+      folders:
+      - name: Brandbekämpfung und Gefahrenabwehr
+        aktz: 12.60.01.01
+      - name: FFW Geräte, Ausrüstungsgegenstände, Einsatztechnik
+        aktz: 12.60.01.04
+      - name: Gefahrenvorbeugung und vorbeugender Brandschutz
+        aktz: 12.60.01.05
+  - name: Katastrophenschutz
+    aktz: '12.80'
+    folders:
+    - name: Katastrophen- und Zivilschutz
+      aktz: 12.80.01
+      folders:
+      - name: AVL Katastrophenschutz
+        aktz: 12.80.01.00
+  - name: Melde- und Personenstandwesen
+    aktz: '12.22'
+    folders:
+    - name: Aufgaben des Meldewesens
+      aktz: 12.22.01
+  - name: Ordnungsaufgaben
+    aktz: '12.21'
+    folders:
+    - name: Allgemeine Gefahrenabwehr und Angelegenheiten der allgemeinen öffentlichen
+        Sicherheit und Ordnung einschließlich Obdachlose, Nachlass, Bestattungen,
+        Schornsteinfegerwesen
+      aktz: 12.21.01
+      folders:
+      - name: Allg. Gefahrenabwehr/Sicherheit
+        aktz: 12.21.01.01
+      - name: Dienstleistungen Ordnungswesen
+        aktz: 12.21.01.02
+      - name: Schiedsstelle, Friedensrichter
+        aktz: 12.21.01.04
+      - name: Verkehrsrechtliche Anordnungen und Genehmigungen
+        aktz: 12.21.01.06
+      - name: Überwachung des ruhenden und fließenden Verkehrs
+        aktz: 12.21.01.05
+        folders:
+        - name: K+S Parkraumservice GmbH
+          aktz: 12.21.01.05-05
+          folders:
+          - name: Korrespondenz Landratsamt
+            aktz: 12.21.01.05-05/2
+            docs: 4
+          - name: Rechtsgrundlagen
+            aktz: 12.21.01.05-05/3
+            docs: 3
+          - name: Vertrag
+            aktz: 12.21.01.05-05/1
+            docs: 1
+    - name: Überwachung erlaubnispflichtiger Gewerbebetriebe
+      aktz: 12.21.02
+      folders:
+      - name: Überwachung erlaubnispflichtiger Gewerbebetriebe
+        aktz: 12.21.02.01
+        docs: 1
+  - name: Statistik und Wahlen
+    aktz: '12.11'
+    folders:
+    - name: Statistische Angelegenheiten, eigene Statistiken und Auftragsstatistiken
+        aller Art
+      aktz: 12.11.01
+      folders:
+      - name: Wahlen
+        aktz: 12.11.01.01
+        folders:
+        - name: Wahlen
+          aktz: 12.11.01.01-01
+          folders:
+          - name: Kommunalwahl (Kreistag, Stadtrat und Ortschaftsräte)
+            aktz: 12.11.01.01-01/3
+            folders:
+            - name: '2024'
+              aktz: 12.11.01.01-01/3#1
+              folders:
+              - name: Landratsamt
+                aktz: 12.11.01.01-01/3#1-1
+                folders:
+                - name: Hinweise Datenschutzgrundverordnung
+                  aktz: 12.11.01.01-01/3#1-1-1
+                  docs: 7
+              - name: Wahllokale und Wahlhelfer
+                aktz: 12.11.01.01-01/3#1-13
+                folders:
+                - name: Bereitschaftserklärung
+                  aktz: 12.11.01.01-01/3#1-13-1
+                  docs: 1
+                - name: Einteilung
+                  aktz: 12.11.01.01-01/3#1-13-3
+                  docs: 4
+                - name: Freistellungen
+                  aktz: 12.11.01.01-01/3#1-13-2
+                  docs: 1
+                - name: Wahllokale
+                  aktz: 12.11.01.01-01/3#1-13-5
+                  folders:
+                  - name: Vertrag Lilly vanilly
+                    aktz: 12.11.01.01-01/3#1-13-5-1
+                    docs: 4
