@@ -7,6 +7,7 @@ import (
 	"io"
 	"strings"
 
+	userpb "github.com/cs3org/go-cs3apis/cs3/identity/user/v1beta1"
 	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
 	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
 	gateway "github.com/cs3org/go-cs3apis/cs3/gateway/v1beta1"
@@ -34,6 +35,8 @@ type Applier struct {
 	conn    *grpc.ClientConn
 	gw      gateway.GatewayAPIClient
 	token   string
+	user    *userpb.User
+	spaceRoot *provider.ResourceId // root ResourceId of the target space
 	created int
 	skipped int
 }
@@ -67,30 +70,32 @@ func (a *Applier) Run(ctx context.Context, ap *schema.Aktenplan) error {
 		}
 	}
 
-	basePath := a.opts.BasePath
-	if basePath == "" {
-		basePath = "/"
-		if ap.Aktenplan.Space != nil && ap.Aktenplan.Space.Name != "" {
-			basePath = "/" + ap.Aktenplan.Space.Name
-		}
+	spaceName := a.opts.SpaceName
+	if spaceName == "" && ap.Aktenplan.Space != nil {
+		spaceName = ap.Aktenplan.Space.Name
+	}
+	if spaceName == "" {
+		return fmt.Errorf("space name required (--space-name or from YAML)")
 	}
 
 	total := schema.CountKnoten(ap.Aktenplan.Knoten)
-	fmt.Fprintf(a.opts.Output, "Aktenplan: %d Knoten, Basis-Pfad: %s\n", total, basePath)
+	fmt.Fprintf(a.opts.Output, "Space: %s, Knoten: %d\n", spaceName, total)
 
 	if a.opts.DryRun {
 		fmt.Fprintln(a.opts.Output, "[DRY-RUN] Keine Änderungen werden durchgeführt.")
+		fmt.Fprintf(a.opts.Output, "[DRY] create space %q\n", spaceName)
 	}
 
-	// Ensure base path exists
+	// Create or find the space
 	if !a.opts.DryRun {
-		if err := a.ensureContainer(ctx, basePath); err != nil {
-			return fmt.Errorf("base path %s: %w", basePath, err)
+		if err := a.ensureSpace(ctx, spaceName); err != nil {
+			return fmt.Errorf("space %q: %w", spaceName, err)
 		}
+		fmt.Fprintf(a.opts.Output, "Space ready: %s\n", spaceName)
 	}
 
-	// Walk and create
-	schema.Walk(ap.Aktenplan.Knoten, basePath, func(path string, k *schema.Knoten, depth int) {
+	// Walk and create folders inside the space
+	schema.Walk(ap.Aktenplan.Knoten, "", func(relPath string, k *schema.Knoten, depth int) {
 		indent := strings.Repeat("  ", depth)
 
 		// Build display label
@@ -103,17 +108,20 @@ func (a *Applier) Run(ctx context.Context, ap *schema.Aktenplan) error {
 			protTag = " (protected)"
 		}
 
+		// Display name for the folder segment
+		folderName := k.Kennung
+		if k.Name != "" {
+			folderName = k.Kennung + " " + k.Name
+		}
+
 		if a.opts.DryRun {
-			fmt.Fprintf(a.opts.Output, "%s[DRY] mkdir %s%s%s\n", indent, path, typeTag, protTag)
-			for _, r := range k.Rechte {
-				fmt.Fprintf(a.opts.Output, "%s  → recht: %s=%s\n", indent, r.Rolle, r.Wirkung)
-			}
+			fmt.Fprintf(a.opts.Output, "%s[DRY] mkdir %s%s%s\n", indent, folderName, typeTag, protTag)
 			return
 		}
 
-		err := a.ensureContainer(ctx, path)
+		err := a.ensureContainer(ctx, relPath)
 		if err != nil {
-			fmt.Fprintf(a.opts.Output, "%sERROR %s: %v\n", indent, path, err)
+			fmt.Fprintf(a.opts.Output, "%sERROR %s: %v\n", indent, folderName, err)
 			return
 		}
 
@@ -128,10 +136,10 @@ func (a *Applier) Run(ctx context.Context, ap *schema.Aktenplan) error {
 			md["oy.protected"] = "true"
 		}
 
-		a.setMetadata(ctx, path, md)
+		a.setMetadata(ctx, relPath, md)
 
 		if depth <= 2 || (a.created+a.skipped)%50 == 0 {
-			fmt.Fprintf(a.opts.Output, "%sOK %s%s%s\n", indent, path, typeTag, protTag)
+			fmt.Fprintf(a.opts.Output, "%sOK %s%s%s\n", indent, folderName, typeTag, protTag)
 		}
 	})
 
@@ -152,6 +160,7 @@ func (a *Applier) authenticate(ctx context.Context) error {
 		return fmt.Errorf("authenticate: %s", res.Status.Message)
 	}
 	a.token = res.Token
+	a.user = res.User
 	return nil
 }
 
@@ -159,36 +168,82 @@ func (a *Applier) ctx(parent context.Context) context.Context {
 	return metadata.AppendToOutgoingContext(parent, "x-access-token", a.token)
 }
 
-func (a *Applier) ensureContainer(ctx context.Context, path string) error {
+// ensureSpace creates a storage space or finds an existing one by name.
+func (a *Applier) ensureSpace(ctx context.Context, spaceName string) error {
 	ctx = a.ctx(ctx)
 
-	// Check if exists
-	statRes, err := a.gw.Stat(ctx, &provider.StatRequest{
-		Ref: &provider.Reference{Path: path},
+	// List existing spaces and check if one matches
+	listRes, err := a.gw.ListStorageSpaces(ctx, &provider.ListStorageSpacesRequest{})
+	if err == nil && listRes.Status.Code == rpc.Code_CODE_OK {
+		for _, space := range listRes.StorageSpaces {
+			if space.Name == spaceName {
+				a.spaceRoot = space.Root
+				fmt.Fprintf(a.opts.Output, "  Space exists: %s\n", spaceName)
+				return nil
+			}
+		}
+	}
+
+	// Create new space
+	createRes, err := a.gw.CreateStorageSpace(ctx, &provider.CreateStorageSpaceRequest{
+		Type:  "project",
+		Name:  spaceName,
+		Owner: a.user,
 	})
+	if err != nil {
+		return fmt.Errorf("create space: %w", err)
+	}
+	if createRes.Status.Code != rpc.Code_CODE_OK {
+		return fmt.Errorf("create space: %s", createRes.Status.Message)
+	}
+	if createRes.StorageSpace != nil && createRes.StorageSpace.Root != nil {
+		a.spaceRoot = createRes.StorageSpace.Root
+	}
+	fmt.Fprintf(a.opts.Output, "  Space created: %s\n", spaceName)
+	return nil
+}
+
+// ref builds a CS3 Reference relative to the space root.
+func (a *Applier) ref(relPath string) *provider.Reference {
+	if a.spaceRoot != nil {
+		p := "."
+		if relPath != "" && relPath != "/" {
+			p = "." + relPath
+		}
+		return &provider.Reference{ResourceId: a.spaceRoot, Path: p}
+	}
+	// Fallback to absolute path (shouldn't happen in normal flow)
+	return &provider.Reference{Path: relPath}
+}
+
+func (a *Applier) ensureContainer(ctx context.Context, relPath string) error {
+	ctx = a.ctx(ctx)
+
+	ref := a.ref(relPath)
+
+	// Check if exists
+	statRes, err := a.gw.Stat(ctx, &provider.StatRequest{Ref: ref})
 	if err == nil && statRes.Status.Code == rpc.Code_CODE_OK {
 		a.skipped++
-		return nil // already exists
+		return nil
 	}
 
 	// Create
-	res, err := a.gw.CreateContainer(ctx, &provider.CreateContainerRequest{
-		Ref: &provider.Reference{Path: path},
-	})
+	res, err := a.gw.CreateContainer(ctx, &provider.CreateContainerRequest{Ref: ref})
 	if err != nil {
-		return fmt.Errorf("create %s: %w", path, err)
+		return fmt.Errorf("create %s: %w", relPath, err)
 	}
 	if res.Status.Code != rpc.Code_CODE_OK && res.Status.Code != rpc.Code_CODE_ALREADY_EXISTS {
-		return fmt.Errorf("create %s: %s", path, res.Status.Message)
+		return fmt.Errorf("create %s: %s", relPath, res.Status.Message)
 	}
 	a.created++
 	return nil
 }
 
-func (a *Applier) setMetadata(ctx context.Context, path string, md map[string]string) {
+func (a *Applier) setMetadata(ctx context.Context, relPath string, md map[string]string) {
 	ctx = a.ctx(ctx)
 	_, _ = a.gw.SetArbitraryMetadata(ctx, &provider.SetArbitraryMetadataRequest{
-		Ref: &provider.Reference{Path: path},
+		Ref:               a.ref(relPath),
 		ArbitraryMetadata: &provider.ArbitraryMetadata{Metadata: md},
 	})
 }

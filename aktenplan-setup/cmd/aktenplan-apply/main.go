@@ -15,7 +15,7 @@ func main() {
 	gateway := flag.String("gateway", envOr("OPENYARD_REVA_GATEWAY", "127.0.0.1:9142"), "CS3 gateway address")
 	user := flag.String("user", envOr("OPENYARD_ADMIN_USER", "admin"), "Admin username")
 	pass := flag.String("pass", envOr("OPENYARD_ADMIN_PASS", ""), "Admin password")
-	basePath := flag.String("base-path", "", "Override base path (default: from YAML space name)")
+	spaceName := flag.String("space-name", "", "Override space name (default: from YAML)")
 	dryRun := flag.Bool("dry-run", false, "Show what would be created without making changes")
 	flag.Parse()
 
@@ -39,11 +39,11 @@ func main() {
 		}
 
 		total := schema.CountKnoten(ap.Aktenplan.Knoten)
-		spaceName := ""
+		sn := ""
 		if ap.Aktenplan.Space != nil {
-			spaceName = ap.Aktenplan.Space.Name
+			sn = ap.Aktenplan.Space.Name
 		}
-		fmt.Printf("  Space: %s, Knoten: %d\n", spaceName, total)
+		fmt.Printf("  Space: %s, Knoten: %d\n", sn, total)
 
 		if *dryRun {
 			fmt.Println()
@@ -53,7 +53,7 @@ func main() {
 			GatewayAddr: *gateway,
 			Username:    *user,
 			Password:    *pass,
-			BasePath:    *basePath,
+			SpaceName:   *spaceName,
 			DryRun:      *dryRun,
 			Output:      os.Stdout,
 		})
