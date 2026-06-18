@@ -93,15 +93,18 @@ func (a *Applier) Run(ctx context.Context, ap *schema.Aktenplan) error {
 	schema.Walk(ap.Aktenplan.Knoten, basePath, func(path string, k *schema.Knoten, depth int) {
 		indent := strings.Repeat("  ", depth)
 
+		// Build display label
+		typeTag := ""
+		if k.Typ != "" {
+			typeTag = " [" + k.Typ + "]"
+		}
+		protTag := ""
+		if k.Immutable {
+			protTag = " (protected)"
+		}
+
 		if a.opts.DryRun {
-			label := k.Kennung
-			if k.Name != "" {
-				label += " " + k.Name
-			}
-			fmt.Fprintf(a.opts.Output, "%s[DRY] mkdir %s\n", indent, path)
-			if k.Immutable {
-				fmt.Fprintf(a.opts.Output, "%s  → immutable\n", indent)
-			}
+			fmt.Fprintf(a.opts.Output, "%s[DRY] mkdir %s%s%s\n", indent, path, typeTag, protTag)
 			for _, r := range k.Rechte {
 				fmt.Fprintf(a.opts.Output, "%s  → recht: %s=%s\n", indent, r.Rolle, r.Wirkung)
 			}
@@ -114,16 +117,21 @@ func (a *Applier) Run(ctx context.Context, ap *schema.Aktenplan) error {
 			return
 		}
 
-		// Set immutable marker via ArbitraryMetadata
+		// Build metadata
+		md := map[string]string{
+			"oy.fileReference": k.Kennung,
+		}
+		if k.Typ != "" {
+			md["_type_"+k.Typ] = "true"
+		}
 		if k.Immutable {
-			a.setMetadata(ctx, path, map[string]string{
-				"openyard.aktenplan.immutable": "true",
-				"openyard.aktenplan.kennung":   k.Kennung,
-			})
-		} else {
-			a.setMetadata(ctx, path, map[string]string{
-				"openyard.aktenplan.kennung": k.Kennung,
-			})
+			md["oy.protected"] = "true"
+		}
+
+		a.setMetadata(ctx, path, md)
+
+		if depth <= 2 || (a.created+a.skipped)%50 == 0 {
+			fmt.Fprintf(a.opts.Output, "%sOK %s%s%s\n", indent, path, typeTag, protTag)
 		}
 	})
 

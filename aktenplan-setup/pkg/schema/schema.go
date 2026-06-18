@@ -47,6 +47,7 @@ type Recht struct {
 type Knoten struct {
 	Kennung   string   `yaml:"kennung"`
 	Name      string   `yaml:"name,omitempty"`
+	Typ       string   `yaml:"typ,omitempty"`       // hauptgruppe, gruppe, sachgruppe, akte, register, vorgang, band
 	Immutable bool     `yaml:"immutable,omitempty"`
 	Rechte    []Recht  `yaml:"rechte,omitempty"`
 	Kinder    []Knoten `yaml:"kinder,omitempty"`
