@@ -30,6 +30,15 @@ if [ ! -f "$DEPLOY_DIR/remoteEntry.mjs" ]; then
 fi
 
 # Deploy
+# nuhost6 deploy
+if [ -n "$NUHOST_TARGET" ]; then
+    echo "[nuhost] nu packages pull $NUHOST_TARGET $APP"
+    ssh "root@$HOST" "nu packages pull $NUHOST_TARGET $APP && nu restart $NUHOST_TARGET"
+    echo ""
+    echo "=== $APP published (nuhost6) ==="
+    exit 0
+fi
+
 echo "[sync] -> $HOST:$REMOTE_BASE/views/$APP/"
 ssh "root@$HOST" "mkdir -p $REMOTE_BASE/views/$APP"
 rsync -avz --delete "$DEPLOY_DIR/" "root@$HOST:$REMOTE_BASE/views/$APP/"
