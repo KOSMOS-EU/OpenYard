@@ -10,8 +10,15 @@ if [[ -f "$SCRIPT_DIR/DIST" ]]; then
     set +a
 fi
 
-IMAGE="${IMAGE:-codeberg.org/kosmos-eu/openyard}"
+IMAGE="${IMAGE:-docker.io/flash7777pods/openyard}"
 TAG="${TAG:-$(date +%Y%m%d-%H%M)}"
+
+# Push credentials: PUSH_USER:PUSH_TOKEN for Docker Hub, token:PUSH_TOKEN for Codeberg
+if [[ -n "${PUSH_USER:-}" ]]; then
+    PUSH_CREDS="${PUSH_USER}:${PUSH_TOKEN}"
+else
+    PUSH_CREDS="token:${PUSH_TOKEN}"
+fi
 
 COMPONENT="${1:-openyard-service}"
 
@@ -35,9 +42,9 @@ case "$COMPONENT" in
 
         if [[ -n "${PUSH_TOKEN:-}" ]]; then
             echo "Pushing..."
-            buildah push --creds="token:${PUSH_TOKEN}" "${IMAGE}:${TAG}"
+            buildah push --creds="${PUSH_CREDS}" "${IMAGE}:${TAG}"
             buildah tag "${IMAGE}:${TAG}" "${IMAGE}:latest"
-            buildah push --creds="token:${PUSH_TOKEN}" "${IMAGE}:latest"
+            buildah push --creds="${PUSH_CREDS}" "${IMAGE}:latest"
             echo "Pushed: ${IMAGE}:${TAG} + latest"
         fi
         ;;
@@ -60,9 +67,9 @@ case "$COMPONENT" in
 
         if [[ -n "${PUSH_TOKEN:-}" ]]; then
             echo "Pushing..."
-            buildah push --creds="token:${PUSH_TOKEN}" "${IMAGE}-aktenplan:${TAG}"
+            buildah push --creds="${PUSH_CREDS}" "${IMAGE}-aktenplan:${TAG}"
             buildah tag "${IMAGE}-aktenplan:${TAG}" "${IMAGE}-aktenplan:latest"
-            buildah push --creds="token:${PUSH_TOKEN}" "${IMAGE}-aktenplan:latest"
+            buildah push --creds="${PUSH_CREDS}" "${IMAGE}-aktenplan:latest"
             echo "Pushed: ${IMAGE}-aktenplan:${TAG} + latest"
         fi
         ;;
