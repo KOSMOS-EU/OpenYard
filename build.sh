@@ -13,9 +13,13 @@ fi
 IMAGE="${IMAGE:-docker.io/flash7777pods/openyard}"
 TAG="${TAG:-$(date +%Y%m%d-%H%M)}"
 
-# Push credentials: PUSH_USER:PUSH_TOKEN for Docker Hub, token:PUSH_TOKEN for Codeberg
+# Push credentials: Docker Hub uses username:token, Codeberg uses token:token
 if [[ -n "${PUSH_USER:-}" ]]; then
     PUSH_CREDS="${PUSH_USER}:${PUSH_TOKEN}"
+elif [[ "$IMAGE" == docker.io/* ]]; then
+    # Extract Docker Hub username from image path (docker.io/USER/image)
+    PUSH_CREDS="${IMAGE#docker.io/}"
+    PUSH_CREDS="${PUSH_CREDS%%/*}:${PUSH_TOKEN}"
 else
     PUSH_CREDS="token:${PUSH_TOKEN}"
 fi
