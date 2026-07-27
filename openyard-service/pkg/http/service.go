@@ -89,6 +89,7 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 			// Folders
 			r.Post("/advancedFolders/GetFolder", h.GetFolder)
 			r.Post("/advancedFolders/GetFolderByFolderpath", h.GetFolderByFolderpath)
+			r.Get("/advancedFolders/GetFolderByWorkID", h.GetFolderByWorkID)
 			r.Get("/advancedFolders/IsFolder", h.IsFolder)
 			r.Post("/advancedFolders/SetFolder", h.SetFolder)
 			r.Post("/advancedFolders/DeleteFolders", h.DeleteFolders)

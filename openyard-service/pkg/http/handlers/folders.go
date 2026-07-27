@@ -2,14 +2,18 @@ package handlers
 
 import (
 	"context"
+	"crypto/rand"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"path"
+	"strconv"
 	"strings"
 
 	userpb "github.com/cs3org/go-cs3apis/cs3/identity/user/v1beta1"
 	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
 	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
+	gocache "github.com/patrickmn/go-cache"
 	"github.com/rs/zerolog/log"
 )
 
@@ -62,30 +66,142 @@ func (h *Handlers) GetFolder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Build legacy DMS-compatible response
-	subFolders := make([]map[string]interface{}, 0)
-	subDocs := make([]map[string]interface{}, 0)
+	allFolders := make([]map[string]interface{}, 0)
+	allDocs := make([]map[string]interface{}, 0)
 	for _, info := range listRes.Infos {
 		mapped := mapResourceInfo(info)
 		if info.Type == provider.ResourceType_RESOURCE_TYPE_CONTAINER {
-			subFolders = append(subFolders, map[string]interface{}{
+			allFolders = append(allFolders, map[string]interface{}{
 				"FolderID":   encodeObjectID(info.Id),
 				"Foldername": unescapeFolderName(path.Base(info.Path)),
 				"Aktz":       "",
 			})
 		} else {
-			subDocs = append(subDocs, mapped)
+			allDocs = append(allDocs, mapped)
 		}
 	}
 
+	// Pagination via MaxResultPerRequestForWorkObject (default: return all)
+	maxPerRequest := 0
+	if v := r.URL.Query().Get("MaxResultPerRequestForWorkObject"); v != "" {
+		if n, err := strconv.Atoi(v); err == nil && n > 0 {
+			maxPerRequest = n
+		}
+	}
+
+	folderInfo := mapFolderInfo(statRes.Info)
+	folderInfo["SubFoldersCount"] = len(allFolders)
+	folderInfo["SubDocsCount"] = len(allDocs)
+
+	subFolders, subDocs, nextWorkID := h.paginateSubElements(folderInfo, allFolders, allDocs, maxPerRequest)
+
+	folderInfo["SubElementsLoaded"] = len(subFolders) + len(subDocs)
+
 	writeJSON(w, 200, map[string]interface{}{
-		"FolderInfo":        mapFolderInfo(statRes.Info),
+		"FolderInfo":        folderInfo,
 		"SubFolders":        subFolders,
 		"SubDocs":           subDocs,
-		"TotalResultsCount": len(subFolders) + len(subDocs),
-		"NextWorkId":        "00000000-0000-0000-0000-000000000000",
+		"TotalResultsCount": len(allFolders) + len(allDocs),
+		"NextWorkId":        nextWorkID,
 		"Notes":             nil,
 		"TaskLog":           taskLogOK(),
 	})
+}
+
+// GET /api/advancedFolders/GetFolderByWorkID?WorkID={WorkID}
+// Returns the next batch of sub-elements for a paginated GetFolder response.
+func (h *Handlers) GetFolderByWorkID(w http.ResponseWriter, r *http.Request) {
+	workID := r.URL.Query().Get("WorkID")
+	if workID == "" || workID == "00000000-0000-0000-0000-000000000000" {
+		writeError(w, 400, "INVALID_REQUEST", "WorkID required")
+		return
+	}
+
+	v, ok := h.workCache.Get(workID)
+	if !ok {
+		writeError(w, 404, "NOT_FOUND", "WorkID expired or unknown")
+		return
+	}
+	h.workCache.Delete(workID)
+	wo := v.(*workObject)
+
+	// MaxResultPerRequestForWorkObject from original request carries over
+	maxPerRequest := 0
+	if v := r.URL.Query().Get("MaxResultPerRequestForWorkObject"); v != "" {
+		if n, err := strconv.Atoi(v); err == nil && n > 0 {
+			maxPerRequest = n
+		}
+	}
+
+	folderInfo := wo.FolderInfo
+	subFolders, subDocs, nextWorkID := h.paginateSubElements(folderInfo, wo.SubFolders, wo.SubDocs, maxPerRequest)
+
+	folderInfo["SubElementsLoaded"] = len(subFolders) + len(subDocs)
+
+	writeJSON(w, 200, map[string]interface{}{
+		"FolderInfo":        folderInfo,
+		"SubFolders":        subFolders,
+		"SubDocs":           subDocs,
+		"TotalResultsCount": len(wo.SubFolders) + len(wo.SubDocs),
+		"NextWorkId":        nextWorkID,
+		"Notes":             nil,
+		"TaskLog":           taskLogOK(),
+	})
+}
+
+// paginateSubElements returns the first maxPerRequest elements and stores the rest
+// under a new WorkID. Returns all elements if maxPerRequest is 0 or total fits.
+func (h *Handlers) paginateSubElements(
+	folderInfo map[string]interface{},
+	allFolders, allDocs []map[string]interface{},
+	maxPerRequest int,
+) (subFolders, subDocs []map[string]interface{}, nextWorkID string) {
+	total := len(allFolders) + len(allDocs)
+	nextWorkID = "00000000-0000-0000-0000-000000000000"
+
+	if maxPerRequest <= 0 || total <= maxPerRequest {
+		return allFolders, allDocs, nextWorkID
+	}
+
+	// Take folders first, then docs up to the limit
+	if len(allFolders) >= maxPerRequest {
+		subFolders = allFolders[:maxPerRequest]
+		subDocs = nil
+		remainFolders := allFolders[maxPerRequest:]
+		remainDocs := allDocs
+		nextWorkID = h.storeWorkObject(folderInfo, remainFolders, remainDocs)
+	} else {
+		subFolders = allFolders
+		docsLimit := maxPerRequest - len(allFolders)
+		if docsLimit > len(allDocs) {
+			docsLimit = len(allDocs)
+		}
+		subDocs = allDocs[:docsLimit]
+		remainDocs := allDocs[docsLimit:]
+		if len(remainDocs) > 0 {
+			nextWorkID = h.storeWorkObject(folderInfo, nil, remainDocs)
+		}
+	}
+	return
+}
+
+func (h *Handlers) storeWorkObject(folderInfo map[string]interface{}, folders, docs []map[string]interface{}) string {
+	wid := generateWorkID()
+	h.workCache.Set(wid, &workObject{
+		FolderInfo: folderInfo,
+		SubFolders: folders,
+		SubDocs:    docs,
+	}, gocache.DefaultExpiration)
+	return wid
+}
+
+func generateWorkID() string {
+	b := make([]byte, 16)
+	rand.Read(b)
+	b[6] = (b[6] & 0x0f) | 0x40
+	b[8] = (b[8] & 0x3f) | 0x80
+	return fmt.Sprintf("%08x-%04x-%04x-%04x-%012x",
+		b[0:4], b[4:6], b[6:8], b[8:10], b[10:16])
 }
 
 // getFolderRoot lists all spaces as legacy DMS root volumes.

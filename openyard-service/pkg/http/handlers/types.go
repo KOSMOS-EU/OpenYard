@@ -4,6 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"time"
+
+	gocache "github.com/patrickmn/go-cache"
 
 	"github.com/kosmos-eu/openyard/pkg/auth"
 	"github.com/kosmos-eu/openyard/pkg/cs3client"
@@ -12,13 +15,26 @@ import (
 
 // Handlers holds shared dependencies for all endpoint handlers.
 type Handlers struct {
-	gw       *cs3client.Client
-	sessions *auth.SessionCache
-	uploader upload.Uploader
+	gw        *cs3client.Client
+	sessions  *auth.SessionCache
+	uploader  upload.Uploader
+	workCache *gocache.Cache // WorkID → *workObject for GetFolder pagination
+}
+
+// workObject stores remaining sub-elements for paginated GetFolder responses.
+type workObject struct {
+	FolderInfo map[string]interface{}
+	SubFolders []map[string]interface{}
+	SubDocs    []map[string]interface{}
 }
 
 func New(gw *cs3client.Client, sessions *auth.SessionCache, up upload.Uploader) *Handlers {
-	return &Handlers{gw: gw, sessions: sessions, uploader: up}
+	return &Handlers{
+		gw:        gw,
+		sessions:  sessions,
+		uploader:  up,
+		workCache: gocache.New(10*time.Minute, 5*time.Minute),
+	}
 }
 
 // contextKey for session context propagation.

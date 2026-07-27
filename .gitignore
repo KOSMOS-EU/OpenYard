@@ -11,6 +11,7 @@ BUILD_VERSION
 
 # Deployment-specific (contains customer hosts/IPs)
 DIST
+info.md
 
 # Environment & secrets
 .env.*
