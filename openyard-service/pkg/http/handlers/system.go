@@ -26,7 +26,7 @@ func (h *Handlers) IsListening(w http.ResponseWriter, r *http.Request) {
 func (h *Handlers) GetServerSettings(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, 200, map[string]interface{}{
 		"Settings": map[string]interface{}{
-			"ServerVersion":       "1.1.0",
+			"ServerVersion":       "1.2.0-grant",
 			"ApiVersion":          "Core 1.1",
 			"ProductName":         "OpenYard DMS",
 			"MaxUploadSizeMB":     512,
