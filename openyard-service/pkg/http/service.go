@@ -175,6 +175,7 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 		r.Get("/migration/status", h.GetMigrationStatus)
 		r.Post("/migration/map", h.MapMigrationID)
 		r.Post("/migration/persist", h.PersistMigration)
+		r.Post("/migration/grant", h.GrantSpaceAccess)
 	})
 
 	// --- IDP / Identity Server Endpoints ---

@@ -4,7 +4,13 @@ import (
 	"encoding/json"
 	"net/http"
 
+	grouppb "github.com/cs3org/go-cs3apis/cs3/identity/group/v1beta1"
+	userpb "github.com/cs3org/go-cs3apis/cs3/identity/user/v1beta1"
+	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
+	collaboration "github.com/cs3org/go-cs3apis/cs3/sharing/collaboration/v1beta1"
+	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
 	"github.com/kosmos-eu/openyard/pkg/migration"
+	"github.com/rs/zerolog/log"
 )
 
 // GET /api/advancedGeneral/IsListening
@@ -146,6 +152,117 @@ func (h *Handlers) MapMigrationID(w http.ResponseWriter, r *http.Request) {
 		"oldId":  body.OldId,
 		"newId":  body.NewId,
 	})
+}
+
+// POST /api/management/space/grant
+// Adds a group or user grant with manager permissions on a space.
+// Body: {"SpaceId": "<encoded-object-id>", "Principal": "group:Admin", "Role": "manager"}
+// Principal: "group:<name>" for groups, "<userId>" for users.
+// Role: "manager" (all perms), "editor" (read+write), "viewer" (read-only).
+func (h *Handlers) GrantSpaceAccess(w http.ResponseWriter, r *http.Request) {
+	r = withCS3Token(r)
+
+	var body struct {
+		SpaceId   string `json:"SpaceId"`
+		Principal string `json:"Principal"`
+		Role      string `json:"Role"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || body.SpaceId == "" || body.Principal == "" {
+		writeError(w, 400, "INVALID_REQUEST", "SpaceId and Principal required")
+		return
+	}
+	if body.Role == "" {
+		body.Role = "manager"
+	}
+
+	ref, err := refFromObjectID(body.SpaceId)
+	if err != nil {
+		writeError(w, 400, "INVALID_REQUEST", err.Error())
+		return
+	}
+
+	grantee := &provider.Grantee{}
+	if len(body.Principal) > 6 && body.Principal[:6] == "group:" {
+		groupName := body.Principal[6:]
+		grantee.Type = provider.GranteeType_GRANTEE_TYPE_GROUP
+		grantee.Id = &provider.Grantee_GroupId{
+			GroupId: &grouppb.GroupId{OpaqueId: groupName},
+		}
+	} else {
+		grantee.Type = provider.GranteeType_GRANTEE_TYPE_USER
+		grantee.Id = &provider.Grantee_UserId{
+			UserId: &userpb.UserId{OpaqueId: body.Principal},
+		}
+	}
+
+	perms := roleToPermissions(body.Role)
+
+	// Stat to get ResourceInfo for CreateShare
+	statRes, serr := h.gw.Gateway.Stat(r.Context(), &provider.StatRequest{Ref: ref})
+	if serr != nil || statRes.Status.Code != rpc.Code_CODE_OK {
+		writeError(w, 404, "NOT_FOUND", "Space not found")
+		return
+	}
+
+	res, err := h.gw.Gateway.CreateShare(r.Context(), &collaboration.CreateShareRequest{
+		ResourceInfo: statRes.Info,
+		Grant: &collaboration.ShareGrant{
+			Grantee:     grantee,
+			Permissions: &collaboration.SharePermissions{Permissions: perms},
+		},
+	})
+	if err != nil {
+		log.Error().Err(err).Str("principal", body.Principal).Msg("add grant failed")
+		writeError(w, 500, "INTERNAL_ERROR", "Add grant failed: "+err.Error())
+		return
+	}
+	if res.Status.Code != rpc.Code_CODE_OK {
+		writeError(w, 500, "INTERNAL_ERROR", res.Status.Message)
+		return
+	}
+
+	log.Info().Str("space", body.SpaceId).Str("principal", body.Principal).Str("role", body.Role).Msg("space grant added")
+	writeJSON(w, 200, map[string]interface{}{
+		"status":    "ok",
+		"spaceId":   body.SpaceId,
+		"principal": body.Principal,
+		"role":      body.Role,
+	})
+}
+
+func roleToPermissions(role string) *provider.ResourcePermissions {
+	switch role {
+	case "manager":
+		return &provider.ResourcePermissions{
+			Stat:                 true,
+			ListContainer:        true,
+			InitiateFileDownload: true,
+			InitiateFileUpload:   true,
+			CreateContainer:      true,
+			Delete:               true,
+			Move:                 true,
+			AddGrant:             true,
+			RemoveGrant:          true,
+			UpdateGrant:          true,
+			DenyGrant:            true,
+		}
+	case "editor":
+		return &provider.ResourcePermissions{
+			Stat:                 true,
+			ListContainer:        true,
+			InitiateFileDownload: true,
+			InitiateFileUpload:   true,
+			CreateContainer:      true,
+			Delete:               true,
+			Move:                 true,
+		}
+	default: // viewer
+		return &provider.ResourcePermissions{
+			Stat:                 true,
+			ListContainer:        true,
+			InitiateFileDownload: true,
+		}
+	}
 }
 
 // ImportDocumentDynamic is implemented in import_doc.go
