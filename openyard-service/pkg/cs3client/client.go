@@ -1,15 +1,22 @@
 package cs3client
 
 import (
+	"context"
+	"sync"
+	"time"
+
 	gateway "github.com/cs3org/go-cs3apis/cs3/gateway/v1beta1"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/keepalive"
-	"time"
 )
 
-// Client wraps the CS3 gateway gRPC connection.
+// Client wraps the CS3 gateway gRPC connection with automatic reconnect.
 type Client struct {
+	addr    string
+	mu      sync.RWMutex
 	conn    *grpc.ClientConn
 	Gateway gateway.GatewayAPIClient
 }
@@ -28,10 +35,8 @@ const retryPolicy = `{
 	}]
 }`
 
-func New(addr string) (*Client, error) {
-	conn, err := grpc.NewClient(
-		// dns:/// prefix forces the gRPC DNS resolver which re-resolves
-		// periodically (default 30min, but also on connection failure).
+func dial(addr string) (*grpc.ClientConn, error) {
+	return grpc.NewClient(
 		"dns:///"+addr,
 		grpc.WithTransportCredentials(insecure.NewCredentials()),
 		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(10<<20)),
@@ -42,15 +47,68 @@ func New(addr string) (*Client, error) {
 			PermitWithoutStream: false,
 		}),
 	)
+}
+
+func New(addr string) (*Client, error) {
+	conn, err := dial(addr)
 	if err != nil {
 		return nil, err
 	}
-	return &Client{
+	c := &Client{
+		addr:    addr,
 		conn:    conn,
 		Gateway: gateway.NewGatewayAPIClient(conn),
-	}, nil
+	}
+	go c.watchConnection()
+	return c, nil
+}
+
+// watchConnection monitors the gRPC connection state and reconnects
+// when it enters TransientFailure or Shutdown.
+func (c *Client) watchConnection() {
+	for {
+		c.mu.RLock()
+		conn := c.conn
+		c.mu.RUnlock()
+
+		state := conn.GetState()
+		if !conn.WaitForStateChange(context.Background(), state) {
+			return // conn closed
+		}
+		newState := conn.GetState()
+		if newState == connectivity.TransientFailure || newState == connectivity.Shutdown {
+			log.Warn().Str("state", newState.String()).Msg("cs3 gateway connection lost, reconnecting")
+			c.reconnect()
+		}
+	}
+}
+
+func (c *Client) reconnect() {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	// Close old connection (ignore errors)
+	c.conn.Close()
+
+	for attempt := 1; ; attempt++ {
+		conn, err := dial(c.addr)
+		if err == nil {
+			c.conn = conn
+			c.Gateway = gateway.NewGatewayAPIClient(conn)
+			log.Info().Int("attempt", attempt).Msg("cs3 gateway reconnected")
+			return
+		}
+		wait := time.Duration(attempt) * 2 * time.Second
+		if wait > 30*time.Second {
+			wait = 30 * time.Second
+		}
+		log.Error().Err(err).Int("attempt", attempt).Dur("retry_in", wait).Msg("cs3 gateway reconnect failed")
+		time.Sleep(wait)
+	}
 }
 
 func (c *Client) Close() error {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 	return c.conn.Close()
 }
