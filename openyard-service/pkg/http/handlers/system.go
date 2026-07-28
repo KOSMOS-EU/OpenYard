@@ -175,7 +175,7 @@ func (h *Handlers) GrantSpaceAccess(w http.ResponseWriter, r *http.Request) {
 		body.Role = "manager"
 	}
 
-	ref, err := refFromObjectID(body.SpaceId)
+	rid, err := decodeObjectID(body.SpaceId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -197,15 +197,13 @@ func (h *Handlers) GrantSpaceAccess(w http.ResponseWriter, r *http.Request) {
 
 	perms := roleToPermissions(body.Role)
 
-	// Stat to get ResourceInfo for CreateShare
-	statRes, serr := h.gw.Gateway.Stat(r.Context(), &provider.StatRequest{Ref: ref})
-	if serr != nil || statRes.Status.Code != rpc.Code_CODE_OK {
-		writeError(w, 404, "NOT_FOUND", "Space not found")
-		return
-	}
-
+	// Use ResourceId directly (avoids Stat permission issues on spaces
+	// where the current user may not yet have access)
 	res, err := h.gw.Gateway.CreateShare(r.Context(), &collaboration.CreateShareRequest{
-		ResourceInfo: statRes.Info,
+		ResourceInfo: &provider.ResourceInfo{
+			Id:   rid,
+			Type: provider.ResourceType_RESOURCE_TYPE_CONTAINER,
+		},
 		Grant: &collaboration.ShareGrant{
 			Grantee:     grantee,
 			Permissions: &collaboration.SharePermissions{Permissions: perms},
