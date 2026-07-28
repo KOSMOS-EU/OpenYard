@@ -37,9 +37,9 @@ func New(addr string) (*Client, error) {
 		grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(10<<20)),
 		grpc.WithDefaultServiceConfig(retryPolicy),
 		grpc.WithKeepaliveParams(keepalive.ClientParameters{
-			Time:                30 * time.Second,
-			Timeout:             10 * time.Second,
-			PermitWithoutStream: true,
+			Time:                5 * time.Minute,
+			Timeout:             20 * time.Second,
+			PermitWithoutStream: false,
 		}),
 	)
 	if err != nil {
