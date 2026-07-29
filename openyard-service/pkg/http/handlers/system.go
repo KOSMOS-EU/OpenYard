@@ -154,6 +154,26 @@ func (h *Handlers) MapMigrationID(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// POST /api/management/migration/missing
+// Returns which of the given OldIds have no mapping yet.
+// Body: {"OldIds": ["id1", "id2", ...]}
+// Response: {"missing": ["id3", "id5"], "total": 100, "mapped": 98}
+func (h *Handlers) FilterMissingIDs(w http.ResponseWriter, r *http.Request) {
+	var body struct {
+		OldIds []string `json:"OldIds"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || len(body.OldIds) == 0 {
+		writeError(w, 400, "INVALID_REQUEST", "OldIds array required")
+		return
+	}
+	missing := migration.FilterMissing(body.OldIds)
+	writeJSON(w, 200, map[string]interface{}{
+		"missing": missing,
+		"total":   len(body.OldIds),
+		"mapped":  len(body.OldIds) - len(missing),
+	})
+}
+
 // POST /api/management/space/grant
 // Adds a group or user grant with manager permissions on a space.
 // Body: {"SpaceId": "<encoded-object-id>", "Principal": "group:Admin", "Role": "manager"}

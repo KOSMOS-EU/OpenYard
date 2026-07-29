@@ -157,3 +157,16 @@ func MappedCount() int {
 	defer mu.RUnlock()
 	return mappedCount()
 }
+
+// FilterMissing returns the subset of oldIDs that have no mapping yet.
+func FilterMissing(oldIDs []string) []string {
+	mu.RLock()
+	defer mu.RUnlock()
+	missing := make([]string, 0)
+	for _, id := range oldIDs {
+		if _, ok := idMap[id]; !ok {
+			missing = append(missing, id)
+		}
+	}
+	return missing
+}
