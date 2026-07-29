@@ -23,11 +23,12 @@ type entry struct {
 }
 
 var (
-	idMap  map[string]entry
-	dbPath string
-	dirty  bool
-	mu     sync.RWMutex
-	once   sync.Once
+	idMap      map[string]entry
+	dbPath     string
+	dirty      bool
+	dirtyCount int
+	mu         sync.RWMutex
+	once       sync.Once
 )
 
 // Init loads the migration map from JSON file.
@@ -83,17 +84,22 @@ func LookupLegacyID(openyardID string) string {
 }
 
 // MapID creates or updates a legacy DMS→OpenYard mapping in memory.
-// Call Persist() to write to disk.
+// Auto-persists every 100 new mappings.
 func MapID(legacyID, openyardID, objType, name string) {
 	mu.Lock()
-	defer mu.Unlock()
-
 	idMap[legacyID] = entry{
 		OpenYardID: openyardID,
 		Type:       objType,
 		Name:       name,
 	}
 	dirty = true
+	dirtyCount++
+	needsPersist := dirtyCount >= 100
+	mu.Unlock()
+
+	if needsPersist {
+		Persist()
+	}
 }
 
 // Persist writes the current map to disk (atomic via temp file).
@@ -116,6 +122,7 @@ func Persist() error {
 	}
 
 	dirty = false
+	dirtyCount = 0
 	log.Info().Int("entries", len(idMap)).Int("mapped", mappedCount()).Msg("migration db persisted")
 	return nil
 }
