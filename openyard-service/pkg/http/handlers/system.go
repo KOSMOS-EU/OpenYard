@@ -3,12 +3,13 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"path"
 
 	grouppb "github.com/cs3org/go-cs3apis/cs3/identity/group/v1beta1"
 	userpb "github.com/cs3org/go-cs3apis/cs3/identity/user/v1beta1"
-	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
-	collaboration "github.com/cs3org/go-cs3apis/cs3/sharing/collaboration/v1beta1"
 	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
+	collaboration "github.com/cs3org/go-cs3apis/cs3/sharing/collaboration/v1beta1"
+	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
 	"github.com/kosmos-eu/openyard/pkg/migration"
 	"github.com/rs/zerolog/log"
 )
@@ -171,6 +172,57 @@ func (h *Handlers) FilterMissingIDs(w http.ResponseWriter, r *http.Request) {
 		"missing": missing,
 		"total":   len(body.OldIds),
 		"mapped":  len(body.OldIds) - len(missing),
+	})
+}
+
+// GET /api/management/migration/folder-meta?FolderId=<id>
+// Returns all children of a folder with their CS3 metadata (oy.*, info.*).
+// Used to verify migration results without going through the legacy DMS API.
+func (h *Handlers) GetFolderMeta(w http.ResponseWriter, r *http.Request) {
+	r = withCS3Token(r)
+
+	folderID := r.URL.Query().Get("FolderId")
+	if folderID == "" {
+		writeError(w, 400, "INVALID_REQUEST", "FolderId required")
+		return
+	}
+
+	ref, err := refFromObjectID(folderID)
+	if err != nil {
+		writeError(w, 400, "INVALID_REQUEST", err.Error())
+		return
+	}
+
+	listRes, err := h.gw.Gateway.ListContainer(r.Context(), &provider.ListContainerRequest{Ref: ref})
+	if err != nil || listRes.Status.Code != rpc.Code_CODE_OK {
+		writeError(w, 500, "INTERNAL_ERROR", "Could not list folder contents")
+		return
+	}
+
+	items := make([]map[string]interface{}, 0, len(listRes.Infos))
+	for _, info := range listRes.Infos {
+		item := map[string]interface{}{
+			"id":   encodeObjectID(info.Id),
+			"name": unescapeFolderName(path.Base(info.Path)),
+			"type": "folder",
+		}
+		if info.Type == provider.ResourceType_RESOURCE_TYPE_FILE {
+			item["type"] = "file"
+			item["size"] = info.Size
+			item["mimeType"] = info.MimeType
+		}
+		if info.ArbitraryMetadata != nil {
+			for k, v := range info.ArbitraryMetadata.Metadata {
+				item[k] = v
+			}
+		}
+		items = append(items, item)
+	}
+
+	writeJSON(w, 200, map[string]interface{}{
+		"folderId": folderID,
+		"count":    len(items),
+		"items":    items,
 	})
 }
 
