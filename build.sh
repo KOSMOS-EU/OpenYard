@@ -30,12 +30,12 @@ case "$COMPONENT" in
     openyard-service)
         echo "=== Build openyard: ${IMAGE}:${TAG} ==="
         if command -v buildah &>/dev/null; then
-            TMPDIR="${TMPDIR:-/tmp}" buildah bud --network=host --security-opt label=disable \
+            TMPDIR="${TMPDIR:-/tmp}" buildah bud --no-cache --network=host --security-opt label=disable \
                 -t "${IMAGE}:${TAG}" \
                 -f "$SCRIPT_DIR/openyard-service/Containerfile" \
                 "$SCRIPT_DIR/openyard-service"
         else
-            TMPDIR="${TMPDIR:-/tmp}" podman build --network=host --security-opt label=disable \
+            TMPDIR="${TMPDIR:-/tmp}" podman build --no-cache --network=host --security-opt label=disable \
                 -t "${IMAGE}:${TAG}" \
                 -f "$SCRIPT_DIR/openyard-service/Containerfile" \
                 "$SCRIPT_DIR/openyard-service"
@@ -55,12 +55,12 @@ case "$COMPONENT" in
     aktenplan-setup)
         echo "=== Build aktenplan-setup: ${IMAGE}-aktenplan:${TAG} ==="
         if command -v buildah &>/dev/null; then
-            TMPDIR="${TMPDIR:-/tmp}" buildah bud --network=host --security-opt label=disable \
+            TMPDIR="${TMPDIR:-/tmp}" buildah bud --no-cache --network=host --security-opt label=disable \
                 -t "${IMAGE}-aktenplan:${TAG}" \
                 -f "$SCRIPT_DIR/aktenplan-setup/Containerfile" \
                 "$SCRIPT_DIR/aktenplan-setup"
         else
-            TMPDIR="${TMPDIR:-/tmp}" podman build --network=host --security-opt label=disable \
+            TMPDIR="${TMPDIR:-/tmp}" podman build --no-cache --network=host --security-opt label=disable \
                 -t "${IMAGE}-aktenplan:${TAG}" \
                 -f "$SCRIPT_DIR/aktenplan-setup/Containerfile" \
                 "$SCRIPT_DIR/aktenplan-setup"

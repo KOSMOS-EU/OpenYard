@@ -175,6 +175,107 @@ func (h *Handlers) FilterMissingIDs(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
+// POST /api/management/migration/verify
+// Verifies migration status for a list of OldIds.
+// For each ID: checks DB mapping, CS3 Stat, and metadata presence.
+// Body: {"OldIds": ["id1", "id2", ...], "CheckMeta": ["oy.fileReference", "oy.subject"]}
+// Response: {"results": [{"oldId": "...", "mapped": true, "exists": true, "meta": {"oy.fileReference": "11.12"}, "issues": []}]}
+func (h *Handlers) VerifyMigration(w http.ResponseWriter, r *http.Request) {
+	r = withCS3Token(r)
+
+	var body struct {
+		OldIds    []string `json:"OldIds"`
+		CheckMeta []string `json:"CheckMeta"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || len(body.OldIds) == 0 {
+		writeError(w, 400, "INVALID_REQUEST", "OldIds array required")
+		return
+	}
+
+	mappings := migration.LookupBatch(body.OldIds)
+
+	type result struct {
+		OldId   string            `json:"oldId"`
+		NewId   string            `json:"newId,omitempty"`
+		Type    string            `json:"type,omitempty"`
+		Name    string            `json:"name,omitempty"`
+		Mapped  bool              `json:"mapped"`
+		Exists  bool              `json:"exists"`
+		Meta    map[string]string `json:"meta,omitempty"`
+		Issues  []string          `json:"issues,omitempty"`
+	}
+
+	results := make([]result, 0, len(body.OldIds))
+
+	for _, oldId := range body.OldIds {
+		res := result{OldId: oldId}
+
+		m, ok := mappings[oldId]
+		if !ok {
+			res.Issues = append(res.Issues, "not_mapped")
+			results = append(results, res)
+			continue
+		}
+
+		res.Mapped = true
+		res.NewId = m.OpenYardID
+		res.Type = m.Type
+		res.Name = m.Name
+
+		// CS3 Stat to verify the object exists
+		if h.gw != nil && h.gw.Gateway != nil && m.OpenYardID != "" {
+			ref, err := refFromObjectID(m.OpenYardID)
+			if err == nil {
+				statRes, err := h.gw.Gateway.Stat(r.Context(), &provider.StatRequest{Ref: ref})
+				if err == nil && statRes.Status.Code == rpc.Code_CODE_OK {
+					res.Exists = true
+
+					// Check requested metadata fields
+					if len(body.CheckMeta) > 0 && statRes.Info.ArbitraryMetadata != nil {
+						res.Meta = make(map[string]string)
+						for _, key := range body.CheckMeta {
+							val, found := statRes.Info.ArbitraryMetadata.Metadata[key]
+							if found {
+								res.Meta[key] = val
+							} else {
+								res.Issues = append(res.Issues, "missing_meta:"+key)
+							}
+						}
+					}
+				} else {
+					res.Issues = append(res.Issues, "not_found_in_cs3")
+				}
+			}
+		}
+
+		results = append(results, res)
+	}
+
+	// Summary
+	mapped := 0
+	exists := 0
+	withIssues := 0
+	for _, r := range results {
+		if r.Mapped {
+			mapped++
+		}
+		if r.Exists {
+			exists++
+		}
+		if len(r.Issues) > 0 {
+			withIssues++
+		}
+	}
+
+	writeJSON(w, 200, map[string]interface{}{
+		"total":      len(body.OldIds),
+		"mapped":     mapped,
+		"exists":     exists,
+		"withIssues": withIssues,
+		"results":    results,
+	})
+}
+
 // GET /api/management/migration/folder-meta?FolderId=<id>
 // Returns all children of a folder with their CS3 metadata (oy.*, info.*).
 // Used to verify migration results without going through the legacy DMS API.

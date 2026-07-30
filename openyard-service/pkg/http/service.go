@@ -176,6 +176,7 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 		r.Post("/migration/map", h.MapMigrationID)
 		r.Post("/migration/persist", h.PersistMigration)
 		r.Post("/migration/missing", h.FilterMissingIDs)
+		r.Post("/migration/verify", h.VerifyMigration)
 		r.Get("/migration/folder-meta", h.GetFolderMeta)
 		r.Post("/migration/grant", h.GrantSpaceAccess)
 	})

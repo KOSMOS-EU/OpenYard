@@ -165,6 +165,27 @@ func MappedCount() int {
 	return mappedCount()
 }
 
+// Mapping holds the public view of a migration entry.
+type Mapping struct {
+	OpenYardID string
+	Type       string
+	Name       string
+}
+
+// LookupBatch returns the mapping for each oldID.
+// Missing IDs are not included in the result.
+func LookupBatch(oldIDs []string) map[string]Mapping {
+	mu.RLock()
+	defer mu.RUnlock()
+	result := make(map[string]Mapping, len(oldIDs))
+	for _, id := range oldIDs {
+		if e, ok := idMap[id]; ok {
+			result[id] = Mapping{OpenYardID: e.OpenYardID, Type: e.Type, Name: e.Name}
+		}
+	}
+	return result
+}
+
 // FilterMissing returns the subset of oldIDs that have no mapping yet.
 func FilterMissing(oldIDs []string) []string {
 	mu.RLock()
