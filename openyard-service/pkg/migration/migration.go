@@ -11,6 +11,7 @@ package migration
 import (
 	"encoding/json"
 	"os"
+	"strings"
 	"sync"
 
 	"github.com/rs/zerolog/log"
@@ -62,10 +63,19 @@ func Init() {
 }
 
 // LookupOpenYardID translates a legacy DMS ID to an OpenYard ID.
+// Case-insensitive: GUIDs may be upper or lowercase.
 func LookupOpenYardID(legacyID string) string {
 	mu.RLock()
 	defer mu.RUnlock()
 	if e, ok := idMap[legacyID]; ok {
+		return e.OpenYardID
+	}
+	// Fallback: try other case
+	alt := strings.ToLower(legacyID)
+	if alt == legacyID {
+		alt = strings.ToUpper(legacyID)
+	}
+	if e, ok := idMap[alt]; ok {
 		return e.OpenYardID
 	}
 	return ""
@@ -85,8 +95,10 @@ func LookupLegacyID(openyardID string) string {
 
 // MapID creates or updates a legacy DMS→OpenYard mapping in memory.
 // Auto-persists every 100 new mappings.
+// Normalizes legacyID to lowercase to avoid case-duplicates.
 func MapID(legacyID, openyardID, objType, name string) {
 	mu.Lock()
+	legacyID = strings.ToLower(legacyID)
 	idMap[legacyID] = entry{
 		OpenYardID: openyardID,
 		Type:       objType,
@@ -172,27 +184,45 @@ type Mapping struct {
 	Name       string
 }
 
-// LookupBatch returns the mapping for each oldID.
+// LookupBatch returns the mapping for each oldID. Case-insensitive.
 // Missing IDs are not included in the result.
 func LookupBatch(oldIDs []string) map[string]Mapping {
 	mu.RLock()
 	defer mu.RUnlock()
 	result := make(map[string]Mapping, len(oldIDs))
 	for _, id := range oldIDs {
-		if e, ok := idMap[id]; ok {
+		e, ok := idMap[id]
+		if !ok {
+			alt := strings.ToLower(id)
+			if alt == id {
+				alt = strings.ToUpper(id)
+			}
+			e, ok = idMap[alt]
+		}
+		if ok {
 			result[id] = Mapping{OpenYardID: e.OpenYardID, Type: e.Type, Name: e.Name}
 		}
 	}
 	return result
 }
 
-// FilterMissing returns the subset of oldIDs that have no mapping yet.
+// FilterMissing returns the subset of oldIDs that have no mapping
+// (or have an empty OpenYardID). Case-insensitive.
 func FilterMissing(oldIDs []string) []string {
 	mu.RLock()
 	defer mu.RUnlock()
 	missing := make([]string, 0)
 	for _, id := range oldIDs {
-		if _, ok := idMap[id]; !ok {
+		e, ok := idMap[id]
+		if !ok {
+			// Try other case
+			alt := strings.ToLower(id)
+			if alt == id {
+				alt = strings.ToUpper(id)
+			}
+			e, ok = idMap[alt]
+		}
+		if !ok || e.OpenYardID == "" {
 			missing = append(missing, id)
 		}
 	}
