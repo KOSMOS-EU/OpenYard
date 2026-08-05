@@ -6,7 +6,6 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
-	gateway "github.com/cs3org/go-cs3apis/cs3/gateway/v1beta1"
 	"github.com/rs/zerolog/log"
 
 	"github.com/kosmos-eu/openyard/pkg/auth"
@@ -31,11 +30,7 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 	var up upload.Uploader
 	switch cfg.Upload.Method {
 	case "reva":
-		var gwClient gateway.GatewayAPIClient
-		if gw != nil {
-			gwClient = gw.Gateway
-		}
-		up = &upload.Reva{Gateway: gwClient, DataGatewayURL: cfg.Upload.BaseURL, ConnChecker: gw}
+		up = &upload.Reva{GW: gw, DataGatewayURL: cfg.Upload.BaseURL}
 	default:
 		up = &upload.WebDAV{BaseURL: cfg.Upload.BaseURL}
 	}

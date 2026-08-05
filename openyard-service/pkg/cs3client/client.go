@@ -108,6 +108,13 @@ func (c *Client) reconnect() {
 	}
 }
 
+// GetGateway returns the current gateway client (thread-safe, survives reconnects).
+func (c *Client) GetGateway() gateway.GatewayAPIClient {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	return c.Gateway
+}
+
 func (c *Client) Close() error {
 	c.mu.RLock()
 	defer c.mu.RUnlock()

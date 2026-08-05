@@ -20,25 +20,25 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-// ConnectionChecker can detect broken gRPC connections and trigger reconnect.
-type ConnectionChecker interface {
+// GatewayProvider provides the current gRPC gateway client.
+// After a reconnect, it returns the new client.
+type GatewayProvider interface {
+	GetGateway() gateway.GatewayAPIClient
 	CheckError(err error) bool
 }
 
 // Reva uploads files via the CS3 gRPC InitiateFileUpload + Data Gateway path.
 type Reva struct {
-	// Gateway is the CS3 gateway gRPC client.
-	Gateway gateway.GatewayAPIClient
+	// GW provides the current gateway client (survives reconnects).
+	GW GatewayProvider
 	// DataGatewayURL is the internal URL of the OC proxy, e.g. "http://opencloud:9200"
 	DataGatewayURL string
-	// ConnChecker triggers reconnect on broken connections (optional).
-	ConnChecker ConnectionChecker
 }
 
 func (r *Reva) Name() string { return "reva" }
 
 func (r *Reva) Upload(ctx context.Context, req *Request) (*Result, error) {
-	if r.Gateway == nil {
+	if r.GW == nil {
 		return nil, fmt.Errorf("reva: gateway not configured")
 	}
 
@@ -80,7 +80,7 @@ func (r *Reva) Upload(ctx context.Context, req *Request) (*Result, error) {
 
 	// Auto-detect: prefer personal, then project
 	if ref == nil {
-		spacesRes, err := r.Gateway.ListStorageSpaces(ctx, &provider.ListStorageSpacesRequest{})
+		spacesRes, err := r.GW.GetGateway().ListStorageSpaces(ctx, &provider.ListStorageSpacesRequest{})
 		if err != nil {
 			return nil, fmt.Errorf("reva: list spaces: %w", err)
 		}
@@ -133,12 +133,14 @@ func (r *Reva) Upload(ctx context.Context, req *Request) (*Result, error) {
 		},
 	}
 
-	uploadRes, err := r.Gateway.InitiateFileUpload(ctx, initReq)
-	if err != nil && r.ConnChecker != nil && r.ConnChecker.CheckError(err) {
-		// Connection was broken, retry after reconnect
+	gw := r.GW.GetGateway()
+	uploadRes, err := gw.InitiateFileUpload(ctx, initReq)
+	if err != nil && r.GW.CheckError(err) {
+		// Connection was broken and reconnected — get fresh client and retry
 		log.Info().Msg("reva: retrying InitiateFileUpload after reconnect")
 		time.Sleep(time.Second)
-		uploadRes, err = r.Gateway.InitiateFileUpload(ctx, initReq)
+		gw = r.GW.GetGateway()
+		uploadRes, err = gw.InitiateFileUpload(ctx, initReq)
 	}
 	if err != nil {
 		return nil, fmt.Errorf("reva: initiate upload: %w", err)
