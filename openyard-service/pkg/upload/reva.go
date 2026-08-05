@@ -20,12 +20,19 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
+// ConnectionChecker can detect broken gRPC connections and trigger reconnect.
+type ConnectionChecker interface {
+	CheckError(err error) bool
+}
+
 // Reva uploads files via the CS3 gRPC InitiateFileUpload + Data Gateway path.
 type Reva struct {
 	// Gateway is the CS3 gateway gRPC client.
 	Gateway gateway.GatewayAPIClient
 	// DataGatewayURL is the internal URL of the OC proxy, e.g. "http://opencloud:9200"
 	DataGatewayURL string
+	// ConnChecker triggers reconnect on broken connections (optional).
+	ConnChecker ConnectionChecker
 }
 
 func (r *Reva) Name() string { return "reva" }
@@ -111,10 +118,10 @@ func (r *Reva) Upload(ctx context.Context, req *Request) (*Result, error) {
 		return nil, fmt.Errorf("reva: no space found for upload")
 	}
 
-	// 2. InitiateFileUpload
+	// 2. InitiateFileUpload (with reconnect on broken connection)
 	log.Info().Str("file", req.FileName).Int("size", len(req.Data)).Msg("reva: initiating upload")
 
-	uploadRes, err := r.Gateway.InitiateFileUpload(ctx, &provider.InitiateFileUploadRequest{
+	initReq := &provider.InitiateFileUploadRequest{
 		Ref: ref,
 		Opaque: &typesv1.Opaque{
 			Map: map[string]*typesv1.OpaqueEntry{
@@ -124,7 +131,15 @@ func (r *Reva) Upload(ctx context.Context, req *Request) (*Result, error) {
 				},
 			},
 		},
-	})
+	}
+
+	uploadRes, err := r.Gateway.InitiateFileUpload(ctx, initReq)
+	if err != nil && r.ConnChecker != nil && r.ConnChecker.CheckError(err) {
+		// Connection was broken, retry after reconnect
+		log.Info().Msg("reva: retrying InitiateFileUpload after reconnect")
+		time.Sleep(time.Second)
+		uploadRes, err = r.Gateway.InitiateFileUpload(ctx, initReq)
+	}
 	if err != nil {
 		return nil, fmt.Errorf("reva: initiate upload: %w", err)
 	}

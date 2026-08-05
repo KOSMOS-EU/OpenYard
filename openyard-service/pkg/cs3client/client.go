@@ -2,6 +2,7 @@ package cs3client
 
 import (
 	"context"
+	"strings"
 	"sync"
 	"time"
 
@@ -30,7 +31,7 @@ const retryPolicy = `{
 			"initialBackoff": "0.5s",
 			"maxBackoff": "5s",
 			"backoffMultiplier": 2.0,
-			"retryableStatusCodes": ["UNAVAILABLE", "DEADLINE_EXCEEDED"]
+			"retryableStatusCodes": ["UNAVAILABLE", "DEADLINE_EXCEEDED", "CANCELLED"]
 		}
 	}]
 }`
@@ -111,4 +112,21 @@ func (c *Client) Close() error {
 	c.mu.RLock()
 	defer c.mu.RUnlock()
 	return c.conn.Close()
+}
+
+// CheckError inspects a gRPC error. If it indicates a broken connection
+// ("connection is closing", "transport is closing"), it triggers a reconnect
+// and returns true. Callers should retry the operation.
+func (c *Client) CheckError(err error) bool {
+	if err == nil {
+		return false
+	}
+	msg := err.Error()
+	if strings.Contains(msg, "connection is closing") ||
+		strings.Contains(msg, "transport is closing") {
+		log.Warn().Msg("cs3 gateway: broken connection detected, reconnecting")
+		c.reconnect()
+		return true
+	}
+	return false
 }

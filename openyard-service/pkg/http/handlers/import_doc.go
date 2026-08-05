@@ -5,6 +5,7 @@ import (
 	"encoding/xml"
 	"io"
 	"net/http"
+	"strings"
 
 	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
 	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
@@ -99,8 +100,27 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 
 	result, err := h.uploader.Upload(r.Context(), uploadReq)
 	if err != nil {
+		errMsg := err.Error()
+		httpCode := 500
+		errCode := "INTERNAL_ERROR"
+		switch {
+		case strings.Contains(errMsg, "409"):
+			httpCode = 409
+			errCode = "ALREADY_EXISTS"
+		case strings.Contains(errMsg, "412"):
+			httpCode = 409
+			errCode = "ALREADY_EXISTS"
+		case strings.Contains(errMsg, "connection is closing"),
+			strings.Contains(errMsg, "transport is closing"):
+			httpCode = 503
+			errCode = "SERVICE_UNAVAILABLE"
+		case strings.Contains(errMsg, "permission denied"),
+			strings.Contains(errMsg, "PERMISSION_DENIED"):
+			httpCode = 403
+			errCode = "PERMISSION_DENIED"
+		}
 		log.Error().Err(err).Str("file", fileName).Str("method", h.uploader.Name()).Msg("upload failed")
-		writeError(w, 500, "INTERNAL_ERROR", "Upload failed: "+err.Error())
+		writeError(w, httpCode, errCode, "Upload failed: "+errMsg)
 		return
 	}
 

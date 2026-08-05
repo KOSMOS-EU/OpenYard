@@ -35,7 +35,7 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 		if gw != nil {
 			gwClient = gw.Gateway
 		}
-		up = &upload.Reva{Gateway: gwClient, DataGatewayURL: cfg.Upload.BaseURL}
+		up = &upload.Reva{Gateway: gwClient, DataGatewayURL: cfg.Upload.BaseURL, ConnChecker: gw}
 	default:
 		up = &upload.WebDAV{BaseURL: cfg.Upload.BaseURL}
 	}
