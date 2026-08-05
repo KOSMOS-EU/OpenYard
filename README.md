@@ -1,10 +1,10 @@
 # OpenYard
 
-**DMS-Adapter for OpenCloud** -- bridges legacy WinYard DMS clients and CMIS 1.1 applications to an [OpenCloud](https://opencloud.eu) storage backend via the CS3 API.
+**DMS-Adapter for OpenCloud** -- bridges legacy DMS clients and CMIS 1.1 applications to an [OpenCloud](https://opencloud.eu) storage backend via the CS3 API.
 
 ```
  Legacy DMS Client          CMIS 1.1 Client
-  (WinYard UI)          (LibreOffice, custom apps)
+  (Legacy DMS UI)       (LibreOffice, custom apps)
        |                         |
        v                         v
   /api/advanced*            /cmis/{repoId}/root
@@ -33,7 +33,7 @@
 
 ### Legacy DMS API (`/api/...`)
 
-Drop-in replacement for the WinYard REST API. Existing DMS clients connect without modification.
+Drop-in replacement for the legacy DMS REST API. Existing DMS clients connect without modification.
 
 - **Auth:** Session-based login (OIDC bridge or direct credentials)
 - **Documents:** CRUD, file up/download, versioning, preview, metadata
@@ -218,4 +218,4 @@ BUILD_TOOL=podman
 
 ## License
 
-Copyright (c) kosmos.eu -- All rights reserved.
+Copyright (c) 2026 Stadt Brandis -- All rights reserved.
