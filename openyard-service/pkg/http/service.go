@@ -2,6 +2,7 @@ package http
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -25,6 +26,7 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 	m.Use(middleware.RealIP)
 	m.Use(middleware.Recoverer)
 	m.Use(middleware.RequestID)
+	m.Use(requestLogger)
 
 	// Select upload method
 	var up upload.Uploader
@@ -194,4 +196,19 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 
 func (s *Service) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	s.mux.ServeHTTP(w, r)
+}
+
+func requestLogger(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		ww := middleware.NewWrapResponseWriter(w, r.ProtoMajor)
+		next.ServeHTTP(ww, r)
+		log.Info().
+			Str("method", r.Method).
+			Str("path", r.URL.Path).
+			Int("status", ww.Status()).
+			Str("duration", time.Since(start).String()).
+			Str("remote", r.RemoteAddr).
+			Msg("request")
+	})
 }
