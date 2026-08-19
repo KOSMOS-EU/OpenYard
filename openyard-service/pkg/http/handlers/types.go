@@ -13,6 +13,9 @@ import (
 	"github.com/kosmos-eu/openyard/pkg/upload"
 )
 
+// serverStartTime is captured at package init for uptime reporting.
+var serverStartTime = time.Now()
+
 // Handlers holds shared dependencies for all endpoint handlers.
 type Handlers struct {
 	gw        *cs3client.Client

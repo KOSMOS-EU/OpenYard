@@ -178,6 +178,10 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 		r.Post("/migration/grant", h.GrantSpaceAccess)
 	})
 
+	// --- Health/Stats Endpoints (ohne Session) ---
+	m.Get("/openyard/health", h.Health)
+	m.Get("/openyard/stats", h.Stats)
+
 	// --- IDP / Identity Server Endpoints ---
 	// OIDC endpoint (no session required, separate path)
 	m.Get("/connect/authorize", h.ConnectAuthorize)

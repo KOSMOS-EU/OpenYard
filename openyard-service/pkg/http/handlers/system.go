@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"path"
+	"time"
 
 	grouppb "github.com/cs3org/go-cs3apis/cs3/identity/group/v1beta1"
 	userpb "github.com/cs3org/go-cs3apis/cs3/identity/user/v1beta1"
@@ -20,6 +21,27 @@ func (h *Handlers) IsListening(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(200)
 	w.Write([]byte("true"))
+}
+
+// GET /openyard/health
+func (h *Handlers) Health(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, 200, map[string]interface{}{
+		"status":   "ok",
+		"uptime_s": int64(time.Since(serverStartTime).Seconds()),
+	})
+}
+
+// GET /openyard/stats
+func (h *Handlers) Stats(w http.ResponseWriter, r *http.Request) {
+	writeJSON(w, 200, map[string]interface{}{
+		"status":   "ok",
+		"uptime_s": int64(time.Since(serverStartTime).Seconds()),
+		"migration": map[string]interface{}{
+			"total":  migration.Count(),
+			"mapped": migration.MappedCount(),
+			"dirty":  migration.IsDirty(),
+		},
+	})
 }
 
 // GET /api/advancedGeneral/GetServerSettings
