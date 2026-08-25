@@ -4,7 +4,7 @@ applicationSuite: "KOSMOS"
 url: "https://gitlab.opencode.de/kosmos/openyard"
 landingURL: "https://kosmos.technology/"
 softwareVersion: "1.0.0"
-logo: "logo.png"
+logo: "feature.png"
 releaseDate: "2026-08-25"
 platforms:
   - "linux"
@@ -36,6 +36,8 @@ description:
       - "CMIS-1.1-Kompatibilität für bestehende Anwendungen"
       - "Aktenplan-Bereitstellung (CLI-Tools)"
       - "Typisierte Ordnersichten als Frontend-Plugin"
+    screenshots:
+      - "feature.png"
   en:
     genericName: "DMS Adapter"
     shortDescription: "DMS adapter for OpenCloud: connects legacy DMS clients and CMIS 1.1 applications to the OpenCloud storage backend."
@@ -59,6 +61,8 @@ description:
       - "CMIS 1.1 compatibility for existing applications"
       - "File-plan provisioning (CLI tools)"
       - "Typed folder views as frontend plugin"
+    screenshots:
+      - "feature.png"
 intendedAudience:
   countries:
     - "de"
