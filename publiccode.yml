@@ -1,0 +1,78 @@
+publiccodeYmlVersion: "0.4"
+name: "OpenYard"
+applicationSuite: "KOSMOS"
+url: "https://gitlab.opencode.de/kosmos/openyard"
+landingURL: "https://kosmos.technology/"
+softwareVersion: "1.0.0"
+releaseDate: "2026-08-25"
+platforms:
+  - "linux"
+categories:
+  - "document-management"
+developmentStatus: "beta"
+softwareType: "standalone/backend"
+description:
+  de:
+    genericName: "DMS-Adapter"
+    shortDescription: "DMS-Adapter für OpenCloud: verbindet Legacy-DMS-Clients und CMIS-1.1-Anwendungen mit dem OpenCloud-Speicher."
+    longDescription: >
+      OpenYard ist ein Adapter-Service, der bestehende DMS-Clients und
+      CMIS-1.1-Anwendungen an den OpenCloud-Speicher anschließt. So
+      können Altanwendungen und gewohnte DMS-Workflows ohne Umbau auf
+      die KOSMOS Edition aufsetzen.
+
+      OpenYard stellt zwei API-Flächen bereit: eine Advanced-API für
+      Legacy-DMS-Clients (Aktenpläne, Vorgänge, Ablage) und eine
+      CMIS-1.1-Fläche (Browser-Binding) für CMIS-konforme
+      Anwendungen wie LibreOffice mit DMS-Anbindung.
+
+      Der Service ist in Go gebaut, kommuniziert über HTTP und nutzt
+      das CS3-Gateway von OpenCloud/Reva als Speicherziel. Zusätzlich
+      werden Werkzeugen zur Bereitstellung von Aktenplänen sowie eine
+      Vue.js-Frontend-Plugin für typisierte Ordnersichten mitgeliefert.
+    features:
+      - "Anbindung von Legacy-DMS-Clients an OpenCloud"
+      - "CMIS-1.1-Kompatibilität für bestehende Anwendungen"
+      - "Aktenplan-Bereitstellung (CLI-Tools)"
+      - "Typisierte Ordnersichten als Frontend-Plugin"
+  en:
+    genericName: "DMS Adapter"
+    shortDescription: "DMS adapter for OpenCloud: connects legacy DMS clients and CMIS 1.1 applications to the OpenCloud storage backend."
+    longDescription: >
+      OpenYard is an adapter service that connects existing DMS
+      clients and CMIS 1.1 applications to the OpenCloud storage
+      backend. This allows legacy applications and established DMS
+      workflows to run on the KOSMOS Edition without rework.
+
+      OpenYard provides two API surfaces: an advanced API for
+      legacy DMS clients (file plans, cases, filing) and a CMIS 1.1
+      surface (browser binding) for CMIS-conformant applications such
+      as LibreOffice with DMS integration.
+
+      The service is built in Go, communicates over HTTP and uses the
+      CS3 gateway of OpenCloud/Reva as the storage target. It also
+      ships CLI tools for file-plan provisioning and a Vue.js frontend
+      plugin for typed folder views.
+    features:
+      - "Connects legacy DMS clients to OpenCloud"
+      - "CMIS 1.1 compatibility for existing applications"
+      - "File-plan provisioning (CLI tools)"
+      - "Typed folder views as frontend plugin"
+intendedAudience:
+  countries:
+    - "de"
+  scope:
+    - "local-authorities"
+    - "government"
+legal:
+  license: "AGPL-3.0-or-later"
+maintenance:
+  type: "community"
+  contacts:
+    - name: "KOSMOS"
+      email: "info@kosmos.technology"
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - "de"
+    - "en"

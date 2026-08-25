@@ -218,4 +218,6 @@ BUILD_TOOL=podman
 
 ## License
 
-Copyright (c) 2026 Stadt Brandis -- All rights reserved.
+AGPL-3.0-or-later
+
+See [LICENSE](LICENSE) for the full license text.
