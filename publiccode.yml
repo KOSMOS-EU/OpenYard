@@ -4,6 +4,7 @@ applicationSuite: "KOSMOS"
 url: "https://gitlab.opencode.de/kosmos/openyard"
 landingURL: "https://kosmos.technology/"
 softwareVersion: "1.0.0"
+logo: "logo.png"
 releaseDate: "2026-08-25"
 platforms:
   - "linux"
