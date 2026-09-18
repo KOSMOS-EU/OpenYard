@@ -87,6 +87,12 @@ func (h *Handlers) SetDocument(w http.ResponseWriter, r *http.Request) {
 
 // POST /api/advancedDocuments/GetFile
 func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
+	defer func() {
+		if rec := recover(); rec != nil {
+			log.Error().Interface("panic", rec).Msg("GetFile panic")
+			writeError(w, 500, "INTERNAL_ERROR", "Panic in GetFile")
+		}
+	}()
 	r = withCS3Token(r)
 
 	var body struct {
