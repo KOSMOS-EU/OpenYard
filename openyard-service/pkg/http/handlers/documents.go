@@ -116,7 +116,9 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		writeError(w, 500, "INTERNAL_ERROR", "Download error")
 		return
 	}
+	log.Info().Int32("status", int32(res.Status.Code)).Int("protocols", len(res.Protocols)).Msg("cs3 InitiateFileDownload result")
 	if res.Status.Code != rpc.Code_CODE_OK {
+		log.Error().Str("code", res.Status.Code.String()).Str("msg", res.Status.Message).Msg("cs3 download init rejected")
 		writeError(w, 500, "INTERNAL_ERROR", res.Status.Message)
 		return
 	}
