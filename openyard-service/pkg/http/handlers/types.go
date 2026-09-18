@@ -21,6 +21,7 @@ type Handlers struct {
 	gw        *cs3client.Client
 	sessions  *auth.SessionCache
 	uploader  upload.Uploader
+	dataURL   string // Internal OC data gateway base URL, e.g. "http://opencloud:9200"
 	workCache *gocache.Cache // WorkID → *workObject for GetFolder pagination
 }
 
@@ -31,11 +32,12 @@ type workObject struct {
 	SubDocs    []map[string]interface{}
 }
 
-func New(gw *cs3client.Client, sessions *auth.SessionCache, up upload.Uploader) *Handlers {
+func New(gw *cs3client.Client, sessions *auth.SessionCache, up upload.Uploader, dataURL string) *Handlers {
 	return &Handlers{
 		gw:        gw,
 		sessions:  sessions,
 		uploader:  up,
+		dataURL:   dataURL,
 		workCache: gocache.New(10*time.Minute, 5*time.Minute),
 	}
 }

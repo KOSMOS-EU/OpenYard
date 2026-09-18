@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -11,6 +12,13 @@ import (
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc/metadata"
 )
+
+// insecureClient skips TLS verification for internal data gateway calls.
+var insecureClient = &http.Client{
+	Transport: &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	},
+}
 
 func withCS3Token(r *http.Request) *http.Request {
 	sess := sessionFromCtx(r.Context())
@@ -106,21 +114,39 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(res.Protocols) == 0 {
+	var downloadToken string
+	for _, p := range res.Protocols {
+		if p.Protocol == "simple" {
+			downloadToken = p.Token
+			break
+		}
+		if downloadToken == "" {
+			downloadToken = p.Token
+		}
+	}
+	if downloadToken == "" {
 		writeError(w, 500, "INTERNAL_ERROR", "No download protocol available")
 		return
 	}
 
-	// Proxy the download from data gateway
 	sess := sessionFromCtx(r.Context())
-	downloadReq, _ := http.NewRequestWithContext(r.Context(), "GET", res.Protocols[0].DownloadEndpoint, nil)
-	downloadReq.Header.Set("X-Access-Token", sess.CS3Token)
-	if res.Protocols[0].Token != "" {
-		downloadReq.Header.Set("X-Reva-Transfer", res.Protocols[0].Token)
+	if sess == nil {
+		writeError(w, 401, "AUTH_REQUIRED", "No session")
+		return
 	}
 
-	resp, err := http.DefaultClient.Do(downloadReq)
+	dataURL := h.dataURL + "/data"
+	downloadReq, err := http.NewRequestWithContext(r.Context(), "GET", dataURL, nil)
 	if err != nil {
+		writeError(w, 500, "INTERNAL_ERROR", "Create download request failed")
+		return
+	}
+	downloadReq.Header.Set("X-Access-Token", sess.CS3Token)
+	downloadReq.Header.Set("X-Reva-Transfer", downloadToken)
+
+	resp, err := insecureClient.Do(downloadReq)
+	if err != nil {
+		log.Error().Err(err).Str("url", dataURL).Msg("download failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Download failed")
 		return
 	}
@@ -129,6 +155,9 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", resp.Header.Get("Content-Type"))
 	if cl := resp.Header.Get("Content-Length"); cl != "" {
 		w.Header().Set("Content-Length", cl)
+	}
+	if etag := resp.Header.Get("Etag"); etag != "" {
+		w.Header().Set("Etag", etag)
 	}
 	w.WriteHeader(resp.StatusCode)
 	io.Copy(w, resp.Body)
@@ -171,12 +200,27 @@ func (h *Handlers) SetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(res.Protocols) == 0 {
+	var uploadToken string
+	for _, p := range res.Protocols {
+		if p.Protocol == "simple" {
+			uploadToken = p.Token
+			break
+		}
+		if uploadToken == "" {
+			uploadToken = p.Token
+		}
+	}
+	if uploadToken == "" {
 		writeError(w, 500, "INTERNAL_ERROR", "No upload protocol available")
 		return
 	}
 
-	// Get the file data
+	sess := sessionFromCtx(r.Context())
+	if sess == nil {
+		writeError(w, 401, "AUTH_REQUIRED", "No session")
+		return
+	}
+
 	var fileReader io.Reader
 	if r.MultipartForm != nil {
 		file, _, err := r.FormFile("file")
@@ -190,16 +234,18 @@ func (h *Handlers) SetFile(w http.ResponseWriter, r *http.Request) {
 		fileReader = r.Body
 	}
 
-	// Upload to data gateway
-	sess := sessionFromCtx(r.Context())
-	uploadReq, _ := http.NewRequestWithContext(r.Context(), "PUT", res.Protocols[0].UploadEndpoint, fileReader)
-	uploadReq.Header.Set("X-Access-Token", sess.CS3Token)
-	if res.Protocols[0].Token != "" {
-		uploadReq.Header.Set("X-Reva-Transfer", res.Protocols[0].Token)
-	}
-
-	resp, err := http.DefaultClient.Do(uploadReq)
+	dataURL := h.dataURL + "/data"
+	uploadReq, err := http.NewRequestWithContext(r.Context(), "PUT", dataURL, fileReader)
 	if err != nil {
+		writeError(w, 500, "INTERNAL_ERROR", "Create upload request failed")
+		return
+	}
+	uploadReq.Header.Set("X-Access-Token", sess.CS3Token)
+	uploadReq.Header.Set("X-Reva-Transfer", uploadToken)
+
+	resp, err := insecureClient.Do(uploadReq)
+	if err != nil {
+		log.Error().Err(err).Str("url", dataURL).Msg("upload failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Upload failed")
 		return
 	}
