@@ -121,7 +121,10 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pathRef := &provider.Reference{ResourceId: ref.ResourceId, Path: statRes.Info.Path}
+	// Convert absolute path to relative (./xxx) to trigger the "spaces" protocol,
+	// which embeds the space ID in the data-server target URL.
+	relPath := "./" + strings.TrimPrefix(statRes.Info.Path, "/")
+	pathRef := &provider.Reference{ResourceId: ref.ResourceId, Path: relPath}
 
 	gw := h.gw.GetGateway()
 	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: pathRef})
@@ -145,7 +148,7 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 
 	var downloadToken string
 	for _, p := range res.Protocols {
-		if p.Protocol == "simple" {
+		if p.Protocol == "spaces" || p.Protocol == "simple" {
 			downloadToken = p.Token
 			break
 		}
