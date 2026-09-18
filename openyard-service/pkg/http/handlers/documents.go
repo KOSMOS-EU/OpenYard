@@ -146,8 +146,15 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Extract internal target URL from JWT transfer token
+	// Extract internal target URL from JWT transfer token.
+	// The target uses localhost (from the OpenCloud container's perspective),
+	// but OpenYard runs in a separate container — remap to the pod hostname.
 	downloadTarget = extractDownloadTarget(downloadToken)
+	if strings.HasPrefix(downloadTarget, "http://localhost:") {
+		downloadTarget = "http://opencloud" + strings.TrimPrefix(downloadTarget, "http://localhost")
+	} else if strings.HasPrefix(downloadTarget, "https://localhost:") {
+		downloadTarget = "https://opencloud" + strings.TrimPrefix(downloadTarget, "https://localhost")
+	}
 	log.Info().Str("target", downloadTarget).Msg("GetFile: download target from JWT")
 
 	sess := sessionFromCtx(r.Context())
