@@ -18,11 +18,12 @@ var serverStartTime = time.Now()
 
 // Handlers holds shared dependencies for all endpoint handlers.
 type Handlers struct {
-	gw        *cs3client.Client
-	sessions  *auth.SessionCache
-	uploader  upload.Uploader
-	dataURL   string // Internal OC data gateway base URL, e.g. "http://opencloud:9200"
-	workCache *gocache.Cache // WorkID → *workObject for GetFolder pagination
+	gw           *cs3client.Client
+	sessions     *auth.SessionCache
+	uploader     upload.Uploader
+	uploadURL    string // Upload base URL (OC web proxy), e.g. "http://opencloud:9200"
+	downloadURL  string // Download base URL (Reva data gateway), e.g. "http://opencloud:9216"
+	workCache    *gocache.Cache // WorkID → *workObject for GetFolder pagination
 }
 
 // workObject stores remaining sub-elements for paginated GetFolder responses.
@@ -32,13 +33,14 @@ type workObject struct {
 	SubDocs    []map[string]interface{}
 }
 
-func New(gw *cs3client.Client, sessions *auth.SessionCache, up upload.Uploader, dataURL string) *Handlers {
+func New(gw *cs3client.Client, sessions *auth.SessionCache, up upload.Uploader, uploadURL, downloadURL string) *Handlers {
 	return &Handlers{
-		gw:        gw,
-		sessions:  sessions,
-		uploader:  up,
-		dataURL:   dataURL,
-		workCache: gocache.New(10*time.Minute, 5*time.Minute),
+		gw:          gw,
+		sessions:    sessions,
+		uploader:    up,
+		uploadURL:   uploadURL,
+		downloadURL: downloadURL,
+		workCache:   gocache.New(10*time.Minute, 5*time.Minute),
 	}
 }
 

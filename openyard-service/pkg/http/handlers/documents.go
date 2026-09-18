@@ -153,7 +153,7 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Info().Str("cs3token_prefix", sess.CS3Token[:min(20, len(sess.CS3Token))]).Msg("GetFile: session ok")
 
-	dataURL := h.dataURL + "/data"
+	dataURL := h.downloadURL + "/data"
 	log.Info().Str("dataURL", dataURL).Msg("GetFile: requesting download")
 	downloadReq, err := http.NewRequestWithContext(r.Context(), "GET", dataURL, nil)
 	if err != nil {
@@ -266,7 +266,7 @@ func (h *Handlers) SetFile(w http.ResponseWriter, r *http.Request) {
 		fileReader = r.Body
 	}
 
-	dataURL := h.dataURL + "/data"
+	dataURL := h.uploadURL + "/data"
 	uploadReq, err := http.NewRequestWithContext(r.Context(), "PUT", dataURL, fileReader)
 	if err != nil {
 		writeError(w, 500, "INTERNAL_ERROR", "Create upload request failed")

@@ -38,7 +38,7 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 	}
 	log.Info().Str("method", up.Name()).Msg("upload method")
 
-	h := handlers.New(gw, sessions, up, cfg.Upload.BaseURL)
+	h := handlers.New(gw, sessions, up, cfg.Upload.BaseURL, cfg.Upload.DownloadURL)
 
 	m.Route("/api", func(r chi.Router) {
 		// Auth endpoints (no session required)

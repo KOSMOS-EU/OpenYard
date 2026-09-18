@@ -29,8 +29,9 @@ type Config struct {
 		Key  string // Path to TLS private key file
 	}
 	Upload struct {
-		Method  string // "webdav" or "reva"
-		BaseURL string // WebDAV base URL (internal OC), e.g. "http://opencloud:9200"
+		Method       string // "webdav" or "reva"
+		BaseURL      string // Upload base URL (internal OC), e.g. "http://opencloud:9200"
+		DownloadURL  string // Download base URL (Reva data gateway), e.g. "http://opencloud:9216"
 	}
 	Log struct {
 		Level string
@@ -51,6 +52,7 @@ func Load() *Config {
 	cfg.TLS.Key = os.Getenv("OPENYARD_TLS_KEY")
 	cfg.Upload.Method = envOr("OPENYARD_UPLOAD_METHOD", "reva")
 	cfg.Upload.BaseURL = envOr("OPENYARD_UPLOAD_URL", "http://opencloud:9200")
+	cfg.Upload.DownloadURL = envOr("OPENYARD_DOWNLOAD_URL", cfg.Upload.BaseURL)
 	cfg.Log.Level = envOr("OPENYARD_LOG_LEVEL", "info")
 	return cfg
 }
