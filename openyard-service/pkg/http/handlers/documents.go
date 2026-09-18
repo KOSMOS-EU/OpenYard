@@ -121,7 +121,7 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	pathRef := &provider.Reference{Path: statRes.Info.Path}
+	pathRef := &provider.Reference{ResourceId: ref.ResourceId, Path: statRes.Info.Path}
 
 	gw := h.gw.GetGateway()
 	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: pathRef})
