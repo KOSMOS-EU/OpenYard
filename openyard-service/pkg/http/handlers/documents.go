@@ -132,7 +132,7 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var downloadToken, downloadTarget string
+	var downloadToken string
 	for _, p := range res.Protocols {
 		if p.Protocol == "simple" {
 			downloadToken = p.Token
@@ -147,16 +147,10 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Extract internal target URL from JWT transfer token.
-	// The target uses localhost (from the OpenCloud container's perspective),
-	// but OpenYard runs in a separate container — remap to the pod hostname.
-	downloadTarget = extractDownloadTarget(downloadToken)
-	if strings.HasPrefix(downloadTarget, "http://localhost:") {
-		downloadTarget = "http://opencloud" + strings.TrimPrefix(downloadTarget, "http://localhost")
-	} else if strings.HasPrefix(downloadTarget, "https://localhost:") {
-		downloadTarget = "https://opencloud" + strings.TrimPrefix(downloadTarget, "https://localhost")
-	}
-	log.Info().Str("target", downloadTarget).Msg("GetFile: download target from JWT")
+	// Download via OC proxy /data endpoint (DataGatewayMiddleware handles JWT routing).
+	// Same pattern as SetFile: use uploadURL (OC proxy) + /data.
+	downloadTarget := h.uploadURL + "/data"
+	log.Info().Str("target", downloadTarget).Msg("GetFile: download via OC proxy")
 
 	sess := sessionFromCtx(r.Context())
 	if sess == nil {
