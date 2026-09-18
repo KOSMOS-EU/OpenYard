@@ -2,9 +2,11 @@ package handlers
 
 import (
 	"crypto/tls"
+	"encoding/base64"
 	"encoding/json"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 
 	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
@@ -129,9 +131,8 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var downloadToken string
-	for i, p := range res.Protocols {
-		log.Info().Int("idx", i).Str("protocol", p.Protocol).Str("endpoint", p.DownloadEndpoint).Msg("cs3 download protocol")
+	var downloadToken, downloadTarget string
+	for _, p := range res.Protocols {
 		if p.Protocol == "simple" {
 			downloadToken = p.Token
 			break
@@ -140,22 +141,22 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 			downloadToken = p.Token
 		}
 	}
-	log.Info().Str("token_prefix", downloadToken[:min(20, len(downloadToken))]).Msg("GetFile: download token selected")
 	if downloadToken == "" {
 		writeError(w, 500, "INTERNAL_ERROR", "No download protocol available")
 		return
 	}
+
+	// Extract internal target URL from JWT transfer token
+	downloadTarget = extractDownloadTarget(downloadToken)
+	log.Info().Str("target", downloadTarget).Msg("GetFile: download target from JWT")
 
 	sess := sessionFromCtx(r.Context())
 	if sess == nil {
 		writeError(w, 401, "AUTH_REQUIRED", "No session")
 		return
 	}
-	log.Info().Str("cs3token_prefix", sess.CS3Token[:min(20, len(sess.CS3Token))]).Msg("GetFile: session ok")
 
-	dataURL := h.downloadURL + "/data"
-	log.Info().Str("dataURL", dataURL).Msg("GetFile: requesting download")
-	downloadReq, err := http.NewRequestWithContext(r.Context(), "GET", dataURL, nil)
+	downloadReq, err := http.NewRequestWithContext(r.Context(), "GET", downloadTarget, nil)
 	if err != nil {
 		log.Error().Err(err).Msg("GetFile: create request failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Create download request failed")
@@ -166,16 +167,18 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := insecureClient.Do(downloadReq)
 	if err != nil {
-		log.Error().Err(err).Str("url", dataURL).Msg("GetFile: download failed")
+		log.Error().Err(err).Str("url", downloadTarget).Msg("GetFile: download failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Download failed")
 		return
 	}
-	log.Info().Int("resp_status", resp.StatusCode).Msg("GetFile: download response")
+	defer resp.Body.Close()
+
 	if resp.StatusCode >= 400 {
 		errBody, _ := io.ReadAll(io.LimitReader(resp.Body, 1024))
-		log.Error().Str("body", string(errBody)).Int("status", resp.StatusCode).Msg("GetFile: data gateway error")
+		log.Error().Str("body", string(errBody)).Int("status", resp.StatusCode).Str("url", downloadTarget).Msg("GetFile: download error")
+		writeError(w, resp.StatusCode, "DOWNLOAD_ERROR", string(errBody))
+		return
 	}
-	defer resp.Body.Close()
 
 	w.Header().Set("Content-Type", resp.Header.Get("Content-Type"))
 	if cl := resp.Header.Get("Content-Length"); cl != "" {
@@ -450,4 +453,37 @@ func (h *Handlers) GetDocumentMetaData(w http.ResponseWriter, r *http.Request) {
 	}
 
 	writeJSON(w, 200, mapResourceInfo(res.Info))
+}
+
+// extractDownloadTarget decodes a JWT transfer token and returns the internal target URL.
+// The target is the internal data server URL (e.g. http://localhost:9158/data/simple/...).
+func extractDownloadTarget(token string) string {
+	parts := strings.Split(token, ".")
+	if len(parts) != 3 {
+		log.Warn().Msg("extractDownloadTarget: invalid JWT format")
+		return ""
+	}
+	payload := parts[1]
+	switch len(payload) % 4 {
+	case 2:
+		payload += "=="
+	case 3:
+		payload += "="
+	}
+	decoded, err := base64.URLEncoding.DecodeString(payload)
+	if err != nil {
+		decoded, err = base64.RawURLEncoding.DecodeString(parts[1])
+		if err != nil {
+			log.Warn().Err(err).Msg("extractDownloadTarget: base64 decode failed")
+			return ""
+		}
+	}
+	var claims struct {
+		Target string `json:"target"`
+	}
+	if err := json.Unmarshal(decoded, &claims); err != nil {
+		log.Warn().Err(err).Msg("extractDownloadTarget: JSON parse failed")
+		return ""
+	}
+	return claims.Target
 }
