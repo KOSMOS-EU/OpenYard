@@ -130,7 +130,8 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var downloadToken string
-	for _, p := range res.Protocols {
+	for i, p := range res.Protocols {
+		log.Info().Int("idx", i).Str("protocol", p.Protocol).Str("endpoint", p.DownloadEndpoint).Msg("cs3 download protocol")
 		if p.Protocol == "simple" {
 			downloadToken = p.Token
 			break
@@ -139,6 +140,7 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 			downloadToken = p.Token
 		}
 	}
+	log.Info().Str("token_prefix", downloadToken[:min(20, len(downloadToken))]).Msg("GetFile: download token selected")
 	if downloadToken == "" {
 		writeError(w, 500, "INTERNAL_ERROR", "No download protocol available")
 		return
@@ -149,10 +151,13 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		writeError(w, 401, "AUTH_REQUIRED", "No session")
 		return
 	}
+	log.Info().Str("cs3token_prefix", sess.CS3Token[:min(20, len(sess.CS3Token))]).Msg("GetFile: session ok")
 
 	dataURL := h.dataURL + "/data"
+	log.Info().Str("dataURL", dataURL).Msg("GetFile: requesting download")
 	downloadReq, err := http.NewRequestWithContext(r.Context(), "GET", dataURL, nil)
 	if err != nil {
+		log.Error().Err(err).Msg("GetFile: create request failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Create download request failed")
 		return
 	}
@@ -161,10 +166,11 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := insecureClient.Do(downloadReq)
 	if err != nil {
-		log.Error().Err(err).Str("url", dataURL).Msg("download failed")
+		log.Error().Err(err).Str("url", dataURL).Msg("GetFile: download failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Download failed")
 		return
 	}
+	log.Info().Int("resp_status", resp.StatusCode).Msg("GetFile: download response")
 	defer resp.Body.Close()
 
 	w.Header().Set("Content-Type", resp.Header.Get("Content-Type"))
