@@ -182,6 +182,12 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 	m.Get("/openyard/health", h.Health)
 	m.Get("/openyard/stats", h.Stats)
 
+	// --- Debug: InitiateFileDownload and return token+target (session required) ---
+	m.Route("/openyard/debug", func(r chi.Router) {
+		r.Use(h.SessionMiddleware)
+		r.Post("/dl-token", h.DLTokenDebug)
+	})
+
 	// --- IDP / Identity Server Endpoints ---
 	// OIDC endpoint (no session required, separate path)
 	m.Get("/connect/authorize", h.ConnectAuthorize)

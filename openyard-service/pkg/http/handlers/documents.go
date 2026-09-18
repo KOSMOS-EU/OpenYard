@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -493,4 +494,48 @@ func extractDownloadTarget(token string) string {
 		return ""
 	}
 	return claims.Target
+}
+
+// DLTokenDebug is a temporary debug endpoint to inspect download tokens.
+// POST /openyard/debug/dl-token with {"ObjectId": "..."}
+func (h *Handlers) DLTokenDebug(w http.ResponseWriter, r *http.Request) {
+	r = withCS3Token(r)
+
+	var body struct {
+		ObjectId string `json:"ObjectId"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || body.ObjectId == "" {
+		writeError(w, 400, "INVALID_REQUEST", "ObjectId required")
+		return
+	}
+
+	ref, err := refFromObjectID(body.ObjectId)
+	if err != nil {
+		writeError(w, 400, "INVALID_REQUEST", err.Error())
+		return
+	}
+
+	gw := h.gw.GetGateway()
+	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: ref})
+	if err != nil {
+		writeError(w, 500, "INTERNAL_ERROR", err.Error())
+		return
+	}
+	if res.Status.Code != rpc.Code_CODE_OK {
+		writeError(w, 500, "INTERNAL_ERROR", res.Status.Message)
+		return
+	}
+
+	for _, p := range res.Protocols {
+		target := extractDownloadTarget(p.Token)
+		log.Info().Str("protocol", p.Protocol).Str("endpoint", p.DownloadEndpoint).Str("target", target).Str("token_len", fmt.Sprintf("%d", len(p.Token))).Msg("DLTokenDebug")
+		writeJSON(w, 200, map[string]interface{}{
+			"protocol": p.Protocol,
+			"endpoint": p.DownloadEndpoint,
+			"target":   target,
+			"token":    p.Token,
+		})
+		return
+	}
+	writeJSON(w, 200, map[string]string{"error": "no protocols"})
 }
