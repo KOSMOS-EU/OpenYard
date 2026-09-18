@@ -171,6 +171,10 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	log.Info().Int("resp_status", resp.StatusCode).Msg("GetFile: download response")
+	if resp.StatusCode >= 400 {
+		errBody, _ := io.ReadAll(io.LimitReader(resp.Body, 1024))
+		log.Error().Str("body", string(errBody)).Int("status", resp.StatusCode).Msg("GetFile: data gateway error")
+	}
 	defer resp.Body.Close()
 
 	w.Header().Set("Content-Type", resp.Header.Get("Content-Type"))
