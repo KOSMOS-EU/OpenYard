@@ -103,7 +103,14 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := h.gw.Gateway.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: ref})
+	gw := h.gw.GetGateway()
+	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: ref})
+	if err != nil && h.gw.CheckError(err) {
+		log.Info().Msg("cs3: retrying InitiateFileDownload after reconnect")
+		time.Sleep(time.Second)
+		gw = h.gw.GetGateway()
+		res, err = gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: ref})
+	}
 	if err != nil {
 		log.Error().Err(err).Msg("cs3 download init failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Download error")
@@ -189,7 +196,14 @@ func (h *Handlers) SetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	res, err := h.gw.Gateway.InitiateFileUpload(r.Context(), &provider.InitiateFileUploadRequest{Ref: ref})
+	gw := h.gw.GetGateway()
+	res, err := gw.InitiateFileUpload(r.Context(), &provider.InitiateFileUploadRequest{Ref: ref})
+	if err != nil && h.gw.CheckError(err) {
+		log.Info().Msg("cs3: retrying InitiateFileUpload after reconnect")
+		time.Sleep(time.Second)
+		gw = h.gw.GetGateway()
+		res, err = gw.InitiateFileUpload(r.Context(), &provider.InitiateFileUploadRequest{Ref: ref})
+	}
 	if err != nil {
 		log.Error().Err(err).Msg("cs3 upload init failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Upload error")
