@@ -112,13 +112,24 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Stat to get the full path — InitiateFileDownload needs a path-based
+	// Reference to produce a valid data-server target URL.
+	statRes, statErr := h.gw.Gateway.Stat(r.Context(), &provider.StatRequest{Ref: ref})
+	if statErr != nil || statRes.Status.Code != rpc.Code_CODE_OK {
+		log.Error().Err(statErr).Int32("status", int32(statRes.Status.Code)).Msg("GetFile: stat failed")
+		writeError(w, 404, "NOT_FOUND", "Document not found")
+		return
+	}
+
+	pathRef := &provider.Reference{Path: statRes.Info.Path}
+
 	gw := h.gw.GetGateway()
-	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: ref})
+	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: pathRef})
 	if err != nil && h.gw.CheckError(err) {
 		log.Info().Msg("cs3: retrying InitiateFileDownload after reconnect")
 		time.Sleep(time.Second)
 		gw = h.gw.GetGateway()
-		res, err = gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: ref})
+		res, err = gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: pathRef})
 	}
 	if err != nil {
 		log.Error().Err(err).Msg("cs3 download init failed")
