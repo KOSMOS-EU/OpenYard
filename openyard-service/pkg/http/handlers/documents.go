@@ -112,27 +112,20 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Stat to get the full path — InitiateFileDownload needs a path-based
-	// Reference to produce a valid data-server target URL.
-	statRes, statErr := h.gw.Gateway.Stat(r.Context(), &provider.StatRequest{Ref: ref})
-	if statErr != nil || statRes.Status.Code != rpc.Code_CODE_OK {
-		log.Error().Err(statErr).Int32("status", int32(statRes.Status.Code)).Msg("GetFile: stat failed")
-		writeError(w, 404, "NOT_FOUND", "Document not found")
-		return
-	}
-
-	// Convert absolute path to relative (./xxx) to trigger the "spaces" protocol,
-	// which embeds the space ID in the data-server target URL.
-	relPath := "./" + strings.TrimPrefix(statRes.Info.Path, "/")
-	pathRef := &provider.Reference{ResourceId: ref.ResourceId, Path: relPath}
+	// Use ResourceId + Path="." to point directly at the file node.
+	// IsRelativeReference returns true (ResourceId set + Path starts with "."),
+	// triggering the "spaces" protocol which embeds the ResourceId in the
+	// data-server target URL. The datatx spaces handler resolves the node
+	// directly via the OpaqueId — no path traversal needed.
+	dlRef := &provider.Reference{ResourceId: ref.ResourceId, Path: "."}
 
 	gw := h.gw.GetGateway()
-	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: pathRef})
+	res, err := gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: dlRef})
 	if err != nil && h.gw.CheckError(err) {
 		log.Info().Msg("cs3: retrying InitiateFileDownload after reconnect")
 		time.Sleep(time.Second)
 		gw = h.gw.GetGateway()
-		res, err = gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: pathRef})
+		res, err = gw.InitiateFileDownload(r.Context(), &provider.InitiateFileDownloadRequest{Ref: dlRef})
 	}
 	if err != nil {
 		log.Error().Err(err).Msg("cs3 download init failed")
