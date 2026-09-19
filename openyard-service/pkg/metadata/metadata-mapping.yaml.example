@@ -1,35 +1,105 @@
 # OpenYard Metadata Mapping Configuration
 #
-# Defines how client metadata keys are mapped to storage keys (xattrs).
-# Place as /etc/openyard/metadata-mapping.yaml or set OPENYARD_METADATA_CONFIG.
+# Steuert wie Client-Metadaten auf dem Storage abgelegt werden.
+# Ablage: /etc/openyard/metadata-mapping.yaml
+# Oder:   OPENYARD_METADATA_CONFIG=/pfad/zur/config.yaml
 #
-# Client sends:   BELEG_NR = "RE-2026-001"
-# Storage writes:  user.oc.md.saskia.beleg_nr = "RE-2026-001"
-# Client reads:    BELEG_NR = "RE-2026-001"
+# Beispiel-Fluss:
+#   Client sendet:    BELEG_NR = "RE-2026-001"
+#   Storage schreibt: user.oc.md.ctrl.beleg_nr = "RE-2026-001"
+#   Client liest:     BELEG_NR = "RE-2026-001"
+
+# ──────────────────────────────────────────────────────────────
+# Namespaces
+# ──────────────────────────────────────────────────────────────
+# Jeder Namespace definiert einen Sub-Bereich auf dem Storage.
+# Alle Client-Keys die nicht in known_keys stehen, landen im
+# Default-Namespace.
+#
+# prefix:        Praefix auf dem Storage (ctrl → ctrl.beleg_nr)
+# storage_case:  "lower" = Kleinschreibung, "preserve" = wie gesendet
+# client_case:   "upper" = Grossschreibung beim Zuruecklesen, "preserve" = wie gespeichert
 
 namespaces:
-  # Default namespace for IFR/Fachverfahren metadata.
-  # All client keys that are not in known_keys land here.
   default:
-    prefix: saskia
-    storage_case: lower    # keys stored in lowercase: BELEG_NR → beleg_nr
-    client_case: upper     # keys returned in UPPERCASE: beleg_nr → BELEG_NR
+    prefix: ctrl
+    storage_case: lower
+    client_case: upper
 
-  # Example: additional namespace for a different client
-  # controlling:
-  #   prefix: ctrl
+  # Weitere Namespaces fuer andere Clients / Fachverfahren:
+  #
+  # personal:
+  #   prefix: hr
+  #   storage_case: lower
+  #   client_case: upper
+  #
+  # liegenschaften:
+  #   prefix: lis
   #   storage_case: lower
   #   client_case: upper
 
-# Known keys: specific client keys mapped to fixed storage keys.
-# These are WinYard-internal system fields, not IFR data fields.
-# Override to add/remove mappings.
-# known_keys:
-#   Betreff: oy.subject
-#   Creator: oy.creatorId
+# ──────────────────────────────────────────────────────────────
+# Known Keys — feste Zuordnung fuer System-/DMS-interne Felder
+# ──────────────────────────────────────────────────────────────
+# Diese Keys landen NICHT im Namespace, sondern unter oy.*
+# Das sind WinYard-interne Felder, keine Fachverfahrensdaten.
+#
+# Nur ueberschreiben wenn abweichende Zuordnung gewuenscht.
+# Ohne Angabe gelten die eingebauten Defaults (siehe defaults.go).
 
-# Info keys: "info:"-prefixed client keys mapped to info.* storage keys.
-# These are DocIndex topic fields from the legacy DMS.
+# known_keys:
+#   Betreff:              oy.subject
+#   Beschreibung:         oy.description
+#   Creator:              oy.creatorId
+#   CreatorFullName:      oy.creatorName
+#   DocTypeName:          oy.type.name
+#   Notice:               note
+
+# ──────────────────────────────────────────────────────────────
+# Info Keys — Benutzer-definierte Indexfelder (DocIndex)
+# ──────────────────────────────────────────────────────────────
+# Werden nur mit "info:" Prefix im Client-Key aktiviert.
+# Beispiel: Client sendet "info:Aktenzeichen" → info.fileReference
+#
+# Ohne Angabe gelten die eingebauten Defaults.
+
 # info_keys:
-#   Aktenzeichen: info.fileReference
-#   Kassenzeichen: info.cashReference
+#   Aktenzeichen:         info.fileReference
+#   Kassenzeichen:        info.cashReference
+#   Absender:             info.sender
+#   Empfaenger:           info.recipient
+
+# ──────────────────────────────────────────────────────────────
+# Ergebnis auf dem Storage (xattrs)
+# ──────────────────────────────────────────────────────────────
+#
+# Mit dieser Config sieht ein Dokument so aus:
+#
+#   user.oc.md.ctrl.mand = "5530"              ← Controlling/IFR
+#   user.oc.md.ctrl.hh_jahr = "2026"
+#   user.oc.md.ctrl.beleg_nr = "RE-2026-001"
+#   user.oc.md.ctrl.brutto = "892.50"
+#   user.oc.md.ctrl.iban = "DE82..."
+#   user.oc.md.ctrl.statusdok = "OFFEN"
+#
+#   user.oc.md.oy.subject = "Rechnung LCS"     ← DMS-System (known_keys)
+#   user.oc.md.oy.creatorName = "Kroeber"
+#
+#   user.oc.md.doc.type = "rechnung"            ← Taki/KI-Enrichment
+#   user.oc.md.doc.subject = "Softwarepflege"
+#   user.oc.md.amounts.total = "892.50"
+#   user.oc.md.sender.company = "LCS GmbH"
+#
+#   user.oc.md.info.fileReference = "11.13.01"  ← DocIndex (info_keys)
+#
+# In der OpenCloud Sidebar wird das als:
+#
+#   Controlling:
+#     Mand          5530
+#     Hh Jahr       2026
+#     Beleg Nr      RE-2026-001
+#     Brutto        892.50
+#
+#   Dokument:
+#     Type          rechnung
+#     Subject       Softwarepflege

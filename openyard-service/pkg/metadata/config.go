@@ -41,7 +41,7 @@ func DefaultConfig() *Config {
 	return &Config{
 		Namespaces: map[string]NamespaceConfig{
 			"default": {
-				Prefix:      "saskia",
+				Prefix:      "ctrl",
 				StorageCase: "lower",
 				ClientCase:  "upper",
 			},
@@ -78,7 +78,7 @@ func (c *Config) defaultNamespace() NamespaceConfig {
 	if ns, ok := c.Namespaces["default"]; ok {
 		return ns
 	}
-	return NamespaceConfig{Prefix: "saskia", StorageCase: "lower", ClientCase: "upper"}
+	return NamespaceConfig{Prefix: "ctrl", StorageCase: "lower", ClientCase: "upper"}
 }
 
 // ToStorageKey converts a client metadata key to a storage key.
