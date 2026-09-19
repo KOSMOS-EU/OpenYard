@@ -260,15 +260,15 @@ var infoKeyMap = map[string]string{
 var defaultMetaCfg = metadata.DefaultConfig()
 
 func mapMetaKey(clientKey string) string {
-	return defaultMetaCfg.ToStorageKey(clientKey)
+	return defaultMetaCfg.ToStorageKey("", clientKey)
 }
 
-// mapMetaKeyWith converts a client key using a specific config.
-func mapMetaKeyWith(cfg *metadata.Config, clientKey string) string {
+// mapMetaKeyForUser converts a client key using a specific config and login.
+func mapMetaKeyForUser(cfg *metadata.Config, login, clientKey string) string {
 	if cfg == nil {
 		return mapMetaKey(clientKey)
 	}
-	return cfg.ToStorageKey(clientKey)
+	return cfg.ToStorageKey(login, clientKey)
 }
 
 func taskLogOK() map[string]interface{} {

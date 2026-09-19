@@ -26,17 +26,28 @@ namespaces:
     storage_case: lower
     client_case: upper
 
-  # Weitere Namespaces fuer andere Clients / Fachverfahren:
-  #
-  # personal:
-  #   prefix: hr
-  #   storage_case: lower
-  #   client_case: upper
-  #
+  # Weitere Namespaces fuer andere Fachverfahren:
+  personal:
+    prefix: hr
+    storage_case: lower
+    client_case: upper
+
   # liegenschaften:
   #   prefix: lis
   #   storage_case: lower
   #   client_case: upper
+
+# ──────────────────────────────────────────────────────────────
+# Users — Login → Namespace Zuordnung
+# ──────────────────────────────────────────────────────────────
+# Bestimmt welcher Namespace fuer einen Login-User gilt.
+# Nicht gelistete User landen im "default" Namespace.
+
+users:
+  saskia: default          # Saskia IFR → ctrl.* (Controlling)
+  worker: default          # Worker/Batch-Import → ctrl.*
+  import_hr: personal      # HR-Import → hr.*
+  # admin: default         # Admin → ctrl.* (oder weglassen = default)
 
 # ──────────────────────────────────────────────────────────────
 # Known Keys — feste Zuordnung fuer System-/DMS-interne Felder

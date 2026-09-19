@@ -153,9 +153,13 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 
 	// Store DocIndex as metadata via CS3 (using the uploaded file's reference)
 	if h.gw != nil && h.gw.Gateway != nil && newID != "" && newID != "00000000-0000-0000-0000-000000000000" {
+		login := ""
+		if sess != nil {
+			login = sess.Login
+		}
 		md := make(map[string]string)
 		for _, e := range importData.DocIndex.Entries {
-			md[mapMetaKeyWith(h.metaCfg, e.Key)] = e.Value
+			md[mapMetaKeyForUser(h.metaCfg, login, e.Key)] = e.Value
 		}
 		if len(md) > 0 {
 			if ref, err := refFromObjectID(newID); err == nil {

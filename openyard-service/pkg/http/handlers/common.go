@@ -202,9 +202,13 @@ func (h *Handlers) SetIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Map metadata keys to oy.* namespace
+	login := ""
+	if sess := sessionFromCtx(r.Context()); sess != nil {
+		login = sess.Login
+	}
 	prefixed := make(map[string]string, len(body.Metadata))
 	for k, v := range body.Metadata {
-		prefixed[mapMetaKeyWith(h.metaCfg, k)] = v
+		prefixed[mapMetaKeyForUser(h.metaCfg, login, k)] = v
 	}
 
 	res, err := h.gw.Gateway.SetArbitraryMetadata(r.Context(), &provider.SetArbitraryMetadataRequest{
