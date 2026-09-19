@@ -72,7 +72,8 @@ func decodeObjectID(objectID string) (*provider.ResourceId, error) {
 }
 
 // mapResourceInfo converts CS3 ResourceInfo to legacy DMS-compatible JSON map.
-func mapResourceInfo(info *provider.ResourceInfo) map[string]interface{} {
+// Uses the handler's metadata config for reverse-mapping namespace keys.
+func (h *Handlers) mapResourceInfo(info *provider.ResourceInfo) map[string]interface{} {
 	// Unescape folder names (U+2215 → "/") for display
 	displayName := strings.ReplaceAll(path.Base(info.Path), "\u2215", "/")
 	displayPath := strings.ReplaceAll(info.Path, "\u2215", "/")
@@ -98,9 +99,13 @@ func mapResourceInfo(info *provider.ResourceInfo) map[string]interface{} {
 	}
 
 	// Arbitrary metadata — reverse-map namespace keys for client display
+	cfg := h.metaCfg
+	if cfg == nil {
+		cfg = defaultMetaCfg
+	}
 	if info.ArbitraryMetadata != nil {
 		for k, v := range info.ArbitraryMetadata.Metadata {
-			clientKey := defaultMetaCfg.ToClientKey(k)
+			clientKey := cfg.ToClientKey(k)
 			m[clientKey] = v
 		}
 	}

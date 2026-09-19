@@ -79,7 +79,7 @@ func (h *Handlers) GetDocument(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	writeJSON(w, 200, mapResourceInfo(res.Info))
+	writeJSON(w, 200, h.mapResourceInfo(res.Info))
 }
 
 // POST /api/advancedDocuments/SetDocument
@@ -461,7 +461,7 @@ func (h *Handlers) GetDocumentMetaData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	writeJSON(w, 200, mapResourceInfo(res.Info))
+	writeJSON(w, 200, h.mapResourceInfo(res.Info))
 }
 
 // extractDownloadTarget decodes a JWT transfer token and returns the internal target URL.

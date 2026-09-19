@@ -5,6 +5,7 @@ import (
 
 	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
 	typesv1 "github.com/cs3org/go-cs3apis/cs3/types/v1beta1"
+	"github.com/kosmos-eu/openyard/pkg/metadata"
 )
 
 func TestEncodeDecodeObjectID(t *testing.T) {
@@ -62,7 +63,8 @@ func TestMapResourceInfoFile(t *testing.T) {
 		Mtime:    &typesv1.Timestamp{Seconds: 1700000000},
 	}
 
-	m := mapResourceInfo(info)
+	h := &Handlers{metaCfg: metadata.DefaultConfig()}
+	m := h.mapResourceInfo(info)
 
 	if m["type"] != "file" {
 		t.Errorf("type = %v, want file", m["type"])
@@ -95,7 +97,8 @@ func TestMapResourceInfoFolder(t *testing.T) {
 		Etag: "def456",
 	}
 
-	m := mapResourceInfo(info)
+	h := &Handlers{metaCfg: metadata.DefaultConfig()}
+	m := h.mapResourceInfo(info)
 
 	if m["type"] != "folder" {
 		t.Errorf("type = %v, want folder", m["type"])
@@ -121,7 +124,8 @@ func TestMapResourceInfoWithMetadata(t *testing.T) {
 		},
 	}
 
-	m := mapResourceInfo(info)
+	h := &Handlers{metaCfg: metadata.DefaultConfig()}
+	m := h.mapResourceInfo(info)
 
 	if m["oy.aktenzeichen"] != "11.12.02.01-15" {
 		t.Errorf("aktenzeichen = %v", m["oy.aktenzeichen"])

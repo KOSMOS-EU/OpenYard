@@ -69,7 +69,7 @@ func (h *Handlers) GetFolder(w http.ResponseWriter, r *http.Request) {
 	allFolders := make([]map[string]interface{}, 0)
 	allDocs := make([]map[string]interface{}, 0)
 	for _, info := range listRes.Infos {
-		mapped := mapResourceInfo(info)
+		mapped := h.mapResourceInfo(info)
 		if info.Type == provider.ResourceType_RESOURCE_TYPE_CONTAINER {
 			allFolders = append(allFolders, map[string]interface{}{
 				"FolderID":   encodeObjectID(info.Id),
@@ -323,10 +323,10 @@ func (h *Handlers) GetFolderByFolderpath(w http.ResponseWriter, r *http.Request)
 
 	contents := make([]map[string]interface{}, 0, len(listRes.Infos))
 	for _, info := range listRes.Infos {
-		contents = append(contents, mapResourceInfo(info))
+		contents = append(contents, h.mapResourceInfo(info))
 	}
 
-	folder := mapResourceInfo(statRes.Info)
+	folder := h.mapResourceInfo(statRes.Info)
 	folder["childCount"] = len(contents)
 	folder["contents"] = contents
 

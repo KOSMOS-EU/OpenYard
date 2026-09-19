@@ -289,7 +289,7 @@ func TestErrorFormat(t *testing.T) {
 
 func TestFullRouterIsListening(t *testing.T) {
 	sessions := auth.NewSessionCache(1 * time.Hour)
-	h := New(nil, sessions, nil)
+	h := New(nil, sessions, nil, "", "")
 
 	r := chi.NewMux()
 	r.Get("/api/advancedGeneral/IsListening", h.IsListening)
