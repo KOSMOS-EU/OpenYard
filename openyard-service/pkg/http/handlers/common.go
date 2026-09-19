@@ -204,7 +204,7 @@ func (h *Handlers) SetIndex(w http.ResponseWriter, r *http.Request) {
 	// Map metadata keys to oy.* namespace
 	prefixed := make(map[string]string, len(body.Metadata))
 	for k, v := range body.Metadata {
-		prefixed[mapMetaKey(k)] = v
+		prefixed[mapMetaKeyWith(h.metaCfg, k)] = v
 	}
 
 	res, err := h.gw.Gateway.SetArbitraryMetadata(r.Context(), &provider.SetArbitraryMetadataRequest{

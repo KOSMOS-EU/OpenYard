@@ -10,6 +10,7 @@ import (
 
 	"github.com/kosmos-eu/openyard/pkg/auth"
 	"github.com/kosmos-eu/openyard/pkg/cs3client"
+	"github.com/kosmos-eu/openyard/pkg/metadata"
 	"github.com/kosmos-eu/openyard/pkg/upload"
 )
 
@@ -24,6 +25,7 @@ type Handlers struct {
 	uploadURL    string // Upload base URL (OC web proxy), e.g. "http://opencloud:9200"
 	downloadURL  string // Download base URL (Reva data gateway), e.g. "http://opencloud:9216"
 	workCache    *gocache.Cache // WorkID → *workObject for GetFolder pagination
+	metaCfg      *metadata.Config // Metadata key mapping configuration
 }
 
 // workObject stores remaining sub-elements for paginated GetFolder responses.
@@ -41,6 +43,7 @@ func New(gw *cs3client.Client, sessions *auth.SessionCache, up upload.Uploader, 
 		uploadURL:   uploadURL,
 		downloadURL: downloadURL,
 		workCache:   gocache.New(10*time.Minute, 5*time.Minute),
+		metaCfg:     metadata.LoadConfig(""),
 	}
 }
 

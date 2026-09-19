@@ -1,0 +1,35 @@
+# OpenYard Metadata Mapping Configuration
+#
+# Defines how client metadata keys are mapped to storage keys (xattrs).
+# Place as /etc/openyard/metadata-mapping.yaml or set OPENYARD_METADATA_CONFIG.
+#
+# Client sends:   BELEG_NR = "RE-2026-001"
+# Storage writes:  user.oc.md.saskia.beleg_nr = "RE-2026-001"
+# Client reads:    BELEG_NR = "RE-2026-001"
+
+namespaces:
+  # Default namespace for IFR/Fachverfahren metadata.
+  # All client keys that are not in known_keys land here.
+  default:
+    prefix: saskia
+    storage_case: lower    # keys stored in lowercase: BELEG_NR → beleg_nr
+    client_case: upper     # keys returned in UPPERCASE: beleg_nr → BELEG_NR
+
+  # Example: additional namespace for a different client
+  # controlling:
+  #   prefix: ctrl
+  #   storage_case: lower
+  #   client_case: upper
+
+# Known keys: specific client keys mapped to fixed storage keys.
+# These are WinYard-internal system fields, not IFR data fields.
+# Override to add/remove mappings.
+# known_keys:
+#   Betreff: oy.subject
+#   Creator: oy.creatorId
+
+# Info keys: "info:"-prefixed client keys mapped to info.* storage keys.
+# These are DocIndex topic fields from the legacy DMS.
+# info_keys:
+#   Aktenzeichen: info.fileReference
+#   Kassenzeichen: info.cashReference

@@ -155,7 +155,7 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 	if h.gw != nil && h.gw.Gateway != nil && newID != "" && newID != "00000000-0000-0000-0000-000000000000" {
 		md := make(map[string]string)
 		for _, e := range importData.DocIndex.Entries {
-			md[mapMetaKey(e.Key)] = e.Value
+			md[mapMetaKeyWith(h.metaCfg, e.Key)] = e.Value
 		}
 		if len(md) > 0 {
 			if ref, err := refFromObjectID(newID); err == nil {

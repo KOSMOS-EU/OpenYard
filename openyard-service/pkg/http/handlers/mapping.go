@@ -9,6 +9,7 @@ import (
 
 	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
 	typesv1 "github.com/cs3org/go-cs3apis/cs3/types/v1beta1"
+	"github.com/kosmos-eu/openyard/pkg/metadata"
 	"github.com/kosmos-eu/openyard/pkg/migration"
 )
 
@@ -96,10 +97,11 @@ func mapResourceInfo(info *provider.ResourceInfo) map[string]interface{} {
 		m["parentId"] = encodeObjectID(info.ParentId)
 	}
 
-	// Arbitrary metadata (oy.* fields)
+	// Arbitrary metadata — reverse-map namespace keys for client display
 	if info.ArbitraryMetadata != nil {
 		for k, v := range info.ArbitraryMetadata.Metadata {
-			m[k] = v
+			clientKey := defaultMetaCfg.ToClientKey(k)
+			m[clientKey] = v
 		}
 	}
 
@@ -152,9 +154,12 @@ func mapFolderInfo(info *provider.ResourceInfo) map[string]interface{} {
 }
 
 // taskLogOK returns a standard legacy DMS TaskLog with no errors.
-// metaKeyMap maps known legacy DMS field names to English oy.* metadata keys.
-// Unknown keys are passed through as oy.<OriginalKey>.
-var metaKeyMap = map[string]string{
+//
+// NOTE: metaKeyMap and infoKeyMap have been moved to pkg/metadata/defaults.go.
+// They are loaded via metadata.DefaultConfig() and configurable via YAML.
+
+// legacyMetaKeyMap is kept for reference only — not used at runtime.
+var _ = map[string]string{
 	// Document metadata
 	"Betreff":              "oy.subject",
 	"Beschreibung":         "oy.description",
@@ -249,37 +254,21 @@ var infoKeyMap = map[string]string{
 	"KZ_DKS":                       "info.dksCode",
 }
 
-// mapMetaKey converts a legacy DMS metadata key to an oy.* or info.* key.
-// Keys with "info:" prefix are mapped via infoKeyMap to the info.* namespace.
-// Known keys get English names, unknown keys pass through as oy.<key>.
-func mapMetaKey(wyKey string) string {
-	// info: prefix → user-defined index fields
-	if strings.HasPrefix(wyKey, "info:") {
-		return mapInfoKey(strings.TrimPrefix(wyKey, "info:"))
-	}
-	if mapped, ok := metaKeyMap[wyKey]; ok {
-		return mapped
-	}
-	return "oy." + wyKey
+// mapMetaKey converts a client metadata key to a storage key using the config.
+// Delegates to metadata.Config.ToStorageKey — see pkg/metadata/config.go.
+// Falls back to package-level defaultMetaCfg if handler config is not available.
+var defaultMetaCfg = metadata.DefaultConfig()
+
+func mapMetaKey(clientKey string) string {
+	return defaultMetaCfg.ToStorageKey(clientKey)
 }
 
-// mapInfoKey converts a legacy DMS DocIndex topic to an info.* key.
-// Known topics get English names, unknown topics are sanitized.
-func mapInfoKey(topic string) string {
-	if mapped, ok := infoKeyMap[topic]; ok {
-		return mapped
+// mapMetaKeyWith converts a client key using a specific config.
+func mapMetaKeyWith(cfg *metadata.Config, clientKey string) string {
+	if cfg == nil {
+		return mapMetaKey(clientKey)
 	}
-	// Sanitize: lowercase, replace spaces/special chars with camelCase
-	sanitized := strings.Map(func(r rune) rune {
-		if r >= 'a' && r <= 'z' || r >= 'A' && r <= 'Z' || r >= '0' && r <= '9' {
-			return r
-		}
-		return -1
-	}, topic)
-	if sanitized == "" {
-		sanitized = "unknown"
-	}
-	return "info." + sanitized
+	return cfg.ToStorageKey(clientKey)
 }
 
 func taskLogOK() map[string]interface{} {
