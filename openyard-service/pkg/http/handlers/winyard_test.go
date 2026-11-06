@@ -29,6 +29,8 @@ namespaces:
     storage_case: lower
     client_case: upper
     source: saskia
+    defaults:
+      booking.status: U
 users:
   saskia: saskia
 `
@@ -376,6 +378,29 @@ func TestWinyardSearchForDocIndex(t *testing.T) {
 		[]map[string]string{{"Topic": "BELEG_NR", "Compare": "Equal", "Value": "nope"}})
 	if strings.TrimSpace(recorder.Body.String()) != "[]" {
 		t.Errorf("empty search body = %s", recorder.Body.String())
+	}
+}
+
+// Saskia GetListUnbearbeitetAsync adds STATUSDOK = U (FELD_DMS booking.status).
+// A missing status counts as U (namespace default), a set status wins.
+func TestWinyardSearchUnprocessedDefault(t *testing.T) {
+	env := newWinyardEnv(t)
+	env.storage.mu.Lock()
+	env.enriched.metadata["booking.status"] = "E"
+	env.storage.mu.Unlock()
+
+	var results []wyDocInfo
+	decodeBody(t, env.callJSON("POST", "/api/basicDocuments/SearchForDocIndex",
+		"SearchInFolder="+nilGUID+"&DocType=rechnung&Conjunction=True",
+		[]map[string]string{{"Topic": "booking.status", "Compare": "Equal", "Value": "U"}}), &results)
+	if len(results) != 1 || results[0].DocId != env.booked.id {
+		t.Fatalf("unprocessed = %+v, want only the booked invoice", results)
+	}
+	if status := results[0].index()["booking.status"]; status != "U" {
+		t.Errorf("DocIndex booking.status = %q, want default U", status)
+	}
+	if _, stored := env.booked.metadata["booking.status"]; stored {
+		t.Error("default must not be written to the document")
 	}
 }
 

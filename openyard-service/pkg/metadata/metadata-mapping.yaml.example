@@ -37,6 +37,10 @@ namespaces:
     storage_case: lower
     client_case: upper
     source: saskia
+    # Vorgabewerte fuer fehlende Felder (Suche und DocIndex, nicht gespeichert):
+    # Belege ohne Status gelten als unbearbeitet (STATUSDOK = U)
+    defaults:
+      booking.status: U
 
   # Weitere Namespaces fuer andere Fachverfahren:
   personal:

@@ -48,6 +48,30 @@ func TestToStorageKeySharedPrefixes(t *testing.T) {
 	}
 }
 
+func TestWithDefaults(t *testing.T) {
+	configPath := filepath.Join(t.TempDir(), "mapping.yaml")
+	yamlText := "namespaces:\n  saskia:\n    prefix: ctrl\n    defaults:\n      booking.status: U\nusers:\n  saskia: saskia\n"
+	if err := os.WriteFile(configPath, []byte(yamlText), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	cfg := LoadConfig(configPath)
+
+	stored := map[string]string{"doc.type": "rechnung"}
+	merged := cfg.WithDefaults("saskia", stored)
+	if merged["booking.status"] != "U" || merged["doc.type"] != "rechnung" {
+		t.Errorf("WithDefaults = %v", merged)
+	}
+	if _, changed := stored["booking.status"]; changed {
+		t.Error("input map modified")
+	}
+	if cfg.WithDefaults("saskia", map[string]string{"booking.status": "E"})["booking.status"] != "E" {
+		t.Error("stored status must win over the default")
+	}
+	if _, ok := cfg.WithDefaults("worker", stored)["booking.status"]; ok {
+		t.Error("other namespaces get no default")
+	}
+}
+
 func TestDocumentMetadata(t *testing.T) {
 	cfg := saskiaConfig(t)
 

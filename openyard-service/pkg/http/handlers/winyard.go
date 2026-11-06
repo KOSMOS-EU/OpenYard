@@ -213,14 +213,15 @@ func fullRights() map[string]interface{} {
 // docIndexFromMetadata converts stored metadata into the WinYard DocIndex
 // list [{"topic": ..., "values": {"StringValue": ...}}], topics in client
 // notation, sorted, each topic once (clients build a dictionary from it).
-func (h *Handlers) docIndexFromMetadata(info *provider.ResourceInfo) []map[string]interface{} {
+func (h *Handlers) docIndexFromMetadata(info *provider.ResourceInfo, login string) []map[string]interface{} {
 	docIndex := make([]map[string]interface{}, 0)
-	if info == nil || info.ArbitraryMetadata == nil {
+	if info == nil {
 		return docIndex
 	}
 	cfg := h.metaConfig()
-	storageKeys := make([]string, 0, len(info.ArbitraryMetadata.Metadata))
-	for storageKey := range info.ArbitraryMetadata.Metadata {
+	storedMeta := cfg.WithDefaults(login, info.GetArbitraryMetadata().GetMetadata())
+	storageKeys := make([]string, 0, len(storedMeta))
+	for storageKey := range storedMeta {
 		storageKeys = append(storageKeys, storageKey)
 	}
 	sort.Strings(storageKeys)
@@ -233,7 +234,7 @@ func (h *Handlers) docIndexFromMetadata(info *provider.ResourceInfo) []map[strin
 		seenTopics[topic] = true
 		docIndex = append(docIndex, map[string]interface{}{
 			"topic":  topic,
-			"values": map[string]interface{}{"StringValue": info.ArbitraryMetadata.Metadata[storageKey]},
+			"values": map[string]interface{}{"StringValue": storedMeta[storageKey]},
 		})
 	}
 	return docIndex
@@ -268,7 +269,7 @@ func (h *Handlers) winyardDocInfo(info *provider.ResourceInfo, login string, wit
 		}
 	}
 	if withIndex {
-		docInfo["DocIndex"] = h.docIndexFromMetadata(info)
+		docInfo["DocIndex"] = h.docIndexFromMetadata(info, login)
 	}
 	if fileKey := downloadFileKey(sessionID, info.Id); fileKey != nil {
 		docInfo["FileKey"] = fileKey

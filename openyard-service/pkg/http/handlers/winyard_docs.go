@@ -502,10 +502,7 @@ func (h *Handlers) SearchForDocIndex(w http.ResponseWriter, r *http.Request) {
 				queue = append(queue, &provider.Reference{ResourceId: info.Id})
 				continue
 			}
-			metadata := map[string]string{}
-			if info.ArbitraryMetadata != nil {
-				metadata = info.ArbitraryMetadata.Metadata
-			}
+			metadata := cfg.WithDefaults(login, info.GetArbitraryMetadata().GetMetadata())
 			if search.matches(metadata) {
 				results = append(results, h.winyardDocInfo(info, login, true, ""))
 				if len(results) >= maxResults {

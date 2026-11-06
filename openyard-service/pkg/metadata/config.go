@@ -51,6 +51,12 @@ type NamespaceConfig struct {
 	// Source is written as "source" on every document stored by a user of
 	// this namespace, e.g. "saskia". Empty: no source key.
 	Source string `yaml:"source"`
+
+	// Defaults are values for storage keys a document does not carry, used
+	// when OpenYard answers this namespace (search and DocIndex), e.g.
+	// booking.status: U — documents from the mail room count as unprocessed
+	// until the client sets a status. Not written to the document.
+	Defaults map[string]string `yaml:"defaults"`
 }
 
 // DefaultConfig returns the built-in configuration.
@@ -198,6 +204,26 @@ func (c *Config) DocumentMetadata(login, docType string) map[string]string {
 		documentMeta["doc.type"] = docType
 	}
 	return documentMeta
+}
+
+// WithDefaults returns the metadata of a document as seen by login: the
+// namespace defaults fill keys that are missing or empty. The input map is
+// not modified.
+func (c *Config) WithDefaults(login string, storedMeta map[string]string) map[string]string {
+	defaults := c.NamespaceForUser(login).Defaults
+	if len(defaults) == 0 {
+		return storedMeta
+	}
+	merged := make(map[string]string, len(storedMeta)+len(defaults))
+	for key, value := range storedMeta {
+		merged[key] = value
+	}
+	for key, value := range defaults {
+		if merged[key] == "" {
+			merged[key] = value
+		}
+	}
+	return merged
 }
 
 // IsNamespacedKey returns true if the storage key belongs to a client namespace.
