@@ -325,7 +325,8 @@ func (h *Handlers) freeChildRef(r *http.Request, parentID *provider.ResourceId, 
 func (h *Handlers) storeDocIndex(r *http.Request, login string, resourceID *provider.ResourceId, docType string, docIndex map[string]string) error {
 	storageMeta := h.metaConfig().DocumentMetadata(login, docType)
 	for topic, value := range docIndex {
-		storageMeta[mapMetaKeyForUser(h.metaCfg, login, topic)] = value
+		storageKey := mapMetaKeyForUser(h.metaCfg, login, topic)
+		storageMeta[storageKey] = h.metaConfig().ToStorageValue(login, storageKey, value)
 	}
 	if len(storageMeta) == 0 {
 		return nil
@@ -470,7 +471,9 @@ func (h *Handlers) SearchForDocIndex(w http.ResponseWriter, r *http.Request) {
 		if condition.Topic == "" {
 			continue
 		}
-		search.conditions[cfg.ToStorageKey(login, condition.Topic)] = condition
+		storageKey := cfg.ToStorageKey(login, condition.Topic)
+		condition.Value = cfg.ToStorageValue(login, storageKey, condition.Value)
+		search.conditions[storageKey] = condition
 	}
 	maxResults := defaultSearchResults
 	if value, err := strconv.Atoi(queryValue(r, "MaxResults")); err == nil && value > 0 {

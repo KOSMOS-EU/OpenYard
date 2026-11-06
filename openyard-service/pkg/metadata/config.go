@@ -57,6 +57,10 @@ type NamespaceConfig struct {
 	// booking.status: U — documents from the mail room count as unprocessed
 	// until the client sets a status. Not written to the document.
 	Defaults map[string]string `yaml:"defaults"`
+
+	// Formats converts dates and amounts between storage and client format
+	// (see FormatConfig), e.g. Saskia: date "02.01.2006", decimal ",".
+	Formats FormatConfig `yaml:"formats"`
 }
 
 // DefaultConfig returns the built-in configuration.

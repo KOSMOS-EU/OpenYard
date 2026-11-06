@@ -159,7 +159,8 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 		}
 		md := h.metaConfig().DocumentMetadata(login, r.URL.Query().Get("ConfigName"))
 		for _, e := range importData.DocIndex.Entries {
-			md[mapMetaKeyForUser(h.metaCfg, login, e.Key)] = e.Value
+			storageKey := mapMetaKeyForUser(h.metaCfg, login, e.Key)
+			md[storageKey] = h.metaConfig().ToStorageValue(login, storageKey, e.Value)
 		}
 		if len(md) > 0 {
 			if ref, err := refFromObjectID(newID); err == nil {

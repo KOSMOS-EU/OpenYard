@@ -234,7 +234,7 @@ func (h *Handlers) docIndexFromMetadata(info *provider.ResourceInfo, login strin
 		seenTopics[topic] = true
 		docIndex = append(docIndex, map[string]interface{}{
 			"topic":  topic,
-			"values": map[string]interface{}{"StringValue": storedMeta[storageKey]},
+			"values": map[string]interface{}{"StringValue": cfg.ToClientValue(login, storageKey, storedMeta[storageKey])},
 		})
 	}
 	return docIndex

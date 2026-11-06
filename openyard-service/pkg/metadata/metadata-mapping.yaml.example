@@ -41,6 +41,11 @@ namespaces:
     # Belege ohne Status gelten als unbearbeitet (STATUSDOK = U)
     defaults:
       booking.status: U
+    # Formate wie Saskia sie liest und schreibt; gespeichert wird kanonisch
+    # (ISO-Datum, Dezimalpunkt). Zahlen nur unter amounts.*
+    formats:
+      date: "02.01.2006"
+      decimal: ","
 
   # Weitere Namespaces fuer andere Fachverfahren:
   personal:

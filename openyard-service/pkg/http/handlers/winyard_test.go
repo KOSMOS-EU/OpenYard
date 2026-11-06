@@ -32,6 +32,9 @@ namespaces:
     source: saskia
     defaults:
       booking.status: U
+    formats:
+      date: "02.01.2006"
+      decimal: ","
 users:
   saskia: saskia
 `
@@ -257,7 +260,7 @@ func TestWinyardReadDocument(t *testing.T) {
 		t.Errorf("DocType = %+v", docInfo.DocType)
 	}
 	index := docInfo.index()
-	if index["BELEG_NR"] != "2026-0042" || index["amounts.total"] != "119.00" || index["source"] != "saskia" {
+	if index["BELEG_NR"] != "2026-0042" || index["amounts.total"] != "119,00" || index["source"] != "saskia" {
 		t.Errorf("DocIndex = %v", index)
 	}
 	if len(document.FileKey) == 0 {
@@ -419,6 +422,35 @@ func TestWinyardSearchUnprocessedDefault(t *testing.T) {
 	}
 	if _, stored := env.booked.metadata["booking.status"]; stored {
 		t.Error("default must not be written to the document")
+	}
+}
+
+// Saskia reads and writes German dates and decimal commas; storage stays
+// canonical (ISO date, decimal point) for Taki and the search index.
+func TestWinyardGermanFormats(t *testing.T) {
+	env := newWinyardEnv(t)
+	env.storage.mu.Lock()
+	env.booked.metadata["doc.date"] = "2026-09-19"
+	env.storage.mu.Unlock()
+
+	index := env.getDocument(env.booked.id).DocInfo.index()
+	if index["doc.date"] != "19.09.2026" || index["amounts.total"] != "119,00" {
+		t.Errorf("client values = date %q total %q", index["doc.date"], index["amounts.total"])
+	}
+
+	var updated bool
+	decodeBody(t, env.callJSON("PUT", "/api/basicDocuments/SetDocIndex", "DocId="+env.booked.id,
+		map[string]string{"doc.date": "01.10.2026", "amounts.total": "1.234,50"}), &updated)
+	if env.booked.metadata["doc.date"] != "2026-10-01" || env.booked.metadata["amounts.total"] != "1234.50" {
+		t.Errorf("stored values = date %q total %q", env.booked.metadata["doc.date"], env.booked.metadata["amounts.total"])
+	}
+
+	var results []wyDocInfo
+	decodeBody(t, env.callJSON("POST", "/api/basicDocuments/SearchForDocIndex",
+		"SearchInFolder="+nilGUID+"&DocType=rechnung",
+		[]map[string]string{{"Topic": "amounts.total", "Compare": "Equal", "Value": "1.234,50"}}), &results)
+	if len(results) != 1 || results[0].DocId != env.booked.id {
+		t.Errorf("search by German amount = %+v", results)
 	}
 }
 
