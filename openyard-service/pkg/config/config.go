@@ -15,6 +15,11 @@ type Config struct {
 	}
 	Session struct {
 		TTL time.Duration
+		// ExpiresIn is the lifetime reported to WinYard clients at login.
+		// Sessions live in memory only: after an OpenYard restart a client
+		// keeps using its old session until ExpiresIn has passed, it does
+		// not log in again on 401 (Saskia DmsWinyard). Keep it short.
+		ExpiresIn time.Duration
 	}
 	ServiceAccount struct {
 		User string
@@ -44,6 +49,7 @@ func Load() *Config {
 	cfg.HTTP.BaseURL = envOr("OPENYARD_BASE_URL", "http://localhost:9201")
 	cfg.Reva.GatewayAddr = envOr("OPENYARD_REVA_GATEWAY", "127.0.0.1:9142")
 	cfg.Session.TTL = envDuration("OPENYARD_SESSION_TTL", 8*time.Hour)
+	cfg.Session.ExpiresIn = envDuration("OPENYARD_SESSION_EXPIRES_IN", 10*time.Minute)
 	cfg.ServiceAccount.User = os.Getenv("OPENYARD_SERVICE_USER")
 	cfg.ServiceAccount.Pass = os.Getenv("OPENYARD_SERVICE_PASS")
 	cfg.DB.DSN = os.Getenv("OPENYARD_DB_DSN")

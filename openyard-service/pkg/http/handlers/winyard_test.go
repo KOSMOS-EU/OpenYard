@@ -14,6 +14,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 
@@ -202,6 +203,23 @@ func (e *winyardEnv) uploadFile(fileName string, content []byte) []byte {
 	return fileKey
 }
 
+func TestExpiresInTicks(t *testing.T) {
+	cases := []struct {
+		ttl, expiresIn time.Duration
+		want           int64
+	}{
+		{8 * time.Hour, 10 * time.Minute, 10 * 60 * 10_000_000},
+		{8 * time.Hour, 0, (8*60 - 1) * 60 * 10_000_000},
+		{5 * time.Minute, 10 * time.Minute, 4 * 60 * 10_000_000},
+		{time.Minute, 10 * time.Minute, 0},
+	}
+	for _, testCase := range cases {
+		if got := expiresInTicks(testCase.ttl, testCase.expiresIn); got != testCase.want {
+			t.Errorf("expiresInTicks(%v, %v) = %d, want %d", testCase.ttl, testCase.expiresIn, got, testCase.want)
+		}
+	}
+}
+
 func TestWinyardLoginExpiresInTicks(t *testing.T) {
 	env := newWinyardEnv(t)
 	env.handlers.gw = nil // dummy login mode, no CS3 authentication
@@ -214,8 +232,8 @@ func TestWinyardLoginExpiresInTicks(t *testing.T) {
 	if !isGUID(user.SessionId) {
 		t.Errorf("SessionId = %q, want GUID", user.SessionId)
 	}
-	// session TTL 1h minus 1 min margin, in 100 ns ticks
-	if want := int64(59 * 60 * 10_000_000); user.ExpiresIn != want {
+	// default OPENYARD_SESSION_EXPIRES_IN 10 min (below TTL 1h - 1 min), in 100 ns ticks
+	if want := int64(10 * 60 * 10_000_000); user.ExpiresIn != want {
 		t.Errorf("ExpiresIn = %d, want %d ticks", user.ExpiresIn, want)
 	}
 }
