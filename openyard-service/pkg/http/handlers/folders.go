@@ -58,26 +58,31 @@ func (h *Handlers) GetFolder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// List contents
-	listRes, err := h.gw.Gateway.ListContainer(r.Context(), &provider.ListContainerRequest{Ref: ref})
+	// List contents (with metadata for the DocIndex of SubDocs)
+	listRes, err := h.gw.Gateway.ListContainer(r.Context(), &provider.ListContainerRequest{Ref: ref, ArbitraryMetadataKeys: []string{"*"}})
 	if err != nil || listRes.Status.Code != rpc.Code_CODE_OK {
 		writeError(w, 500, "INTERNAL_ERROR", "Could not list folder contents")
 		return
 	}
 
+	login := ""
+	if sess := sessionFromCtx(r.Context()); sess != nil {
+		login = sess.Login
+	}
+	sessionID := sessionIDFromRequest(r)
+
 	// Build legacy DMS-compatible response
 	allFolders := make([]map[string]interface{}, 0)
 	allDocs := make([]map[string]interface{}, 0)
 	for _, info := range listRes.Infos {
-		mapped := h.mapResourceInfo(info)
 		if info.Type == provider.ResourceType_RESOURCE_TYPE_CONTAINER {
 			allFolders = append(allFolders, map[string]interface{}{
-				"FolderID":   encodeObjectID(info.Id),
+				"FolderID":   clientID(info.Id),
 				"Foldername": unescapeFolderName(path.Base(info.Path)),
 				"Aktz":       "",
 			})
 		} else {
-			allDocs = append(allDocs, mapped)
+			allDocs = append(allDocs, h.winyardDocInfo(info, login, true, sessionID))
 		}
 	}
 
@@ -234,7 +239,7 @@ func (h *Handlers) getFolderRoot(w http.ResponseWriter, r *http.Request) {
 
 	subFolders := make([]map[string]interface{}, 0, len(res.StorageSpaces))
 	for _, space := range res.StorageSpaces {
-		fid := encodeObjectID(space.Root)
+		fid := clientID(space.Root)
 		subFolders = append(subFolders, map[string]interface{}{
 			"FolderID":       fid,
 			"Foldername":     space.Name,
@@ -343,7 +348,7 @@ func (h *Handlers) IsFolder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(objectID)
+	ref, err := h.refFromID(r.Context(), objectID)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -435,7 +440,7 @@ func (h *Handlers) DeleteFolders(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, oid := range body.ObjectIds {
-		ref, err := refFromObjectID(oid)
+		ref, err := h.refFromID(r.Context(), oid)
 		if err != nil {
 			continue
 		}
@@ -457,7 +462,7 @@ func (h *Handlers) GetFolderRights(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(objectID)
+	ref, err := h.refFromID(r.Context(), objectID)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -505,7 +510,7 @@ func (h *Handlers) CreateFolderByParentFolderID(w http.ResponseWriter, r *http.R
 	}
 
 	// Resolve parent
-	parentRef, err := refFromObjectID(body.ParentFolderId)
+	parentRef, err := h.refFromID(r.Context(), body.ParentFolderId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -565,7 +570,7 @@ func (h *Handlers) RenameFolder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	srcRef, err := refFromObjectID(body.ObjectId)
+	srcRef, err := h.refFromID(r.Context(), body.ObjectId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -610,7 +615,7 @@ func path_base(p string) string {
 // For space roots, returns a Reference with ResourceId + relative path ".".
 // For regular objects, tries Stat to get the ResourceId.
 func (h *Handlers) resolveRef(ctx context.Context, objectID string) (*provider.Reference, error) {
-	rid, err := decodeObjectID(objectID)
+	rid, err := h.resourceIDFromID(ctx, objectID)
 	if err != nil {
 		return nil, err
 	}
@@ -625,7 +630,7 @@ func (h *Handlers) resolveRef(ctx context.Context, objectID string) (*provider.R
 // resolveRefWithChild resolves a parent ObjectID and appends a child name.
 // Escapes "/" in folder names to Unicode fraction slash (U+2215) for storage.
 func (h *Handlers) resolveRefWithChild(ctx context.Context, parentID, childName string) (*provider.Reference, error) {
-	rid, err := decodeObjectID(parentID)
+	rid, err := h.resourceIDFromID(ctx, parentID)
 	if err != nil {
 		return nil, err
 	}

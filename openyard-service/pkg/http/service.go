@@ -64,6 +64,9 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 		r.Post("/ClientConfiguration", h.PostClientConfiguration)
 		r.Get("/Customers/GetIdSrvUrl/{prefix}", h.GetIdSrvUrl)
 
+		// WinYard GetFile: FileKey in the body carries the session (no SessionID)
+		r.Post("/advancedDocuments/GetFile", h.GetFile)
+
 		// Protected endpoints (SessionID required)
 		r.Group(func(r chi.Router) {
 			r.Use(h.SessionMiddleware)
@@ -74,7 +77,6 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 			// Documents
 			r.Post("/advancedDocuments/GetDocument", h.GetDocument)
 			r.Post("/advancedDocuments/SetDocument", h.SetDocument)
-			r.Post("/advancedDocuments/GetFile", h.GetFile)
 			r.Post("/advancedDocuments/SetFile", h.SetFile)
 			r.Get("/advancedDocuments/IsDocument", h.IsDocument)
 			r.Post("/advancedDocuments/BinDocuments", h.BinDocuments)
@@ -127,6 +129,11 @@ func NewService(gw *cs3client.Client, sessions *auth.SessionCache, cfg *config.C
 			r.Get("/basicDocuments/HasPreviewFile", h.HasPreviewFile)
 			r.Get("/basicDocuments/DownloadPreviewFile", h.DownloadPreviewFile)
 			r.Post("/basicDocuments/ImportDocumentDynamic", h.ImportDocumentDynamic)
+			r.Put("/basicDocuments/SetDocIndex", h.SetDocIndex)
+			r.Post("/basicDocuments/SearchForDocIndex", h.SearchForDocIndex)
+			r.Put("/basicDocuments/UpdateDocument", h.UpdateDocument)
+			r.Post("/advancedCommon/SetTopic", h.SetTopic)
+			r.Delete("/advancedCommon/DeleteTopic", h.DeleteTopic)
 
 			// Extended Documents
 			r.Post("/basicDocuments/ImportDocumentByParentFolderID", h.ImportDocumentByParentFolderID)

@@ -34,7 +34,7 @@ func (h *Handlers) RenameDocument(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	srcRef, err := refFromObjectID(body.ObjectId)
+	srcRef, err := h.refFromID(r.Context(), body.ObjectId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -57,12 +57,6 @@ func (h *Handlers) RenameDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	writeJSON(w, 200, map[string]string{"status": "ok"})
-}
-
-// POST /api/basicDocuments/UploadFile
-func (h *Handlers) UploadFile(w http.ResponseWriter, r *http.Request) {
-	// Spec: reva — wie SetFile mit zusätzlichen Flags
-	h.SetFile(w, r)
 }
 
 // POST /api/basicDocuments/CheckInAndIgnoreChanges

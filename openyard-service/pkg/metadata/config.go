@@ -28,6 +28,13 @@ type Config struct {
 
 	// InfoKeys maps "info:"-prefixed client keys to info.* storage keys.
 	InfoKeys map[string]string `yaml:"info_keys"`
+
+	// SharedPrefixes are storage key prefixes shared with Taki enrichment
+	// (doc., sender., amounts., ...). Client keys starting with one of them
+	// are stored lowercased without a namespace prefix: "doc.reference"
+	// stays "doc.reference" instead of becoming "ctrl.doc.reference".
+	// An entry without a trailing dot matches the exact key ("source").
+	SharedPrefixes []string `yaml:"shared_prefixes"`
 }
 
 // NamespaceConfig defines a client namespace.
@@ -40,6 +47,10 @@ type NamespaceConfig struct {
 
 	// ClientCase controls how keys are returned to clients: "upper" (default) or "preserve"
 	ClientCase string `yaml:"client_case"`
+
+	// Source is written as "source" on every document stored by a user of
+	// this namespace, e.g. "saskia". Empty: no source key.
+	Source string `yaml:"source"`
 }
 
 // DefaultConfig returns the built-in configuration.
@@ -53,8 +64,9 @@ func DefaultConfig() *Config {
 				ClientCase:  "upper",
 			},
 		},
-		KnownKeys: defaultKnownKeys(),
-		InfoKeys:  defaultInfoKeys(),
+		KnownKeys:      defaultKnownKeys(),
+		InfoKeys:       defaultInfoKeys(),
+		SharedPrefixes: defaultSharedPrefixes(),
 	}
 }
 
@@ -119,6 +131,11 @@ func (c *Config) ToStorageKey(login, clientKey string) string {
 		return mapped
 	}
 
+	// Shared keys (Taki enrichment) → lowercased, no namespace prefix
+	if c.IsSharedKey(clientKey) {
+		return strings.ToLower(clientKey)
+	}
+
 	// User-specific namespace: prefix + case transformation
 	ns := c.NamespaceForUser(login)
 	key := clientKey
@@ -148,6 +165,39 @@ func (c *Config) ToClientKey(storageKey string) string {
 	}
 	// Non-namespace keys pass through unchanged
 	return storageKey
+}
+
+// IsSharedKey reports whether a client key belongs to the shared key space
+// (case-insensitive), e.g. "doc.type", "Sender.Company", "source".
+func (c *Config) IsSharedKey(clientKey string) bool {
+	key := strings.ToLower(clientKey)
+	for _, prefix := range c.SharedPrefixes {
+		if strings.HasSuffix(prefix, ".") {
+			if strings.HasPrefix(key, prefix) {
+				return true
+			}
+		} else if key == prefix {
+			return true
+		}
+	}
+	return false
+}
+
+// DocumentMetadata returns the storage keys OpenYard adds to a document
+// stored by login with the client document type docType:
+// source and doc.type.
+func (c *Config) DocumentMetadata(login, docType string) map[string]string {
+	ns := c.NamespaceForUser(login)
+	documentMeta := make(map[string]string)
+	if ns.Source != "" {
+		documentMeta["source"] = ns.Source
+	}
+	// The client configures the target value itself (Saskia: KS_DMS_META
+	// DOKTYP row, FELD_DMS), OpenYard stores it unchanged.
+	if docType != "" {
+		documentMeta["doc.type"] = docType
+	}
+	return documentMeta
 }
 
 // IsNamespacedKey returns true if the storage key belongs to a client namespace.

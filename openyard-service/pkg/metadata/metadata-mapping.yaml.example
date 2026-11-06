@@ -26,6 +26,18 @@ namespaces:
     storage_case: lower
     client_case: upper
 
+  # Saskia IFR: gemeinsame Schluessel (doc.*, sender.*, amounts.*, booking.*)
+  # kommen direkt aus KS_DMS_META.FELD_DMS und gehen ohne Praefix durch
+  # (siehe shared_prefixes). Uebrige Felder landen unter ctrl.*.
+  #   source:       wird an jedes abgelegte Dokument geschrieben
+  #   Dokumenttyp: Saskia sendet den Zielwert (KS_DMS_META DOKTYP FELD_DMS,
+  #                z. B. "rechnung"), OpenYard schreibt ihn unveraendert als doc.type
+  saskia:
+    prefix: ctrl
+    storage_case: lower
+    client_case: upper
+    source: saskia
+
   # Weitere Namespaces fuer andere Fachverfahren:
   personal:
     prefix: hr
@@ -44,7 +56,7 @@ namespaces:
 # Nicht gelistete User landen im "default" Namespace.
 
 users:
-  saskia: default          # Saskia IFR → ctrl.* (Controlling)
+  saskia: saskia           # Saskia IFR → shared keys + ctrl.* (Controlling)
   worker: default          # Worker/Batch-Import → ctrl.*
   import_hr: personal      # HR-Import → hr.*
   # admin: default         # Admin → ctrl.* (oder weglassen = default)
@@ -65,6 +77,15 @@ users:
 #   CreatorFullName:      oy.creatorName
 #   DocTypeName:          oy.type.name
 #   Notice:               note
+
+# ──────────────────────────────────────────────────────────────
+# Shared Prefixes — gemeinsame Schluessel mit Taki-Enrichment
+# ──────────────────────────────────────────────────────────────
+# Client-Keys mit diesen Praefixen werden kleingeschrieben und OHNE
+# Namespace abgelegt. Eintrag ohne Punkt = exakter Schluessel.
+# Ohne Angabe gilt: doc. sender. recipient. issuer. amounts. booking. source
+
+# shared_prefixes: [doc., sender., recipient., issuer., amounts., booking., source]
 
 # ──────────────────────────────────────────────────────────────
 # Info Keys — Benutzer-definierte Indexfelder (DocIndex)

@@ -25,12 +25,19 @@ type SessionContext struct {
 // SessionCache manages SessionID → SessionContext mappings.
 type SessionCache struct {
 	cache *gocache.Cache
+	ttl   time.Duration
 }
 
 func NewSessionCache(ttl time.Duration) *SessionCache {
 	return &SessionCache{
 		cache: gocache.New(ttl, ttl/2),
+		ttl:   ttl,
 	}
+}
+
+// TTL returns the lifetime of a session (no sliding expiration).
+func (s *SessionCache) TTL() time.Duration {
+	return s.ttl
 }
 
 // Create generates a new SessionID (GUID format) and stores the context.

@@ -79,7 +79,7 @@ func (h *Handlers) mapResourceInfo(info *provider.ResourceInfo) map[string]inter
 	displayPath := strings.ReplaceAll(info.Path, "\u2215", "/")
 
 	m := map[string]interface{}{
-		"id":       encodeObjectID(info.Id),
+		"id":       clientID(info.Id),
 		"name":     displayName,
 		"path":     displayPath,
 		"modified": formatTimestamp(info.Mtime),
@@ -95,7 +95,7 @@ func (h *Handlers) mapResourceInfo(info *provider.ResourceInfo) map[string]inter
 	}
 
 	if info.ParentId != nil {
-		m["parentId"] = encodeObjectID(info.ParentId)
+		m["parentId"] = clientID(info.ParentId)
 	}
 
 	// Arbitrary metadata — reverse-map namespace keys for client display
@@ -137,8 +137,8 @@ func refFromPath(p string) *provider.Reference {
 // mapFolderInfo converts CS3 ResourceInfo to legacy DMS FolderInfo.
 func mapFolderInfo(info *provider.ResourceInfo) map[string]interface{} {
 	return map[string]interface{}{
-		"FolderID":       encodeObjectID(info.Id),
-		"ParentFolderID": encodeObjectID(info.ParentId),
+		"FolderID":       clientID(info.Id),
+		"ParentFolderID": clientID(info.ParentId),
 		"Foldername":     strings.ReplaceAll(path.Base(info.Path), "\u2215", "/"),
 		"FolderLevel":    0,
 		"Aktz":           "",

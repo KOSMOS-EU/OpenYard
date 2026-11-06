@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"context"
 	"crypto/tls"
 	"encoding/base64"
 	"encoding/json"
@@ -32,62 +33,6 @@ func withCS3Token(r *http.Request) *http.Request {
 	return r
 }
 
-// POST /api/advancedDocuments/GetDocument
-// DocID is a query parameter (legacy DMS format), not in body.
-func (h *Handlers) GetDocument(w http.ResponseWriter, r *http.Request) {
-	r = withCS3Token(r)
-
-	// DocID from query (legacy DMS) or ObjectId from body (legacy)
-	docID := r.URL.Query().Get("DocID")
-	if docID == "" {
-		docID = r.URL.Query().Get("ObjectId")
-	}
-	if docID == "" {
-		var body struct {
-			ObjectId string `json:"ObjectId"`
-			DocId    string `json:"DocId"`
-		}
-		json.NewDecoder(r.Body).Decode(&body)
-		docID = body.DocId
-		if docID == "" {
-			docID = body.ObjectId
-		}
-	}
-	if docID == "" {
-		writeError(w, 400, "INVALID_REQUEST", "DocID required")
-		return
-	}
-
-	ref, err := refFromObjectID(docID)
-	if err != nil {
-		writeError(w, 400, "INVALID_REQUEST", err.Error())
-		return
-	}
-
-	res, err := h.gw.Gateway.Stat(r.Context(), &provider.StatRequest{Ref: ref})
-	if err != nil {
-		log.Error().Err(err).Msg("cs3 stat failed")
-		writeError(w, 500, "INTERNAL_ERROR", "Storage error")
-		return
-	}
-	if res.Status.Code == rpc.Code_CODE_NOT_FOUND {
-		writeError(w, 404, "NOT_FOUND", "Document not found")
-		return
-	}
-	if res.Status.Code != rpc.Code_CODE_OK {
-		writeError(w, 500, "INTERNAL_ERROR", res.Status.Message)
-		return
-	}
-
-	writeJSON(w, 200, h.mapResourceInfo(res.Info))
-}
-
-// POST /api/advancedDocuments/SetDocument
-func (h *Handlers) SetDocument(w http.ResponseWriter, r *http.Request) {
-	// Spec: Impl-Kategorie reva — CS3 InitiateFileUpload + PUT
-	h.SetFile(w, r)
-}
-
 // POST /api/advancedDocuments/GetFile
 func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 	defer func() {
@@ -96,19 +41,25 @@ func (h *Handlers) GetFile(w http.ResponseWriter, r *http.Request) {
 			writeError(w, 500, "INTERNAL_ERROR", "Panic in GetFile")
 		}
 	}()
-	r = withCS3Token(r)
 
-	var body struct {
-		ObjectId string `json:"ObjectId"`
-	}
-	if err := json.NewDecoder(r.Body).Decode(&body); err != nil || body.ObjectId == "" {
-		writeError(w, 400, "INVALID_REQUEST", "ObjectId required")
+	// Body: FileKey as JSON base64 string (WinYard, no SessionID needed)
+	// or {"ObjectId": "..."} with ?SessionID= (OpenYard 1.x).
+	fileSess, objectID, found := h.fileRequest(r)
+	if !found {
+		// WinYard: 204 → client reports "document not found"
+		w.WriteHeader(http.StatusNoContent)
 		return
 	}
+	if fileSess == nil {
+		writeError(w, 401, "AUTH_REQUIRED", "Invalid or expired session")
+		return
+	}
+	r = r.WithContext(context.WithValue(r.Context(), sessionCtxKey, fileSess))
+	r = withCS3Token(r)
 
-	ref, err := refFromObjectID(body.ObjectId)
+	ref, err := h.refFromID(r.Context(), objectID)
 	if err != nil {
-		writeError(w, 400, "INVALID_REQUEST", err.Error())
+		w.WriteHeader(http.StatusNoContent)
 		return
 	}
 
@@ -220,7 +171,7 @@ func (h *Handlers) SetFile(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(objectID)
+	ref, err := h.refFromID(r.Context(), objectID)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -313,7 +264,7 @@ func (h *Handlers) IsDocument(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(objectID)
+	ref, err := h.refFromID(r.Context(), objectID)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -343,7 +294,7 @@ func (h *Handlers) BinDocuments(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, oid := range body.ObjectIds {
-		ref, err := refFromObjectID(oid)
+		ref, err := h.refFromID(r.Context(), oid)
 		if err != nil {
 			continue
 		}
@@ -366,7 +317,7 @@ func (h *Handlers) GetDeletedFiles(w http.ResponseWriter, r *http.Request) {
 
 	ref := &provider.Reference{Path: "/"}
 	if body.FolderId != "" {
-		if parsed, err := refFromObjectID(body.FolderId); err == nil {
+		if parsed, err := h.refFromID(r.Context(), body.FolderId); err == nil {
 			ref = parsed
 		}
 	}
@@ -403,7 +354,7 @@ func (h *Handlers) GetDocumentVersions(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(docID)
+	ref, err := h.refFromID(r.Context(), docID)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -428,14 +379,6 @@ func (h *Handlers) GetDocumentVersions(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, 200, map[string]interface{}{"versions": versions})
 }
 
-// GET /api/advancedDocuments/GetPreviewFile
-func (h *Handlers) GetPreviewFile(w http.ResponseWriter, r *http.Request) {
-	// Spec: Impl-Kategorie opencloud-framework — Thumbnails-Service
-	// Phase 1: Stub, liefert 404
-	log.Warn().Msg("GetPreviewFile called — stub, thumbnails not yet integrated")
-	writeError(w, 404, "NOT_FOUND", "Preview not available")
-}
-
 // GET /api/advancedDocuments/GetMetaData
 func (h *Handlers) GetDocumentMetaData(w http.ResponseWriter, r *http.Request) {
 	r = withCS3Token(r)
@@ -446,7 +389,7 @@ func (h *Handlers) GetDocumentMetaData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(objectID)
+	ref, err := h.refFromID(r.Context(), objectID)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -510,7 +453,7 @@ func (h *Handlers) DLTokenDebug(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(body.ObjectId)
+	ref, err := h.refFromID(r.Context(), body.ObjectId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return

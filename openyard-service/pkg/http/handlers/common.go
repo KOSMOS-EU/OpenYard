@@ -22,7 +22,7 @@ func (h *Handlers) CopyObjects(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dstRef, err := refFromObjectID(body.DestinationId)
+	dstRef, err := h.refFromID(r.Context(), body.DestinationId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -36,7 +36,7 @@ func (h *Handlers) CopyObjects(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, srcID := range body.SourceIds {
-		srcRef, err := refFromObjectID(srcID)
+		srcRef, err := h.refFromID(r.Context(), srcID)
 		if err != nil {
 			continue
 		}
@@ -67,7 +67,7 @@ func (h *Handlers) MoveObjects(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dstRef, err := refFromObjectID(body.DestinationId)
+	dstRef, err := h.refFromID(r.Context(), body.DestinationId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return
@@ -80,7 +80,7 @@ func (h *Handlers) MoveObjects(w http.ResponseWriter, r *http.Request) {
 	}
 
 	for _, srcID := range body.SourceIds {
-		srcRef, err := refFromObjectID(srcID)
+		srcRef, err := h.refFromID(r.Context(), srcID)
 		if err != nil {
 			continue
 		}
@@ -132,7 +132,7 @@ func (h *Handlers) ExistObjectId(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(objectID)
+	ref, err := h.refFromID(r.Context(), objectID)
 	if err != nil {
 		writeJSON(w, 200, map[string]bool{"exists": false})
 		return
@@ -195,7 +195,7 @@ func (h *Handlers) SetIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ref, err := refFromObjectID(body.ObjectId)
+	ref, err := h.refFromID(r.Context(), body.ObjectId)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", err.Error())
 		return

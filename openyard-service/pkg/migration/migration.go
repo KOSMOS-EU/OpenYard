@@ -25,6 +25,7 @@ type entry struct {
 
 var (
 	idMap      map[string]entry
+	legacyByOY map[string]string // OpenYard ID → legacy ID (reverse index of idMap)
 	dbPath     string
 	dirty      bool
 	dirtyCount int
@@ -57,6 +58,11 @@ func Init() {
 			idMap = make(map[string]entry)
 			return
 		}
+		for legacyID, e := range idMap {
+			if e.OpenYardID != "" {
+				reverseIndex()[e.OpenYardID] = legacyID
+			}
+		}
 
 		log.Info().Int("entries", len(idMap)).Msg("migration db loaded")
 	})
@@ -85,12 +91,16 @@ func LookupOpenYardID(legacyID string) string {
 func LookupLegacyID(openyardID string) string {
 	mu.RLock()
 	defer mu.RUnlock()
-	for wyID, e := range idMap {
-		if e.OpenYardID == openyardID {
-			return wyID
-		}
+	return legacyByOY[openyardID]
+}
+
+// reverseIndex returns the OpenYard → legacy index, creating it if needed.
+// Callers hold mu (or run inside Init).
+func reverseIndex() map[string]string {
+	if legacyByOY == nil {
+		legacyByOY = make(map[string]string)
 	}
-	return ""
+	return legacyByOY
 }
 
 // MapID creates or updates a legacy DMS→OpenYard mapping in memory.
@@ -99,6 +109,12 @@ func LookupLegacyID(openyardID string) string {
 func MapID(legacyID, openyardID, objType, name string) {
 	mu.Lock()
 	legacyID = strings.ToLower(legacyID)
+	if previous, ok := idMap[legacyID]; ok && previous.OpenYardID != "" {
+		delete(reverseIndex(), previous.OpenYardID)
+	}
+	if openyardID != "" {
+		reverseIndex()[openyardID] = legacyID
+	}
 	idMap[legacyID] = entry{
 		OpenYardID: openyardID,
 		Type:       objType,

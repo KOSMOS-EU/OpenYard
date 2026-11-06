@@ -65,6 +65,13 @@ func defaultKnownKeys() map[string]string {
 	}
 }
 
+// defaultSharedPrefixes returns the key prefixes shared with Taki enrichment
+// (see open_taki docmeta_schema.json) plus "booking." for accounting fields
+// of Fachverfahren and the exact key "source".
+func defaultSharedPrefixes() []string {
+	return []string{"doc.", "sender.", "recipient.", "issuer.", "amounts.", "booking.", "source"}
+}
+
 // defaultInfoKeys returns the hardcoded mapping for user-defined DocIndex fields.
 func defaultInfoKeys() map[string]string {
 	return map[string]string{

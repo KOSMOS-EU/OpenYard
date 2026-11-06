@@ -119,8 +119,21 @@ func (h *Handlers) Login(w http.ResponseWriter, r *http.Request) {
 	sessionID := h.sessions.Create(sc)
 
 	// legacy DMS-compatible login response
-	writeJSON(w, 200, buildLoginResponse(sessionID, sc))
+	loginResponse := buildLoginResponse(sessionID, sc)
+	loginResponse["ExpiresIn"] = expiresInTicks(h.sessions.TTL())
+	writeJSON(w, 200, loginResponse)
 	log.Info().Str("user", sc.Login).Str("session", sessionID[:8]+"...").Msg("login")
+}
+
+// expiresInTicks returns the session lifetime as .NET ticks (100 ns), as
+// WinYard clients compute DateTime.Now.AddTicks(ExpiresIn). One minute
+// margin so the client logs in again before the session expires.
+func expiresInTicks(ttl time.Duration) int64 {
+	ttl -= time.Minute
+	if ttl <= 0 {
+		return 0
+	}
+	return int64(ttl / 100)
 }
 
 // buildLoginResponse creates a legacy DMS-compatible login response

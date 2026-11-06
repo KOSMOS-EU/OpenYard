@@ -157,7 +157,7 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 		if sess != nil {
 			login = sess.Login
 		}
-		md := make(map[string]string)
+		md := h.metaConfig().DocumentMetadata(login, r.URL.Query().Get("ConfigName"))
 		for _, e := range importData.DocIndex.Entries {
 			md[mapMetaKeyForUser(h.metaCfg, login, e.Key)] = e.Value
 		}
@@ -175,6 +175,11 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 	if oldID != "" && newID != "" {
 		migration.MapID(oldID, newID, "document", fileName)
 		log.Info().Str("oldId", oldID).Str("newId", newID[:20]+"...").Msg("migration mapping created")
+	}
+
+	// WinYard clients get a GUID (legacy ID or OpenCloud opaque ID)
+	if resourceID, err := decodeObjectID(newID); err == nil && newID != nilGUID {
+		newID = clientID(resourceID)
 	}
 
 	log.Info().Str("file", fileName).Int("size", len(fileData)).Str("id", newID).Str("method", h.uploader.Name()).Msg("document imported")
