@@ -126,6 +126,16 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 		fileName = "imported_document"
 	}
 
+	// Folder rule of the namespace (metadata config "folders"), unless the
+	// client chose the folder itself
+	if folderID == "" {
+		login := ""
+		if sess != nil {
+			login = sess.Login
+		}
+		folderID = h.ruleFolderID(r.Context(), login, r.URL.Query().Get("ConfigName"), spaceID, importData.DocIndex.Entries)
+	}
+
 	// Upload via pluggable uploader (webdav-weg or reva-weg)
 	uploadReq := &upload.Request{
 		FileName: escapeFolderName(fileName),

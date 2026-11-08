@@ -177,6 +177,25 @@ func (s *fakeStorage) Stat(_ context.Context, req *provider.StatRequest, _ ...gr
 	return &provider.StatResponse{Status: statusOK(), Info: s.info(node, len(req.ArbitraryMetadataKeys) > 0)}, nil
 }
 
+// CreateContainer creates the folder named by the reference's path below the
+// reference's resource (one level, like the CS3 gateway).
+func (s *fakeStorage) CreateContainer(_ context.Context, req *provider.CreateContainerRequest, _ ...grpc.CallOption) (*provider.CreateContainerResponse, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	parent, missing := s.resolve(req.Ref)
+	if parent == nil {
+		return &provider.CreateContainerResponse{Status: statusNotFound()}, nil
+	}
+	if missing == "" {
+		return &provider.CreateContainerResponse{Status: &rpc.Status{Code: rpc.Code_CODE_ALREADY_EXISTS}}, nil
+	}
+	if strings.Contains(missing, "/") {
+		return &provider.CreateContainerResponse{Status: statusNotFound()}, nil
+	}
+	s.addNodeLocked(parent, missing, true, nil, map[string]string{})
+	return &provider.CreateContainerResponse{Status: statusOK()}, nil
+}
+
 func (s *fakeStorage) ListContainer(_ context.Context, req *provider.ListContainerRequest, _ ...grpc.CallOption) (*provider.ListContainerResponse, error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
@@ -278,7 +297,22 @@ type fakeUploader struct {
 func (u *fakeUploader) Name() string { return "fake" }
 
 func (u *fakeUploader) Upload(_ context.Context, req *upload.Request) (*upload.Result, error) {
-	node := u.storage.addNode(u.folder, req.FileName, false, req.Data, nil)
+	folder := u.folder
+	if req.FolderID != "" {
+		// like upload.Reva: an explicit FolderID wins over the default target
+		rid, err := decodeObjectID(req.FolderID)
+		if err != nil {
+			return nil, err
+		}
+		u.storage.mu.Lock()
+		target := u.storage.nodes[rid.OpaqueId]
+		u.storage.mu.Unlock()
+		if target == nil || !target.isDir {
+			return nil, fmt.Errorf("fake upload: folder %s not found", req.FolderID)
+		}
+		folder = target
+	}
+	node := u.storage.addNode(folder, req.FileName, false, req.Data, nil)
 	return &upload.Result{FileID: fakeStorageID + "$" + node.spaceID + "!" + node.id}, nil
 }
 

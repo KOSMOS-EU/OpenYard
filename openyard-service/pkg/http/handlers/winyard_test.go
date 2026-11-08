@@ -35,6 +35,10 @@ namespaces:
     formats:
       date: "02.01.2006"
       decimal: ","
+    # Ablageregel je Belegtyp (ConfigName); ohne Regel bleibt der Beleg, wo der Uploader ihn ablegt
+    folders:
+      IfrAnordnung: Anordnungen/{HH_JAHR}/{KZ_DKS}/{AO_NR|block:1000}
+      IfrAnordnungListe: Anordnungen/{HH_JAHR}/Listen
 users:
   saskia: saskia
 `
@@ -369,7 +373,7 @@ func TestWinyardImportDocumentDynamic(t *testing.T) {
 func TestWinyardImportDocumentDynamicJSON(t *testing.T) {
 	env := newWinyardEnv(t)
 	jsonBody := `{"FileContent":"JVBERiBuZXc=","DocIndex":{"Mand":"5530","HH_JAHR":"2026","AO_NR":"7151",` +
-		`"BELEG_NR":"MANB26000000638","NAME2":""}}`
+		`"KZ_DKS":"D","BELEG_NR":"MANB26000000638","NAME2":""}}`
 	recorder := env.call("POST", "/api/basicDocuments/ImportDocumentDynamic",
 		"ConfigName=IfrAnordnung&FileName=AO7151_ggvgnmcn.pdf", "application/json", []byte(jsonBody))
 	var newID string
@@ -391,12 +395,32 @@ func TestWinyardImportDocumentDynamicJSON(t *testing.T) {
 	if string(node.content) != "%PDF new" {
 		t.Errorf("content = %q", node.content)
 	}
+	// folder rule of the namespace: Anordnungen/<Jahr>/<D|K|S>/<1000er-Block> in the first space
+	// (fake spaces are all "project", the uploader/importSpaceRoot take the first one)
+	wantPath := "/Personal Admin/Anordnungen/2026/D/7001-8000/AO7151_ggvgnmcn.pdf"
+	if got := env.storage.nodePath(node); got != wantPath {
+		t.Errorf("imported to %q, want %q", got, wantPath)
+	}
 
-	// no content type, JSON body: still accepted
+	// no content type, JSON body: still accepted; second document reuses the created folders
 	recorder = env.call("POST", "/api/basicDocuments/ImportDocumentDynamic",
 		"ConfigName=IfrAnordnung&FileName=AO7152.pdf", "", []byte(jsonBody))
 	if recorder.Code != 200 {
 		t.Errorf("JSON without content type: status %d, body %s", recorder.Code, recorder.Body.String())
+	}
+	var secondID string
+	decodeBody(t, recorder, &secondID)
+	if second := env.storage.nodes[secondID]; second == nil || second.parentID != node.parentID {
+		t.Errorf("second import not in the same rule folder: %+v", second)
+	}
+	folders := 0
+	for _, n := range env.storage.nodes {
+		if n.isDir && n.name == "Anordnungen" {
+			folders++
+		}
+	}
+	if folders != 1 {
+		t.Errorf("Anordnungen folder created %d times, want 1", folders)
 	}
 
 	// garbage: 400 with a message naming both formats

@@ -61,6 +61,17 @@ type NamespaceConfig struct {
 	// Formats converts dates and amounts between storage and client format
 	// (see FormatConfig), e.g. Saskia: date "02.01.2006", decimal ",".
 	Formats FormatConfig `yaml:"formats"`
+
+	// Folders maps a document type (ConfigName of ImportDocumentDynamic) to a
+	// folder template, see Config.FolderPath:
+	//   IfrAnordnung: Anordnungen/{HH_JAHR}/{KZ_DKS}/{AO_NR|block:1000}
+	// Only used when the client does not pass FolderId/SpaceId itself.
+	Folders map[string]string `yaml:"folders"`
+
+	// FolderDefault is the template for document types without an entry in
+	// Folders, e.g. Ablage/{doc.type}/{now|date:2006}/{now|date:01}. Empty:
+	// such documents land in the space root.
+	FolderDefault string `yaml:"folder_default"`
 }
 
 // DefaultConfig returns the built-in configuration.
