@@ -159,7 +159,7 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 				index[e.Key] = e.Value
 			}
 			if existing := h.findDuplicate(r.Context(), sess.Login, r.URL.Query().Get("ConfigName"), index, folderRID); existing != nil {
-				if err := h.putContent(r.Context(), sess, &provider.Reference{ResourceId: existing.Id}, bytes.NewReader(fileData)); err != nil {
+				if err := h.putContent(r.Context(), sess, &provider.Reference{ResourceId: existing.Id}, bytes.NewReader(fileData), int64(len(fileData))); err != nil {
 					log.Error().Err(err).Str("file", fileName).Msg("ImportDocumentDynamic: replacing existing document failed")
 					writeError(w, 500, "INTERNAL_ERROR", "Upload failed: "+err.Error())
 					return

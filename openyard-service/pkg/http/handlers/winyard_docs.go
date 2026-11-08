@@ -293,7 +293,11 @@ func (h *Handlers) SetDocument(w http.ResponseWriter, r *http.Request) {
 			writeError(w, 400, "INVALID_REQUEST", "FileKey unknown or expired")
 			return
 		}
-		err = h.putContent(r.Context(), sess, targetRef, content)
+		size := int64(0)
+		if fileInfo, statErr := content.Stat(); statErr == nil {
+			size = fileInfo.Size()
+		}
+		err = h.putContent(r.Context(), sess, targetRef, content, size)
 		content.Close()
 		if err != nil {
 			log.Error().Err(err).Msg("SetDocument: upload failed")
@@ -403,7 +407,11 @@ func (h *Handlers) UpdateDocument(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer content.Close()
-	if err := h.putContent(r.Context(), sess, ref, content); err != nil {
+	size := int64(0)
+	if fileInfo, statErr := content.Stat(); statErr == nil {
+		size = fileInfo.Size()
+	}
+	if err := h.putContent(r.Context(), sess, ref, content, size); err != nil {
 		log.Error().Err(err).Str("docId", docID).Msg("UpdateDocument: upload failed")
 		writeError(w, 500, "INTERNAL_ERROR", "Upload failed")
 		return

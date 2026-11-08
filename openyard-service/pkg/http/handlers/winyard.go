@@ -20,11 +20,13 @@ import (
 	"os"
 	"path"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
 	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
 	provider "github.com/cs3org/go-cs3apis/cs3/storage/provider/v1beta1"
+	typesv1 "github.com/cs3org/go-cs3apis/cs3/types/v1beta1"
 	gocache "github.com/patrickmn/go-cache"
 	"github.com/rs/zerolog/log"
 
@@ -412,14 +414,23 @@ func (h *Handlers) statWithMetadata(ctx context.Context, ref *provider.Reference
 
 // putContent uploads content to ref (new file or new version) via the
 // data gateway, like SetFile.
-func (h *Handlers) putContent(ctx context.Context, sess *auth.SessionContext, ref *provider.Reference, content io.Reader) error {
+func (h *Handlers) putContent(ctx context.Context, sess *auth.SessionContext, ref *provider.Reference, content io.Reader, size int64) error {
 	gw := h.gw.GetGateway()
-	res, err := gw.InitiateFileUpload(ctx, &provider.InitiateFileUploadRequest{Ref: ref})
+	// Upload-Length is required: without it decomposedfs creates no upload
+	// session for the "simple" protocol and the data PUT fails with
+	// ERR_UPLOAD_NOT_FOUND (brandis 2026-11-08, Saskia Unterdokumente).
+	initReq := &provider.InitiateFileUploadRequest{
+		Ref: ref,
+		Opaque: &typesv1.Opaque{Map: map[string]*typesv1.OpaqueEntry{
+			"Upload-Length": {Decoder: "plain", Value: []byte(strconv.FormatInt(size, 10))},
+		}},
+	}
+	res, err := gw.InitiateFileUpload(ctx, initReq)
 	if err != nil && h.gw.CheckError(err) {
 		log.Info().Msg("cs3: retrying InitiateFileUpload after reconnect")
 		time.Sleep(time.Second)
 		gw = h.gw.GetGateway()
-		res, err = gw.InitiateFileUpload(ctx, &provider.InitiateFileUploadRequest{Ref: ref})
+		res, err = gw.InitiateFileUpload(ctx, initReq)
 	}
 	if err != nil {
 		return err
@@ -444,6 +455,7 @@ func (h *Handlers) putContent(ctx context.Context, sess *auth.SessionContext, re
 	if err != nil {
 		return err
 	}
+	uploadReq.ContentLength = size
 	uploadReq.Header.Set("X-Access-Token", sess.CS3Token)
 	uploadReq.Header.Set("X-Reva-Transfer", uploadToken)
 	resp, err := insecureClient.Do(uploadReq)
