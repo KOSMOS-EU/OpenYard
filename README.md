@@ -182,6 +182,13 @@ fehlenden Codes wird ebenfalls nach dem Plan bestimmt. Jede Ordneranlage wird al
 Eltern-ID protokolliert. Platzhalter wie in `folders`, zusaetzlich `{lookup.code}` und `{lookup.name}`.
 Der Lookup laeuft mit den Rechten des Client-Logins, der Space muss fuer ihn sichtbar sein.
 
+Feldnamen sind Client-Sache: `keys` und `names` sind die Schluessel des gesendeten DocIndex, so wie
+der jeweilige DMS-Client sie liefert (bei SASKIA die DMS-Feldnamen aus KS_DMS_META, z. B. `PROD` fuer
+das Produkt der Buchungsstelle und `PROD_G` fuer das der Gegen-Buchungsstelle), noch vor dem Mapping
+auf Speicherschluessel (`ctrl.prod`). Ein anderer Client (anderer Namespace) bringt andere Felder mit
+und bekommt deshalb eigene `lookups` mit seinen Feldnamen; OpenYard kennt keine festen Feldbedeutungen.
+Aendert der Client seine Feldnamen, wird nur die Regel angepasst.
+
 #### Trenner der Speicherschluessel (`key_separator`)
 
 `key_separator: "."` ersetzt den Unterstrich der Client-Schluessel durch eine weitere Ebene:
