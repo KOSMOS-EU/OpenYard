@@ -363,6 +363,50 @@ func TestWinyardImportDocumentDynamic(t *testing.T) {
 	}
 }
 
+// Saskia's generated WinYard client (SIS.Global.Dms WinyardProxy, NSwag/Newtonsoft) posts
+// ImportDocDataDynamic as application/json: FileContent base64, DocIndex as dictionary.
+// Observed on brandis 2026-11-08 (DmsBatchAnordnung, AO 7151): the XML-only parser answered 400.
+func TestWinyardImportDocumentDynamicJSON(t *testing.T) {
+	env := newWinyardEnv(t)
+	jsonBody := `{"FileContent":"JVBERiBuZXc=","DocIndex":{"Mand":"5530","HH_JAHR":"2026","AO_NR":"7151",` +
+		`"BELEG_NR":"MANB26000000638","NAME2":""}}`
+	recorder := env.call("POST", "/api/basicDocuments/ImportDocumentDynamic",
+		"ConfigName=IfrAnordnung&FileName=AO7151_ggvgnmcn.pdf", "application/json", []byte(jsonBody))
+	var newID string
+	decodeBody(t, recorder, &newID)
+	if !isGUID(newID) {
+		t.Fatalf("ImportDocumentDynamic (JSON) = %q, want GUID; body %s", newID, recorder.Body.String())
+	}
+	node := env.storage.nodes[newID]
+	if node == nil {
+		t.Fatalf("no node %s", newID)
+	}
+	want := map[string]string{"ctrl.ao_nr": "7151", "ctrl.beleg_nr": "MANB26000000638", "source": "saskia",
+		"doc.type": "IfrAnordnung"}
+	for key, value := range want {
+		if node.metadata[key] != value {
+			t.Errorf("metadata[%s] = %q, want %q", key, node.metadata[key], value)
+		}
+	}
+	if string(node.content) != "%PDF new" {
+		t.Errorf("content = %q", node.content)
+	}
+
+	// no content type, JSON body: still accepted
+	recorder = env.call("POST", "/api/basicDocuments/ImportDocumentDynamic",
+		"ConfigName=IfrAnordnung&FileName=AO7152.pdf", "", []byte(jsonBody))
+	if recorder.Code != 200 {
+		t.Errorf("JSON without content type: status %d, body %s", recorder.Code, recorder.Body.String())
+	}
+
+	// garbage: 400 with a message naming both formats
+	recorder = env.call("POST", "/api/basicDocuments/ImportDocumentDynamic",
+		"ConfigName=IfrAnordnung&FileName=x.pdf", "application/json", []byte("not a body"))
+	if recorder.Code != 400 || !strings.Contains(recorder.Body.String(), "XML or JSON") {
+		t.Errorf("garbage body: status %d, body %s", recorder.Code, recorder.Body.String())
+	}
+}
+
 // Saskia GetListAsync: SearchForDocIndex(SearchInFolder=Guid.Empty, DocType, Conjunction=true).
 func TestWinyardSearchForDocIndex(t *testing.T) {
 	env := newWinyardEnv(t)

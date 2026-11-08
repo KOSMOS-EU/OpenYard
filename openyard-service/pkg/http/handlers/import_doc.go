@@ -1,10 +1,13 @@
 package handlers
 
 import (
+	"bytes"
 	"encoding/base64"
+	"encoding/json"
 	"encoding/xml"
 	"io"
 	"net/http"
+	"sort"
 	"strings"
 
 	rpc "github.com/cs3org/go-cs3apis/cs3/rpc/v1beta1"
@@ -31,6 +34,42 @@ type DocIndexEntry struct {
 	Value string `xml:"Value"`
 }
 
+// importDocDataJSON is the same body as the NSwag-generated WinYard client
+// (Saskia SIS.Global.Dms, Newtonsoft.Json) sends it: application/json with
+// FileContent as base64 string and DocIndex as a flat string dictionary.
+type importDocDataJSON struct {
+	DocIndex    map[string]string `json:"DocIndex"`
+	FileContent string            `json:"FileContent"`
+}
+
+// parseImportDocData accepts the WCF DataContract XML body and the JSON body of
+// the .NET WinYard client. The content type decides; without one, a body
+// starting with "{" is JSON.
+func parseImportDocData(contentType string, body []byte) (ImportDocDataDynamic, error) {
+	trimmed := bytes.TrimSpace(body)
+	isJSON := strings.Contains(strings.ToLower(contentType), "json") ||
+		(!strings.Contains(strings.ToLower(contentType), "xml") && bytes.HasPrefix(trimmed, []byte("{")))
+	if !isJSON {
+		var importData ImportDocDataDynamic
+		err := xml.Unmarshal(body, &importData)
+		return importData, err
+	}
+	var jsonData importDocDataJSON
+	if err := json.Unmarshal(trimmed, &jsonData); err != nil {
+		return ImportDocDataDynamic{}, err
+	}
+	keys := make([]string, 0, len(jsonData.DocIndex))
+	for key := range jsonData.DocIndex {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys)
+	importData := ImportDocDataDynamic{FileContent: jsonData.FileContent}
+	for _, key := range keys {
+		importData.DocIndex.Entries = append(importData.DocIndex.Entries, DocIndexEntry{Key: key, Value: jsonData.DocIndex[key]})
+	}
+	return importData, nil
+}
+
 // POST /api/basicDocuments/ImportDocumentDynamic
 //
 // Query: ?SessionID=...&ConfigName=...&FileName=...&OldId=...&SpaceId=...
@@ -53,16 +92,18 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 	spaceID := r.URL.Query().Get("SpaceId")
 	folderID := r.URL.Query().Get("FolderId")
 
-	// Parse XML body
+	// Parse body: WCF XML (migration tools) or JSON (.NET WinYard client, Saskia)
 	bodyBytes, err := io.ReadAll(r.Body)
 	if err != nil {
 		writeError(w, 400, "INVALID_REQUEST", "Cannot read body")
 		return
 	}
 
-	var importData ImportDocDataDynamic
-	if err := xml.Unmarshal(bodyBytes, &importData); err != nil {
-		writeError(w, 400, "INVALID_REQUEST", "Invalid XML body")
+	importData, err := parseImportDocData(r.Header.Get("Content-Type"), bodyBytes)
+	if err != nil {
+		log.Warn().Err(err).Str("contentType", r.Header.Get("Content-Type")).Int("bodyLen", len(bodyBytes)).
+			Msg("ImportDocumentDynamic: body not parseable")
+		writeError(w, 400, "INVALID_REQUEST", "Invalid body: expected ImportDocDataDynamic as XML or JSON")
 		return
 	}
 
