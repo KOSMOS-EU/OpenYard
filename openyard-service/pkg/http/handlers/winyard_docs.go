@@ -102,7 +102,7 @@ func (h *Handlers) GetDocument(w http.ResponseWriter, r *http.Request) {
 		login = sess.Login
 	}
 	sessionID := sessionIDFromRequest(r)
-	docInfo := h.winyardDocInfo(info, login, queryBool(r, "LoadDocIndex", true), "")
+	docInfo := h.winyardDocInfo(r.Context(), info, login, queryBool(r, "LoadDocIndex", true), "")
 	document := map[string]interface{}{
 		"DocInfo": docInfo,
 		"Rights":  fullRights(),
@@ -142,7 +142,7 @@ func (h *Handlers) GetPreviewFile(w http.ResponseWriter, r *http.Request) {
 		login = sess.Login
 	}
 	writeJSON(w, 200, map[string]interface{}{
-		"DocInfo": h.winyardDocInfo(info, login, false, ""),
+		"DocInfo": h.winyardDocInfo(r.Context(), info, login, false, ""),
 		"TaskLog": taskLogOK(),
 	})
 }
@@ -254,6 +254,23 @@ func (h *Handlers) SetDocument(w http.ResponseWriter, r *http.Request) {
 			writeError(w, 404, "NOT_FOUND", fmt.Sprintf("Ordner %s existiert nicht", wDocInfo.ParentFolderId))
 			return
 		}
+		// Saskia CreateSubDocAsync passes the main document's ParentFolderId; if
+		// that resolves to a file (see parentFolderID), file next to it instead
+		// of uploading "into" the document (brandis 2026-11-08: 500 from the gateway).
+		parentInfo, err := h.statWithMetadata(r.Context(), &provider.Reference{ResourceId: parentID})
+		if err != nil {
+			writeError(w, 404, "NOT_FOUND", fmt.Sprintf("Ordner %s existiert nicht", wDocInfo.ParentFolderId))
+			return
+		}
+		if parentInfo.Type != provider.ResourceType_RESOURCE_TYPE_CONTAINER {
+			folder := h.parentFolderID(r.Context(), parentInfo)
+			if folder == nil || folder.OpaqueId == parentInfo.Id.OpaqueId {
+				writeError(w, 400, "INVALID_REQUEST", fmt.Sprintf("%s ist kein Ordner", wDocInfo.ParentFolderId))
+				return
+			}
+			log.Info().Str("parent", wDocInfo.ParentFolderId).Msg("SetDocument: parent is a document, filing next to it")
+			parentID = folder
+		}
 		fileName := wDocInfo.DocName
 		if upload.extension != "" && !strings.EqualFold(path.Ext(fileName), upload.extension) {
 			fileName += upload.extension
@@ -297,7 +314,7 @@ func (h *Handlers) SetDocument(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Info().Str("docId", clientID(info.Id)).Str("path", info.Path).Msg("SetDocument")
 	writeJSON(w, 200, map[string]interface{}{
-		"DocInfo": h.winyardDocInfo(info, sess.Login, true, ""),
+		"DocInfo": h.winyardDocInfo(r.Context(), info, sess.Login, true, ""),
 		"FileKey": downloadFileKey(sessionID, info.Id),
 		"Rights":  fullRights(),
 		"TaskLog": taskLogOK(),
@@ -507,7 +524,7 @@ func (h *Handlers) SearchForDocIndex(w http.ResponseWriter, r *http.Request) {
 			}
 			metadata := cfg.WithDefaults(login, info.GetArbitraryMetadata().GetMetadata())
 			if search.matches(metadata) {
-				results = append(results, h.winyardDocInfo(info, login, true, ""))
+				results = append(results, h.winyardDocInfo(r.Context(), info, login, true, ""))
 				if len(results) >= maxResults {
 					break
 				}

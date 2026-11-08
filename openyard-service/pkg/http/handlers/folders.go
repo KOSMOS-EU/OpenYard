@@ -82,7 +82,7 @@ func (h *Handlers) GetFolder(w http.ResponseWriter, r *http.Request) {
 				"Aktz":       "",
 			})
 		} else {
-			allDocs = append(allDocs, h.winyardDocInfo(info, login, true, sessionID))
+			allDocs = append(allDocs, h.winyardDocInfo(r.Context(), info, login, true, sessionID))
 		}
 	}
 

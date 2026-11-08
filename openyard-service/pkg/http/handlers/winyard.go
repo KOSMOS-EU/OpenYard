@@ -243,14 +243,52 @@ func (h *Handlers) docIndexFromMetadata(info *provider.ResourceInfo, login strin
 // winyardDocInfo converts a CS3 file into a WinYard DocInfo.
 // withIndex adds DocIndex (needs a Stat/List with ArbitraryMetadataKeys "*"),
 // a non-empty sessionID adds the download FileKey.
-func (h *Handlers) winyardDocInfo(info *provider.ResourceInfo, login string, withIndex bool, sessionID string) map[string]interface{} {
+// parentFolderID returns the folder a resource lives in. Right after an
+// upload the gateway may report no ParentId, or the resource's own ID (seen on
+// brandis 2026-11-08: Saskia then tried to file a sub-document "into" the main
+// document). In that case the parent is looked up by path below the space root.
+func (h *Handlers) parentFolderID(ctx context.Context, info *provider.ResourceInfo) *provider.ResourceId {
+	if info == nil || info.Id == nil {
+		return nil
+	}
+	if info.ParentId != nil && info.ParentId.OpaqueId != "" && info.ParentId.OpaqueId != info.Id.OpaqueId {
+		return info.ParentId
+	}
+	if h.gw == nil || h.gw.Gateway == nil {
+		return info.ParentId
+	}
+	root := &provider.ResourceId{StorageId: info.Id.StorageId, SpaceId: info.Id.SpaceId, OpaqueId: info.Id.SpaceId}
+	relative := strings.Trim(path.Dir(strings.TrimPrefix(strings.TrimPrefix(info.Path, "."), "/")), "/")
+	// info.Path is relative to the space root; some gateways prefix the space name
+	candidates := []string{relative}
+	if first, rest, found := strings.Cut(relative, "/"); found && first != "" {
+		candidates = append(candidates, rest)
+	} else if relative != "" && relative != "." {
+		candidates = append(candidates, "")
+	}
+	for _, candidate := range candidates {
+		ref := &provider.Reference{ResourceId: root, Path: "."}
+		if candidate != "" && candidate != "." {
+			ref.Path = "./" + candidate
+		}
+		statRes, err := h.gw.Gateway.Stat(ctx, &provider.StatRequest{Ref: ref})
+		if err == nil && statRes.Status.Code == rpc.Code_CODE_OK && statRes.Info != nil && statRes.Info.Id != nil &&
+			statRes.Info.Type == provider.ResourceType_RESOURCE_TYPE_CONTAINER && statRes.Info.Id.OpaqueId != info.Id.OpaqueId {
+			return statRes.Info.Id
+		}
+	}
+	log.Warn().Str("path", info.Path).Msg("parentFolderID: parent not resolvable by path")
+	return info.ParentId
+}
+
+func (h *Handlers) winyardDocInfo(ctx context.Context, info *provider.ResourceInfo, login string, withIndex bool, sessionID string) map[string]interface{} {
 	docName, extension := splitDocName(path.Base(info.Path))
 	modified := winyardTime(info)
 	docInfo := map[string]interface{}{
 		"DocId":          clientID(info.Id),
 		"DocName":        docName,
 		"FileExtension":  extension,
-		"ParentFolderId": clientID(info.ParentId),
+		"ParentFolderId": clientID(h.parentFolderID(ctx, info)),
 		"FullpathString": unescapeFolderName(info.Path),
 		"FileSize":       info.Size,
 		"Version":        1,

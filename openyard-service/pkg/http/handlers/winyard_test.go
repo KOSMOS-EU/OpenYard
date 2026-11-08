@@ -6,6 +6,7 @@ package handlers
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"mime/multipart"
 	"net/http"
@@ -557,6 +558,32 @@ func TestWinyardCreateSubDocument(t *testing.T) {
 	second := createSubDoc()
 	if second.DocId == first.DocId || second.DocName != "Anlage (2)" {
 		t.Errorf("second SetDocument = %+v", second)
+	}
+
+	// ParentFolderId that is a document (gateway reported the file as its own
+	// parent right after upload): file next to the main document, not "into" it
+	fileKey := env.uploadFile("Anlage.pdf", []byte("%PDF attachment 3"))
+	var third wyDocument
+	decodeBody(t, env.callJSON("POST", "/api/advancedDocuments/SetDocument", "", map[string]interface{}{
+		"DocName": "Anlage", "DocType": "rechnung", "ParentFolderId": mainDoc.DocInfo.DocId, "FileKey": fileKey,
+	}), &third)
+	if third.DocInfo.ParentFolderId != env.belege.id || third.DocInfo.DocName != "Anlage (3)" {
+		t.Errorf("SetDocument with document as parent = %+v", third.DocInfo)
+	}
+}
+
+// Stat without ParentId (or with the resource as its own parent): the folder is
+// resolved by path below the space root.
+func TestParentFolderIDFallback(t *testing.T) {
+	env := newWinyardEnv(t)
+	info := env.storage.info(env.booked, false)
+	info.ParentId = nil
+	if got := env.handlers.parentFolderID(context.Background(), info); got == nil || got.OpaqueId != env.belege.id {
+		t.Errorf("parentFolderID(ParentId nil) = %+v, want %s", got, env.belege.id)
+	}
+	info.ParentId = info.Id
+	if got := env.handlers.parentFolderID(context.Background(), info); got == nil || got.OpaqueId != env.belege.id {
+		t.Errorf("parentFolderID(ParentId == Id) = %+v, want %s", got, env.belege.id)
 	}
 }
 
