@@ -86,3 +86,18 @@ func TestExpandPlaceholderModifiers(t *testing.T) {
 		}
 	}
 }
+
+func TestUniqueKeys(t *testing.T) {
+	cfg := DefaultConfig()
+	cfg.Users = map[string]string{"saskia": "saskia"}
+	cfg.Namespaces["saskia"] = NamespaceConfig{UniqueKeys: map[string][]string{"IfrAnordnung": {"Mand", "HH_JAHR", "AO_NR"}}}
+	if got := cfg.UniqueKeys("saskia", "IfrAnordnung"); len(got) != 3 || got[2] != "AO_NR" {
+		t.Errorf("UniqueKeys = %v", got)
+	}
+	if got := cfg.UniqueKeys("saskia", "ifranordnung"); len(got) != 3 {
+		t.Errorf("case-insensitive doc type = %v", got)
+	}
+	if cfg.UniqueKeys("saskia", "rechnung") != nil || cfg.UniqueKeys("someone", "IfrAnordnung") != nil || cfg.UniqueKeys("saskia", "") != nil {
+		t.Error("unique keys for unconfigured type/user/empty type must be nil")
+	}
+}

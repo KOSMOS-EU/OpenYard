@@ -72,6 +72,30 @@ type NamespaceConfig struct {
 	// Folders, e.g. Ablage/{doc.type}/{now|date:2006}/{now|date:01}. Empty:
 	// such documents land in the space root.
 	FolderDefault string `yaml:"folder_default"`
+
+	// UniqueKeys names, per document type, the client metadata keys that
+	// identify a document, e.g. IfrAnordnung: [Mand, HH_JAHR, AO_NR]. An import
+	// whose values match an existing document of that type in the target
+	// folder replaces its content (new version) instead of filing a second copy.
+	UniqueKeys map[string][]string `yaml:"unique_keys"`
+}
+
+// UniqueKeys returns the identifying client keys of a document type for the
+// user's namespace, nil if none are configured.
+func (c *Config) UniqueKeys(login, docType string) []string {
+	ns := c.NamespaceForUser(login)
+	if docType == "" || len(ns.UniqueKeys) == 0 {
+		return nil
+	}
+	if keys, ok := ns.UniqueKeys[docType]; ok {
+		return keys
+	}
+	for configured, keys := range ns.UniqueKeys {
+		if strings.EqualFold(configured, docType) {
+			return keys
+		}
+	}
+	return nil
 }
 
 // DefaultConfig returns the built-in configuration.

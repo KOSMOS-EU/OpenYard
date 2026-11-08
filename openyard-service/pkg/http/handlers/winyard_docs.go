@@ -275,7 +275,16 @@ func (h *Handlers) SetDocument(w http.ResponseWriter, r *http.Request) {
 		if upload.extension != "" && !strings.EqualFold(path.Ext(fileName), upload.extension) {
 			fileName += upload.extension
 		}
-		targetRef = h.freeChildRef(r, parentID, fileName)
+		// unique key of the document type: replace the existing document (new version)
+		index := make(map[string]string, len(wDocInfo.DocIndex))
+		for _, entry := range wDocInfo.DocIndex {
+			index[entry.Topic] = entry.Value
+		}
+		if existing := h.findDuplicate(r.Context(), sess.Login, wDocInfo.DocType, index, parentID); existing != nil {
+			targetRef = &provider.Reference{ResourceId: existing.Id}
+		} else {
+			targetRef = h.freeChildRef(r, parentID, fileName)
+		}
 	}
 
 	if upload != nil {

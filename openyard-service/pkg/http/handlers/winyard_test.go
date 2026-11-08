@@ -40,6 +40,9 @@ namespaces:
     folders:
       IfrAnordnung: Anordnungen/{HH_JAHR}/{KZ_DKS}/{AO_NR|block:1000}
       IfrAnordnungListe: Anordnungen/{HH_JAHR}/Listen
+    # dieselbe Anordnung noch einmal (Nachdruck): neue Version statt zweiter Datei
+    unique_keys:
+      IfrAnordnung: [Mand, HH_JAHR, AO_NR]
 users:
   saskia: saskia
 `
@@ -403,16 +406,39 @@ func TestWinyardImportDocumentDynamicJSON(t *testing.T) {
 		t.Errorf("imported to %q, want %q", got, wantPath)
 	}
 
-	// no content type, JSON body: still accepted; second document reuses the created folders
+	// no content type, JSON body: still accepted; another Anordnung reuses the created folders
+	otherBody := strings.Replace(jsonBody, `"AO_NR":"7151"`, `"AO_NR":"7152"`, 1)
 	recorder = env.call("POST", "/api/basicDocuments/ImportDocumentDynamic",
-		"ConfigName=IfrAnordnung&FileName=AO7152.pdf", "", []byte(jsonBody))
+		"ConfigName=IfrAnordnung&FileName=AO7152.pdf", "", []byte(otherBody))
 	if recorder.Code != 200 {
 		t.Errorf("JSON without content type: status %d, body %s", recorder.Code, recorder.Body.String())
 	}
 	var secondID string
 	decodeBody(t, recorder, &secondID)
-	if second := env.storage.nodes[secondID]; second == nil || second.parentID != node.parentID {
+	if second := env.storage.nodes[secondID]; second == nil || second.parentID != node.parentID || secondID == newID {
 		t.Errorf("second import not in the same rule folder: %+v", second)
+	}
+
+	// same unique key (Mand, HH_JAHR, AO_NR 7151) again: content replaced, same document, no copy
+	reprint := strings.Replace(jsonBody, "JVBERiBuZXc=", "JVBERiB2Mg==", 1) // "%PDF v2"
+	recorder = env.call("POST", "/api/basicDocuments/ImportDocumentDynamic",
+		"ConfigName=IfrAnordnung&FileName=AO7151_zweiter.pdf", "application/json", []byte(reprint))
+	var againID string
+	decodeBody(t, recorder, &againID)
+	if againID != newID {
+		t.Errorf("reprint returned %q, want existing %q", againID, newID)
+	}
+	if string(env.storage.nodes[newID].content) != "%PDF v2" {
+		t.Errorf("reprint content = %q, want new version", env.storage.nodes[newID].content)
+	}
+	count := 0
+	for _, n := range env.storage.nodes {
+		if !n.isDir && n.parentID == node.parentID {
+			count++
+		}
+	}
+	if count != 2 {
+		t.Errorf("documents in rule folder = %d, want 2 (7151 and 7152)", count)
 	}
 	folders := 0
 	for _, n := range env.storage.nodes {
@@ -569,6 +595,36 @@ func TestWinyardCreateSubDocument(t *testing.T) {
 	}), &third)
 	if third.DocInfo.ParentFolderId != env.belege.id || third.DocInfo.DocName != "Anlage (3)" {
 		t.Errorf("SetDocument with document as parent = %+v", third.DocInfo)
+	}
+}
+
+// SetDocument (Saskia CreateSubDocAsync) with the unique key of an existing
+// Anordnung in the same folder: new version instead of a second file.
+func TestWinyardSetDocumentUniqueKey(t *testing.T) {
+	env := newWinyardEnv(t)
+	existing := env.storage.addNode(env.belege, "IFR_ER_AO_AO7151_a.pdf", false, []byte("%PDF v1"), map[string]string{
+		"source": "saskia", "doc.type": "IfrAnordnung", "ctrl.mand": "5530", "ctrl.hh_jahr": "2026", "ctrl.ao_nr": "7151",
+	})
+	fileKey := env.uploadFile("IFR_ER_AO_AO7151_b.pdf", []byte("%PDF v2"))
+	var document wyDocument
+	decodeBody(t, env.callJSON("POST", "/api/advancedDocuments/SetDocument", "", map[string]interface{}{
+		"DocName": "IFR_ER_AO_AO7151_b", "DocType": "IfrAnordnung", "ParentFolderId": env.belege.id, "FileKey": fileKey,
+		"DocIndex": []map[string]string{{"topic": "Mand", "value": "5530"}, {"topic": "HH_JAHR", "value": "2026"}, {"topic": "AO_NR", "value": "7151"}},
+	}), &document)
+	if document.DocInfo.DocId != existing.id {
+		t.Fatalf("SetDocument with unique key = %q, want existing %q", document.DocInfo.DocId, existing.id)
+	}
+	if string(existing.content) != "%PDF v2" {
+		t.Errorf("content = %q, want replaced", existing.content)
+	}
+	// different AO_NR: new document as before
+	fileKey = env.uploadFile("IFR_ER_AO_AO7152_a.pdf", []byte("%PDF other"))
+	decodeBody(t, env.callJSON("POST", "/api/advancedDocuments/SetDocument", "", map[string]interface{}{
+		"DocName": "IFR_ER_AO_AO7152_a", "DocType": "IfrAnordnung", "ParentFolderId": env.belege.id, "FileKey": fileKey,
+		"DocIndex": []map[string]string{{"topic": "Mand", "value": "5530"}, {"topic": "HH_JAHR", "value": "2026"}, {"topic": "AO_NR", "value": "7152"}},
+	}), &document)
+	if document.DocInfo.DocId == existing.id || !isGUID(document.DocInfo.DocId) {
+		t.Errorf("other AO = %+v, want new document", document.DocInfo)
 	}
 }
 

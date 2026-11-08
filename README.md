@@ -128,6 +128,11 @@ namespaces:
       IfrAnordnung: Anordnungen/{HH_JAHR}/{KZ_DKS}/{AO_NR|block:1000}
       IfrAnordnungListe: Anordnungen/{HH_JAHR}/Listen
     folder_default: Ablage/{doc.type}/{now|date:2006}/{now|date:01}
+    # Eindeutigkeitsschluessel je Dokumenttyp: derselbe Beleg noch einmal (Nachdruck)
+    # ersetzt den Inhalt des vorhandenen Dokuments im Zielordner (neue Version),
+    # statt eine zweite Datei anzulegen. Gilt fuer ImportDocumentDynamic und SetDocument.
+    unique_keys:
+      IfrAnordnung: [Mand, HH_JAHR, AO_NR]
 users:
   saskia: saskia
 ```

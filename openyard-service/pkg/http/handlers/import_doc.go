@@ -149,7 +149,30 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 		uploadReq.CS3Token = sess.CS3Token
 	}
 
-	result, err := h.uploader.Upload(r.Context(), uploadReq)
+	// Unique key (metadata config "unique_keys"): same document again → new
+	// version of the existing file in the rule folder instead of a second copy
+	var newID string
+	if folderID != "" && sess != nil {
+		if folderRID, err := decodeObjectID(folderID); err == nil {
+			index := make(map[string]string, len(importData.DocIndex.Entries))
+			for _, e := range importData.DocIndex.Entries {
+				index[e.Key] = e.Value
+			}
+			if existing := h.findDuplicate(r.Context(), sess.Login, r.URL.Query().Get("ConfigName"), index, folderRID); existing != nil {
+				if err := h.putContent(r.Context(), sess, &provider.Reference{ResourceId: existing.Id}, bytes.NewReader(fileData)); err != nil {
+					log.Error().Err(err).Str("file", fileName).Msg("ImportDocumentDynamic: replacing existing document failed")
+					writeError(w, 500, "INTERNAL_ERROR", "Upload failed: "+err.Error())
+					return
+				}
+				newID = encodeObjectID(existing.Id)
+			}
+		}
+	}
+
+	var result *upload.Result
+	if newID == "" {
+		result, err = h.uploader.Upload(r.Context(), uploadReq)
+	}
 	if err != nil {
 		errMsg := err.Error()
 		httpCode := 500
@@ -177,7 +200,9 @@ func (h *Handlers) ImportDocumentDynamic(w http.ResponseWriter, r *http.Request)
 
 	// Build encoded ObjectID from Oc-Fileid (storageId$spaceId!opaqueId)
 	// This is the same format that encodeObjectID produces, so GetDocument can decode it.
-	newID := encodeObjectIDFromFileID(result.FileID)
+	if newID == "" && result != nil {
+		newID = encodeObjectIDFromFileID(result.FileID)
+	}
 
 	// Fallback: Stat via CS3 to get the canonical ResourceId
 	if newID == "" && h.gw != nil && h.gw.Gateway != nil {
