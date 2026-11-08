@@ -78,6 +78,89 @@ type NamespaceConfig struct {
 	// whose values match an existing document of that type in the target
 	// folder replaces its content (new version) instead of filing a second copy.
 	UniqueKeys map[string][]string `yaml:"unique_keys"`
+
+	// KeySeparator replaces "_" in client keys when building storage keys, so
+	// that each part becomes a level of its own: "." turns PROD_G_BEZ into
+	// ctrl.prod.g.bez instead of ctrl.prod_g_bez. Empty: "_" is kept. Changing
+	// it on a namespace with stored documents needs a re-keying of their
+	// metadata; the reverse mapping (ToClientKey) turns the separator back
+	// into "_".
+	KeySeparator string `yaml:"key_separator"`
+
+	// Lookups maps a document type to a file plan lookup (see LookupConfig):
+	// the folder is found by a metadata value instead of being built from a
+	// path template. Tried before Folders; falls back to Folders when the
+	// document carries no code.
+	Lookups map[string]LookupConfig `yaml:"lookups"`
+}
+
+// LookupConfig files a document type below a folder that is found by a
+// metadata value, e.g. the file plan node carrying the product number of an
+// Anordnung:
+//
+//	IfrAnordnung:
+//	  keys: [PROD, PROD_G]            # DocIndex keys, first non-empty value is the code
+//	  names: [PROD_BEZ, PROD_G_BEZ]   # designation belonging to each key (for create)
+//	  match: oy.fileReference         # folder metadata the code is compared with
+//	  spaces: [Aktenplan]             # spaces searched; empty: the import's target space
+//	  create: "{lookup.code} {lookup.name}"  # name of the folder created when none matches
+//	  subpath: "{doc.type}/{HH_JAHR}"        # levels below the matched folder
+//	  numbered_levels: 1              # created subpath levels that get <parent>-NN as match value
+type LookupConfig struct {
+	// Keys are the client metadata keys tried in order; the first non-empty
+	// value is the code looked up (Saskia: PROD for income, PROD_G for the
+	// counter booking side of expenses).
+	Keys []string `yaml:"keys"`
+	// Names are the client keys with the designation belonging to Keys
+	// (same position), available as {lookup.name} in Create.
+	Names []string `yaml:"names"`
+	// Match is the storage metadata key of the folder carrying the code.
+	// Default oy.fileReference (file plan Kennung).
+	Match string `yaml:"match"`
+	// Spaces names the storage spaces searched for the folder. Empty: the
+	// space the import goes to anyway.
+	Spaces []string `yaml:"spaces"`
+	// Create is the name template for a folder that is created when no
+	// folder carries the code; placeholders as in Folders plus {lookup.code}
+	// and {lookup.name}. The folder is created below the nearest existing
+	// ancestor by code prefix (11.16.13.01 → 11.16.13 → 11.16 → 11), else
+	// below the space root, and gets the code as Match metadata. Empty: no
+	// creation, the document falls back to Folders.
+	Create string `yaml:"create"`
+	// Subpath is the path template below the matched folder, e.g.
+	// {doc.type}/{HH_JAHR}. Empty: the document lands in the matched folder.
+	Subpath string `yaml:"subpath"`
+	// NumberedLevels is the number of Subpath levels (from the top) that,
+	// when created, continue the file plan numbering: Match metadata
+	// <parent code>-NN with the lowest free NN among the siblings. 0: none.
+	NumberedLevels int `yaml:"numbered_levels"`
+}
+
+// MatchKey returns the folder metadata key compared with the code.
+func (l LookupConfig) MatchKey() string {
+	if l.Match == "" {
+		return "oy.fileReference"
+	}
+	return l.Match
+}
+
+// Lookup returns the file plan lookup of a document type for the user's
+// namespace, nil if none is configured. The type is matched case-insensitively
+// like the other per-type maps.
+func (c *Config) Lookup(login, docType string) *LookupConfig {
+	ns := c.NamespaceForUser(login)
+	if docType == "" || len(ns.Lookups) == 0 {
+		return nil
+	}
+	if lookup, ok := ns.Lookups[docType]; ok {
+		return &lookup
+	}
+	for configured, lookup := range ns.Lookups {
+		if strings.EqualFold(configured, docType) {
+			return &lookup
+		}
+	}
+	return nil
 }
 
 // UniqueKeys returns the identifying client keys of a document type for the
@@ -181,11 +264,14 @@ func (c *Config) ToStorageKey(login, clientKey string) string {
 		return strings.ToLower(clientKey)
 	}
 
-	// User-specific namespace: prefix + case transformation
+	// User-specific namespace: prefix + case transformation + separator
 	ns := c.NamespaceForUser(login)
 	key := clientKey
 	if ns.StorageCase == "lower" {
 		key = strings.ToLower(key)
+	}
+	if ns.KeySeparator != "" {
+		key = strings.ReplaceAll(key, "_", ns.KeySeparator)
 	}
 	return ns.Prefix + "." + key
 }
@@ -198,18 +284,36 @@ func (c *Config) ToStorageKey(login, clientKey string) string {
 //	"oy.subject"         → "oy.subject"  (known keys pass through)
 //	"doc.type"           → "doc.type"    (Taki fields pass through)
 func (c *Config) ToClientKey(storageKey string) string {
+	// Namespaces may share a prefix (default and a client namespace both use
+	// "ctrl"); the separator of any of them applies, since only a namespace
+	// with a separator produces keys containing it.
+	matched := false
+	separator, clientCase, key := "", "", ""
 	for _, ns := range c.Namespaces {
 		prefix := ns.Prefix + "."
-		if strings.HasPrefix(storageKey, prefix) {
-			key := strings.TrimPrefix(storageKey, prefix)
-			if ns.ClientCase == "upper" {
-				key = strings.ToUpper(key)
-			}
-			return key
+		if !strings.HasPrefix(storageKey, prefix) {
+			continue
+		}
+		if !matched {
+			matched = true
+			key = strings.TrimPrefix(storageKey, prefix)
+			clientCase = ns.ClientCase
+		}
+		if ns.KeySeparator != "" {
+			separator = ns.KeySeparator
 		}
 	}
-	// Non-namespace keys pass through unchanged
-	return storageKey
+	if !matched {
+		// Non-namespace keys pass through unchanged
+		return storageKey
+	}
+	if separator != "" {
+		key = strings.ReplaceAll(key, separator, "_")
+	}
+	if clientCase == "upper" {
+		key = strings.ToUpper(key)
+	}
+	return key
 }
 
 // IsSharedKey reports whether a client key belongs to the shared key space

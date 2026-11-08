@@ -23,7 +23,12 @@ func (h *Handlers) ruleFolderID(ctx context.Context, login, docType, spaceID str
 	for _, entry := range entries {
 		index[entry.Key] = entry.Value
 	}
-	folderPath := h.metaConfig().FolderPath(login, docType, index, time.Now())
+	now := time.Now()
+	// File plan lookup first (metadata config "lookups"), then the path templates
+	if folderID, ok := h.lookupFolderID(ctx, login, docType, spaceID, index, now); ok {
+		return folderID
+	}
+	folderPath := h.metaConfig().FolderPath(login, docType, index, now)
 	if folderPath == "" {
 		return ""
 	}
@@ -59,6 +64,10 @@ func (h *Handlers) ensureFolderPath(ctx context.Context, spaceID, folderPath str
 			}
 			if createRes.Status.Code != rpc.Code_CODE_OK && createRes.Status.Code != rpc.Code_CODE_ALREADY_EXISTS {
 				return "", fmt.Errorf("create %s: %s", segment, createRes.Status.Message)
+			}
+			if createRes.Status.Code == rpc.Code_CODE_OK {
+				log.Info().Str("name", segment).Str("path", folderPath).Str("parent", encodeObjectID(parent)).
+					Msg("folder rule: folder created")
 			}
 			statRes, err = h.gw.Gateway.Stat(ctx, &provider.StatRequest{Ref: ref})
 			if err != nil {

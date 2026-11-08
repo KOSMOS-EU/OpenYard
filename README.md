@@ -145,6 +145,45 @@ Bleibt ein Platzhalter leer, gilt `folder_default`; fehlt auch das, landet das D
 der Space-Wurzel. Fehlende Ordner werden beim Import angelegt. Ein `/` im Wert wird zu `∕`
 (U+2215), ein Wert erzeugt also nie zusaetzliche Ebenen.
 
+#### Aktenplan-Lookup (`lookups`)
+
+Statt eines festen Pfads kann ein Dokumenttyp ueber ein Metadatum des Zielordners abgelegt werden,
+z. B. die Produktnummer einer Anordnung, die als Kennung (`oy.fileReference`) an den Aktenplan-Ordnern
+haengt. Der Lookup wird vor `folders` geprueft; traegt der Beleg keinen Code oder schlaegt der Lookup
+fehl, greifen die Pfadvorlagen wie gehabt (Notablage).
+
+```yaml
+namespaces:
+  saskia:
+    lookups:
+      IfrAnordnung:
+        keys: [PROD, PROD_G]            # DocIndex-Felder, der erste belegte Wert ist der Code
+        names: [PROD_BEZ, PROD_G_BEZ]   # Bezeichnung zum jeweiligen Feld (fuer create)
+        match: oy.fileReference         # Metadatum des Ordners, das dem Code entsprechen muss
+        spaces: [Aktenplan]             # durchsuchte Spaces; leer = Ziel-Space des Imports
+        create: "{lookup.code} {lookup.name}"   # Ordnername, wenn kein Ordner den Code traegt
+        subpath: "{doc.type}/{HH_JAHR}"         # Ebenen unter dem gefundenen Ordner
+        numbered_levels: 1              # so viele neue Subpath-Ebenen erhalten <Eltern>-NN als Kennung
+```
+
+Ablauf: Die Ordner der genannten Spaces werden einmal durchlaufen und nach `match` indiziert
+(Cache 10 Minuten; ein Fehltreffer loest einen erneuten Durchlauf aus, fruehestens alle 20 Sekunden,
+damit auch von Hand angelegte Ordner gefunden werden). Fehlt der Ordner zum Code und ist `create`
+gesetzt, entsteht er unter dem naechsten vorhandenen Vorfahren nach Kennung (`11.16.13.01` →
+`11.16.13` → `11.16` → `11`, sonst Space-Wurzel) und erhaelt den Code als `match`-Metadatum.
+Darunter werden die `subpath`-Ebenen angelegt; die ersten `numbered_levels` neuen Ebenen setzen die
+Aktenplan-Nummerierung fort (`11.16.13.01-01`, naechste freie Nummer unter den Geschwistern),
+vorhandene Ordner bleiben unveraendert. Jede Ordneranlage wird als Info-Log mit Name, Kennung und
+Eltern-ID protokolliert. Platzhalter wie in `folders`, zusaetzlich `{lookup.code}` und `{lookup.name}`.
+Der Lookup laeuft mit den Rechten des Client-Logins, der Space muss fuer ihn sichtbar sein.
+
+#### Trenner der Speicherschluessel (`key_separator`)
+
+`key_separator: "."` ersetzt den Unterstrich der Client-Schluessel durch eine weitere Ebene:
+`PROD_G_BEZ` wird zu `ctrl.prod.g.bez` statt `ctrl.prod_g_bez`; in Richtung Client wird der Trenner
+wieder zum Unterstrich. Nachtraeglich auf einem Namespace mit vorhandenen Belegen gesetzt, muessen deren
+Schluessel umgeschrieben werden, sonst finden `unique_keys` und DocIndex den Altbestand nicht mehr.
+
 ## License
 
 [AGPL-3.0-or-later](LICENSE)

@@ -26,6 +26,7 @@ type Handlers struct {
 	downloadURL  string // Download base URL (Reva data gateway), e.g. "http://opencloud:9216"
 	workCache    *gocache.Cache // WorkID → *workObject for GetFolder pagination
 	metaCfg      *metadata.Config // Metadata key mapping configuration
+	lookups      *lookupCache     // file plan folder index per space (metadata config "lookups")
 }
 
 // workObject stores remaining sub-elements for paginated GetFolder responses.
@@ -44,6 +45,7 @@ func New(gw *cs3client.Client, sessions *auth.SessionCache, up upload.Uploader, 
 		downloadURL: downloadURL,
 		workCache:   gocache.New(10*time.Minute, 5*time.Minute),
 		metaCfg:     metadata.LoadConfig(""),
+		lookups:     newLookupCache(),
 	}
 }
 

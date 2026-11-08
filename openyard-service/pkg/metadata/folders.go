@@ -45,12 +45,27 @@ func (c *Config) FolderPath(login, docType string, index map[string]string, now 
 	return ""
 }
 
+// ExpandTemplate renders a folder or name template for the user's namespace
+// with the DocIndex values plus extra placeholders (e.g. lookup.code,
+// lookup.name); same syntax and rules as FolderPath.
+func (c *Config) ExpandTemplate(login, template, docType string, index, extra map[string]string, now time.Time) (string, error) {
+	ns := c.NamespaceForUser(login)
+	return expandFolderTemplateWith(template, docType, index, extra, now, ns.Formats.Date)
+}
+
 func expandFolderTemplate(template, docType string, index map[string]string, now time.Time, clientDateLayout string) (string, error) {
-	lookup := make(map[string]string, len(index)+1)
+	return expandFolderTemplateWith(template, docType, index, nil, now, clientDateLayout)
+}
+
+func expandFolderTemplateWith(template, docType string, index, extra map[string]string, now time.Time, clientDateLayout string) (string, error) {
+	lookup := make(map[string]string, len(index)+len(extra)+1)
 	for key, value := range index {
 		lookup[strings.ToLower(key)] = value
 	}
 	lookup["doc.type"] = docType
+	for key, value := range extra {
+		lookup[strings.ToLower(key)] = value
+	}
 
 	var out strings.Builder
 	rest := template
