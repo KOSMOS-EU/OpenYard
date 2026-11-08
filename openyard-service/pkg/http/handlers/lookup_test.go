@@ -163,8 +163,13 @@ func TestLookupCacheSeesFoldersCreatedElsewhere(t *testing.T) {
 	if got := env.storage.nodePath(node); got != "/Aktenplan/12 Ordnung/12.23 Standesamt/Anordnungen/2026/AO7002.pdf" {
 		t.Errorf("filed to %q, want the folder created elsewhere", got)
 	}
+	// below a Gruppe (depth 2) the plan continues with a dotted level, not an Akte
+	anordnungen := env.storage.nodes[env.storage.nodes[node.parentID].parentID]
+	if anordnungen.metadata["oy.fileReference"] != "12.23.01" {
+		t.Errorf("Anordnungen below 12.23 got %q, want 12.23.01", anordnungen.metadata["oy.fileReference"])
+	}
 	values := env.handlers.lookupCacheRef().sortedValues(env.storage.resourceID(plan), "oy.fileReference")
-	if !containsString(values, "12.23") || !containsString(values, "12.23-01") {
+	if !containsString(values, "12.23") || !containsString(values, "12.23.01") {
 		t.Errorf("cache values = %v", values)
 	}
 }

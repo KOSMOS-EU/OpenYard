@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"sort"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -28,10 +27,9 @@ const (
 	lookupRefreshMinGap  = 20 * time.Second
 	lookupMaxDepth       = 16
 	lookupMaxFolders     = 100000
-	lookupNumberPadding  = 2
-	lookupReferenceJoin  = "-"
 	lookupCodeLevelJoin  = "."
 	lookupSpaceTypeMatch = "project"
+	lookupAllSpaces      = "*" // spaces entry (and default): every project space visible to the user
 )
 
 // refIndex is the cached folder index of one space: match value → folder.
@@ -61,7 +59,7 @@ func (h *Handlers) lookupCacheRef() *lookupCache {
 // lookupFolderID resolves the target folder of an import through the
 // namespace's lookup rule. ok is false when no rule applies or the document
 // carries no code; the caller then uses the path templates.
-func (h *Handlers) lookupFolderID(ctx context.Context, login, docType, spaceID string, index map[string]string, now time.Time) (string, bool) {
+func (h *Handlers) lookupFolderID(ctx context.Context, login, docType string, index map[string]string, now time.Time) (string, bool) {
 	rule := h.metaConfig().Lookup(login, docType)
 	if rule == nil || len(rule.Keys) == 0 {
 		return "", false
@@ -71,7 +69,7 @@ func (h *Handlers) lookupFolderID(ctx context.Context, login, docType, spaceID s
 		log.Debug().Str("docType", docType).Strs("keys", rule.Keys).Msg("lookup: document carries no code, using folder templates")
 		return "", false
 	}
-	roots, err := h.lookupRoots(ctx, rule, spaceID)
+	roots, err := h.lookupRoots(ctx, rule)
 	if err != nil {
 		log.Warn().Err(err).Str("docType", docType).Msg("lookup: cannot resolve spaces")
 		return "", false
@@ -97,7 +95,7 @@ func (h *Handlers) lookupFolderID(ctx context.Context, login, docType, spaceID s
 		if err != nil {
 			log.Warn().Err(err).Str("docType", docType).Msg("lookup: subpath template failed, filing into the matched folder")
 		} else {
-			target, err = h.ensureSubpath(ctx, root, folder, code, subpath, matchKey, rule.NumberedLevels, docType)
+			target, err = h.ensureSubpath(ctx, login, root, folder, code, subpath, matchKey, rule.NumberedLevels, docType)
 			if err != nil {
 				log.Warn().Err(err).Str("docType", docType).Str("subpath", subpath).Msg("lookup: cannot prepare subpath, using folder templates")
 				return "", false
@@ -131,13 +129,10 @@ func lookupCodeAndName(rule *metadata.LookupConfig, index map[string]string) (st
 
 // lookupRoots returns the roots of the spaces a rule searches: the named
 // spaces, or the import's target space.
-func (h *Handlers) lookupRoots(ctx context.Context, rule *metadata.LookupConfig, spaceID string) ([]*provider.ResourceId, error) {
-	if len(rule.Spaces) == 0 {
-		root, err := h.importSpaceRoot(ctx, spaceID)
-		if err != nil {
-			return nil, err
-		}
-		return []*provider.ResourceId{root}, nil
+func (h *Handlers) lookupRoots(ctx context.Context, rule *metadata.LookupConfig) ([]*provider.ResourceId, error) {
+	wantedSpaces := rule.Spaces
+	if len(wantedSpaces) == 0 {
+		wantedSpaces = []string{lookupAllSpaces}
 	}
 	spacesRes, err := h.gw.Gateway.ListStorageSpaces(ctx, &provider.ListStorageSpacesRequest{})
 	if err != nil {
@@ -147,16 +142,23 @@ func (h *Handlers) lookupRoots(ctx context.Context, rule *metadata.LookupConfig,
 		return nil, fmt.Errorf("list spaces: %s", spacesRes.Status.Message)
 	}
 	var roots []*provider.ResourceId
-	for _, wanted := range rule.Spaces {
+	for _, wanted := range wantedSpaces {
 		for _, space := range spacesRes.StorageSpaces {
-			if space.Root != nil && strings.EqualFold(space.Name, wanted) {
+			if space.Root == nil {
+				continue
+			}
+			if wanted == lookupAllSpaces && space.SpaceType == lookupSpaceTypeMatch {
+				roots = append(roots, space.Root)
+				continue
+			}
+			if strings.EqualFold(space.Name, wanted) {
 				roots = append(roots, space.Root)
 				break
 			}
 		}
 	}
 	if len(roots) == 0 {
-		return nil, fmt.Errorf("none of the spaces %v is visible to the user", rule.Spaces)
+		return nil, fmt.Errorf("none of the spaces %v is visible to the user", wantedSpaces)
 	}
 	return roots, nil
 }
@@ -262,7 +264,8 @@ func (h *Handlers) createLookupFolder(ctx context.Context, login string, rule *m
 
 	parent, root := roots[0], roots[0]
 	parentCode := ""
-	for prefix := parentPrefix(code); prefix != ""; prefix = parentPrefix(prefix) {
+	plan := h.metaConfig().ReferencePlanFor(login)
+	for prefix := ancestorCode(plan, code); prefix != ""; prefix = ancestorCode(plan, prefix) {
 		if folder, foundRoot := h.findByValue(ctx, roots, matchKey, prefix, false); folder != nil {
 			parent, root, parentCode = folder, foundRoot, prefix
 			break
@@ -282,8 +285,15 @@ func (h *Handlers) createLookupFolder(ctx context.Context, login string, rule *m
 	return folder, root, nil
 }
 
-// parentPrefix cuts the last level of a dotted code: 11.16.13.01 → 11.16.13; "" at the top.
-func parentPrefix(code string) string {
+// ancestorCode returns the code one level up by the reference plan; for a
+// code outside the plan the last dotted level is cut (11.16.13.01 → 11.16.13).
+func ancestorCode(plan metadata.ReferencePlan, code string) string {
+	if parent := plan.ParentCode(code); parent != "" {
+		return parent
+	}
+	if plan.Depth(code) > 0 {
+		return ""
+	}
 	if cut := strings.LastIndex(code, lookupCodeLevelJoin); cut > 0 {
 		return code[:cut]
 	}
@@ -294,7 +304,8 @@ func parentPrefix(code string) string {
 // first numberedLevels created levels get matchKey = <parent value>-NN with
 // the lowest free NN among their siblings; existing folders are left as they
 // are. Returns the last folder.
-func (h *Handlers) ensureSubpath(ctx context.Context, root, folder *provider.ResourceId, code, subpath, matchKey string, numberedLevels int, docType string) (*provider.ResourceId, error) {
+func (h *Handlers) ensureSubpath(ctx context.Context, login string, root, folder *provider.ResourceId, code, subpath, matchKey string, numberedLevels int, docType string) (*provider.ResourceId, error) {
+	plan := h.metaConfig().ReferencePlanFor(login)
 	parent, parentValue := folder, code
 	for level, segment := range strings.Split(subpath, "/") {
 		child, created, err := h.ensureChildFolder(ctx, parent, segment)
@@ -304,7 +315,7 @@ func (h *Handlers) ensureSubpath(ctx context.Context, root, folder *provider.Res
 		childValue := ""
 		if level < numberedLevels {
 			if created {
-				childValue, err = h.nextFreeReference(ctx, parent, matchKey, parentValue)
+				childValue, err = h.nextFreeReference(ctx, plan, parent, matchKey, parentValue)
 				if err != nil {
 					return nil, err
 				}
@@ -329,9 +340,12 @@ func (h *Handlers) ensureSubpath(ctx context.Context, root, folder *provider.Res
 	return parent, nil
 }
 
-// nextFreeReference returns <parentValue>-NN with the lowest NN not used by a
-// child folder of parent (two digits, more when needed).
-func (h *Handlers) nextFreeReference(ctx context.Context, parent *provider.ResourceId, matchKey, parentValue string) (string, error) {
+// nextFreeReference returns the child code of parentValue by the reference
+// plan with the lowest number no child folder of parent uses yet.
+func (h *Handlers) nextFreeReference(ctx context.Context, plan metadata.ReferencePlan, parent *provider.ResourceId, matchKey, parentValue string) (string, error) {
+	if _, ok := plan.Child(parentValue, 1); !ok {
+		return "", fmt.Errorf("reference plan: no level below %q", parentValue)
+	}
 	listRes, err := h.gw.Gateway.ListContainer(ctx, &provider.ListContainerRequest{
 		Ref:                   &provider.Reference{ResourceId: parent},
 		ArbitraryMetadataKeys: []string{matchKey},
@@ -342,14 +356,10 @@ func (h *Handlers) nextFreeReference(ctx context.Context, parent *provider.Resou
 	if listRes.Status.Code != rpc.Code_CODE_OK {
 		return "", fmt.Errorf("list siblings: %s", listRes.Status.Message)
 	}
-	prefix := parentValue + lookupReferenceJoin
 	used := map[int]bool{}
 	for _, info := range listRes.Infos {
 		value := strings.TrimSpace(info.ArbitraryMetadata.GetMetadata()[matchKey])
-		if !strings.HasPrefix(value, prefix) {
-			continue
-		}
-		if number, err := strconv.Atoi(strings.TrimPrefix(value, prefix)); err == nil {
+		if number, ok := plan.ChildNumber(parentValue, value); ok {
 			used[number] = true
 		}
 	}
@@ -357,7 +367,8 @@ func (h *Handlers) nextFreeReference(ctx context.Context, parent *provider.Resou
 	for used[next] {
 		next++
 	}
-	return prefix + fmt.Sprintf("%0*d", lookupNumberPadding, next), nil
+	child, _ := plan.Child(parentValue, next)
+	return child, nil
 }
 
 // ensureChildFolder returns the child folder name below parent, creating it

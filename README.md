@@ -160,10 +160,13 @@ namespaces:
         keys: [PROD, PROD_G]            # DocIndex-Felder, der erste belegte Wert ist der Code
         names: [PROD_BEZ, PROD_G_BEZ]   # Bezeichnung zum jeweiligen Feld (fuer create)
         match: oy.fileReference         # Metadatum des Ordners, das dem Code entsprechen muss
-        spaces: [Aktenplan]             # durchsuchte Spaces; leer = Ziel-Space des Imports
+        spaces: [Innere Verwaltung, Sicherheit und Ordnung]  # durchsuchte Spaces; leer oder "*" = alle sichtbaren Project-Spaces
         create: "{lookup.code} {lookup.name}"   # Ordnername, wenn kein Ordner den Code traegt
         subpath: "{doc.type}/{HH_JAHR}"         # Ebenen unter dem gefundenen Ordner
-        numbered_levels: 1              # so viele neue Subpath-Ebenen erhalten <Eltern>-NN als Kennung
+        numbered_levels: 1              # so viele neue Subpath-Ebenen werden nach dem Aktenzeichen-Plan nummeriert
+    # Aktenzeichen-Syntax fuer neue Ebenen (Vorgabe = dokumentierter Aktenplan, folderviews/AKTENPLAN.md):
+    # Sachgruppen 11 / 11.12 / 11.12.01, Aktenschrank 11.12.01.03, Akte -01, Vorgang /1, Register #1
+    reference_plan: ["{n:2}", ".{n:2}", ".{n:2}", ".{n:2}", "-{n:2}", "/{n}", "#{n}"]
 ```
 
 Ablauf: Die Ordner der genannten Spaces werden einmal durchlaufen und nach `match` indiziert
@@ -172,8 +175,10 @@ damit auch von Hand angelegte Ordner gefunden werden). Fehlt der Ordner zum Code
 gesetzt, entsteht er unter dem naechsten vorhandenen Vorfahren nach Kennung (`11.16.13.01` →
 `11.16.13` → `11.16` → `11`, sonst Space-Wurzel) und erhaelt den Code als `match`-Metadatum.
 Darunter werden die `subpath`-Ebenen angelegt; die ersten `numbered_levels` neuen Ebenen setzen die
-Aktenplan-Nummerierung fort (`11.16.13.01-01`, naechste freie Nummer unter den Geschwistern),
-vorhandene Ordner bleiben unveraendert. Jede Ordneranlage wird als Info-Log mit Name, Kennung und
+Nummerierung nach `reference_plan` fort: unter dem Aktenschrank `11.16.13.01` wird die Typ-Ebene zur
+Akte `11.16.13.01-01`, darunter das Jahr zum Vorgang `11.16.13.01-01/1`, jeweils mit der niedrigsten
+freien Nummer unter den Geschwistern; vorhandene Ordner bleiben unveraendert. Der Vorfahre eines
+fehlenden Codes wird ebenfalls nach dem Plan bestimmt. Jede Ordneranlage wird als Info-Log mit Name, Kennung und
 Eltern-ID protokolliert. Platzhalter wie in `folders`, zusaetzlich `{lookup.code}` und `{lookup.name}`.
 Der Lookup laeuft mit den Rechten des Client-Logins, der Space muss fuer ihn sichtbar sein.
 

@@ -87,6 +87,12 @@ type NamespaceConfig struct {
 	// into "_".
 	KeySeparator string `yaml:"key_separator"`
 
+	// ReferencePlan is the file reference syntax used when the lookup creates
+	// numbered folders, one pattern per level ({n} or {n:W} after a
+	// separator). Empty: DefaultReferencePlan, the documented syntax
+	// 11 / 11.12 / 11.12.01 / 11.12.01.03 / -01 (Akte) / /1 (Vorgang) / #1 (Register).
+	ReferencePlan ReferencePlan `yaml:"reference_plan"`
+
 	// Lookups maps a document type to a file plan lookup (see LookupConfig):
 	// the folder is found by a metadata value instead of being built from a
 	// path template. Tried before Folders; falls back to Folders when the
@@ -117,8 +123,9 @@ type LookupConfig struct {
 	// Match is the storage metadata key of the folder carrying the code.
 	// Default oy.fileReference (file plan Kennung).
 	Match string `yaml:"match"`
-	// Spaces names the storage spaces searched for the folder. Empty: the
-	// space the import goes to anyway.
+	// Spaces names the storage spaces searched for the folder, in order,
+	// e.g. [Innere Verwaltung, Sicherheit und Ordnung]. Empty or "*": every
+	// project space the user sees.
 	Spaces []string `yaml:"spaces"`
 	// Create is the name template for a folder that is created when no
 	// folder carries the code; placeholders as in Folders plus {lookup.code}
@@ -131,8 +138,10 @@ type LookupConfig struct {
 	// {doc.type}/{HH_JAHR}. Empty: the document lands in the matched folder.
 	Subpath string `yaml:"subpath"`
 	// NumberedLevels is the number of Subpath levels (from the top) that,
-	// when created, continue the file plan numbering: Match metadata
-	// <parent code>-NN with the lowest free NN among the siblings. 0: none.
+	// when created, continue the file plan numbering by the namespace's
+	// ReferencePlan (below an Aktenschrank 11.16.13.01: Akte 11.16.13.01-01,
+	// then Vorgang 11.16.13.01-01/1), each with the lowest free number among
+	// its siblings. 0: none.
 	NumberedLevels int `yaml:"numbered_levels"`
 }
 

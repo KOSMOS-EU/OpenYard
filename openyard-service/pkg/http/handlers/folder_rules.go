@@ -25,7 +25,7 @@ func (h *Handlers) ruleFolderID(ctx context.Context, login, docType, spaceID str
 	}
 	now := time.Now()
 	// File plan lookup first (metadata config "lookups"), then the path templates
-	if folderID, ok := h.lookupFolderID(ctx, login, docType, spaceID, index, now); ok {
+	if folderID, ok := h.lookupFolderID(ctx, login, docType, index, now); ok {
 		return folderID
 	}
 	folderPath := h.metaConfig().FolderPath(login, docType, index, now)
