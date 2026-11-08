@@ -103,6 +103,42 @@ podman build -t openyard:latest -f openyard-service/Containerfile openyard-servi
 | `OPENYARD_BASE_URL` | `http://localhost:9201` | Externe URL (CMIS URIs) |
 | `OPENYARD_SESSION_TTL` | `8h` | Session-Abgelauf |
 | `OPENYARD_LOG_LEVEL` | `info` | Log-Level |
+| `OPENYARD_METADATA_CONFIG` | | Pfad zur Metadaten-Mapping-YAML (siehe unten) |
+
+### Metadaten-Mapping und Ablageregeln
+
+Die YAML aus `OPENYARD_METADATA_CONFIG` legt je Namespace (= Login-Name eines DMS-Clients) fest,
+wie Metadaten gespeichert werden und wo importierte Dokumente landen. Wird beim Start gelesen.
+
+```yaml
+namespaces:
+  saskia:
+    prefix: ctrl              # Client-Schluessel -> ctrl.<key>
+    storage_case: lower
+    client_case: upper
+    source: saskia            # "source" an jedem Beleg
+    defaults:                 # Vorgaben fuer Suche/DocIndex, nicht gespeichert
+      booking.status: U
+    formats:                  # Client-Formate, gespeichert wird ISO / Punkt
+      date: "02.01.2006"
+      decimal: ","
+    # Ablageregel je Dokumenttyp (ConfigName von ImportDocumentDynamic).
+    # Greift nur, wenn der Client keinen FolderId/SpaceId mitgibt.
+    folders:
+      IfrAnordnung: Anordnungen/{HH_JAHR}/{KZ_DKS}/{AO_NR|block:1000}
+      IfrAnordnungListe: Anordnungen/{HH_JAHR}/Listen
+    folder_default: Ablage/{doc.type}/{now|date:2006}/{now|date:01}
+users:
+  saskia: saskia
+```
+
+Pfadvorlagen: `{FELD}` ist ein Schluessel des gesendeten DocIndex (Gross/Klein egal),
+`{doc.type}` der Dokumenttyp, `{now}` der Importzeitpunkt. Modifikatoren nach `|`:
+`block:N` (Nummernkreis-Block, 7151 → `7001-8000`), `pad:N`, `left:N`, `right:N`, `upper`,
+`lower`, `date:LAYOUT` (Go-Layout, Eingabe im Client- oder ISO-Format), `default:X`.
+Bleibt ein Platzhalter leer, gilt `folder_default`; fehlt auch das, landet das Dokument in
+der Space-Wurzel. Fehlende Ordner werden beim Import angelegt. Ein `/` im Wert wird zu `∕`
+(U+2215), ein Wert erzeugt also nie zusaetzliche Ebenen.
 
 ## License
 
